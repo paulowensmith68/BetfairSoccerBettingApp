@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{293D1019-E4DC-49CD-B188-D78C02D86265}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>BetfairSoccerBettingApp.My.MyApplication</StartupObject>
+    <RootNamespace>BetfairSoccerBettingApp</RootNamespace>
+    <AssemblyName>BetfairSoccerBettingApp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>BetfairSoccerBettingApp.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>BetfairSoccerBettingApp.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountClass.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BeffairEventClass.vb" />
+    <Compile Include="BetfairClass.vb" />
+    <Compile Include="EventLogger.vb" />
+    <Compile Include="frmMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IClient.vb" />
+    <Compile Include="JsonRpcClient.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Json\JsonConvert.vb" />
+    <Compile Include="Json\JsonRequest.vb" />
+    <Compile Include="Json\JsonResponse.vb" />
+    <Compile Include="Json\RescriptRequest.vb" />
+    <Compile Include="MatchedEventClass.vb" />
+    <Compile Include="modGlobals.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ResponseClass.vb" />
+    <Compile Include="TO\APINGException.vb" />
+    <Compile Include="TO\CancelExecutionReport.vb" />
+    <Compile Include="TO\CancelInstruction.vb" />
+    <Compile Include="TO\CancelInstructionReport.vb" />
+    <Compile Include="TO\Competition.vb" />
+    <Compile Include="TO\CompetitionResult.vb" />
+    <Compile Include="TO\CurrentOrderSummary.vb" />
+    <Compile Include="TO\CurrentOrderSummaryReport.vb" />
+    <Compile Include="TO\Event.vb" />
+    <Compile Include="TO\EventResult.vb" />
+    <Compile Include="TO\EventType.vb" />
+    <Compile Include="TO\EventTypeResult.vb" />
+    <Compile Include="TO\ExBestOffersOverrides.vb" />
+    <Compile Include="TO\Exception.vb" />
+    <Compile Include="TO\ExchangePrices.vb" />
+    <Compile Include="TO\ExecutionReportErrorCode.vb" />
+    <Compile Include="TO\ExecutionReportStatus.vb" />
+    <Compile Include="TO\InstructionReportErrorCode.vb" />
+    <Compile Include="TO\InstructionReportStatus.vb" />
+    <Compile Include="TO\LimitOnCloseOrder.vb" />
+    <Compile Include="TO\LimitOrder.vb" />
+    <Compile Include="TO\MarketBettingType.vb" />
+    <Compile Include="TO\MarketBook.vb" />
+    <Compile Include="TO\MarketCatalogue.vb" />
+    <Compile Include="TO\MarketDescription.vb" />
+    <Compile Include="TO\MarketFilter.vb" />
+    <Compile Include="TO\MarketOnCloseOrder.vb" />
+    <Compile Include="TO\MarketProfitAndLoss.vb" />
+    <Compile Include="TO\MarketProjection.vb" />
+    <Compile Include="TO\MarketSort.vb" />
+    <Compile Include="TO\MarketStatus.vb" />
+    <Compile Include="TO\Match.vb" />
+    <Compile Include="TO\MatchProjection.vb" />
+    <Compile Include="TO\Order.vb" />
+    <Compile Include="TO\OrderBy.vb" />
+    <Compile Include="TO\OrderProjection.vb" />
+    <Compile Include="TO\OrderStatus.vb" />
+    <Compile Include="TO\OrderType.vb" />
+    <Compile Include="TO\PersistenceType.vb" />
+    <Compile Include="TO\PlaceExecutionReport.vb" />
+    <Compile Include="TO\PlaceInstruction.vb" />
+    <Compile Include="TO\PlaceInstructionReport.vb" />
+    <Compile Include="TO\PriceData.vb" />
+    <Compile Include="TO\PriceProjection.vb" />
+    <Compile Include="TO\PriceSize.vb" />
+    <Compile Include="TO\ReplaceInstruction.vb" />
+    <Compile Include="TO\ReplaceExecutionReport.vb" />
+    <Compile Include="TO\ReplaceInstructionReport.vb" />
+    <Compile Include="TO\RollUpModel.vb" />
+    <Compile Include="TO\RunnerProfitAndLoss.vb" />
+    <Compile Include="TO\Runner.vb" />
+    <Compile Include="TO\RunnerDescription.vb" />
+    <Compile Include="TO\RunnerStatus.vb" />
+    <Compile Include="Selection.vb" />
+    <Compile Include="TO\Side.vb" />
+    <Compile Include="TO\SortDir.vb" />
+    <Compile Include="TO\StartingPrices.vb" />
+    <Compile Include="TO\TimeRange.vb" />
+    <Compile Include="TO\UpdateExecutionReport.vb" />
+    <Compile Include="TO\UpdateInstructionReport.vb" />
+    <Compile Include="TO\UpdateInstruction.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\BeffairEventClass.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
