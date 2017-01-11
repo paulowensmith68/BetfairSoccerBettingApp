@@ -93,6 +93,11 @@ Public Class frmMain
 
     Private Sub timerRefreshSelections_Tick(sender As Object, e As EventArgs) Handles timerRefreshSelections.Tick
 
+        ' Clean log rich textbox
+        If rtbLog.Lines.Count > 1000 Then
+            rtbLog.Clear()
+        End If
+
         If tbxSel1EventName.Text <> "" Then
             Refreshsel1Info()
         End If
