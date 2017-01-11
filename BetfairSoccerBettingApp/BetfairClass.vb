@@ -95,7 +95,7 @@ Public Class BetfairClass
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
         client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Starting to get OVER_UNDER_15 and CORRECT_SCORE for Event Id: " + eventTypeId.ToString + " Event Id: " + eventId, EventLogEntryType.Information)
+        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Starting to get Market Ids for Event Id: " + eventTypeId.ToString + " Event Id: " + eventId, EventLogEntryType.Information)
 
         Try
 
@@ -118,63 +118,63 @@ Public Class BetfairClass
             marketFilter.EventIds = eventIds
 
             ' Set-up market type codes e.g. WIN or MATCH ODDS
-            marketFilter.MarketTypeCodes = New HashSet(Of String)({"CORRECT_SCORE", "OVER_UNDER_15"})
+            marketFilter.MarketTypeCodes = New HashSet(Of String)({"CORRECT_SCORE", "OVER_UNDER_05", "OVER_UNDER_15", "OVER_UNDER_25", "OVER_UNDER_35", "OVER_UNDER_45"})
 
             ' Set-up order
             Dim marketSort = Api_ng_sample_code.TO.MarketSort.MAXIMUM_TRADED
 
             ' Set-up market projection
             Dim marketProjections As ISet(Of MarketProjection) = New HashSet(Of MarketProjection)()
-            marketProjections.Add(MarketProjection.RUNNER_METADATA)
-            marketProjections.Add(MarketProjection.EVENT)
+            marketProjections.Add(MarketProjection.RUNNER_DESCRIPTION)
 
-            Dim marketCatalogues = client.listMarketCatalogue(marketFilter, marketProjections, marketSort, maxResults)
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from MarketCatalogue (event objects) : " + marketCatalogues.Count.ToString, EventLogEntryType.Information)
+            Dim marketCatalogue = client.listMarketCatalogue(marketFilter, marketProjections, marketSort, maxResults)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from MarketCatalogue (event objects) : " + marketCatalogue.Count.ToString, EventLogEntryType.Information)
 
-            For Each book In marketCatalogues
-                Dim marketIdBook As String = book.MarketId
-                Dim marketIdsBook As IList(Of String) = New List(Of String)()
-                marketIdsBook.Add(marketIdBook)
+            ' Initialie the Market Id's to NotFound so we know which ones are still Open
+            selection.betfairCorrectScoreMarketId = "Not Found"
+            selection.betfairUnderOver05MarketId = "Not Found"
+            selection.betfairUnderOver15MarketId = "Not Found"
+            selection.betfairUnderOver25MarketId = "Not Found"
+            selection.betfairUnderOver35MarketId = "Not Found"
+            selection.betfairUnderOver45MarketId = "Not Found"
 
-                Dim priceData As ISet(Of PriceData) = New HashSet(Of PriceData)()
-                'get all prices from the exchange
-                priceData.Add(Api_ng_sample_code.TO.PriceData.EX_BEST_OFFERS)
-                priceData.Add(Api_ng_sample_code.TO.PriceData.EX_TRADED)
+            For Each book In marketCatalogue
 
-                Dim priceProjection = New PriceProjection()
-                priceProjection.PriceData = priceData
+                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Processing Market : " + book.MarketName + " with Market Id : " + book.MarketId + " Market: " + book.MarketName, EventLogEntryType.Information)
 
-                Dim marketBook = client.listMarketBook(marketIdsBook, priceProjection)
+                For i = 0 To book.Runners.Count - 1
 
-                ' Look through the market books, there should only be 1
-                For Each backBet In marketBook
-
-                    If marketBook.Count = 1 Then
-
-                        For i = 0 To backBet.Runners.Count - 1
-
-                            If book.Runners(i).RunnerName = "Over 1.5 Goals" Then
-                                selection.betfairUnderOver15MarketId = backBet.MarketId
-                                selection.betfairOver15SelectionId = book.Runners(i).SelectionId
-                            ElseIf book.Runners(i).RunnerName = "Under 1.5 Goals" Then
-                                selection.betfairUnderOver15MarketId = backBet.MarketId
-                                selection.betfairUnder15SelectionId = book.Runners(i).SelectionId
-                            ElseIf book.Runners(i).RunnerName = "0 - 0" Then
-                                selection.betfairCorrectScoreMarketId = backBet.MarketId
-                                selection.betfairCorrectScore00SelectionId = book.Runners(i).SelectionId
-                            ElseIf book.Runners(i).RunnerName = "1 - 0" Then
-                                selection.betfairCorrectScoreMarketId = backBet.MarketId
-                                selection.betfairCorrectScore10SelectionId = book.Runners(i).SelectionId
-                            ElseIf book.Runners(i).RunnerName = "0 - 1" Then
-                                selection.betfairCorrectScoreMarketId = backBet.MarketId
-                                selection.betfairCorrectScore01SelectionId = book.Runners(i).SelectionId
-                            End If
-
-                        Next ' End of runners
-
+                    If book.MarketName = "Correct Score" Then
+                        selection.betfairCorrectScoreMarketId = book.MarketId
+                        If book.Runners(i).RunnerName = "0 - 0" Then
+                            selection.betfairCorrectScore00SelectionId = book.Runners(i).SelectionId
+                        ElseIf book.Runners(i).RunnerName = "1 - 0" Then
+                            selection.betfairCorrectScore10SelectionId = book.Runners(i).SelectionId
+                        ElseIf book.Runners(i).RunnerName = "0 - 1" Then
+                            selection.betfairCorrectScore01SelectionId = book.Runners(i).SelectionId
+                        Else
+                            'continue
+                        End If
+                    ElseIf book.MarketName = "Over/Under 0.5 Goals" Then
+                        selection.betfairUnderOver05MarketId = book.MarketId
+                    ElseIf book.MarketName = "Over/Under 1.5 Goals" Then
+                        selection.betfairUnderOver15MarketId = book.MarketId
+                        If book.Runners(i).RunnerName = "Under 1.5 Goals" Then
+                            selection.betfairUnder15SelectionId = book.Runners(i).SelectionId
+                        ElseIf book.Runners(i).RunnerName = "Over 1.5 Goals" Then
+                            selection.betfairOver15SelectionId = book.Runners(i).SelectionId
+                        End If
+                    ElseIf book.MarketName = "Over/Under 2.5 Goals" Then
+                        selection.betfairUnderOver25MarketId = book.MarketId
+                    ElseIf book.MarketName = "Over/Under 3.5 Goals" Then
+                        selection.betfairUnderOver35MarketId = book.MarketId
+                    ElseIf book.MarketName = "Over/Under 4.5 Goals" Then
+                        selection.betfairUnderOver45MarketId = book.MarketId
+                    Else
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Unexpected Market : " + book.MarketName, EventLogEntryType.Error)
                     End If
 
-                Next ' End of backBet
+                Next ' End of runners
 
             Next
 
@@ -374,6 +374,8 @@ Public Class BetfairClass
 
             For Each market In markets
 
+                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listMarketBook on Market Status. Market Id: " + marketId.ToString + " Status: " + convertMarketStatus(market.Status), EventLogEntryType.Information)
+
                 ' Store Market Details
                 If market.MarketId = selection.betfairCorrectScoreMarketId Then
                     selection.betfairCorrectScoreMarketStatus = convertMarketStatus(market.Status)
@@ -392,25 +394,25 @@ Public Class BetfairClass
                             selection.betfairOver15Orders = market.Runners(i).Orders.Count.ToString
                         End If
                     ElseIf market.Runners(i).SelectionId = selection.betfairUnder15SelectionId Then
-                            selection.betfairUnder15BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairUnder15BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
                         selection.betfairUnder15SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
                         If market.Runners(i).Orders IsNot Nothing Then
                             selection.betfairUnder15Orders = market.Runners(i).Orders.Count.ToString
                         End If
                     ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
-                            selection.betfairCorrectScore00BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairCorrectScore00BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
                         selection.betfairCorrectScore00SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
                         If market.Runners(i).Orders IsNot Nothing Then
                             selection.betfairCorrectScore00Orders = market.Runners(i).Orders.Count.ToString
                         End If
                     ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
-                            selection.betfairCorrectScore10BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairCorrectScore10BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
                         selection.betfairCorrectScore10SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
                         If market.Runners(i).Orders IsNot Nothing Then
                             selection.betfairCorrectScore10Orders = market.Runners(i).Orders.Count.ToString
                         End If
                     ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore01SelectionId Then
-                            selection.betfairCorrectScore01BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairCorrectScore01BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
                         selection.betfairCorrectScore01SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
                         If market.Runners(i).Orders IsNot Nothing Then
                             selection.betfairCorrectScore01Orders = market.Runners(i).Orders.Count.ToString

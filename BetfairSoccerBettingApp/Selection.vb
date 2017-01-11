@@ -9,6 +9,23 @@
     Public betfairEventName As String
     Public betfairEventDateTime As String
     Public betfairEventInplay As Boolean
+    Public betfairGoalsScored As String
+
+    ' Betfair Under/Over0.5 market details
+    Public betfairUnderOver05MarketId As String
+    Public betfairUnderOver05MarketStatus As String
+
+    ' Betfair Under/Over2.5 market details
+    Public betfairUnderOver25MarketId As String
+    Public betfairUnderOver25MarketStatus As String
+
+    ' Betfair Under/Over3.5 market details
+    Public betfairUnderOver35MarketId As String
+    Public betfairUnderOver35MarketStatus As String
+
+    ' Betfair Under/Over4.5 market details
+    Public betfairUnderOver45MarketId As String
+    Public betfairUnderOver45MarketStatus As String
 
     ' Betfair Under/Over1.5 market details
     Public betfairUnderOver15MarketId As String
@@ -94,7 +111,43 @@
 
         BetfairClass1 = Nothing
 
+        ' Populate goals scored
+        betfairGoalsScored = calculateGoalsScored()
+
+
     End Sub
+    Private Function calculateGoalsScored() As String
+
+        ' Get the derived market Status from previous listMarketCatalogue
+        Dim strGoalsScored As String = ""
+
+        If Me.betfairCorrectScoreMarketId = "Not Found" Then
+            Return "Match ended!"
+        Else
+            If Me.betfairUnderOver05MarketId = "Not Found" Then
+                If Me.betfairUnderOver15MarketId = "Not Found" Then
+                    If Me.betfairUnderOver25MarketId = "Not Found" Then
+                        If Me.betfairUnderOver35MarketId = "Not Found" Then
+                            If Me.betfairUnderOver45MarketId = "Not Found" Then
+                                Return "Over 4.5"
+                            Else
+                                Return "4 Goals scored"
+                            End If
+                        Else
+                            Return "3 Goals scored"
+                        End If
+                    Else
+                        Return "2 Goals scored"
+                    End If
+                Else
+                    Return "1 Goal scored"
+                End If
+            Else
+                Return "0 - 0"
+            End If
+        End If
+
+    End Function
 
     Public Sub placeCorrectScore_00_Order()
 

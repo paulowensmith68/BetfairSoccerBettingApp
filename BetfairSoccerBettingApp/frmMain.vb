@@ -352,9 +352,6 @@ Public Class frmMain
             ' Get Initial book details, like marketId's and selectionId's
             sel1.getInitialBookDetails()
 
-            ' Set score
-            populateScoreSel1()
-
             ' Refresh 
             Refreshsel1Info()
 
@@ -446,9 +443,6 @@ Public Class frmMain
             ' Get Initial book details, like marketId's and selectionId's
             sel2.getInitialBookDetails()
 
-            ' Set score
-            populateScoreSel2()
-
             ' Refresh 
             Refreshsel2Info()
 
@@ -536,9 +530,6 @@ Public Class frmMain
 
             ' Get Initial book details, like marketId's and selectionId's
             sel3.getInitialBookDetails()
-
-            ' Set score
-            populateScoreSel3()
 
             ' Refresh 
             Refreshsel3Info()
@@ -628,9 +619,6 @@ Public Class frmMain
             ' Get Initial book details, like marketId's and selectionId's
             sel4.getInitialBookDetails()
 
-            ' Set score
-            populateScoreSel4()
-
             ' Refresh 
             Refreshsel4Info()
 
@@ -650,7 +638,6 @@ Public Class frmMain
 
     End Sub
 
-
     Private Sub Refreshsel1Info()
 
         ' Get latest data from Betfair
@@ -664,25 +651,7 @@ Public Class frmMain
         End If
 
         ' Set score
-        Dim strPreviousScore As String
-        strPreviousScore = tbxSel1Score.Text
-        populateScoreSel1()
-
-        ' Detect score change
-        If strPreviousScore = tbxSel1Score.Text Then
-            ' Same score
-        Else
-            ' Goal scored since last tick
-            If tbxSel1Goal1.Text = "" Then
-                tbxSel1Goal1.Text = tbxSel1InplayTime.Text.ToString
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Goal 1 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
-            Else
-                If tbxSel1Goal2.Text = "" Then
-                    tbxSel1Goal2.Text = tbxSel1InplayTime.Text.ToString
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Goal 2 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
-                End If
-            End If
-        End If
+        tbxSel1Score.Text = sel1.betfairGoalsScored
 
         ' Market Status
         tbxSel1CorrectScoreStatus.Text = sel1.betfairCorrectScoreMarketStatus
@@ -790,31 +759,6 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub populateScoreSel1()
-
-        ' Some matches (low liquidity) dont have any money so just ignore scores
-        If String.IsNullOrEmpty(sel1.betfairCorrectScore00BackOdds) Or String.IsNullOrEmpty(sel1.betfairCorrectScore10BackOdds) Or String.IsNullOrEmpty(sel1.betfairCorrectScore01BackOdds) Then
-            tbxSel1Score.Text = "Unknown"
-        Else
-
-            If Double.Parse(sel1.betfairCorrectScore10BackOdds) = 1000 Then
-                If Double.Parse(sel1.betfairCorrectScore01BackOdds) = 1000 Then
-                    tbxSel1Score.Text = "Score Over 1.5"
-                Else
-                    tbxSel1Score.Text = "0 - 1"
-                End If
-            Else
-                If Double.Parse(sel1.betfairCorrectScore01BackOdds) = 1000 Then
-                    tbxSel1Score.Text = "1 - 0"
-                Else
-                    tbxSel1Score.Text = "0 - 0"
-                End If
-            End If
-
-        End If
-
-    End Sub
-
     Private Sub Refreshsel2Info()
 
         ' Get latest data from Betfair
@@ -828,25 +772,7 @@ Public Class frmMain
         End If
 
         ' Set score
-        Dim strPreviousScore As String
-        strPreviousScore = tbxSel2Score.Text
-        populateScoreSel2()
-
-        ' Detect score change
-        If strPreviousScore = tbxSel2Score.Text Then
-            ' Same score
-        Else
-            ' Goal scored since last tick
-            If tbxSel2Goal1.Text = "" Then
-                tbxSel2Goal1.Text = tbxSel2InplayTime.Text.ToString
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Goal 1 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
-            Else
-                If tbxSel2Goal2.Text = "" Then
-                    tbxSel2Goal2.Text = tbxSel2InplayTime.Text.ToString
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Goal 2 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
-                End If
-            End If
-        End If
+        tbxSel2Score.Text = sel1.betfairGoalsScored
 
         ' Market Status
         tbxSel2CorrectScoreStatus.Text = sel2.betfairCorrectScoreMarketStatus
@@ -954,31 +880,6 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub populateScoreSel2()
-
-        ' Some matches (low liquidity) dont have any money so just ignore scores
-        If String.IsNullOrEmpty(sel2.betfairCorrectScore00BackOdds) Or String.IsNullOrEmpty(sel2.betfairCorrectScore10BackOdds) Or String.IsNullOrEmpty(sel2.betfairCorrectScore01BackOdds) Then
-            tbxSel2Score.Text = "Unknown"
-        Else
-
-            If Double.Parse(sel2.betfairCorrectScore10BackOdds) = 1000 Then
-                If Double.Parse(sel2.betfairCorrectScore01BackOdds) = 1000 Then
-                    tbxSel2Score.Text = "Score Over 1.5"
-                Else
-                    tbxSel2Score.Text = "0 - 1"
-                End If
-            Else
-                If Double.Parse(sel2.betfairCorrectScore01BackOdds) = 1000 Then
-                    tbxSel2Score.Text = "1 - 0"
-                Else
-                    tbxSel2Score.Text = "0 - 0"
-                End If
-            End If
-
-        End If
-
-    End Sub
-
     Private Sub Refreshsel3Info()
 
         ' Get latest data from Betfair
@@ -992,25 +893,7 @@ Public Class frmMain
         End If
 
         ' Set score
-        Dim strPreviousScore As String
-        strPreviousScore = tbxSel3Score.Text
-        populateScoreSel3()
-
-        ' Detect score change
-        If strPreviousScore = tbxSel3Score.Text Then
-            ' Same score
-        Else
-            ' Goal scored since last tick
-            If tbxSel3Goal1.Text = "" Then
-                tbxSel3Goal1.Text = tbxSel3InplayTime.Text.ToString
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Goal 1 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
-            Else
-                If tbxSel3Goal2.Text = "" Then
-                    tbxSel3Goal2.Text = tbxSel3InplayTime.Text.ToString
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Goal 2 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
-                End If
-            End If
-        End If
+        tbxSel3Score.Text = sel1.betfairGoalsScored
 
         ' Market Status
         tbxSel3CorrectScoreStatus.Text = sel3.betfairCorrectScoreMarketStatus
@@ -1118,31 +1001,6 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub populateScoreSel3()
-
-        ' Some matches (low liquidity) dont have any money so just ignore scores
-        If String.IsNullOrEmpty(sel3.betfairCorrectScore00BackOdds) Or String.IsNullOrEmpty(sel3.betfairCorrectScore10BackOdds) Or String.IsNullOrEmpty(sel3.betfairCorrectScore01BackOdds) Then
-            tbxSel3Score.Text = "Unknown"
-        Else
-
-            If Double.Parse(sel3.betfairCorrectScore10BackOdds) = 1000 Then
-                If Double.Parse(sel3.betfairCorrectScore01BackOdds) = 1000 Then
-                    tbxSel3Score.Text = "Score Over 1.5"
-                Else
-                    tbxSel3Score.Text = "0 - 1"
-                End If
-            Else
-                If Double.Parse(sel3.betfairCorrectScore01BackOdds) = 1000 Then
-                    tbxSel3Score.Text = "1 - 0"
-                Else
-                    tbxSel3Score.Text = "0 - 0"
-                End If
-            End If
-
-        End If
-
-    End Sub
-
     Private Sub Refreshsel4Info()
 
         ' Get latest data from Betfair
@@ -1156,25 +1014,7 @@ Public Class frmMain
         End If
 
         ' Set score
-        Dim strPreviousScore As String
-        strPreviousScore = tbxSel4Score.Text
-        populateScoreSel4()
-
-        ' Detect score change
-        If strPreviousScore = tbxSel4Score.Text Then
-            ' Same score
-        Else
-            ' Goal scored since last tick
-            If tbxSel4Goal1.Text = "" Then
-                tbxSel4Goal1.Text = tbxSel4InplayTime.Text.ToString
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Goal 1 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
-            Else
-                If tbxSel4Goal2.Text = "" Then
-                    tbxSel4Goal2.Text = tbxSel4InplayTime.Text.ToString
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Goal 2 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
-                End If
-            End If
-        End If
+        tbxSel4Score.Text = sel1.betfairGoalsScored
 
         ' Market Status
         tbxSel4CorrectScoreStatus.Text = sel4.betfairCorrectScoreMarketStatus
@@ -1282,7 +1122,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub populateScoreSel4()
+    Private Sub populateGoalsScoredSel4()
 
         ' Some matches (low liquidity) dont have any money so just ignore scores
         If String.IsNullOrEmpty(sel4.betfairCorrectScore00BackOdds) Or String.IsNullOrEmpty(sel4.betfairCorrectScore10BackOdds) Or String.IsNullOrEmpty(sel4.betfairCorrectScore01BackOdds) Then
