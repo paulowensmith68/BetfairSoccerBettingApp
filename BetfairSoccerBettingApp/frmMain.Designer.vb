@@ -23,13 +23,12 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.rtbLog = New System.Windows.Forms.RichTextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.tbxRefreshSecs = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.grpSelections = New System.Windows.Forms.GroupBox()
         Me.btnSel4AutoBetOn = New System.Windows.Forms.Button()
@@ -37,28 +36,28 @@ Partial Class frmMain
         Me.Button18 = New System.Windows.Forms.Button()
         Me.Button19 = New System.Windows.Forms.Button()
         Me.Button20 = New System.Windows.Forms.Button()
-        Me.Button21 = New System.Windows.Forms.Button()
+        Me.btnSel4ProfitStatus00 = New System.Windows.Forms.Button()
         Me.btnSel4 = New System.Windows.Forms.Button()
         Me.btnSel3AutoBetOn = New System.Windows.Forms.Button()
         Me.tbxSel3EventName = New System.Windows.Forms.TextBox()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
+        Me.btnSel3ProfitStatus00 = New System.Windows.Forms.Button()
         Me.btnSel3 = New System.Windows.Forms.Button()
         Me.btnSel2AutoBetOn = New System.Windows.Forms.Button()
         Me.tbxSel2EventName = New System.Windows.Forms.TextBox()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
+        Me.btnSel2ProfitStatus00 = New System.Windows.Forms.Button()
         Me.btnSel2 = New System.Windows.Forms.Button()
         Me.btnSel1AutoBetOn = New System.Windows.Forms.Button()
         Me.tbxSel1EventName = New System.Windows.Forms.TextBox()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSel1ProfitStatusOver15 = New System.Windows.Forms.Button()
+        Me.btnSel1ProfitStatusUnder15 = New System.Windows.Forms.Button()
+        Me.btnSel1ProfitStatus10 = New System.Windows.Forms.Button()
+        Me.btnSel1ProfitStatus00 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -121,13 +120,6 @@ Partial Class frmMain
         Me.timerRefreshSelections = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel1AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.dgvEvents = New System.Windows.Forms.DataGridView()
-        Me.EventTypeIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EventIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CountryCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TimezoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BeffairEventClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.grpSel2 = New System.Windows.Forms.GroupBox()
         Me.tbxSel2IOver15Orders = New System.Windows.Forms.TextBox()
         Me.tbxSel2IUnder15Orders = New System.Windows.Forms.TextBox()
@@ -281,14 +273,69 @@ Partial Class frmMain
         Me.Label91 = New System.Windows.Forms.Label()
         Me.tbxSel4CorrectScore00Odds = New System.Windows.Forms.TextBox()
         Me.Label92 = New System.Windows.Forms.Label()
+        Me.Label93 = New System.Windows.Forms.Label()
+        Me.nudSettingsSelectionRefresh = New System.Windows.Forms.NumericUpDown()
+        Me.nudSettingsAutoBetRefresh = New System.Windows.Forms.NumericUpDown()
+        Me.nudSettingsCS00UpperPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label94 = New System.Windows.Forms.Label()
+        Me.nudSettingsCS00LowerPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label95 = New System.Windows.Forms.Label()
+        Me.nudSettingsCS00TargetPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label96 = New System.Windows.Forms.Label()
+        Me.nudSettingsOver15TargetPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label97 = New System.Windows.Forms.Label()
+        Me.nudSettingsOver15LowerPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label98 = New System.Windows.Forms.Label()
+        Me.nudSettingsOver15UpperPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label99 = New System.Windows.Forms.Label()
+        Me.Label100 = New System.Windows.Forms.Label()
+        Me.nudSettingsUnder15TargetPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label101 = New System.Windows.Forms.Label()
+        Me.nudSettingsUnder15LowerPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label102 = New System.Windows.Forms.Label()
+        Me.nudSettingsUnder15UpperPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label103 = New System.Windows.Forms.Label()
+        Me.Label104 = New System.Windows.Forms.Label()
+        Me.nudSettingsCS00Stake = New System.Windows.Forms.NumericUpDown()
+        Me.Label105 = New System.Windows.Forms.Label()
+        Me.nudSettingsOver15Stake = New System.Windows.Forms.NumericUpDown()
+        Me.Label106 = New System.Windows.Forms.Label()
+        Me.nudSettingsUnder15take = New System.Windows.Forms.NumericUpDown()
+        Me.Label107 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.btnSel1ProfitStatus01 = New System.Windows.Forms.Button()
+        Me.Label108 = New System.Windows.Forms.Label()
+        Me.EventTypeIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EventIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CountryCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TimezoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OpenDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BeffairEventClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.grpSelections.SuspendLayout()
         Me.grpSel1.SuspendLayout()
         CType(Me.dgvEvents, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSel2.SuspendLayout()
         Me.grpSel3.SuspendLayout()
         Me.grpSel4.SuspendLayout()
+        CType(Me.nudSettingsSelectionRefresh, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsAutoBetRefresh, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsCS00UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsCS00LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsCS00TargetPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsOver15TargetPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsOver15LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsOver15UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsUnder15TargetPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsUnder15LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsUnder15UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsCS00Stake, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsOver15Stake, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsUnder15take, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -316,63 +363,87 @@ Partial Class frmMain
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.Info
-        Me.GroupBox1.Controls.Add(Me.tbxRefreshSecs)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsUnder15take)
+        Me.GroupBox1.Controls.Add(Me.Label107)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsOver15Stake)
+        Me.GroupBox1.Controls.Add(Me.Label106)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsCS00Stake)
+        Me.GroupBox1.Controls.Add(Me.Label105)
+        Me.GroupBox1.Controls.Add(Me.Label104)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsUnder15TargetPrice)
+        Me.GroupBox1.Controls.Add(Me.Label101)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsUnder15LowerPrice)
+        Me.GroupBox1.Controls.Add(Me.Label102)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsUnder15UpperPrice)
+        Me.GroupBox1.Controls.Add(Me.Label103)
+        Me.GroupBox1.Controls.Add(Me.Label100)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsOver15TargetPrice)
+        Me.GroupBox1.Controls.Add(Me.Label97)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsOver15LowerPrice)
+        Me.GroupBox1.Controls.Add(Me.Label98)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsOver15UpperPrice)
+        Me.GroupBox1.Controls.Add(Me.Label99)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsCS00TargetPrice)
+        Me.GroupBox1.Controls.Add(Me.Label96)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsCS00LowerPrice)
+        Me.GroupBox1.Controls.Add(Me.Label95)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsCS00UpperPrice)
+        Me.GroupBox1.Controls.Add(Me.Label94)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsAutoBetRefresh)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsSelectionRefresh)
+        Me.GroupBox1.Controls.Add(Me.Label93)
         Me.GroupBox1.Controls.Add(Me.Label22)
-        Me.GroupBox1.Location = New System.Drawing.Point(769, 29)
+        Me.GroupBox1.Location = New System.Drawing.Point(769, 10)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(649, 83)
+        Me.GroupBox1.Size = New System.Drawing.Size(714, 152)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Settings"
         '
-        'tbxRefreshSecs
-        '
-        Me.tbxRefreshSecs.Location = New System.Drawing.Point(87, 13)
-        Me.tbxRefreshSecs.Name = "tbxRefreshSecs"
-        Me.tbxRefreshSecs.Size = New System.Drawing.Size(29, 20)
-        Me.tbxRefreshSecs.TabIndex = 38
-        Me.tbxRefreshSecs.Text = "10"
-        Me.tbxRefreshSecs.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(6, 16)
+        Me.Label22.Location = New System.Drawing.Point(6, 32)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(75, 13)
+        Me.Label22.Size = New System.Drawing.Size(96, 13)
         Me.Label22.TabIndex = 37
-        Me.Label22.Text = "Refresh (secs)"
+        Me.Label22.Text = "Refresh Selections"
         '
         'grpSelections
         '
         Me.grpSelections.BackColor = System.Drawing.Color.PaleTurquoise
+        Me.grpSelections.Controls.Add(Me.Button5)
+        Me.grpSelections.Controls.Add(Me.Button10)
+        Me.grpSelections.Controls.Add(Me.Button11)
+        Me.grpSelections.Controls.Add(Me.btnSel1ProfitStatus01)
+        Me.grpSelections.Controls.Add(Me.Label108)
         Me.grpSelections.Controls.Add(Me.btnSel4AutoBetOn)
         Me.grpSelections.Controls.Add(Me.tbxSel4EventName)
         Me.grpSelections.Controls.Add(Me.Button18)
         Me.grpSelections.Controls.Add(Me.Button19)
         Me.grpSelections.Controls.Add(Me.Button20)
-        Me.grpSelections.Controls.Add(Me.Button21)
+        Me.grpSelections.Controls.Add(Me.btnSel4ProfitStatus00)
         Me.grpSelections.Controls.Add(Me.btnSel4)
         Me.grpSelections.Controls.Add(Me.btnSel3AutoBetOn)
         Me.grpSelections.Controls.Add(Me.tbxSel3EventName)
         Me.grpSelections.Controls.Add(Me.Button12)
         Me.grpSelections.Controls.Add(Me.Button13)
         Me.grpSelections.Controls.Add(Me.Button14)
-        Me.grpSelections.Controls.Add(Me.Button15)
+        Me.grpSelections.Controls.Add(Me.btnSel3ProfitStatus00)
         Me.grpSelections.Controls.Add(Me.btnSel3)
         Me.grpSelections.Controls.Add(Me.btnSel2AutoBetOn)
         Me.grpSelections.Controls.Add(Me.tbxSel2EventName)
         Me.grpSelections.Controls.Add(Me.Button6)
         Me.grpSelections.Controls.Add(Me.Button7)
         Me.grpSelections.Controls.Add(Me.Button8)
-        Me.grpSelections.Controls.Add(Me.Button9)
+        Me.grpSelections.Controls.Add(Me.btnSel2ProfitStatus00)
         Me.grpSelections.Controls.Add(Me.btnSel2)
         Me.grpSelections.Controls.Add(Me.btnSel1AutoBetOn)
         Me.grpSelections.Controls.Add(Me.tbxSel1EventName)
-        Me.grpSelections.Controls.Add(Me.Button4)
-        Me.grpSelections.Controls.Add(Me.Button3)
-        Me.grpSelections.Controls.Add(Me.Button2)
-        Me.grpSelections.Controls.Add(Me.Button1)
+        Me.grpSelections.Controls.Add(Me.btnSel1ProfitStatusOver15)
+        Me.grpSelections.Controls.Add(Me.btnSel1ProfitStatusUnder15)
+        Me.grpSelections.Controls.Add(Me.btnSel1ProfitStatus10)
+        Me.grpSelections.Controls.Add(Me.btnSel1ProfitStatus00)
         Me.grpSelections.Controls.Add(Me.Label7)
         Me.grpSelections.Controls.Add(Me.Label6)
         Me.grpSelections.Controls.Add(Me.Label5)
@@ -380,9 +451,9 @@ Partial Class frmMain
         Me.grpSelections.Controls.Add(Me.Label3)
         Me.grpSelections.Controls.Add(Me.Label2)
         Me.grpSelections.Controls.Add(Me.btnSel1)
-        Me.grpSelections.Location = New System.Drawing.Point(769, 127)
+        Me.grpSelections.Location = New System.Drawing.Point(769, 168)
         Me.grpSelections.Name = "grpSelections"
-        Me.grpSelections.Size = New System.Drawing.Size(652, 211)
+        Me.grpSelections.Size = New System.Drawing.Size(714, 211)
         Me.grpSelections.TabIndex = 6
         Me.grpSelections.TabStop = False
         Me.grpSelections.Text = "Selections"
@@ -409,43 +480,47 @@ Partial Class frmMain
         '
         'Button18
         '
-        Me.Button18.BackColor = System.Drawing.Color.Ivory
+        Me.Button18.BackColor = System.Drawing.Color.White
+        Me.Button18.Enabled = False
         Me.Button18.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button18.Location = New System.Drawing.Point(560, 173)
+        Me.Button18.Location = New System.Drawing.Point(649, 173)
         Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(30, 24)
+        Me.Button18.Size = New System.Drawing.Size(39, 24)
         Me.Button18.TabIndex = 48
         Me.Button18.UseVisualStyleBackColor = False
         '
         'Button19
         '
-        Me.Button19.BackColor = System.Drawing.Color.Ivory
+        Me.Button19.BackColor = System.Drawing.Color.White
+        Me.Button19.Enabled = False
         Me.Button19.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button19.Location = New System.Drawing.Point(519, 173)
+        Me.Button19.Location = New System.Drawing.Point(596, 173)
         Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(30, 24)
+        Me.Button19.Size = New System.Drawing.Size(39, 24)
         Me.Button19.TabIndex = 47
         Me.Button19.UseVisualStyleBackColor = False
         '
         'Button20
         '
-        Me.Button20.BackColor = System.Drawing.Color.Ivory
+        Me.Button20.BackColor = System.Drawing.Color.White
+        Me.Button20.Enabled = False
         Me.Button20.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button20.Location = New System.Drawing.Point(478, 173)
+        Me.Button20.Location = New System.Drawing.Point(498, 173)
         Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(30, 24)
+        Me.Button20.Size = New System.Drawing.Size(39, 24)
         Me.Button20.TabIndex = 46
         Me.Button20.UseVisualStyleBackColor = False
         '
-        'Button21
+        'btnSel4ProfitStatus00
         '
-        Me.Button21.BackColor = System.Drawing.Color.Ivory
-        Me.Button21.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button21.Location = New System.Drawing.Point(437, 173)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(30, 24)
-        Me.Button21.TabIndex = 45
-        Me.Button21.UseVisualStyleBackColor = False
+        Me.btnSel4ProfitStatus00.BackColor = System.Drawing.Color.White
+        Me.btnSel4ProfitStatus00.Enabled = False
+        Me.btnSel4ProfitStatus00.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnSel4ProfitStatus00.Location = New System.Drawing.Point(450, 173)
+        Me.btnSel4ProfitStatus00.Name = "btnSel4ProfitStatus00"
+        Me.btnSel4ProfitStatus00.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel4ProfitStatus00.TabIndex = 45
+        Me.btnSel4ProfitStatus00.UseVisualStyleBackColor = False
         '
         'btnSel4
         '
@@ -478,43 +553,47 @@ Partial Class frmMain
         '
         'Button12
         '
-        Me.Button12.BackColor = System.Drawing.Color.Ivory
+        Me.Button12.BackColor = System.Drawing.Color.White
+        Me.Button12.Enabled = False
         Me.Button12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button12.Location = New System.Drawing.Point(560, 134)
+        Me.Button12.Location = New System.Drawing.Point(649, 134)
         Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(30, 24)
+        Me.Button12.Size = New System.Drawing.Size(39, 24)
         Me.Button12.TabIndex = 41
         Me.Button12.UseVisualStyleBackColor = False
         '
         'Button13
         '
-        Me.Button13.BackColor = System.Drawing.Color.Ivory
+        Me.Button13.BackColor = System.Drawing.Color.White
+        Me.Button13.Enabled = False
         Me.Button13.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button13.Location = New System.Drawing.Point(519, 134)
+        Me.Button13.Location = New System.Drawing.Point(596, 134)
         Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(30, 24)
+        Me.Button13.Size = New System.Drawing.Size(39, 24)
         Me.Button13.TabIndex = 40
         Me.Button13.UseVisualStyleBackColor = False
         '
         'Button14
         '
-        Me.Button14.BackColor = System.Drawing.Color.Ivory
+        Me.Button14.BackColor = System.Drawing.Color.White
+        Me.Button14.Enabled = False
         Me.Button14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button14.Location = New System.Drawing.Point(478, 134)
+        Me.Button14.Location = New System.Drawing.Point(498, 134)
         Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(30, 24)
+        Me.Button14.Size = New System.Drawing.Size(39, 24)
         Me.Button14.TabIndex = 39
         Me.Button14.UseVisualStyleBackColor = False
         '
-        'Button15
+        'btnSel3ProfitStatus00
         '
-        Me.Button15.BackColor = System.Drawing.Color.Ivory
-        Me.Button15.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button15.Location = New System.Drawing.Point(437, 134)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(30, 24)
-        Me.Button15.TabIndex = 38
-        Me.Button15.UseVisualStyleBackColor = False
+        Me.btnSel3ProfitStatus00.BackColor = System.Drawing.Color.White
+        Me.btnSel3ProfitStatus00.Enabled = False
+        Me.btnSel3ProfitStatus00.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnSel3ProfitStatus00.Location = New System.Drawing.Point(450, 134)
+        Me.btnSel3ProfitStatus00.Name = "btnSel3ProfitStatus00"
+        Me.btnSel3ProfitStatus00.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel3ProfitStatus00.TabIndex = 38
+        Me.btnSel3ProfitStatus00.UseVisualStyleBackColor = False
         '
         'btnSel3
         '
@@ -547,43 +626,47 @@ Partial Class frmMain
         '
         'Button6
         '
-        Me.Button6.BackColor = System.Drawing.Color.Ivory
+        Me.Button6.BackColor = System.Drawing.Color.White
+        Me.Button6.Enabled = False
         Me.Button6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button6.Location = New System.Drawing.Point(560, 95)
+        Me.Button6.Location = New System.Drawing.Point(649, 95)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(30, 24)
+        Me.Button6.Size = New System.Drawing.Size(39, 24)
         Me.Button6.TabIndex = 34
         Me.Button6.UseVisualStyleBackColor = False
         '
         'Button7
         '
-        Me.Button7.BackColor = System.Drawing.Color.Ivory
+        Me.Button7.BackColor = System.Drawing.Color.White
+        Me.Button7.Enabled = False
         Me.Button7.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button7.Location = New System.Drawing.Point(519, 95)
+        Me.Button7.Location = New System.Drawing.Point(596, 95)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(30, 24)
+        Me.Button7.Size = New System.Drawing.Size(39, 24)
         Me.Button7.TabIndex = 33
         Me.Button7.UseVisualStyleBackColor = False
         '
         'Button8
         '
-        Me.Button8.BackColor = System.Drawing.Color.Ivory
+        Me.Button8.BackColor = System.Drawing.Color.White
+        Me.Button8.Enabled = False
         Me.Button8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button8.Location = New System.Drawing.Point(478, 95)
+        Me.Button8.Location = New System.Drawing.Point(498, 95)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(30, 24)
+        Me.Button8.Size = New System.Drawing.Size(39, 24)
         Me.Button8.TabIndex = 32
         Me.Button8.UseVisualStyleBackColor = False
         '
-        'Button9
+        'btnSel2ProfitStatus00
         '
-        Me.Button9.BackColor = System.Drawing.Color.Ivory
-        Me.Button9.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button9.Location = New System.Drawing.Point(437, 95)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(30, 24)
-        Me.Button9.TabIndex = 31
-        Me.Button9.UseVisualStyleBackColor = False
+        Me.btnSel2ProfitStatus00.BackColor = System.Drawing.Color.White
+        Me.btnSel2ProfitStatus00.Enabled = False
+        Me.btnSel2ProfitStatus00.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnSel2ProfitStatus00.Location = New System.Drawing.Point(450, 95)
+        Me.btnSel2ProfitStatus00.Name = "btnSel2ProfitStatus00"
+        Me.btnSel2ProfitStatus00.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel2ProfitStatus00.TabIndex = 31
+        Me.btnSel2ProfitStatus00.UseVisualStyleBackColor = False
         '
         'btnSel2
         '
@@ -614,45 +697,49 @@ Partial Class frmMain
         Me.tbxSel1EventName.Size = New System.Drawing.Size(263, 33)
         Me.tbxSel1EventName.TabIndex = 28
         '
-        'Button4
+        'btnSel1ProfitStatusOver15
         '
-        Me.Button4.BackColor = System.Drawing.Color.Ivory
-        Me.Button4.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button4.Location = New System.Drawing.Point(560, 56)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(30, 24)
-        Me.Button4.TabIndex = 15
-        Me.Button4.UseVisualStyleBackColor = False
+        Me.btnSel1ProfitStatusOver15.BackColor = System.Drawing.Color.White
+        Me.btnSel1ProfitStatusOver15.Enabled = False
+        Me.btnSel1ProfitStatusOver15.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnSel1ProfitStatusOver15.Location = New System.Drawing.Point(649, 56)
+        Me.btnSel1ProfitStatusOver15.Name = "btnSel1ProfitStatusOver15"
+        Me.btnSel1ProfitStatusOver15.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatusOver15.TabIndex = 15
+        Me.btnSel1ProfitStatusOver15.UseVisualStyleBackColor = False
         '
-        'Button3
+        'btnSel1ProfitStatusUnder15
         '
-        Me.Button3.BackColor = System.Drawing.Color.Ivory
-        Me.Button3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button3.Location = New System.Drawing.Point(519, 56)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(30, 24)
-        Me.Button3.TabIndex = 14
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btnSel1ProfitStatusUnder15.BackColor = System.Drawing.Color.White
+        Me.btnSel1ProfitStatusUnder15.Enabled = False
+        Me.btnSel1ProfitStatusUnder15.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnSel1ProfitStatusUnder15.Location = New System.Drawing.Point(596, 56)
+        Me.btnSel1ProfitStatusUnder15.Name = "btnSel1ProfitStatusUnder15"
+        Me.btnSel1ProfitStatusUnder15.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatusUnder15.TabIndex = 14
+        Me.btnSel1ProfitStatusUnder15.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btnSel1ProfitStatus10
         '
-        Me.Button2.BackColor = System.Drawing.Color.Ivory
-        Me.Button2.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button2.Location = New System.Drawing.Point(478, 56)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(30, 24)
-        Me.Button2.TabIndex = 13
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnSel1ProfitStatus10.BackColor = System.Drawing.Color.White
+        Me.btnSel1ProfitStatus10.Enabled = False
+        Me.btnSel1ProfitStatus10.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnSel1ProfitStatus10.Location = New System.Drawing.Point(498, 56)
+        Me.btnSel1ProfitStatus10.Name = "btnSel1ProfitStatus10"
+        Me.btnSel1ProfitStatus10.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatus10.TabIndex = 13
+        Me.btnSel1ProfitStatus10.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnSel1ProfitStatus00
         '
-        Me.Button1.BackColor = System.Drawing.Color.Ivory
-        Me.Button1.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button1.Location = New System.Drawing.Point(437, 56)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(30, 24)
-        Me.Button1.TabIndex = 12
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnSel1ProfitStatus00.BackColor = System.Drawing.Color.White
+        Me.btnSel1ProfitStatus00.Enabled = False
+        Me.btnSel1ProfitStatus00.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnSel1ProfitStatus00.Location = New System.Drawing.Point(450, 56)
+        Me.btnSel1ProfitStatus00.Name = "btnSel1ProfitStatus00"
+        Me.btnSel1ProfitStatus00.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatus00.TabIndex = 12
+        Me.btnSel1ProfitStatus00.UseVisualStyleBackColor = False
         '
         'Label7
         '
@@ -666,7 +753,7 @@ Partial Class frmMain
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(557, 26)
+        Me.Label6.Location = New System.Drawing.Point(646, 26)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(42, 13)
         Me.Label6.TabIndex = 10
@@ -675,7 +762,7 @@ Partial Class frmMain
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(510, 26)
+        Me.Label5.Location = New System.Drawing.Point(587, 26)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(48, 13)
         Me.Label5.TabIndex = 9
@@ -684,16 +771,16 @@ Partial Class frmMain
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(468, 26)
+        Me.Label4.Location = New System.Drawing.Point(502, 26)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(42, 13)
+        Me.Label4.Size = New System.Drawing.Size(22, 13)
         Me.Label4.TabIndex = 8
-        Me.Label4.Text = "1-0/0-1"
+        Me.Label4.Text = "1-0"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(440, 26)
+        Me.Label3.Location = New System.Drawing.Point(458, 26)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(22, 13)
         Me.Label3.TabIndex = 7
@@ -770,7 +857,7 @@ Partial Class frmMain
         Me.grpSel1.Controls.Add(Me.Label9)
         Me.grpSel1.Controls.Add(Me.tbxSel1CorrectScore00Odds)
         Me.grpSel1.Controls.Add(Me.Label8)
-        Me.grpSel1.Location = New System.Drawing.Point(12, 361)
+        Me.grpSel1.Location = New System.Drawing.Point(12, 385)
         Me.grpSel1.Name = "grpSel1"
         Me.grpSel1.Size = New System.Drawing.Size(734, 175)
         Me.grpSel1.TabIndex = 7
@@ -1220,94 +1307,39 @@ Partial Class frmMain
         Me.dgvEvents.AllowUserToAddRows = False
         Me.dgvEvents.AllowUserToDeleteRows = False
         Me.dgvEvents.AutoGenerateColumns = False
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Info
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEvents.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEvents.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEvents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EventTypeIdDataGridViewTextBoxColumn, Me.EventIdDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.CountryCodeDataGridViewTextBoxColumn, Me.TimezoneDataGridViewTextBoxColumn, Me.OpenDateDataGridViewTextBoxColumn})
         Me.dgvEvents.DataSource = Me.BeffairEventClassBindingSource
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEvents.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEvents.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvEvents.Location = New System.Drawing.Point(31, 29)
         Me.dgvEvents.MultiSelect = False
         Me.dgvEvents.Name = "dgvEvents"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEvents.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEvents.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvEvents.Size = New System.Drawing.Size(691, 309)
+        Me.dgvEvents.Size = New System.Drawing.Size(691, 326)
         Me.dgvEvents.TabIndex = 11
-        '
-        'EventTypeIdDataGridViewTextBoxColumn
-        '
-        Me.EventTypeIdDataGridViewTextBoxColumn.DataPropertyName = "eventTypeId"
-        Me.EventTypeIdDataGridViewTextBoxColumn.HeaderText = "eventTypeId"
-        Me.EventTypeIdDataGridViewTextBoxColumn.Name = "EventTypeIdDataGridViewTextBoxColumn"
-        Me.EventTypeIdDataGridViewTextBoxColumn.ReadOnly = True
-        Me.EventTypeIdDataGridViewTextBoxColumn.Visible = False
-        '
-        'EventIdDataGridViewTextBoxColumn
-        '
-        Me.EventIdDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EventIdDataGridViewTextBoxColumn.DataPropertyName = "eventId"
-        Me.EventIdDataGridViewTextBoxColumn.HeaderText = "eventId"
-        Me.EventIdDataGridViewTextBoxColumn.Name = "EventIdDataGridViewTextBoxColumn"
-        Me.EventIdDataGridViewTextBoxColumn.Width = 71
-        '
-        'NameDataGridViewTextBoxColumn
-        '
-        Me.NameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
-        Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
-        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
-        Me.NameDataGridViewTextBoxColumn.ReadOnly = True
-        Me.NameDataGridViewTextBoxColumn.Width = 64
-        '
-        'CountryCodeDataGridViewTextBoxColumn
-        '
-        Me.CountryCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.CountryCodeDataGridViewTextBoxColumn.DataPropertyName = "countryCode"
-        Me.CountryCodeDataGridViewTextBoxColumn.HeaderText = "countryCode"
-        Me.CountryCodeDataGridViewTextBoxColumn.Name = "CountryCodeDataGridViewTextBoxColumn"
-        Me.CountryCodeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'TimezoneDataGridViewTextBoxColumn
-        '
-        Me.TimezoneDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.TimezoneDataGridViewTextBoxColumn.DataPropertyName = "timezone"
-        Me.TimezoneDataGridViewTextBoxColumn.HeaderText = "timezone"
-        Me.TimezoneDataGridViewTextBoxColumn.Name = "TimezoneDataGridViewTextBoxColumn"
-        Me.TimezoneDataGridViewTextBoxColumn.ReadOnly = True
-        Me.TimezoneDataGridViewTextBoxColumn.Width = 83
-        '
-        'OpenDateDataGridViewTextBoxColumn
-        '
-        Me.OpenDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.OpenDateDataGridViewTextBoxColumn.DataPropertyName = "openDate"
-        Me.OpenDateDataGridViewTextBoxColumn.HeaderText = "openDate"
-        Me.OpenDateDataGridViewTextBoxColumn.Name = "OpenDateDataGridViewTextBoxColumn"
-        Me.OpenDateDataGridViewTextBoxColumn.ReadOnly = True
-        Me.OpenDateDataGridViewTextBoxColumn.Width = 86
-        '
-        'BeffairEventClassBindingSource
-        '
-        Me.BeffairEventClassBindingSource.DataSource = GetType(BetfairSoccerBettingApp.BeffairEventClass)
         '
         'grpSel2
         '
@@ -1362,7 +1394,7 @@ Partial Class frmMain
         Me.grpSel2.Controls.Add(Me.Label49)
         Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore00Odds)
         Me.grpSel2.Controls.Add(Me.Label50)
-        Me.grpSel2.Location = New System.Drawing.Point(764, 361)
+        Me.grpSel2.Location = New System.Drawing.Point(764, 385)
         Me.grpSel2.Name = "grpSel2"
         Me.grpSel2.Size = New System.Drawing.Size(734, 175)
         Me.grpSel2.TabIndex = 12
@@ -1843,7 +1875,7 @@ Partial Class frmMain
         Me.grpSel3.Controls.Add(Me.Label70)
         Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore00Odds)
         Me.grpSel3.Controls.Add(Me.Label71)
-        Me.grpSel3.Location = New System.Drawing.Point(12, 555)
+        Me.grpSel3.Location = New System.Drawing.Point(12, 579)
         Me.grpSel3.Name = "grpSel3"
         Me.grpSel3.Size = New System.Drawing.Size(734, 175)
         Me.grpSel3.TabIndex = 13
@@ -2324,7 +2356,7 @@ Partial Class frmMain
         Me.grpSel4.Controls.Add(Me.Label91)
         Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore00Odds)
         Me.grpSel4.Controls.Add(Me.Label92)
-        Me.grpSel4.Location = New System.Drawing.Point(764, 555)
+        Me.grpSel4.Location = New System.Drawing.Point(764, 579)
         Me.grpSel4.Name = "grpSel4"
         Me.grpSel4.Size = New System.Drawing.Size(734, 175)
         Me.grpSel4.TabIndex = 14
@@ -2752,6 +2784,431 @@ Partial Class frmMain
         Me.Label92.TabIndex = 12
         Me.Label92.Text = "Correct Score 0-0"
         '
+        'Label93
+        '
+        Me.Label93.AutoSize = True
+        Me.Label93.Location = New System.Drawing.Point(6, 55)
+        Me.Label93.Name = "Label93"
+        Me.Label93.Size = New System.Drawing.Size(91, 13)
+        Me.Label93.TabIndex = 39
+        Me.Label93.Text = "Refresh Auto Bet "
+        '
+        'nudSettingsSelectionRefresh
+        '
+        Me.nudSettingsSelectionRefresh.Increment = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudSettingsSelectionRefresh.Location = New System.Drawing.Point(108, 30)
+        Me.nudSettingsSelectionRefresh.Maximum = New Decimal(New Integer() {600000, 0, 0, 0})
+        Me.nudSettingsSelectionRefresh.Minimum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudSettingsSelectionRefresh.Name = "nudSettingsSelectionRefresh"
+        Me.nudSettingsSelectionRefresh.Size = New System.Drawing.Size(63, 20)
+        Me.nudSettingsSelectionRefresh.TabIndex = 41
+        Me.nudSettingsSelectionRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsSelectionRefresh.Value = New Decimal(New Integer() {30000, 0, 0, 0})
+        '
+        'nudSettingsAutoBetRefresh
+        '
+        Me.nudSettingsAutoBetRefresh.Increment = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.nudSettingsAutoBetRefresh.Location = New System.Drawing.Point(108, 53)
+        Me.nudSettingsAutoBetRefresh.Maximum = New Decimal(New Integer() {600000, 0, 0, 0})
+        Me.nudSettingsAutoBetRefresh.Minimum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.nudSettingsAutoBetRefresh.Name = "nudSettingsAutoBetRefresh"
+        Me.nudSettingsAutoBetRefresh.Size = New System.Drawing.Size(63, 20)
+        Me.nudSettingsAutoBetRefresh.TabIndex = 42
+        Me.nudSettingsAutoBetRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsAutoBetRefresh.Value = New Decimal(New Integer() {30000, 0, 0, 0})
+        '
+        'nudSettingsCS00UpperPrice
+        '
+        Me.nudSettingsCS00UpperPrice.DecimalPlaces = 2
+        Me.nudSettingsCS00UpperPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsCS00UpperPrice.Location = New System.Drawing.Point(302, 32)
+        Me.nudSettingsCS00UpperPrice.Maximum = New Decimal(New Integer() {25, 0, 0, 0})
+        Me.nudSettingsCS00UpperPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsCS00UpperPrice.Name = "nudSettingsCS00UpperPrice"
+        Me.nudSettingsCS00UpperPrice.Size = New System.Drawing.Size(55, 20)
+        Me.nudSettingsCS00UpperPrice.TabIndex = 44
+        Me.nudSettingsCS00UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsCS00UpperPrice.Value = New Decimal(New Integer() {25, 0, 0, 0})
+        '
+        'Label94
+        '
+        Me.Label94.AutoSize = True
+        Me.Label94.Location = New System.Drawing.Point(242, 34)
+        Me.Label94.Name = "Label94"
+        Me.Label94.Size = New System.Drawing.Size(54, 13)
+        Me.Label94.TabIndex = 43
+        Me.Label94.Text = "0-0 Upper"
+        '
+        'nudSettingsCS00LowerPrice
+        '
+        Me.nudSettingsCS00LowerPrice.DecimalPlaces = 2
+        Me.nudSettingsCS00LowerPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsCS00LowerPrice.Location = New System.Drawing.Point(303, 55)
+        Me.nudSettingsCS00LowerPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsCS00LowerPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsCS00LowerPrice.Name = "nudSettingsCS00LowerPrice"
+        Me.nudSettingsCS00LowerPrice.Size = New System.Drawing.Size(54, 20)
+        Me.nudSettingsCS00LowerPrice.TabIndex = 46
+        Me.nudSettingsCS00LowerPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsCS00LowerPrice.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
+        'Label95
+        '
+        Me.Label95.AutoSize = True
+        Me.Label95.Location = New System.Drawing.Point(242, 57)
+        Me.Label95.Name = "Label95"
+        Me.Label95.Size = New System.Drawing.Size(54, 13)
+        Me.Label95.TabIndex = 45
+        Me.Label95.Text = "0-0 Lower"
+        '
+        'nudSettingsCS00TargetPrice
+        '
+        Me.nudSettingsCS00TargetPrice.DecimalPlaces = 2
+        Me.nudSettingsCS00TargetPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsCS00TargetPrice.Location = New System.Drawing.Point(302, 78)
+        Me.nudSettingsCS00TargetPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsCS00TargetPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsCS00TargetPrice.Name = "nudSettingsCS00TargetPrice"
+        Me.nudSettingsCS00TargetPrice.Size = New System.Drawing.Size(55, 20)
+        Me.nudSettingsCS00TargetPrice.TabIndex = 48
+        Me.nudSettingsCS00TargetPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsCS00TargetPrice.Value = New Decimal(New Integer() {9, 0, 0, 0})
+        '
+        'Label96
+        '
+        Me.Label96.AutoSize = True
+        Me.Label96.Location = New System.Drawing.Point(242, 80)
+        Me.Label96.Name = "Label96"
+        Me.Label96.Size = New System.Drawing.Size(56, 13)
+        Me.Label96.TabIndex = 47
+        Me.Label96.Text = "0-0 Target"
+        '
+        'nudSettingsOver15TargetPrice
+        '
+        Me.nudSettingsOver15TargetPrice.DecimalPlaces = 2
+        Me.nudSettingsOver15TargetPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsOver15TargetPrice.Location = New System.Drawing.Point(461, 78)
+        Me.nudSettingsOver15TargetPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsOver15TargetPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsOver15TargetPrice.Name = "nudSettingsOver15TargetPrice"
+        Me.nudSettingsOver15TargetPrice.Size = New System.Drawing.Size(56, 20)
+        Me.nudSettingsOver15TargetPrice.TabIndex = 54
+        Me.nudSettingsOver15TargetPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsOver15TargetPrice.Value = New Decimal(New Integer() {15, 0, 0, 65536})
+        '
+        'Label97
+        '
+        Me.Label97.AutoSize = True
+        Me.Label97.Location = New System.Drawing.Point(375, 80)
+        Me.Label97.Name = "Label97"
+        Me.Label97.Size = New System.Drawing.Size(82, 13)
+        Me.Label97.TabIndex = 53
+        Me.Label97.Text = "Over 1.5 Target"
+        '
+        'nudSettingsOver15LowerPrice
+        '
+        Me.nudSettingsOver15LowerPrice.DecimalPlaces = 2
+        Me.nudSettingsOver15LowerPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsOver15LowerPrice.Location = New System.Drawing.Point(461, 55)
+        Me.nudSettingsOver15LowerPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsOver15LowerPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsOver15LowerPrice.Name = "nudSettingsOver15LowerPrice"
+        Me.nudSettingsOver15LowerPrice.Size = New System.Drawing.Size(56, 20)
+        Me.nudSettingsOver15LowerPrice.TabIndex = 52
+        Me.nudSettingsOver15LowerPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsOver15LowerPrice.Value = New Decimal(New Integer() {11, 0, 0, 65536})
+        '
+        'Label98
+        '
+        Me.Label98.AutoSize = True
+        Me.Label98.Location = New System.Drawing.Point(375, 57)
+        Me.Label98.Name = "Label98"
+        Me.Label98.Size = New System.Drawing.Size(80, 13)
+        Me.Label98.TabIndex = 51
+        Me.Label98.Text = "Over 1.5 Lower"
+        '
+        'nudSettingsOver15UpperPrice
+        '
+        Me.nudSettingsOver15UpperPrice.DecimalPlaces = 2
+        Me.nudSettingsOver15UpperPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsOver15UpperPrice.Location = New System.Drawing.Point(461, 32)
+        Me.nudSettingsOver15UpperPrice.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudSettingsOver15UpperPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsOver15UpperPrice.Name = "nudSettingsOver15UpperPrice"
+        Me.nudSettingsOver15UpperPrice.Size = New System.Drawing.Size(56, 20)
+        Me.nudSettingsOver15UpperPrice.TabIndex = 50
+        Me.nudSettingsOver15UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsOver15UpperPrice.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        '
+        'Label99
+        '
+        Me.Label99.AutoSize = True
+        Me.Label99.Location = New System.Drawing.Point(375, 34)
+        Me.Label99.Name = "Label99"
+        Me.Label99.Size = New System.Drawing.Size(80, 13)
+        Me.Label99.TabIndex = 49
+        Me.Label99.Text = "Over 1.5 Upper"
+        '
+        'Label100
+        '
+        Me.Label100.AutoSize = True
+        Me.Label100.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label100.Location = New System.Drawing.Point(241, 14)
+        Me.Label100.Name = "Label100"
+        Me.Label100.Size = New System.Drawing.Size(42, 13)
+        Me.Label100.TabIndex = 55
+        Me.Label100.Text = "Prices"
+        '
+        'nudSettingsUnder15TargetPrice
+        '
+        Me.nudSettingsUnder15TargetPrice.DecimalPlaces = 2
+        Me.nudSettingsUnder15TargetPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsUnder15TargetPrice.Location = New System.Drawing.Point(619, 78)
+        Me.nudSettingsUnder15TargetPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsUnder15TargetPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsUnder15TargetPrice.Name = "nudSettingsUnder15TargetPrice"
+        Me.nudSettingsUnder15TargetPrice.Size = New System.Drawing.Size(55, 20)
+        Me.nudSettingsUnder15TargetPrice.TabIndex = 61
+        Me.nudSettingsUnder15TargetPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsUnder15TargetPrice.Value = New Decimal(New Integer() {15, 0, 0, 65536})
+        '
+        'Label101
+        '
+        Me.Label101.AutoSize = True
+        Me.Label101.Location = New System.Drawing.Point(533, 80)
+        Me.Label101.Name = "Label101"
+        Me.Label101.Size = New System.Drawing.Size(88, 13)
+        Me.Label101.TabIndex = 60
+        Me.Label101.Text = "Under 1.5 Target"
+        '
+        'nudSettingsUnder15LowerPrice
+        '
+        Me.nudSettingsUnder15LowerPrice.DecimalPlaces = 2
+        Me.nudSettingsUnder15LowerPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsUnder15LowerPrice.Location = New System.Drawing.Point(619, 55)
+        Me.nudSettingsUnder15LowerPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsUnder15LowerPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsUnder15LowerPrice.Name = "nudSettingsUnder15LowerPrice"
+        Me.nudSettingsUnder15LowerPrice.Size = New System.Drawing.Size(55, 20)
+        Me.nudSettingsUnder15LowerPrice.TabIndex = 59
+        Me.nudSettingsUnder15LowerPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsUnder15LowerPrice.Value = New Decimal(New Integer() {11, 0, 0, 65536})
+        '
+        'Label102
+        '
+        Me.Label102.AutoSize = True
+        Me.Label102.Location = New System.Drawing.Point(533, 57)
+        Me.Label102.Name = "Label102"
+        Me.Label102.Size = New System.Drawing.Size(86, 13)
+        Me.Label102.TabIndex = 58
+        Me.Label102.Text = "Under 1.5 Lower"
+        '
+        'nudSettingsUnder15UpperPrice
+        '
+        Me.nudSettingsUnder15UpperPrice.DecimalPlaces = 2
+        Me.nudSettingsUnder15UpperPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsUnder15UpperPrice.Location = New System.Drawing.Point(619, 32)
+        Me.nudSettingsUnder15UpperPrice.Maximum = New Decimal(New Integer() {25, 0, 0, 0})
+        Me.nudSettingsUnder15UpperPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsUnder15UpperPrice.Name = "nudSettingsUnder15UpperPrice"
+        Me.nudSettingsUnder15UpperPrice.Size = New System.Drawing.Size(55, 20)
+        Me.nudSettingsUnder15UpperPrice.TabIndex = 57
+        Me.nudSettingsUnder15UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsUnder15UpperPrice.Value = New Decimal(New Integer() {25, 0, 0, 0})
+        '
+        'Label103
+        '
+        Me.Label103.AutoSize = True
+        Me.Label103.Location = New System.Drawing.Point(533, 34)
+        Me.Label103.Name = "Label103"
+        Me.Label103.Size = New System.Drawing.Size(86, 13)
+        Me.Label103.TabIndex = 56
+        Me.Label103.Text = "Under 1.5 Upper"
+        '
+        'Label104
+        '
+        Me.Label104.AutoSize = True
+        Me.Label104.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label104.Location = New System.Drawing.Point(241, 105)
+        Me.Label104.Name = "Label104"
+        Me.Label104.Size = New System.Drawing.Size(46, 13)
+        Me.Label104.TabIndex = 62
+        Me.Label104.Text = "Stakes"
+        '
+        'nudSettingsCS00Stake
+        '
+        Me.nudSettingsCS00Stake.DecimalPlaces = 2
+        Me.nudSettingsCS00Stake.Increment = New Decimal(New Integer() {50, 0, 0, 131072})
+        Me.nudSettingsCS00Stake.Location = New System.Drawing.Point(302, 125)
+        Me.nudSettingsCS00Stake.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsCS00Stake.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudSettingsCS00Stake.Name = "nudSettingsCS00Stake"
+        Me.nudSettingsCS00Stake.Size = New System.Drawing.Size(54, 20)
+        Me.nudSettingsCS00Stake.TabIndex = 64
+        Me.nudSettingsCS00Stake.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsCS00Stake.Value = New Decimal(New Integer() {8, 0, 0, 0})
+        '
+        'Label105
+        '
+        Me.Label105.AutoSize = True
+        Me.Label105.Location = New System.Drawing.Point(241, 127)
+        Me.Label105.Name = "Label105"
+        Me.Label105.Size = New System.Drawing.Size(53, 13)
+        Me.Label105.TabIndex = 63
+        Me.Label105.Text = "0-0 Stake"
+        '
+        'nudSettingsOver15Stake
+        '
+        Me.nudSettingsOver15Stake.DecimalPlaces = 2
+        Me.nudSettingsOver15Stake.Increment = New Decimal(New Integer() {50, 0, 0, 131072})
+        Me.nudSettingsOver15Stake.Location = New System.Drawing.Point(459, 125)
+        Me.nudSettingsOver15Stake.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsOver15Stake.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudSettingsOver15Stake.Name = "nudSettingsOver15Stake"
+        Me.nudSettingsOver15Stake.Size = New System.Drawing.Size(59, 20)
+        Me.nudSettingsOver15Stake.TabIndex = 66
+        Me.nudSettingsOver15Stake.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsOver15Stake.Value = New Decimal(New Integer() {30, 0, 0, 0})
+        '
+        'Label106
+        '
+        Me.Label106.AutoSize = True
+        Me.Label106.Location = New System.Drawing.Point(378, 127)
+        Me.Label106.Name = "Label106"
+        Me.Label106.Size = New System.Drawing.Size(79, 13)
+        Me.Label106.TabIndex = 65
+        Me.Label106.Text = "Over 1.5 Stake"
+        '
+        'nudSettingsUnder15take
+        '
+        Me.nudSettingsUnder15take.DecimalPlaces = 2
+        Me.nudSettingsUnder15take.Increment = New Decimal(New Integer() {50, 0, 0, 131072})
+        Me.nudSettingsUnder15take.Location = New System.Drawing.Point(617, 125)
+        Me.nudSettingsUnder15take.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsUnder15take.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudSettingsUnder15take.Name = "nudSettingsUnder15take"
+        Me.nudSettingsUnder15take.Size = New System.Drawing.Size(54, 20)
+        Me.nudSettingsUnder15take.TabIndex = 68
+        Me.nudSettingsUnder15take.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsUnder15take.Value = New Decimal(New Integer() {8, 0, 0, 0})
+        '
+        'Label107
+        '
+        Me.Label107.AutoSize = True
+        Me.Label107.Location = New System.Drawing.Point(533, 127)
+        Me.Label107.Name = "Label107"
+        Me.Label107.Size = New System.Drawing.Size(85, 13)
+        Me.Label107.TabIndex = 67
+        Me.Label107.Text = "Under 1.5 Stake"
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.White
+        Me.Button5.Enabled = False
+        Me.Button5.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button5.Location = New System.Drawing.Point(546, 173)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(39, 24)
+        Me.Button5.TabIndex = 55
+        Me.Button5.UseVisualStyleBackColor = False
+        '
+        'Button10
+        '
+        Me.Button10.BackColor = System.Drawing.Color.White
+        Me.Button10.Enabled = False
+        Me.Button10.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button10.Location = New System.Drawing.Point(546, 134)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(39, 24)
+        Me.Button10.TabIndex = 54
+        Me.Button10.UseVisualStyleBackColor = False
+        '
+        'Button11
+        '
+        Me.Button11.BackColor = System.Drawing.Color.White
+        Me.Button11.Enabled = False
+        Me.Button11.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button11.Location = New System.Drawing.Point(546, 95)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(39, 24)
+        Me.Button11.TabIndex = 53
+        Me.Button11.UseVisualStyleBackColor = False
+        '
+        'btnSel1ProfitStatus01
+        '
+        Me.btnSel1ProfitStatus01.BackColor = System.Drawing.Color.White
+        Me.btnSel1ProfitStatus01.Enabled = False
+        Me.btnSel1ProfitStatus01.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnSel1ProfitStatus01.Location = New System.Drawing.Point(546, 56)
+        Me.btnSel1ProfitStatus01.Name = "btnSel1ProfitStatus01"
+        Me.btnSel1ProfitStatus01.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatus01.TabIndex = 52
+        Me.btnSel1ProfitStatus01.UseVisualStyleBackColor = False
+        '
+        'Label108
+        '
+        Me.Label108.AutoSize = True
+        Me.Label108.Location = New System.Drawing.Point(549, 26)
+        Me.Label108.Name = "Label108"
+        Me.Label108.Size = New System.Drawing.Size(22, 13)
+        Me.Label108.TabIndex = 51
+        Me.Label108.Text = "0-1"
+        '
+        'EventTypeIdDataGridViewTextBoxColumn
+        '
+        Me.EventTypeIdDataGridViewTextBoxColumn.DataPropertyName = "eventTypeId"
+        Me.EventTypeIdDataGridViewTextBoxColumn.HeaderText = "eventTypeId"
+        Me.EventTypeIdDataGridViewTextBoxColumn.Name = "EventTypeIdDataGridViewTextBoxColumn"
+        Me.EventTypeIdDataGridViewTextBoxColumn.ReadOnly = True
+        Me.EventTypeIdDataGridViewTextBoxColumn.Visible = False
+        '
+        'EventIdDataGridViewTextBoxColumn
+        '
+        Me.EventIdDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EventIdDataGridViewTextBoxColumn.DataPropertyName = "eventId"
+        Me.EventIdDataGridViewTextBoxColumn.HeaderText = "eventId"
+        Me.EventIdDataGridViewTextBoxColumn.Name = "EventIdDataGridViewTextBoxColumn"
+        Me.EventIdDataGridViewTextBoxColumn.Width = 71
+        '
+        'NameDataGridViewTextBoxColumn
+        '
+        Me.NameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
+        Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
+        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
+        Me.NameDataGridViewTextBoxColumn.ReadOnly = True
+        Me.NameDataGridViewTextBoxColumn.Width = 64
+        '
+        'CountryCodeDataGridViewTextBoxColumn
+        '
+        Me.CountryCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.CountryCodeDataGridViewTextBoxColumn.DataPropertyName = "countryCode"
+        Me.CountryCodeDataGridViewTextBoxColumn.HeaderText = "countryCode"
+        Me.CountryCodeDataGridViewTextBoxColumn.Name = "CountryCodeDataGridViewTextBoxColumn"
+        Me.CountryCodeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TimezoneDataGridViewTextBoxColumn
+        '
+        Me.TimezoneDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TimezoneDataGridViewTextBoxColumn.DataPropertyName = "timezone"
+        Me.TimezoneDataGridViewTextBoxColumn.HeaderText = "timezone"
+        Me.TimezoneDataGridViewTextBoxColumn.Name = "TimezoneDataGridViewTextBoxColumn"
+        Me.TimezoneDataGridViewTextBoxColumn.ReadOnly = True
+        Me.TimezoneDataGridViewTextBoxColumn.Width = 83
+        '
+        'OpenDateDataGridViewTextBoxColumn
+        '
+        Me.OpenDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.OpenDateDataGridViewTextBoxColumn.DataPropertyName = "openDate"
+        Me.OpenDateDataGridViewTextBoxColumn.HeaderText = "openDate"
+        Me.OpenDateDataGridViewTextBoxColumn.Name = "OpenDateDataGridViewTextBoxColumn"
+        Me.OpenDateDataGridViewTextBoxColumn.ReadOnly = True
+        Me.OpenDateDataGridViewTextBoxColumn.Width = 86
+        '
+        'BeffairEventClassBindingSource
+        '
+        Me.BeffairEventClassBindingSource.DataSource = GetType(BetfairSoccerBettingApp.BeffairEventClass)
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2778,13 +3235,27 @@ Partial Class frmMain
         Me.grpSel1.ResumeLayout(False)
         Me.grpSel1.PerformLayout()
         CType(Me.dgvEvents, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpSel2.ResumeLayout(False)
         Me.grpSel2.PerformLayout()
         Me.grpSel3.ResumeLayout(False)
         Me.grpSel3.PerformLayout()
         Me.grpSel4.ResumeLayout(False)
         Me.grpSel4.PerformLayout()
+        CType(Me.nudSettingsSelectionRefresh, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsAutoBetRefresh, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsCS00UpperPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsCS00LowerPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsCS00TargetPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsOver15TargetPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsOver15LowerPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsOver15UpperPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsUnder15TargetPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsUnder15LowerPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsUnder15UpperPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsCS00Stake, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsOver15Stake, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsUnder15take, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2793,10 +3264,10 @@ Partial Class frmMain
     Friend WithEvents rtbLog As RichTextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents grpSelections As GroupBox
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSel1ProfitStatusOver15 As Button
+    Friend WithEvents btnSel1ProfitStatusUnder15 As Button
+    Friend WithEvents btnSel1ProfitStatus10 As Button
+    Friend WithEvents btnSel1ProfitStatus00 As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
@@ -2841,7 +3312,6 @@ Partial Class frmMain
     Friend WithEvents Label19 As Label
     Friend WithEvents tbxSel1UnderOver15MarketStatus As TextBox
     Friend WithEvents Label21 As Label
-    Friend WithEvents tbxRefreshSecs As TextBox
     Friend WithEvents Label22 As Label
     Friend WithEvents timerRefreshSelections As Timer
     Friend WithEvents btnSel1AutoBetOn As Button
@@ -2851,21 +3321,21 @@ Partial Class frmMain
     Friend WithEvents Button18 As Button
     Friend WithEvents Button19 As Button
     Friend WithEvents Button20 As Button
-    Friend WithEvents Button21 As Button
+    Friend WithEvents btnSel4ProfitStatus00 As Button
     Friend WithEvents btnSel4 As Button
     Friend WithEvents btnSel3AutoBetOn As Button
     Friend WithEvents tbxSel3EventName As TextBox
     Friend WithEvents Button12 As Button
     Friend WithEvents Button13 As Button
     Friend WithEvents Button14 As Button
-    Friend WithEvents Button15 As Button
+    Friend WithEvents btnSel3ProfitStatus00 As Button
     Friend WithEvents btnSel3 As Button
     Friend WithEvents btnSel2AutoBetOn As Button
     Friend WithEvents tbxSel2EventName As TextBox
     Friend WithEvents Button6 As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents Button8 As Button
-    Friend WithEvents Button9 As Button
+    Friend WithEvents btnSel2ProfitStatus00 As Button
     Friend WithEvents btnSel2 As Button
     Friend WithEvents dgvEvents As DataGridView
     Friend WithEvents BeffairEventClassBindingSource As BindingSource
@@ -3044,4 +3514,38 @@ Partial Class frmMain
     Friend WithEvents Label91 As Label
     Friend WithEvents tbxSel4CorrectScore00Odds As TextBox
     Friend WithEvents Label92 As Label
+    Friend WithEvents nudSettingsUnder15take As NumericUpDown
+    Friend WithEvents Label107 As Label
+    Friend WithEvents nudSettingsOver15Stake As NumericUpDown
+    Friend WithEvents Label106 As Label
+    Friend WithEvents nudSettingsCS00Stake As NumericUpDown
+    Friend WithEvents Label105 As Label
+    Friend WithEvents Label104 As Label
+    Friend WithEvents nudSettingsUnder15TargetPrice As NumericUpDown
+    Friend WithEvents Label101 As Label
+    Friend WithEvents nudSettingsUnder15LowerPrice As NumericUpDown
+    Friend WithEvents Label102 As Label
+    Friend WithEvents nudSettingsUnder15UpperPrice As NumericUpDown
+    Friend WithEvents Label103 As Label
+    Friend WithEvents Label100 As Label
+    Friend WithEvents nudSettingsOver15TargetPrice As NumericUpDown
+    Friend WithEvents Label97 As Label
+    Friend WithEvents nudSettingsOver15LowerPrice As NumericUpDown
+    Friend WithEvents Label98 As Label
+    Friend WithEvents nudSettingsOver15UpperPrice As NumericUpDown
+    Friend WithEvents Label99 As Label
+    Friend WithEvents nudSettingsCS00TargetPrice As NumericUpDown
+    Friend WithEvents Label96 As Label
+    Friend WithEvents nudSettingsCS00LowerPrice As NumericUpDown
+    Friend WithEvents Label95 As Label
+    Friend WithEvents nudSettingsCS00UpperPrice As NumericUpDown
+    Friend WithEvents Label94 As Label
+    Friend WithEvents nudSettingsAutoBetRefresh As NumericUpDown
+    Friend WithEvents nudSettingsSelectionRefresh As NumericUpDown
+    Friend WithEvents Label93 As Label
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button10 As Button
+    Friend WithEvents Button11 As Button
+    Friend WithEvents btnSel1ProfitStatus01 As Button
+    Friend WithEvents Label108 As Label
 End Class

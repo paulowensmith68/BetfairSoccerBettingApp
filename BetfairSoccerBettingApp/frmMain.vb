@@ -124,11 +124,20 @@ Public Class frmMain
 
                 If MsgBox("Please confirm you want to switch Automatic Betting on?", MsgBoxStyle.YesNo, "Automatic Betting Confirmation") = MsgBoxResult.Yes Then
 
+                    ' Set the interval
+                    timerSel1AutoBet.Interval = nudSettingsAutoBetRefresh.Value
+
                     ' Enable Auto Bet timer
                     timerSel1AutoBet.Enabled = True
 
                     btnSel1AutoBetOn.Text = "Auto Bet Off"
                     btnSel1AutoBetOn.BackColor = Color.LightSalmon
+
+                    ' Write to log
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Auto Bet for Sel1 has been switched on.", EventLogEntryType.Information)
+
+                    ' Call tick
+                    timerSel1AutoBet_Tick(sender, e)
 
                 End If
 
@@ -149,6 +158,123 @@ Public Class frmMain
     End Sub
 
     Private Sub timerSel1AutoBet_Tick(sender As Object, e As EventArgs) Handles timerSel1AutoBet.Tick
+
+        '
+        ' Do we need any stakes, check the status of bets on this Event 
+        '
+        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00IfWinProfit) Then
+            If CDbl(sel1.betfairCorrectScore00IfWinProfit) > 0 Then
+                btnSel1ProfitStatus00.BackColor = Color.LawnGreen
+                btnSel1ProfitStatus00.Text = sel1.betfairCorrectScore00IfWinProfit
+            Else
+                btnSel1ProfitStatus00.BackColor = Color.White
+                btnSel1ProfitStatus00.Text = ""
+            End If
+        Else
+            btnSel1ProfitStatus00.Text = "NULL"
+        End If
+        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore10IfWinProfit) Then
+            If CDbl(sel1.betfairCorrectScore10IfWinProfit) > 0 Then
+                btnSel1ProfitStatus10.BackColor = Color.LawnGreen
+                btnSel1ProfitStatus10.Text = sel1.betfairCorrectScore10IfWinProfit
+            Else
+                btnSel1ProfitStatus10.BackColor = Color.White
+                btnSel1ProfitStatus10.Text = ""
+            End If
+        Else
+            btnSel1ProfitStatus10.Text = "NULL"
+
+        End If
+        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore01IfWinProfit) Then
+            If CDbl(sel1.betfairCorrectScore01IfWinProfit) > 0 Then
+                btnSel1ProfitStatus01.BackColor = Color.LawnGreen
+                btnSel1ProfitStatus01.Text = sel1.betfairCorrectScore01IfWinProfit
+            Else
+                btnSel1ProfitStatus01.BackColor = Color.White
+                btnSel1ProfitStatus01.Text = ""
+            End If
+        Else
+            btnSel1ProfitStatus01.Text = "NULL"
+
+        End If
+        If Not String.IsNullOrEmpty(sel1.betfairUnder15IfWinProfit) Then
+            If CDbl(sel1.betfairUnder15IfWinProfit) > 0 Then
+                btnSel1ProfitStatusUnder15.BackColor = Color.LawnGreen
+                btnSel1ProfitStatusUnder15.Text = sel1.betfairUnder15IfWinProfit
+            Else
+                btnSel1ProfitStatusUnder15.BackColor = Color.White
+                btnSel1ProfitStatusUnder15.Text = ""
+            End If
+        Else
+            btnSel1ProfitStatusUnder15.Text = "NULL"
+        End If
+        If Not String.IsNullOrEmpty(sel1.betfairOver15IfWinProfit) Then
+            If CDbl(sel1.betfairOver15IfWinProfit) > 0 Then
+                btnSel1ProfitStatusOver15.BackColor = Color.LawnGreen
+                btnSel1ProfitStatusOver15.Text = sel1.betfairOver15IfWinProfit
+            Else
+                btnSel1ProfitStatusOver15.BackColor = Color.White
+                btnSel1ProfitStatusOver15.Text = ""
+            End If
+        Else
+            btnSel1ProfitStatusOver15.Text = "NULL"
+        End If
+
+
+        ' If any of the bets are missing then continue
+        If btnSel1ProfitStatus00.Text = "" Or btnSel1ProfitStatus10.Text = "" Or btnSel1ProfitStatus01.Text = "" Or btnSel1ProfitStatusUnder15.Text = "" Or btnSel1ProfitStatusOver15.Text = "" Then
+            ' Continue
+        Else
+            ' Write to log
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Auto Bet for Sel1 - No bets required (or some of the profit fields are null)", EventLogEntryType.Information)
+
+        End If
+
+        '
+        ' Check the status of the Event, must be Inplay
+        '
+        If sel1.betfairEventInplay = "True" Then
+            ' Continue
+        Else
+            ' Write to log
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Auto Bet for Sel1 - Event not in play", EventLogEntryType.Information)
+        End If
+
+
+        ' 
+        ' Look for Correct Score 0-0 bet
+        '
+        If btnSel1ProfitStatus00.Text = "" Then
+
+            If sel1.betfairCorrectScoreMarketStatus = "OPEN" Then
+
+                ' Check in first half
+                If CDbl(tbxSel1InplayTime.Text) > +0 And CDbl(tbxSel1InplayTime.Text) < +45 Then
+
+                    If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00BackOdds) Then
+                        If CDbl(sel1.betfairCorrectScore00BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel1.betfairCorrectScore00BackOdds) < nudSettingsCS00UpperPrice.Value Then
+
+                            If sel1.betfairCorrectScore00BackOdds <= nudSettingsCS00TargetPrice.Value Then
+
+                                If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00Orders) Then
+                                    If CDbl(sel1.betfairCorrectScore00Orders) > 1 Then
+
+                                        'Unmatched Orders
+                                        ' Write to log
+                                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Auto Bet for Sel1 - I WOULD CANCEL UNMATCHED ORDERS", EventLogEntryType.Information)
+                                    End If
+                                End If
+
+                                ' Write to log
+                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Auto Bet for Sel1 - I WOULD PLACE A BET NOW", EventLogEntryType.Information)
+
+                            End If
+                        End If
+                    End If
+                End If
+
+            End If
+        End If
 
         ' Place order on 0-0 market
         'sel1.placeCorrectScore_00_Order()
