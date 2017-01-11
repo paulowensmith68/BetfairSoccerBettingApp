@@ -60,6 +60,8 @@ Public Class EventLogger
             PrintLine(intFileNumber, strDate & "." & strTimestamp & ", " & strEntryType & ", " & entry)
             FileClose(intFileNumber)
 
+            grtbLog.AppendText(strDate & "." & strTimestamp & ", " & strEntryType & ", " & entry & vbCrLf)
+
             Return True
 
         Catch Ex As Exception

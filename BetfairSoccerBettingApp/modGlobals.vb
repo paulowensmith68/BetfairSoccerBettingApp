@@ -38,4 +38,6 @@
     Public gintKillRuntimeThressholdMillisecs As Integer
     Public gblnProcessHasExited As Boolean
 
+    Public grtbLog As RichTextBox
+
 End Module

@@ -23,9 +23,9 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.rtbLog = New System.Windows.Forms.RichTextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -67,18 +67,22 @@ Partial Class frmMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnSel1 = New System.Windows.Forms.Button()
         Me.grpSel1 = New System.Windows.Forms.GroupBox()
-        Me.tbxSel1UnmatchedCorrectScore = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.tbxSel1UnmatchedUnderOver15 = New System.Windows.Forms.TextBox()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
+        Me.tbxSel1IOver15Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel1IUnder15Orders = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.tbxSel1CorrectScore01Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel1CorrectScore10Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel1CorrectScore00Orders = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.tbxSel1Goal2 = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.tbxSel1RefreshLight = New System.Windows.Forms.TextBox()
         Me.Label23 = New System.Windows.Forms.Label()
-        Me.tbxSel1InplayTime = New System.Windows.Forms.TextBox()
         Me.tbxSel1EventDateTime = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.tbxSel1InplayStatus = New System.Windows.Forms.TextBox()
         Me.Label43 = New System.Windows.Forms.Label()
+        Me.tbxSel1InplayTime = New System.Windows.Forms.TextBox()
         Me.tbxSel1UnderOver15MarketStatus = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.tbxSel1IOver15Status = New System.Windows.Forms.TextBox()
@@ -92,7 +96,7 @@ Partial Class frmMain
         Me.Label18 = New System.Windows.Forms.Label()
         Me.tbxSel1CorrectScore01IfWin = New System.Windows.Forms.TextBox()
         Me.tbxSel1CorrectScore10IfWin = New System.Windows.Forms.TextBox()
-        Me.tbxSel1LastGoal = New System.Windows.Forms.TextBox()
+        Me.tbxSel1Goal1 = New System.Windows.Forms.TextBox()
         Me.tbxSel1Score = New System.Windows.Forms.TextBox()
         Me.tbxSel1CorrectScoreStatus = New System.Windows.Forms.TextBox()
         Me.Label42 = New System.Windows.Forms.Label()
@@ -116,10 +120,7 @@ Partial Class frmMain
         Me.btnExit = New System.Windows.Forms.Button()
         Me.timerRefreshSelections = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel1AutoBet = New System.Windows.Forms.Timer(Me.components)
-        Me.cbxInplayOnly = New System.Windows.Forms.CheckBox()
         Me.dgvEvents = New System.Windows.Forms.DataGridView()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label28 = New System.Windows.Forms.Label()
         Me.EventTypeIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EventIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -127,20 +128,176 @@ Partial Class frmMain
         Me.TimezoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OpenDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BeffairEventClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.grpSel2 = New System.Windows.Forms.GroupBox()
+        Me.tbxSel2IOver15Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel2IUnder15Orders = New System.Windows.Forms.TextBox()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.tbxSel2CorrectScore01Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel2CorrectScore10Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel2CorrectScore00Orders = New System.Windows.Forms.TextBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.tbxSel2Goal2 = New System.Windows.Forms.TextBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.tbxSel2RefreshLight = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.tbxSel2EventDateTime = New System.Windows.Forms.TextBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.tbxSel2InplayStatus = New System.Windows.Forms.TextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.tbxSel2InplayTime = New System.Windows.Forms.TextBox()
+        Me.tbxSel2UnderOver15MarketStatus = New System.Windows.Forms.TextBox()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.tbxSel2IOver15Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel2IUnder15Status = New System.Windows.Forms.TextBox()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.tbxSel2CorrectScore01Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel2CorrectScore10Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel2CorrectScore00Status = New System.Windows.Forms.TextBox()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.tbxSel2CorrectScore01IfWin = New System.Windows.Forms.TextBox()
+        Me.tbxSel2CorrectScore10IfWin = New System.Windows.Forms.TextBox()
+        Me.tbxSel2Goal1 = New System.Windows.Forms.TextBox()
+        Me.tbxSel2Score = New System.Windows.Forms.TextBox()
+        Me.tbxSel2CorrectScoreStatus = New System.Windows.Forms.TextBox()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.tbxSel2IUnder15fWinProfit = New System.Windows.Forms.TextBox()
+        Me.tbxSel2IOver15fWinProfit = New System.Windows.Forms.TextBox()
+        Me.tbxSel2CorrectScore00IfWin = New System.Windows.Forms.TextBox()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.tbxSel2CorrectScore01Odds = New System.Windows.Forms.TextBox()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.tbxSel2Under15Odds = New System.Windows.Forms.TextBox()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.tbxSel2Over15Odds = New System.Windows.Forms.TextBox()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.tbxSel2CorrectScore10Odds = New System.Windows.Forms.TextBox()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.tbxSel2CorrectScore00Odds = New System.Windows.Forms.TextBox()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.grpSel3 = New System.Windows.Forms.GroupBox()
+        Me.tbxSel3IOver15Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel3IUnder15Orders = New System.Windows.Forms.TextBox()
+        Me.Label51 = New System.Windows.Forms.Label()
+        Me.tbxSel3CorrectScore01Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel3CorrectScore10Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel3CorrectScore00Orders = New System.Windows.Forms.TextBox()
+        Me.Label52 = New System.Windows.Forms.Label()
+        Me.tbxSel3Goal2 = New System.Windows.Forms.TextBox()
+        Me.Label53 = New System.Windows.Forms.Label()
+        Me.tbxSel3RefreshLight = New System.Windows.Forms.TextBox()
+        Me.Label54 = New System.Windows.Forms.Label()
+        Me.tbxSel3EventDateTime = New System.Windows.Forms.TextBox()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.tbxSel3InplayStatus = New System.Windows.Forms.TextBox()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.tbxSel3InplayTime = New System.Windows.Forms.TextBox()
+        Me.tbxSel3UnderOver15MarketStatus = New System.Windows.Forms.TextBox()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.tbxSel3IOver15Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel3IUnder15Status = New System.Windows.Forms.TextBox()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.tbxSel3CorrectScore01Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel3CorrectScore10Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel3CorrectScore00Status = New System.Windows.Forms.TextBox()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.tbxSel3CorrectScore01IfWin = New System.Windows.Forms.TextBox()
+        Me.tbxSel3CorrectScore10IfWin = New System.Windows.Forms.TextBox()
+        Me.tbxSel3Goal1 = New System.Windows.Forms.TextBox()
+        Me.tbxSel3Score = New System.Windows.Forms.TextBox()
+        Me.tbxSel3CorrectScoreStatus = New System.Windows.Forms.TextBox()
+        Me.Label62 = New System.Windows.Forms.Label()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.tbxSel3IUnder15fWinProfit = New System.Windows.Forms.TextBox()
+        Me.tbxSel3IOver15fWinProfit = New System.Windows.Forms.TextBox()
+        Me.tbxSel3CorrectScore00IfWin = New System.Windows.Forms.TextBox()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.tbxSel3CorrectScore01Odds = New System.Windows.Forms.TextBox()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.tbxSel3Under15Odds = New System.Windows.Forms.TextBox()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.tbxSel3Over15Odds = New System.Windows.Forms.TextBox()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.tbxSel3CorrectScore10Odds = New System.Windows.Forms.TextBox()
+        Me.Label70 = New System.Windows.Forms.Label()
+        Me.tbxSel3CorrectScore00Odds = New System.Windows.Forms.TextBox()
+        Me.Label71 = New System.Windows.Forms.Label()
+        Me.grpSel4 = New System.Windows.Forms.GroupBox()
+        Me.tbxSel4IOver15Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel4IUnder15Orders = New System.Windows.Forms.TextBox()
+        Me.Label72 = New System.Windows.Forms.Label()
+        Me.tbxSel4CorrectScore01Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel4CorrectScore10Orders = New System.Windows.Forms.TextBox()
+        Me.tbxSel4CorrectScore00Orders = New System.Windows.Forms.TextBox()
+        Me.Label73 = New System.Windows.Forms.Label()
+        Me.tbxSel4Goal2 = New System.Windows.Forms.TextBox()
+        Me.Label74 = New System.Windows.Forms.Label()
+        Me.tbxSel4RefreshLight = New System.Windows.Forms.TextBox()
+        Me.Label75 = New System.Windows.Forms.Label()
+        Me.tbxSel4EventDateTime = New System.Windows.Forms.TextBox()
+        Me.Label76 = New System.Windows.Forms.Label()
+        Me.tbxSel4InplayStatus = New System.Windows.Forms.TextBox()
+        Me.Label77 = New System.Windows.Forms.Label()
+        Me.tbxSel4InplayTime = New System.Windows.Forms.TextBox()
+        Me.tbxSel4UnderOver15MarketStatus = New System.Windows.Forms.TextBox()
+        Me.Label78 = New System.Windows.Forms.Label()
+        Me.tbxSel4IOver15Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel4IUnder15Status = New System.Windows.Forms.TextBox()
+        Me.Label79 = New System.Windows.Forms.Label()
+        Me.tbxSel4CorrectScore01Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel4CorrectScore10Status = New System.Windows.Forms.TextBox()
+        Me.tbxSel4CorrectScore00Status = New System.Windows.Forms.TextBox()
+        Me.Label80 = New System.Windows.Forms.Label()
+        Me.Label81 = New System.Windows.Forms.Label()
+        Me.Label82 = New System.Windows.Forms.Label()
+        Me.tbxSel4CorrectScore01IfWin = New System.Windows.Forms.TextBox()
+        Me.tbxSel4CorrectScore10IfWin = New System.Windows.Forms.TextBox()
+        Me.tbxSel4Goal1 = New System.Windows.Forms.TextBox()
+        Me.tbxSel4Score = New System.Windows.Forms.TextBox()
+        Me.tbxSel4CorrectScoreStatus = New System.Windows.Forms.TextBox()
+        Me.Label83 = New System.Windows.Forms.Label()
+        Me.Label84 = New System.Windows.Forms.Label()
+        Me.Label85 = New System.Windows.Forms.Label()
+        Me.tbxSel4IUnder15fWinProfit = New System.Windows.Forms.TextBox()
+        Me.tbxSel4IOver15fWinProfit = New System.Windows.Forms.TextBox()
+        Me.tbxSel4CorrectScore00IfWin = New System.Windows.Forms.TextBox()
+        Me.Label86 = New System.Windows.Forms.Label()
+        Me.tbxSel4CorrectScore01Odds = New System.Windows.Forms.TextBox()
+        Me.Label87 = New System.Windows.Forms.Label()
+        Me.tbxSel4Under15Odds = New System.Windows.Forms.TextBox()
+        Me.Label88 = New System.Windows.Forms.Label()
+        Me.tbxSel4Over15Odds = New System.Windows.Forms.TextBox()
+        Me.Label89 = New System.Windows.Forms.Label()
+        Me.Label90 = New System.Windows.Forms.Label()
+        Me.tbxSel4CorrectScore10Odds = New System.Windows.Forms.TextBox()
+        Me.Label91 = New System.Windows.Forms.Label()
+        Me.tbxSel4CorrectScore00Odds = New System.Windows.Forms.TextBox()
+        Me.Label92 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.grpSelections.SuspendLayout()
         Me.grpSel1.SuspendLayout()
         CType(Me.dgvEvents, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpSel2.SuspendLayout()
+        Me.grpSel3.SuspendLayout()
+        Me.grpSel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(28, 19)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(29, 10)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(148, 16)
+        Me.Label1.Size = New System.Drawing.Size(133, 15)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Over/Under1.5 Strategy"
         '
@@ -149,10 +306,10 @@ Partial Class frmMain
         Me.rtbLog.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rtbLog.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.rtbLog.HideSelection = False
-        Me.rtbLog.Location = New System.Drawing.Point(56, 653)
+        Me.rtbLog.Location = New System.Drawing.Point(42, 760)
         Me.rtbLog.Name = "rtbLog"
         Me.rtbLog.ReadOnly = True
-        Me.rtbLog.Size = New System.Drawing.Size(1405, 97)
+        Me.rtbLog.Size = New System.Drawing.Size(1080, 103)
         Me.rtbLog.TabIndex = 4
         Me.rtbLog.Text = ""
         '
@@ -161,9 +318,9 @@ Partial Class frmMain
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.Info
         Me.GroupBox1.Controls.Add(Me.tbxRefreshSecs)
         Me.GroupBox1.Controls.Add(Me.Label22)
-        Me.GroupBox1.Location = New System.Drawing.Point(847, 38)
+        Me.GroupBox1.Location = New System.Drawing.Point(769, 29)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(574, 70)
+        Me.GroupBox1.Size = New System.Drawing.Size(649, 83)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Settings"
@@ -225,7 +382,7 @@ Partial Class frmMain
         Me.grpSelections.Controls.Add(Me.btnSel1)
         Me.grpSelections.Location = New System.Drawing.Point(769, 127)
         Me.grpSelections.Name = "grpSelections"
-        Me.grpSelections.Size = New System.Drawing.Size(652, 220)
+        Me.grpSelections.Size = New System.Drawing.Size(652, 211)
         Me.grpSelections.TabIndex = 6
         Me.grpSelections.TabStop = False
         Me.grpSelections.Text = "Selections"
@@ -563,18 +720,20 @@ Partial Class frmMain
         'grpSel1
         '
         Me.grpSel1.BackColor = System.Drawing.Color.LightSkyBlue
-        Me.grpSel1.Controls.Add(Me.Label28)
-        Me.grpSel1.Controls.Add(Me.tbxSel1UnmatchedCorrectScore)
-        Me.grpSel1.Controls.Add(Me.Label27)
-        Me.grpSel1.Controls.Add(Me.TextBox2)
-        Me.grpSel1.Controls.Add(Me.tbxSel1UnmatchedUnderOver15)
-        Me.grpSel1.Controls.Add(Me.Label26)
+        Me.grpSel1.Controls.Add(Me.tbxSel1IOver15Orders)
+        Me.grpSel1.Controls.Add(Me.tbxSel1IUnder15Orders)
+        Me.grpSel1.Controls.Add(Me.Label17)
+        Me.grpSel1.Controls.Add(Me.tbxSel1CorrectScore01Orders)
+        Me.grpSel1.Controls.Add(Me.tbxSel1CorrectScore10Orders)
+        Me.grpSel1.Controls.Add(Me.tbxSel1CorrectScore00Orders)
+        Me.grpSel1.Controls.Add(Me.Label14)
+        Me.grpSel1.Controls.Add(Me.tbxSel1Goal2)
         Me.grpSel1.Controls.Add(Me.Label24)
         Me.grpSel1.Controls.Add(Me.tbxSel1RefreshLight)
         Me.grpSel1.Controls.Add(Me.Label23)
         Me.grpSel1.Controls.Add(Me.tbxSel1EventDateTime)
         Me.grpSel1.Controls.Add(Me.Label25)
-        Me.grpSel1.Controls.Add(Me.TextBox1)
+        Me.grpSel1.Controls.Add(Me.tbxSel1InplayStatus)
         Me.grpSel1.Controls.Add(Me.Label43)
         Me.grpSel1.Controls.Add(Me.tbxSel1InplayTime)
         Me.grpSel1.Controls.Add(Me.tbxSel1UnderOver15MarketStatus)
@@ -590,7 +749,7 @@ Partial Class frmMain
         Me.grpSel1.Controls.Add(Me.Label18)
         Me.grpSel1.Controls.Add(Me.tbxSel1CorrectScore01IfWin)
         Me.grpSel1.Controls.Add(Me.tbxSel1CorrectScore10IfWin)
-        Me.grpSel1.Controls.Add(Me.tbxSel1LastGoal)
+        Me.grpSel1.Controls.Add(Me.tbxSel1Goal1)
         Me.grpSel1.Controls.Add(Me.tbxSel1Score)
         Me.grpSel1.Controls.Add(Me.tbxSel1CorrectScoreStatus)
         Me.grpSel1.Controls.Add(Me.Label42)
@@ -611,60 +770,83 @@ Partial Class frmMain
         Me.grpSel1.Controls.Add(Me.Label9)
         Me.grpSel1.Controls.Add(Me.tbxSel1CorrectScore00Odds)
         Me.grpSel1.Controls.Add(Me.Label8)
-        Me.grpSel1.Location = New System.Drawing.Point(30, 371)
+        Me.grpSel1.Location = New System.Drawing.Point(12, 361)
         Me.grpSel1.Name = "grpSel1"
-        Me.grpSel1.Size = New System.Drawing.Size(716, 165)
+        Me.grpSel1.Size = New System.Drawing.Size(734, 175)
         Me.grpSel1.TabIndex = 7
         Me.grpSel1.TabStop = False
         Me.grpSel1.Text = "Selection 1"
         '
-        'tbxSel1UnmatchedCorrectScore
+        'tbxSel1IOver15Orders
         '
-        Me.tbxSel1UnmatchedCorrectScore.Location = New System.Drawing.Point(153, 115)
-        Me.tbxSel1UnmatchedCorrectScore.Name = "tbxSel1UnmatchedCorrectScore"
-        Me.tbxSel1UnmatchedCorrectScore.Size = New System.Drawing.Size(41, 20)
-        Me.tbxSel1UnmatchedCorrectScore.TabIndex = 68
-        Me.tbxSel1UnmatchedCorrectScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.tbxSel1IOver15Orders.Location = New System.Drawing.Point(650, 133)
+        Me.tbxSel1IOver15Orders.Name = "tbxSel1IOver15Orders"
+        Me.tbxSel1IOver15Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel1IOver15Orders.TabIndex = 78
+        Me.tbxSel1IOver15Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label27
+        'tbxSel1IUnder15Orders
         '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(11, 118)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(130, 13)
-        Me.Label27.TabIndex = 67
-        Me.Label27.Text = "Unmatched Correct Score"
+        Me.tbxSel1IUnder15Orders.Location = New System.Drawing.Point(650, 110)
+        Me.tbxSel1IUnder15Orders.Name = "tbxSel1IUnder15Orders"
+        Me.tbxSel1IUnder15Orders.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel1IUnder15Orders.TabIndex = 77
+        Me.tbxSel1IUnder15Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'tbxSel1UnmatchedUnderOver15
+        'Label17
         '
-        Me.tbxSel1UnmatchedUnderOver15.Location = New System.Drawing.Point(153, 93)
-        Me.tbxSel1UnmatchedUnderOver15.Name = "tbxSel1UnmatchedUnderOver15"
-        Me.tbxSel1UnmatchedUnderOver15.Size = New System.Drawing.Size(41, 20)
-        Me.tbxSel1UnmatchedUnderOver15.TabIndex = 66
-        Me.tbxSel1UnmatchedUnderOver15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(646, 94)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(38, 13)
+        Me.Label17.TabIndex = 76
+        Me.Label17.Text = "Orders"
         '
-        'Label26
+        'tbxSel1CorrectScore01Orders
         '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(11, 96)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(129, 13)
-        Me.Label26.TabIndex = 65
-        Me.Label26.Text = "Unmatched UnderOver15"
+        Me.tbxSel1CorrectScore01Orders.Location = New System.Drawing.Point(379, 146)
+        Me.tbxSel1CorrectScore01Orders.Name = "tbxSel1CorrectScore01Orders"
+        Me.tbxSel1CorrectScore01Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel1CorrectScore01Orders.TabIndex = 75
+        Me.tbxSel1CorrectScore01Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label25
+        'tbxSel1CorrectScore10Orders
         '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(324, 16)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(65, 13)
-        Me.Label25.TabIndex = 64
-        Me.Label25.Text = "Inplay (mins)"
+        Me.tbxSel1CorrectScore10Orders.Location = New System.Drawing.Point(379, 121)
+        Me.tbxSel1CorrectScore10Orders.Name = "tbxSel1CorrectScore10Orders"
+        Me.tbxSel1CorrectScore10Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel1CorrectScore10Orders.TabIndex = 74
+        Me.tbxSel1CorrectScore10Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel1CorrectScore00Orders
+        '
+        Me.tbxSel1CorrectScore00Orders.Location = New System.Drawing.Point(380, 95)
+        Me.tbxSel1CorrectScore00Orders.Name = "tbxSel1CorrectScore00Orders"
+        Me.tbxSel1CorrectScore00Orders.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel1CorrectScore00Orders.TabIndex = 73
+        Me.tbxSel1CorrectScore00Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(376, 79)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(38, 13)
+        Me.Label14.TabIndex = 72
+        Me.Label14.Text = "Orders"
+        '
+        'tbxSel1Goal2
+        '
+        Me.tbxSel1Goal2.Location = New System.Drawing.Point(132, 72)
+        Me.tbxSel1Goal2.Name = "tbxSel1Goal2"
+        Me.tbxSel1Goal2.Size = New System.Drawing.Size(40, 20)
+        Me.tbxSel1Goal2.TabIndex = 71
+        Me.tbxSel1Goal2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(105, 16)
+        Me.Label24.Location = New System.Drawing.Point(108, 22)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(89, 13)
         Me.Label24.TabIndex = 63
@@ -673,7 +855,7 @@ Partial Class frmMain
         'tbxSel1RefreshLight
         '
         Me.tbxSel1RefreshLight.BackColor = System.Drawing.Color.White
-        Me.tbxSel1RefreshLight.Location = New System.Drawing.Point(91, 141)
+        Me.tbxSel1RefreshLight.Location = New System.Drawing.Point(94, 147)
         Me.tbxSel1RefreshLight.Name = "tbxSel1RefreshLight"
         Me.tbxSel1RefreshLight.Size = New System.Drawing.Size(66, 20)
         Me.tbxSel1RefreshLight.TabIndex = 62
@@ -682,54 +864,64 @@ Partial Class frmMain
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(6, 144)
+        Me.Label23.Location = New System.Drawing.Point(9, 150)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(82, 13)
         Me.Label23.TabIndex = 61
         Me.Label23.Text = "Refreshed Data"
         '
-        'tbxSel1InplayTime
-        '
-        Me.tbxSel1InplayTime.Location = New System.Drawing.Point(395, 13)
-        Me.tbxSel1InplayTime.Name = "tbxSel1InplayTime"
-        Me.tbxSel1InplayTime.Size = New System.Drawing.Size(45, 20)
-        Me.tbxSel1InplayTime.TabIndex = 60
-        Me.tbxSel1InplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'tbxSel1EventDateTime
         '
-        Me.tbxSel1EventDateTime.Location = New System.Drawing.Point(198, 13)
+        Me.tbxSel1EventDateTime.Location = New System.Drawing.Point(201, 19)
         Me.tbxSel1EventDateTime.Name = "tbxSel1EventDateTime"
         Me.tbxSel1EventDateTime.Size = New System.Drawing.Size(119, 20)
         Me.tbxSel1EventDateTime.TabIndex = 59
         '
-        'TextBox1
+        'Label25
         '
-        Me.TextBox1.Location = New System.Drawing.Point(75, 13)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(20, 20)
-        Me.TextBox1.TabIndex = 57
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(327, 22)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(65, 13)
+        Me.Label25.TabIndex = 64
+        Me.Label25.Text = "Inplay (mins)"
+        '
+        'tbxSel1InplayStatus
+        '
+        Me.tbxSel1InplayStatus.Location = New System.Drawing.Point(78, 19)
+        Me.tbxSel1InplayStatus.Name = "tbxSel1InplayStatus"
+        Me.tbxSel1InplayStatus.Size = New System.Drawing.Size(20, 20)
+        Me.tbxSel1InplayStatus.TabIndex = 57
         '
         'Label43
         '
         Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(41, 16)
+        Me.Label43.Location = New System.Drawing.Point(44, 22)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(38, 13)
         Me.Label43.TabIndex = 56
         Me.Label43.Text = "Inplay "
         '
+        'tbxSel1InplayTime
+        '
+        Me.tbxSel1InplayTime.Location = New System.Drawing.Point(398, 19)
+        Me.tbxSel1InplayTime.Name = "tbxSel1InplayTime"
+        Me.tbxSel1InplayTime.Size = New System.Drawing.Size(71, 20)
+        Me.tbxSel1InplayTime.TabIndex = 60
+        Me.tbxSel1InplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'tbxSel1UnderOver15MarketStatus
         '
-        Me.tbxSel1UnderOver15MarketStatus.Location = New System.Drawing.Point(570, 43)
+        Me.tbxSel1UnderOver15MarketStatus.Location = New System.Drawing.Point(573, 49)
         Me.tbxSel1UnderOver15MarketStatus.Name = "tbxSel1UnderOver15MarketStatus"
         Me.tbxSel1UnderOver15MarketStatus.Size = New System.Drawing.Size(119, 20)
         Me.tbxSel1UnderOver15MarketStatus.TabIndex = 55
+        Me.tbxSel1UnderOver15MarketStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(449, 46)
+        Me.Label21.Location = New System.Drawing.Point(452, 52)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(115, 13)
         Me.Label21.TabIndex = 54
@@ -737,7 +929,7 @@ Partial Class frmMain
         '
         'tbxSel1IOver15Status
         '
-        Me.tbxSel1IOver15Status.Location = New System.Drawing.Point(645, 107)
+        Me.tbxSel1IOver15Status.Location = New System.Drawing.Point(694, 133)
         Me.tbxSel1IOver15Status.Name = "tbxSel1IOver15Status"
         Me.tbxSel1IOver15Status.Size = New System.Drawing.Size(26, 20)
         Me.tbxSel1IOver15Status.TabIndex = 53
@@ -745,7 +937,7 @@ Partial Class frmMain
         '
         'tbxSel1IUnder15Status
         '
-        Me.tbxSel1IUnder15Status.Location = New System.Drawing.Point(645, 84)
+        Me.tbxSel1IUnder15Status.Location = New System.Drawing.Point(694, 110)
         Me.tbxSel1IUnder15Status.Name = "tbxSel1IUnder15Status"
         Me.tbxSel1IUnder15Status.Size = New System.Drawing.Size(25, 20)
         Me.tbxSel1IUnder15Status.TabIndex = 52
@@ -754,7 +946,7 @@ Partial Class frmMain
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(641, 68)
+        Me.Label20.Location = New System.Drawing.Point(690, 94)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(37, 13)
         Me.Label20.TabIndex = 51
@@ -762,7 +954,7 @@ Partial Class frmMain
         '
         'tbxSel1CorrectScore01Status
         '
-        Me.tbxSel1CorrectScore01Status.Location = New System.Drawing.Point(389, 136)
+        Me.tbxSel1CorrectScore01Status.Location = New System.Drawing.Point(423, 147)
         Me.tbxSel1CorrectScore01Status.Name = "tbxSel1CorrectScore01Status"
         Me.tbxSel1CorrectScore01Status.Size = New System.Drawing.Size(26, 20)
         Me.tbxSel1CorrectScore01Status.TabIndex = 50
@@ -770,7 +962,7 @@ Partial Class frmMain
         '
         'tbxSel1CorrectScore10Status
         '
-        Me.tbxSel1CorrectScore10Status.Location = New System.Drawing.Point(389, 111)
+        Me.tbxSel1CorrectScore10Status.Location = New System.Drawing.Point(423, 121)
         Me.tbxSel1CorrectScore10Status.Name = "tbxSel1CorrectScore10Status"
         Me.tbxSel1CorrectScore10Status.Size = New System.Drawing.Size(26, 20)
         Me.tbxSel1CorrectScore10Status.TabIndex = 49
@@ -778,7 +970,7 @@ Partial Class frmMain
         '
         'tbxSel1CorrectScore00Status
         '
-        Me.tbxSel1CorrectScore00Status.Location = New System.Drawing.Point(390, 85)
+        Me.tbxSel1CorrectScore00Status.Location = New System.Drawing.Point(424, 95)
         Me.tbxSel1CorrectScore00Status.Name = "tbxSel1CorrectScore00Status"
         Me.tbxSel1CorrectScore00Status.Size = New System.Drawing.Size(25, 20)
         Me.tbxSel1CorrectScore00Status.TabIndex = 48
@@ -787,7 +979,7 @@ Partial Class frmMain
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(386, 69)
+        Me.Label19.Location = New System.Drawing.Point(420, 79)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(37, 13)
         Me.Label19.TabIndex = 47
@@ -796,7 +988,7 @@ Partial Class frmMain
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(602, 68)
+        Me.Label16.Location = New System.Drawing.Point(608, 94)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(35, 13)
         Me.Label16.TabIndex = 46
@@ -805,7 +997,7 @@ Partial Class frmMain
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(564, 68)
+        Me.Label18.Location = New System.Drawing.Point(570, 94)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(32, 13)
         Me.Label18.TabIndex = 44
@@ -813,54 +1005,58 @@ Partial Class frmMain
         '
         'tbxSel1CorrectScore01IfWin
         '
-        Me.tbxSel1CorrectScore01IfWin.Location = New System.Drawing.Point(345, 136)
+        Me.tbxSel1CorrectScore01IfWin.Location = New System.Drawing.Point(332, 145)
         Me.tbxSel1CorrectScore01IfWin.Name = "tbxSel1CorrectScore01IfWin"
-        Me.tbxSel1CorrectScore01IfWin.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel1CorrectScore01IfWin.Size = New System.Drawing.Size(41, 20)
         Me.tbxSel1CorrectScore01IfWin.TabIndex = 42
         Me.tbxSel1CorrectScore01IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbxSel1CorrectScore10IfWin
         '
-        Me.tbxSel1CorrectScore10IfWin.Location = New System.Drawing.Point(345, 111)
+        Me.tbxSel1CorrectScore10IfWin.Location = New System.Drawing.Point(332, 120)
         Me.tbxSel1CorrectScore10IfWin.Name = "tbxSel1CorrectScore10IfWin"
-        Me.tbxSel1CorrectScore10IfWin.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel1CorrectScore10IfWin.Size = New System.Drawing.Size(42, 20)
         Me.tbxSel1CorrectScore10IfWin.TabIndex = 41
         Me.tbxSel1CorrectScore10IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'tbxSel1LastGoal
+        'tbxSel1Goal1
         '
-        Me.tbxSel1LastGoal.Location = New System.Drawing.Point(75, 66)
-        Me.tbxSel1LastGoal.Name = "tbxSel1LastGoal"
-        Me.tbxSel1LastGoal.Size = New System.Drawing.Size(119, 20)
-        Me.tbxSel1LastGoal.TabIndex = 40
+        Me.tbxSel1Goal1.Location = New System.Drawing.Point(78, 72)
+        Me.tbxSel1Goal1.Name = "tbxSel1Goal1"
+        Me.tbxSel1Goal1.Size = New System.Drawing.Size(37, 20)
+        Me.tbxSel1Goal1.TabIndex = 40
+        Me.tbxSel1Goal1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'tbxSel1Score
         '
-        Me.tbxSel1Score.Location = New System.Drawing.Point(75, 39)
+        Me.tbxSel1Score.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbxSel1Score.Location = New System.Drawing.Point(78, 45)
         Me.tbxSel1Score.Name = "tbxSel1Score"
-        Me.tbxSel1Score.Size = New System.Drawing.Size(119, 20)
+        Me.tbxSel1Score.Size = New System.Drawing.Size(94, 20)
         Me.tbxSel1Score.TabIndex = 39
+        Me.tbxSel1Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'tbxSel1CorrectScoreStatus
         '
-        Me.tbxSel1CorrectScoreStatus.Location = New System.Drawing.Point(327, 43)
+        Me.tbxSel1CorrectScoreStatus.Location = New System.Drawing.Point(330, 49)
         Me.tbxSel1CorrectScoreStatus.Name = "tbxSel1CorrectScoreStatus"
-        Me.tbxSel1CorrectScoreStatus.Size = New System.Drawing.Size(100, 20)
+        Me.tbxSel1CorrectScoreStatus.Size = New System.Drawing.Size(116, 20)
         Me.tbxSel1CorrectScoreStatus.TabIndex = 36
+        Me.tbxSel1CorrectScoreStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label42
         '
         Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(11, 69)
+        Me.Label42.Location = New System.Drawing.Point(14, 75)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(58, 13)
+        Me.Label42.Size = New System.Drawing.Size(64, 13)
         Me.Label42.TabIndex = 37
-        Me.Label42.Text = "Last Goal :"
+        Me.Label42.Text = "Goals (mins)"
         '
         'Label41
         '
         Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(11, 42)
+        Me.Label41.Location = New System.Drawing.Point(14, 48)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(35, 13)
         Me.Label41.TabIndex = 36
@@ -869,7 +1065,7 @@ Partial Class frmMain
         'Label40
         '
         Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(222, 48)
+        Me.Label40.Location = New System.Drawing.Point(225, 54)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(105, 13)
         Me.Label40.TabIndex = 35
@@ -877,7 +1073,7 @@ Partial Class frmMain
         '
         'tbxSel1IUnder15fWinProfit
         '
-        Me.tbxSel1IUnder15fWinProfit.Location = New System.Drawing.Point(600, 84)
+        Me.tbxSel1IUnder15fWinProfit.Location = New System.Drawing.Point(606, 110)
         Me.tbxSel1IUnder15fWinProfit.Name = "tbxSel1IUnder15fWinProfit"
         Me.tbxSel1IUnder15fWinProfit.Size = New System.Drawing.Size(36, 20)
         Me.tbxSel1IUnder15fWinProfit.TabIndex = 33
@@ -885,7 +1081,7 @@ Partial Class frmMain
         '
         'tbxSel1IOver15fWinProfit
         '
-        Me.tbxSel1IOver15fWinProfit.Location = New System.Drawing.Point(600, 107)
+        Me.tbxSel1IOver15fWinProfit.Location = New System.Drawing.Point(606, 133)
         Me.tbxSel1IOver15fWinProfit.Name = "tbxSel1IOver15fWinProfit"
         Me.tbxSel1IOver15fWinProfit.Size = New System.Drawing.Size(36, 20)
         Me.tbxSel1IOver15fWinProfit.TabIndex = 32
@@ -893,16 +1089,16 @@ Partial Class frmMain
         '
         'tbxSel1CorrectScore00IfWin
         '
-        Me.tbxSel1CorrectScore00IfWin.Location = New System.Drawing.Point(346, 85)
+        Me.tbxSel1CorrectScore00IfWin.Location = New System.Drawing.Point(333, 94)
         Me.tbxSel1CorrectScore00IfWin.Name = "tbxSel1CorrectScore00IfWin"
-        Me.tbxSel1CorrectScore00IfWin.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel1CorrectScore00IfWin.Size = New System.Drawing.Size(41, 20)
         Me.tbxSel1CorrectScore00IfWin.TabIndex = 30
         Me.tbxSel1CorrectScore00IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(348, 69)
+        Me.Label15.Location = New System.Drawing.Point(335, 78)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(35, 13)
         Me.Label15.TabIndex = 24
@@ -910,16 +1106,16 @@ Partial Class frmMain
         '
         'tbxSel1CorrectScore01Odds
         '
-        Me.tbxSel1CorrectScore01Odds.Location = New System.Drawing.Point(306, 137)
+        Me.tbxSel1CorrectScore01Odds.Location = New System.Drawing.Point(284, 146)
         Me.tbxSel1CorrectScore01Odds.Name = "tbxSel1CorrectScore01Odds"
-        Me.tbxSel1CorrectScore01Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel1CorrectScore01Odds.Size = New System.Drawing.Size(43, 20)
         Me.tbxSel1CorrectScore01Odds.TabIndex = 22
         Me.tbxSel1CorrectScore01Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(210, 140)
+        Me.Label13.Location = New System.Drawing.Point(188, 149)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(90, 13)
         Me.Label13.TabIndex = 21
@@ -927,7 +1123,7 @@ Partial Class frmMain
         '
         'tbxSel1Under15Odds
         '
-        Me.tbxSel1Under15Odds.Location = New System.Drawing.Point(560, 84)
+        Me.tbxSel1Under15Odds.Location = New System.Drawing.Point(566, 110)
         Me.tbxSel1Under15Odds.Name = "tbxSel1Under15Odds"
         Me.tbxSel1Under15Odds.Size = New System.Drawing.Size(36, 20)
         Me.tbxSel1Under15Odds.TabIndex = 20
@@ -936,7 +1132,7 @@ Partial Class frmMain
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(472, 88)
+        Me.Label11.Location = New System.Drawing.Point(478, 117)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(82, 13)
         Me.Label11.TabIndex = 19
@@ -944,7 +1140,7 @@ Partial Class frmMain
         '
         'tbxSel1Over15Odds
         '
-        Me.tbxSel1Over15Odds.Location = New System.Drawing.Point(560, 107)
+        Me.tbxSel1Over15Odds.Location = New System.Drawing.Point(566, 133)
         Me.tbxSel1Over15Odds.Name = "tbxSel1Over15Odds"
         Me.tbxSel1Over15Odds.Size = New System.Drawing.Size(36, 20)
         Me.tbxSel1Over15Odds.TabIndex = 18
@@ -953,7 +1149,7 @@ Partial Class frmMain
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(478, 110)
+        Me.Label12.Location = New System.Drawing.Point(484, 136)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(76, 13)
         Me.Label12.TabIndex = 17
@@ -962,7 +1158,7 @@ Partial Class frmMain
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(310, 70)
+        Me.Label10.Location = New System.Drawing.Point(288, 79)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(32, 13)
         Me.Label10.TabIndex = 16
@@ -970,16 +1166,16 @@ Partial Class frmMain
         '
         'tbxSel1CorrectScore10Odds
         '
-        Me.tbxSel1CorrectScore10Odds.Location = New System.Drawing.Point(306, 111)
+        Me.tbxSel1CorrectScore10Odds.Location = New System.Drawing.Point(284, 120)
         Me.tbxSel1CorrectScore10Odds.Name = "tbxSel1CorrectScore10Odds"
-        Me.tbxSel1CorrectScore10Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel1CorrectScore10Odds.Size = New System.Drawing.Size(43, 20)
         Me.tbxSel1CorrectScore10Odds.TabIndex = 15
         Me.tbxSel1CorrectScore10Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(210, 114)
+        Me.Label9.Location = New System.Drawing.Point(188, 123)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(90, 13)
         Me.Label9.TabIndex = 14
@@ -987,16 +1183,16 @@ Partial Class frmMain
         '
         'tbxSel1CorrectScore00Odds
         '
-        Me.tbxSel1CorrectScore00Odds.Location = New System.Drawing.Point(306, 86)
+        Me.tbxSel1CorrectScore00Odds.Location = New System.Drawing.Point(284, 95)
         Me.tbxSel1CorrectScore00Odds.Name = "tbxSel1CorrectScore00Odds"
-        Me.tbxSel1CorrectScore00Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel1CorrectScore00Odds.Size = New System.Drawing.Size(43, 20)
         Me.tbxSel1CorrectScore00Odds.TabIndex = 13
         Me.tbxSel1CorrectScore00Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(210, 89)
+        Me.Label8.Location = New System.Drawing.Point(188, 98)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(90, 13)
         Me.Label8.TabIndex = 12
@@ -1004,7 +1200,7 @@ Partial Class frmMain
         '
         'btnExit
         '
-        Me.btnExit.Location = New System.Drawing.Point(1192, 756)
+        Me.btnExit.Location = New System.Drawing.Point(1359, 814)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(126, 49)
         Me.btnExit.TabIndex = 8
@@ -1013,74 +1209,50 @@ Partial Class frmMain
         '
         'timerRefreshSelections
         '
-        Me.timerRefreshSelections.Interval = 10000
+        Me.timerRefreshSelections.Interval = 30000
         '
         'timerSel1AutoBet
         '
         Me.timerSel1AutoBet.Interval = 600
         '
-        'cbxInplayOnly
-        '
-        Me.cbxInplayOnly.AutoSize = True
-        Me.cbxInplayOnly.Location = New System.Drawing.Point(668, 15)
-        Me.cbxInplayOnly.Name = "cbxInplayOnly"
-        Me.cbxInplayOnly.Size = New System.Drawing.Size(78, 17)
-        Me.cbxInplayOnly.TabIndex = 10
-        Me.cbxInplayOnly.Text = "Inplay Only"
-        Me.cbxInplayOnly.UseVisualStyleBackColor = True
-        '
         'dgvEvents
         '
+        Me.dgvEvents.AllowUserToAddRows = False
+        Me.dgvEvents.AllowUserToDeleteRows = False
         Me.dgvEvents.AutoGenerateColumns = False
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Info
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEvents.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Info
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEvents.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEvents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EventTypeIdDataGridViewTextBoxColumn, Me.EventIdDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.CountryCodeDataGridViewTextBoxColumn, Me.TimezoneDataGridViewTextBoxColumn, Me.OpenDateDataGridViewTextBoxColumn})
         Me.dgvEvents.DataSource = Me.BeffairEventClassBindingSource
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEvents.DefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvEvents.Location = New System.Drawing.Point(30, 38)
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEvents.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvEvents.Location = New System.Drawing.Point(31, 29)
         Me.dgvEvents.MultiSelect = False
         Me.dgvEvents.Name = "dgvEvents"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEvents.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEvents.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvEvents.Size = New System.Drawing.Size(716, 309)
+        Me.dgvEvents.Size = New System.Drawing.Size(691, 309)
         Me.dgvEvents.TabIndex = 11
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(570, 13)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(119, 20)
-        Me.TextBox2.TabIndex = 69
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(456, 16)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(108, 13)
-        Me.Label28.TabIndex = 70
-        Me.Label28.Text = "Inplay Detected Time"
         '
         'EventTypeIdDataGridViewTextBoxColumn
         '
@@ -1137,14 +1309,1459 @@ Partial Class frmMain
         '
         Me.BeffairEventClassBindingSource.DataSource = GetType(BetfairSoccerBettingApp.BeffairEventClass)
         '
+        'grpSel2
+        '
+        Me.grpSel2.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.grpSel2.Controls.Add(Me.tbxSel2IOver15Orders)
+        Me.grpSel2.Controls.Add(Me.tbxSel2IUnder15Orders)
+        Me.grpSel2.Controls.Add(Me.Label26)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore01Orders)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore10Orders)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore00Orders)
+        Me.grpSel2.Controls.Add(Me.Label27)
+        Me.grpSel2.Controls.Add(Me.tbxSel2Goal2)
+        Me.grpSel2.Controls.Add(Me.Label28)
+        Me.grpSel2.Controls.Add(Me.tbxSel2RefreshLight)
+        Me.grpSel2.Controls.Add(Me.Label29)
+        Me.grpSel2.Controls.Add(Me.tbxSel2EventDateTime)
+        Me.grpSel2.Controls.Add(Me.Label30)
+        Me.grpSel2.Controls.Add(Me.tbxSel2InplayStatus)
+        Me.grpSel2.Controls.Add(Me.Label31)
+        Me.grpSel2.Controls.Add(Me.tbxSel2InplayTime)
+        Me.grpSel2.Controls.Add(Me.tbxSel2UnderOver15MarketStatus)
+        Me.grpSel2.Controls.Add(Me.Label32)
+        Me.grpSel2.Controls.Add(Me.tbxSel2IOver15Status)
+        Me.grpSel2.Controls.Add(Me.tbxSel2IUnder15Status)
+        Me.grpSel2.Controls.Add(Me.Label33)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore01Status)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore10Status)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore00Status)
+        Me.grpSel2.Controls.Add(Me.Label34)
+        Me.grpSel2.Controls.Add(Me.Label35)
+        Me.grpSel2.Controls.Add(Me.Label36)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore01IfWin)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore10IfWin)
+        Me.grpSel2.Controls.Add(Me.tbxSel2Goal1)
+        Me.grpSel2.Controls.Add(Me.tbxSel2Score)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScoreStatus)
+        Me.grpSel2.Controls.Add(Me.Label37)
+        Me.grpSel2.Controls.Add(Me.Label38)
+        Me.grpSel2.Controls.Add(Me.Label39)
+        Me.grpSel2.Controls.Add(Me.tbxSel2IUnder15fWinProfit)
+        Me.grpSel2.Controls.Add(Me.tbxSel2IOver15fWinProfit)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore00IfWin)
+        Me.grpSel2.Controls.Add(Me.Label44)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore01Odds)
+        Me.grpSel2.Controls.Add(Me.Label45)
+        Me.grpSel2.Controls.Add(Me.tbxSel2Under15Odds)
+        Me.grpSel2.Controls.Add(Me.Label46)
+        Me.grpSel2.Controls.Add(Me.tbxSel2Over15Odds)
+        Me.grpSel2.Controls.Add(Me.Label47)
+        Me.grpSel2.Controls.Add(Me.Label48)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore10Odds)
+        Me.grpSel2.Controls.Add(Me.Label49)
+        Me.grpSel2.Controls.Add(Me.tbxSel2CorrectScore00Odds)
+        Me.grpSel2.Controls.Add(Me.Label50)
+        Me.grpSel2.Location = New System.Drawing.Point(764, 361)
+        Me.grpSel2.Name = "grpSel2"
+        Me.grpSel2.Size = New System.Drawing.Size(734, 175)
+        Me.grpSel2.TabIndex = 12
+        Me.grpSel2.TabStop = False
+        Me.grpSel2.Text = "Selection 2"
+        '
+        'tbxSel2IOver15Orders
+        '
+        Me.tbxSel2IOver15Orders.Location = New System.Drawing.Point(650, 133)
+        Me.tbxSel2IOver15Orders.Name = "tbxSel2IOver15Orders"
+        Me.tbxSel2IOver15Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel2IOver15Orders.TabIndex = 78
+        Me.tbxSel2IOver15Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2IUnder15Orders
+        '
+        Me.tbxSel2IUnder15Orders.Location = New System.Drawing.Point(650, 110)
+        Me.tbxSel2IUnder15Orders.Name = "tbxSel2IUnder15Orders"
+        Me.tbxSel2IUnder15Orders.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel2IUnder15Orders.TabIndex = 77
+        Me.tbxSel2IUnder15Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(646, 94)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(38, 13)
+        Me.Label26.TabIndex = 76
+        Me.Label26.Text = "Orders"
+        '
+        'tbxSel2CorrectScore01Orders
+        '
+        Me.tbxSel2CorrectScore01Orders.Location = New System.Drawing.Point(379, 146)
+        Me.tbxSel2CorrectScore01Orders.Name = "tbxSel2CorrectScore01Orders"
+        Me.tbxSel2CorrectScore01Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel2CorrectScore01Orders.TabIndex = 75
+        Me.tbxSel2CorrectScore01Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2CorrectScore10Orders
+        '
+        Me.tbxSel2CorrectScore10Orders.Location = New System.Drawing.Point(379, 121)
+        Me.tbxSel2CorrectScore10Orders.Name = "tbxSel2CorrectScore10Orders"
+        Me.tbxSel2CorrectScore10Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel2CorrectScore10Orders.TabIndex = 74
+        Me.tbxSel2CorrectScore10Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2CorrectScore00Orders
+        '
+        Me.tbxSel2CorrectScore00Orders.Location = New System.Drawing.Point(380, 95)
+        Me.tbxSel2CorrectScore00Orders.Name = "tbxSel2CorrectScore00Orders"
+        Me.tbxSel2CorrectScore00Orders.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel2CorrectScore00Orders.TabIndex = 73
+        Me.tbxSel2CorrectScore00Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(376, 79)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(38, 13)
+        Me.Label27.TabIndex = 72
+        Me.Label27.Text = "Orders"
+        '
+        'tbxSel2Goal2
+        '
+        Me.tbxSel2Goal2.Location = New System.Drawing.Point(132, 72)
+        Me.tbxSel2Goal2.Name = "tbxSel2Goal2"
+        Me.tbxSel2Goal2.Size = New System.Drawing.Size(40, 20)
+        Me.tbxSel2Goal2.TabIndex = 71
+        Me.tbxSel2Goal2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(108, 22)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(89, 13)
+        Me.Label28.TabIndex = 63
+        Me.Label28.Text = "Event Date/Time"
+        '
+        'tbxSel2RefreshLight
+        '
+        Me.tbxSel2RefreshLight.BackColor = System.Drawing.Color.White
+        Me.tbxSel2RefreshLight.Location = New System.Drawing.Point(94, 147)
+        Me.tbxSel2RefreshLight.Name = "tbxSel2RefreshLight"
+        Me.tbxSel2RefreshLight.Size = New System.Drawing.Size(66, 20)
+        Me.tbxSel2RefreshLight.TabIndex = 62
+        Me.tbxSel2RefreshLight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(9, 150)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(82, 13)
+        Me.Label29.TabIndex = 61
+        Me.Label29.Text = "Refreshed Data"
+        '
+        'tbxSel2EventDateTime
+        '
+        Me.tbxSel2EventDateTime.Location = New System.Drawing.Point(201, 19)
+        Me.tbxSel2EventDateTime.Name = "tbxSel2EventDateTime"
+        Me.tbxSel2EventDateTime.Size = New System.Drawing.Size(119, 20)
+        Me.tbxSel2EventDateTime.TabIndex = 59
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(327, 22)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(65, 13)
+        Me.Label30.TabIndex = 64
+        Me.Label30.Text = "Inplay (mins)"
+        '
+        'tbxSel2InplayStatus
+        '
+        Me.tbxSel2InplayStatus.Location = New System.Drawing.Point(78, 19)
+        Me.tbxSel2InplayStatus.Name = "tbxSel2InplayStatus"
+        Me.tbxSel2InplayStatus.Size = New System.Drawing.Size(20, 20)
+        Me.tbxSel2InplayStatus.TabIndex = 57
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(44, 22)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(38, 13)
+        Me.Label31.TabIndex = 56
+        Me.Label31.Text = "Inplay "
+        '
+        'tbxSel2InplayTime
+        '
+        Me.tbxSel2InplayTime.Location = New System.Drawing.Point(398, 19)
+        Me.tbxSel2InplayTime.Name = "tbxSel2InplayTime"
+        Me.tbxSel2InplayTime.Size = New System.Drawing.Size(71, 20)
+        Me.tbxSel2InplayTime.TabIndex = 60
+        Me.tbxSel2InplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2UnderOver15MarketStatus
+        '
+        Me.tbxSel2UnderOver15MarketStatus.Location = New System.Drawing.Point(573, 49)
+        Me.tbxSel2UnderOver15MarketStatus.Name = "tbxSel2UnderOver15MarketStatus"
+        Me.tbxSel2UnderOver15MarketStatus.Size = New System.Drawing.Size(119, 20)
+        Me.tbxSel2UnderOver15MarketStatus.TabIndex = 55
+        Me.tbxSel2UnderOver15MarketStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Location = New System.Drawing.Point(452, 52)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(115, 13)
+        Me.Label32.TabIndex = 54
+        Me.Label32.Text = "Under/Over 1.5 Status"
+        '
+        'tbxSel2IOver15Status
+        '
+        Me.tbxSel2IOver15Status.Location = New System.Drawing.Point(694, 133)
+        Me.tbxSel2IOver15Status.Name = "tbxSel2IOver15Status"
+        Me.tbxSel2IOver15Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel2IOver15Status.TabIndex = 53
+        Me.tbxSel2IOver15Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2IUnder15Status
+        '
+        Me.tbxSel2IUnder15Status.Location = New System.Drawing.Point(694, 110)
+        Me.tbxSel2IUnder15Status.Name = "tbxSel2IUnder15Status"
+        Me.tbxSel2IUnder15Status.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel2IUnder15Status.TabIndex = 52
+        Me.tbxSel2IUnder15Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(690, 94)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(37, 13)
+        Me.Label33.TabIndex = 51
+        Me.Label33.Text = "Status"
+        '
+        'tbxSel2CorrectScore01Status
+        '
+        Me.tbxSel2CorrectScore01Status.Location = New System.Drawing.Point(423, 147)
+        Me.tbxSel2CorrectScore01Status.Name = "tbxSel2CorrectScore01Status"
+        Me.tbxSel2CorrectScore01Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel2CorrectScore01Status.TabIndex = 50
+        Me.tbxSel2CorrectScore01Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2CorrectScore10Status
+        '
+        Me.tbxSel2CorrectScore10Status.Location = New System.Drawing.Point(423, 121)
+        Me.tbxSel2CorrectScore10Status.Name = "tbxSel2CorrectScore10Status"
+        Me.tbxSel2CorrectScore10Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel2CorrectScore10Status.TabIndex = 49
+        Me.tbxSel2CorrectScore10Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2CorrectScore00Status
+        '
+        Me.tbxSel2CorrectScore00Status.Location = New System.Drawing.Point(424, 95)
+        Me.tbxSel2CorrectScore00Status.Name = "tbxSel2CorrectScore00Status"
+        Me.tbxSel2CorrectScore00Status.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel2CorrectScore00Status.TabIndex = 48
+        Me.tbxSel2CorrectScore00Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Location = New System.Drawing.Point(420, 79)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(37, 13)
+        Me.Label34.TabIndex = 47
+        Me.Label34.Text = "Status"
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Location = New System.Drawing.Point(608, 94)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(35, 13)
+        Me.Label35.TabIndex = 46
+        Me.Label35.Text = "If Win"
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Location = New System.Drawing.Point(570, 94)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(32, 13)
+        Me.Label36.TabIndex = 44
+        Me.Label36.Text = "Back"
+        '
+        'tbxSel2CorrectScore01IfWin
+        '
+        Me.tbxSel2CorrectScore01IfWin.Location = New System.Drawing.Point(332, 145)
+        Me.tbxSel2CorrectScore01IfWin.Name = "tbxSel2CorrectScore01IfWin"
+        Me.tbxSel2CorrectScore01IfWin.Size = New System.Drawing.Size(41, 20)
+        Me.tbxSel2CorrectScore01IfWin.TabIndex = 42
+        Me.tbxSel2CorrectScore01IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2CorrectScore10IfWin
+        '
+        Me.tbxSel2CorrectScore10IfWin.Location = New System.Drawing.Point(332, 120)
+        Me.tbxSel2CorrectScore10IfWin.Name = "tbxSel2CorrectScore10IfWin"
+        Me.tbxSel2CorrectScore10IfWin.Size = New System.Drawing.Size(42, 20)
+        Me.tbxSel2CorrectScore10IfWin.TabIndex = 41
+        Me.tbxSel2CorrectScore10IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2Goal1
+        '
+        Me.tbxSel2Goal1.Location = New System.Drawing.Point(78, 72)
+        Me.tbxSel2Goal1.Name = "tbxSel2Goal1"
+        Me.tbxSel2Goal1.Size = New System.Drawing.Size(37, 20)
+        Me.tbxSel2Goal1.TabIndex = 40
+        Me.tbxSel2Goal1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'tbxSel2Score
+        '
+        Me.tbxSel2Score.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbxSel2Score.Location = New System.Drawing.Point(78, 45)
+        Me.tbxSel2Score.Name = "tbxSel2Score"
+        Me.tbxSel2Score.Size = New System.Drawing.Size(94, 20)
+        Me.tbxSel2Score.TabIndex = 39
+        Me.tbxSel2Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'tbxSel2CorrectScoreStatus
+        '
+        Me.tbxSel2CorrectScoreStatus.Location = New System.Drawing.Point(330, 49)
+        Me.tbxSel2CorrectScoreStatus.Name = "tbxSel2CorrectScoreStatus"
+        Me.tbxSel2CorrectScoreStatus.Size = New System.Drawing.Size(116, 20)
+        Me.tbxSel2CorrectScoreStatus.TabIndex = 36
+        Me.tbxSel2CorrectScoreStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Location = New System.Drawing.Point(14, 75)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(64, 13)
+        Me.Label37.TabIndex = 37
+        Me.Label37.Text = "Goals (mins)"
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(14, 48)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(35, 13)
+        Me.Label38.TabIndex = 36
+        Me.Label38.Text = "Score"
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Location = New System.Drawing.Point(225, 54)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(105, 13)
+        Me.Label39.TabIndex = 35
+        Me.Label39.Text = "Correct Score Status"
+        '
+        'tbxSel2IUnder15fWinProfit
+        '
+        Me.tbxSel2IUnder15fWinProfit.Location = New System.Drawing.Point(606, 110)
+        Me.tbxSel2IUnder15fWinProfit.Name = "tbxSel2IUnder15fWinProfit"
+        Me.tbxSel2IUnder15fWinProfit.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel2IUnder15fWinProfit.TabIndex = 33
+        Me.tbxSel2IUnder15fWinProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2IOver15fWinProfit
+        '
+        Me.tbxSel2IOver15fWinProfit.Location = New System.Drawing.Point(606, 133)
+        Me.tbxSel2IOver15fWinProfit.Name = "tbxSel2IOver15fWinProfit"
+        Me.tbxSel2IOver15fWinProfit.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel2IOver15fWinProfit.TabIndex = 32
+        Me.tbxSel2IOver15fWinProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel2CorrectScore00IfWin
+        '
+        Me.tbxSel2CorrectScore00IfWin.Location = New System.Drawing.Point(333, 94)
+        Me.tbxSel2CorrectScore00IfWin.Name = "tbxSel2CorrectScore00IfWin"
+        Me.tbxSel2CorrectScore00IfWin.Size = New System.Drawing.Size(41, 20)
+        Me.tbxSel2CorrectScore00IfWin.TabIndex = 30
+        Me.tbxSel2CorrectScore00IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.Location = New System.Drawing.Point(335, 78)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(35, 13)
+        Me.Label44.TabIndex = 24
+        Me.Label44.Text = "If Win"
+        '
+        'tbxSel2CorrectScore01Odds
+        '
+        Me.tbxSel2CorrectScore01Odds.Location = New System.Drawing.Point(284, 146)
+        Me.tbxSel2CorrectScore01Odds.Name = "tbxSel2CorrectScore01Odds"
+        Me.tbxSel2CorrectScore01Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel2CorrectScore01Odds.TabIndex = 22
+        Me.tbxSel2CorrectScore01Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Location = New System.Drawing.Point(188, 149)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(90, 13)
+        Me.Label45.TabIndex = 21
+        Me.Label45.Text = "Correct Score 0-1"
+        '
+        'tbxSel2Under15Odds
+        '
+        Me.tbxSel2Under15Odds.Location = New System.Drawing.Point(566, 110)
+        Me.tbxSel2Under15Odds.Name = "tbxSel2Under15Odds"
+        Me.tbxSel2Under15Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel2Under15Odds.TabIndex = 20
+        Me.tbxSel2Under15Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Location = New System.Drawing.Point(478, 117)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(82, 13)
+        Me.Label46.TabIndex = 19
+        Me.Label46.Text = "Under 1.5 Odds"
+        '
+        'tbxSel2Over15Odds
+        '
+        Me.tbxSel2Over15Odds.Location = New System.Drawing.Point(566, 133)
+        Me.tbxSel2Over15Odds.Name = "tbxSel2Over15Odds"
+        Me.tbxSel2Over15Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel2Over15Odds.TabIndex = 18
+        Me.tbxSel2Over15Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.Location = New System.Drawing.Point(484, 136)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(76, 13)
+        Me.Label47.TabIndex = 17
+        Me.Label47.Text = "Over 1.5 Odds"
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(288, 79)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(32, 13)
+        Me.Label48.TabIndex = 16
+        Me.Label48.Text = "Back"
+        '
+        'tbxSel2CorrectScore10Odds
+        '
+        Me.tbxSel2CorrectScore10Odds.Location = New System.Drawing.Point(284, 120)
+        Me.tbxSel2CorrectScore10Odds.Name = "tbxSel2CorrectScore10Odds"
+        Me.tbxSel2CorrectScore10Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel2CorrectScore10Odds.TabIndex = 15
+        Me.tbxSel2CorrectScore10Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Location = New System.Drawing.Point(188, 123)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(90, 13)
+        Me.Label49.TabIndex = 14
+        Me.Label49.Text = "Correct Score 1-0"
+        '
+        'tbxSel2CorrectScore00Odds
+        '
+        Me.tbxSel2CorrectScore00Odds.Location = New System.Drawing.Point(284, 95)
+        Me.tbxSel2CorrectScore00Odds.Name = "tbxSel2CorrectScore00Odds"
+        Me.tbxSel2CorrectScore00Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel2CorrectScore00Odds.TabIndex = 13
+        Me.tbxSel2CorrectScore00Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.Location = New System.Drawing.Point(188, 98)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(90, 13)
+        Me.Label50.TabIndex = 12
+        Me.Label50.Text = "Correct Score 0-0"
+        '
+        'grpSel3
+        '
+        Me.grpSel3.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.grpSel3.Controls.Add(Me.tbxSel3IOver15Orders)
+        Me.grpSel3.Controls.Add(Me.tbxSel3IUnder15Orders)
+        Me.grpSel3.Controls.Add(Me.Label51)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore01Orders)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore10Orders)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore00Orders)
+        Me.grpSel3.Controls.Add(Me.Label52)
+        Me.grpSel3.Controls.Add(Me.tbxSel3Goal2)
+        Me.grpSel3.Controls.Add(Me.Label53)
+        Me.grpSel3.Controls.Add(Me.tbxSel3RefreshLight)
+        Me.grpSel3.Controls.Add(Me.Label54)
+        Me.grpSel3.Controls.Add(Me.tbxSel3EventDateTime)
+        Me.grpSel3.Controls.Add(Me.Label55)
+        Me.grpSel3.Controls.Add(Me.tbxSel3InplayStatus)
+        Me.grpSel3.Controls.Add(Me.Label56)
+        Me.grpSel3.Controls.Add(Me.tbxSel3InplayTime)
+        Me.grpSel3.Controls.Add(Me.tbxSel3UnderOver15MarketStatus)
+        Me.grpSel3.Controls.Add(Me.Label57)
+        Me.grpSel3.Controls.Add(Me.tbxSel3IOver15Status)
+        Me.grpSel3.Controls.Add(Me.tbxSel3IUnder15Status)
+        Me.grpSel3.Controls.Add(Me.Label58)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore01Status)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore10Status)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore00Status)
+        Me.grpSel3.Controls.Add(Me.Label59)
+        Me.grpSel3.Controls.Add(Me.Label60)
+        Me.grpSel3.Controls.Add(Me.Label61)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore01IfWin)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore10IfWin)
+        Me.grpSel3.Controls.Add(Me.tbxSel3Goal1)
+        Me.grpSel3.Controls.Add(Me.tbxSel3Score)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScoreStatus)
+        Me.grpSel3.Controls.Add(Me.Label62)
+        Me.grpSel3.Controls.Add(Me.Label63)
+        Me.grpSel3.Controls.Add(Me.Label64)
+        Me.grpSel3.Controls.Add(Me.tbxSel3IUnder15fWinProfit)
+        Me.grpSel3.Controls.Add(Me.tbxSel3IOver15fWinProfit)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore00IfWin)
+        Me.grpSel3.Controls.Add(Me.Label65)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore01Odds)
+        Me.grpSel3.Controls.Add(Me.Label66)
+        Me.grpSel3.Controls.Add(Me.tbxSel3Under15Odds)
+        Me.grpSel3.Controls.Add(Me.Label67)
+        Me.grpSel3.Controls.Add(Me.tbxSel3Over15Odds)
+        Me.grpSel3.Controls.Add(Me.Label68)
+        Me.grpSel3.Controls.Add(Me.Label69)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore10Odds)
+        Me.grpSel3.Controls.Add(Me.Label70)
+        Me.grpSel3.Controls.Add(Me.tbxSel3CorrectScore00Odds)
+        Me.grpSel3.Controls.Add(Me.Label71)
+        Me.grpSel3.Location = New System.Drawing.Point(12, 555)
+        Me.grpSel3.Name = "grpSel3"
+        Me.grpSel3.Size = New System.Drawing.Size(734, 175)
+        Me.grpSel3.TabIndex = 13
+        Me.grpSel3.TabStop = False
+        Me.grpSel3.Text = "Selection 3"
+        '
+        'tbxSel3IOver15Orders
+        '
+        Me.tbxSel3IOver15Orders.Location = New System.Drawing.Point(650, 133)
+        Me.tbxSel3IOver15Orders.Name = "tbxSel3IOver15Orders"
+        Me.tbxSel3IOver15Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel3IOver15Orders.TabIndex = 78
+        Me.tbxSel3IOver15Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3IUnder15Orders
+        '
+        Me.tbxSel3IUnder15Orders.Location = New System.Drawing.Point(650, 110)
+        Me.tbxSel3IUnder15Orders.Name = "tbxSel3IUnder15Orders"
+        Me.tbxSel3IUnder15Orders.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel3IUnder15Orders.TabIndex = 77
+        Me.tbxSel3IUnder15Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label51
+        '
+        Me.Label51.AutoSize = True
+        Me.Label51.Location = New System.Drawing.Point(646, 94)
+        Me.Label51.Name = "Label51"
+        Me.Label51.Size = New System.Drawing.Size(38, 13)
+        Me.Label51.TabIndex = 76
+        Me.Label51.Text = "Orders"
+        '
+        'tbxSel3CorrectScore01Orders
+        '
+        Me.tbxSel3CorrectScore01Orders.Location = New System.Drawing.Point(379, 146)
+        Me.tbxSel3CorrectScore01Orders.Name = "tbxSel3CorrectScore01Orders"
+        Me.tbxSel3CorrectScore01Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel3CorrectScore01Orders.TabIndex = 75
+        Me.tbxSel3CorrectScore01Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3CorrectScore10Orders
+        '
+        Me.tbxSel3CorrectScore10Orders.Location = New System.Drawing.Point(379, 121)
+        Me.tbxSel3CorrectScore10Orders.Name = "tbxSel3CorrectScore10Orders"
+        Me.tbxSel3CorrectScore10Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel3CorrectScore10Orders.TabIndex = 74
+        Me.tbxSel3CorrectScore10Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3CorrectScore00Orders
+        '
+        Me.tbxSel3CorrectScore00Orders.Location = New System.Drawing.Point(380, 95)
+        Me.tbxSel3CorrectScore00Orders.Name = "tbxSel3CorrectScore00Orders"
+        Me.tbxSel3CorrectScore00Orders.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel3CorrectScore00Orders.TabIndex = 73
+        Me.tbxSel3CorrectScore00Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label52
+        '
+        Me.Label52.AutoSize = True
+        Me.Label52.Location = New System.Drawing.Point(376, 79)
+        Me.Label52.Name = "Label52"
+        Me.Label52.Size = New System.Drawing.Size(38, 13)
+        Me.Label52.TabIndex = 72
+        Me.Label52.Text = "Orders"
+        '
+        'tbxSel3Goal2
+        '
+        Me.tbxSel3Goal2.Location = New System.Drawing.Point(132, 72)
+        Me.tbxSel3Goal2.Name = "tbxSel3Goal2"
+        Me.tbxSel3Goal2.Size = New System.Drawing.Size(40, 20)
+        Me.tbxSel3Goal2.TabIndex = 71
+        Me.tbxSel3Goal2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label53
+        '
+        Me.Label53.AutoSize = True
+        Me.Label53.Location = New System.Drawing.Point(108, 22)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(89, 13)
+        Me.Label53.TabIndex = 63
+        Me.Label53.Text = "Event Date/Time"
+        '
+        'tbxSel3RefreshLight
+        '
+        Me.tbxSel3RefreshLight.BackColor = System.Drawing.Color.White
+        Me.tbxSel3RefreshLight.Location = New System.Drawing.Point(94, 147)
+        Me.tbxSel3RefreshLight.Name = "tbxSel3RefreshLight"
+        Me.tbxSel3RefreshLight.Size = New System.Drawing.Size(66, 20)
+        Me.tbxSel3RefreshLight.TabIndex = 62
+        Me.tbxSel3RefreshLight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.Location = New System.Drawing.Point(9, 150)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(82, 13)
+        Me.Label54.TabIndex = 61
+        Me.Label54.Text = "Refreshed Data"
+        '
+        'tbxSel3EventDateTime
+        '
+        Me.tbxSel3EventDateTime.Location = New System.Drawing.Point(201, 19)
+        Me.tbxSel3EventDateTime.Name = "tbxSel3EventDateTime"
+        Me.tbxSel3EventDateTime.Size = New System.Drawing.Size(119, 20)
+        Me.tbxSel3EventDateTime.TabIndex = 59
+        '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.Location = New System.Drawing.Point(327, 22)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(65, 13)
+        Me.Label55.TabIndex = 64
+        Me.Label55.Text = "Inplay (mins)"
+        '
+        'tbxSel3InplayStatus
+        '
+        Me.tbxSel3InplayStatus.Location = New System.Drawing.Point(78, 19)
+        Me.tbxSel3InplayStatus.Name = "tbxSel3InplayStatus"
+        Me.tbxSel3InplayStatus.Size = New System.Drawing.Size(20, 20)
+        Me.tbxSel3InplayStatus.TabIndex = 57
+        '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.Location = New System.Drawing.Point(44, 22)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(38, 13)
+        Me.Label56.TabIndex = 56
+        Me.Label56.Text = "Inplay "
+        '
+        'tbxSel3InplayTime
+        '
+        Me.tbxSel3InplayTime.Location = New System.Drawing.Point(398, 19)
+        Me.tbxSel3InplayTime.Name = "tbxSel3InplayTime"
+        Me.tbxSel3InplayTime.Size = New System.Drawing.Size(71, 20)
+        Me.tbxSel3InplayTime.TabIndex = 60
+        Me.tbxSel3InplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3UnderOver15MarketStatus
+        '
+        Me.tbxSel3UnderOver15MarketStatus.Location = New System.Drawing.Point(573, 49)
+        Me.tbxSel3UnderOver15MarketStatus.Name = "tbxSel3UnderOver15MarketStatus"
+        Me.tbxSel3UnderOver15MarketStatus.Size = New System.Drawing.Size(119, 20)
+        Me.tbxSel3UnderOver15MarketStatus.TabIndex = 55
+        Me.tbxSel3UnderOver15MarketStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label57
+        '
+        Me.Label57.AutoSize = True
+        Me.Label57.Location = New System.Drawing.Point(452, 52)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(115, 13)
+        Me.Label57.TabIndex = 54
+        Me.Label57.Text = "Under/Over 1.5 Status"
+        '
+        'tbxSel3IOver15Status
+        '
+        Me.tbxSel3IOver15Status.Location = New System.Drawing.Point(694, 133)
+        Me.tbxSel3IOver15Status.Name = "tbxSel3IOver15Status"
+        Me.tbxSel3IOver15Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel3IOver15Status.TabIndex = 53
+        Me.tbxSel3IOver15Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3IUnder15Status
+        '
+        Me.tbxSel3IUnder15Status.Location = New System.Drawing.Point(694, 110)
+        Me.tbxSel3IUnder15Status.Name = "tbxSel3IUnder15Status"
+        Me.tbxSel3IUnder15Status.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel3IUnder15Status.TabIndex = 52
+        Me.tbxSel3IUnder15Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.Location = New System.Drawing.Point(690, 94)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(37, 13)
+        Me.Label58.TabIndex = 51
+        Me.Label58.Text = "Status"
+        '
+        'tbxSel3CorrectScore01Status
+        '
+        Me.tbxSel3CorrectScore01Status.Location = New System.Drawing.Point(423, 147)
+        Me.tbxSel3CorrectScore01Status.Name = "tbxSel3CorrectScore01Status"
+        Me.tbxSel3CorrectScore01Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel3CorrectScore01Status.TabIndex = 50
+        Me.tbxSel3CorrectScore01Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3CorrectScore10Status
+        '
+        Me.tbxSel3CorrectScore10Status.Location = New System.Drawing.Point(423, 121)
+        Me.tbxSel3CorrectScore10Status.Name = "tbxSel3CorrectScore10Status"
+        Me.tbxSel3CorrectScore10Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel3CorrectScore10Status.TabIndex = 49
+        Me.tbxSel3CorrectScore10Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3CorrectScore00Status
+        '
+        Me.tbxSel3CorrectScore00Status.Location = New System.Drawing.Point(424, 95)
+        Me.tbxSel3CorrectScore00Status.Name = "tbxSel3CorrectScore00Status"
+        Me.tbxSel3CorrectScore00Status.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel3CorrectScore00Status.TabIndex = 48
+        Me.tbxSel3CorrectScore00Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Location = New System.Drawing.Point(420, 79)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(37, 13)
+        Me.Label59.TabIndex = 47
+        Me.Label59.Text = "Status"
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Location = New System.Drawing.Point(608, 94)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(35, 13)
+        Me.Label60.TabIndex = 46
+        Me.Label60.Text = "If Win"
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Location = New System.Drawing.Point(570, 94)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(32, 13)
+        Me.Label61.TabIndex = 44
+        Me.Label61.Text = "Back"
+        '
+        'tbxSel3CorrectScore01IfWin
+        '
+        Me.tbxSel3CorrectScore01IfWin.Location = New System.Drawing.Point(332, 145)
+        Me.tbxSel3CorrectScore01IfWin.Name = "tbxSel3CorrectScore01IfWin"
+        Me.tbxSel3CorrectScore01IfWin.Size = New System.Drawing.Size(41, 20)
+        Me.tbxSel3CorrectScore01IfWin.TabIndex = 42
+        Me.tbxSel3CorrectScore01IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3CorrectScore10IfWin
+        '
+        Me.tbxSel3CorrectScore10IfWin.Location = New System.Drawing.Point(332, 120)
+        Me.tbxSel3CorrectScore10IfWin.Name = "tbxSel3CorrectScore10IfWin"
+        Me.tbxSel3CorrectScore10IfWin.Size = New System.Drawing.Size(42, 20)
+        Me.tbxSel3CorrectScore10IfWin.TabIndex = 41
+        Me.tbxSel3CorrectScore10IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3Goal1
+        '
+        Me.tbxSel3Goal1.Location = New System.Drawing.Point(78, 72)
+        Me.tbxSel3Goal1.Name = "tbxSel3Goal1"
+        Me.tbxSel3Goal1.Size = New System.Drawing.Size(37, 20)
+        Me.tbxSel3Goal1.TabIndex = 40
+        Me.tbxSel3Goal1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'tbxSel3Score
+        '
+        Me.tbxSel3Score.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbxSel3Score.Location = New System.Drawing.Point(78, 45)
+        Me.tbxSel3Score.Name = "tbxSel3Score"
+        Me.tbxSel3Score.Size = New System.Drawing.Size(94, 20)
+        Me.tbxSel3Score.TabIndex = 39
+        Me.tbxSel3Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'tbxSel3CorrectScoreStatus
+        '
+        Me.tbxSel3CorrectScoreStatus.Location = New System.Drawing.Point(330, 49)
+        Me.tbxSel3CorrectScoreStatus.Name = "tbxSel3CorrectScoreStatus"
+        Me.tbxSel3CorrectScoreStatus.Size = New System.Drawing.Size(116, 20)
+        Me.tbxSel3CorrectScoreStatus.TabIndex = 36
+        Me.tbxSel3CorrectScoreStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Location = New System.Drawing.Point(14, 75)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(64, 13)
+        Me.Label62.TabIndex = 37
+        Me.Label62.Text = "Goals (mins)"
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.Location = New System.Drawing.Point(14, 48)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(35, 13)
+        Me.Label63.TabIndex = 36
+        Me.Label63.Text = "Score"
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Location = New System.Drawing.Point(225, 54)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(105, 13)
+        Me.Label64.TabIndex = 35
+        Me.Label64.Text = "Correct Score Status"
+        '
+        'tbxSel3IUnder15fWinProfit
+        '
+        Me.tbxSel3IUnder15fWinProfit.Location = New System.Drawing.Point(606, 110)
+        Me.tbxSel3IUnder15fWinProfit.Name = "tbxSel3IUnder15fWinProfit"
+        Me.tbxSel3IUnder15fWinProfit.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel3IUnder15fWinProfit.TabIndex = 33
+        Me.tbxSel3IUnder15fWinProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3IOver15fWinProfit
+        '
+        Me.tbxSel3IOver15fWinProfit.Location = New System.Drawing.Point(606, 133)
+        Me.tbxSel3IOver15fWinProfit.Name = "tbxSel3IOver15fWinProfit"
+        Me.tbxSel3IOver15fWinProfit.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel3IOver15fWinProfit.TabIndex = 32
+        Me.tbxSel3IOver15fWinProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel3CorrectScore00IfWin
+        '
+        Me.tbxSel3CorrectScore00IfWin.Location = New System.Drawing.Point(333, 94)
+        Me.tbxSel3CorrectScore00IfWin.Name = "tbxSel3CorrectScore00IfWin"
+        Me.tbxSel3CorrectScore00IfWin.Size = New System.Drawing.Size(41, 20)
+        Me.tbxSel3CorrectScore00IfWin.TabIndex = 30
+        Me.tbxSel3CorrectScore00IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Location = New System.Drawing.Point(335, 78)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(35, 13)
+        Me.Label65.TabIndex = 24
+        Me.Label65.Text = "If Win"
+        '
+        'tbxSel3CorrectScore01Odds
+        '
+        Me.tbxSel3CorrectScore01Odds.Location = New System.Drawing.Point(284, 146)
+        Me.tbxSel3CorrectScore01Odds.Name = "tbxSel3CorrectScore01Odds"
+        Me.tbxSel3CorrectScore01Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel3CorrectScore01Odds.TabIndex = 22
+        Me.tbxSel3CorrectScore01Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Location = New System.Drawing.Point(188, 149)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(90, 13)
+        Me.Label66.TabIndex = 21
+        Me.Label66.Text = "Correct Score 0-1"
+        '
+        'tbxSel3Under15Odds
+        '
+        Me.tbxSel3Under15Odds.Location = New System.Drawing.Point(566, 110)
+        Me.tbxSel3Under15Odds.Name = "tbxSel3Under15Odds"
+        Me.tbxSel3Under15Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel3Under15Odds.TabIndex = 20
+        Me.tbxSel3Under15Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label67
+        '
+        Me.Label67.AutoSize = True
+        Me.Label67.Location = New System.Drawing.Point(478, 117)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(82, 13)
+        Me.Label67.TabIndex = 19
+        Me.Label67.Text = "Under 1.5 Odds"
+        '
+        'tbxSel3Over15Odds
+        '
+        Me.tbxSel3Over15Odds.Location = New System.Drawing.Point(566, 133)
+        Me.tbxSel3Over15Odds.Name = "tbxSel3Over15Odds"
+        Me.tbxSel3Over15Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel3Over15Odds.TabIndex = 18
+        Me.tbxSel3Over15Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.Location = New System.Drawing.Point(484, 136)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(76, 13)
+        Me.Label68.TabIndex = 17
+        Me.Label68.Text = "Over 1.5 Odds"
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Location = New System.Drawing.Point(288, 79)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(32, 13)
+        Me.Label69.TabIndex = 16
+        Me.Label69.Text = "Back"
+        '
+        'tbxSel3CorrectScore10Odds
+        '
+        Me.tbxSel3CorrectScore10Odds.Location = New System.Drawing.Point(284, 120)
+        Me.tbxSel3CorrectScore10Odds.Name = "tbxSel3CorrectScore10Odds"
+        Me.tbxSel3CorrectScore10Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel3CorrectScore10Odds.TabIndex = 15
+        Me.tbxSel3CorrectScore10Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label70
+        '
+        Me.Label70.AutoSize = True
+        Me.Label70.Location = New System.Drawing.Point(188, 123)
+        Me.Label70.Name = "Label70"
+        Me.Label70.Size = New System.Drawing.Size(90, 13)
+        Me.Label70.TabIndex = 14
+        Me.Label70.Text = "Correct Score 1-0"
+        '
+        'tbxSel3CorrectScore00Odds
+        '
+        Me.tbxSel3CorrectScore00Odds.Location = New System.Drawing.Point(284, 95)
+        Me.tbxSel3CorrectScore00Odds.Name = "tbxSel3CorrectScore00Odds"
+        Me.tbxSel3CorrectScore00Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel3CorrectScore00Odds.TabIndex = 13
+        Me.tbxSel3CorrectScore00Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label71
+        '
+        Me.Label71.AutoSize = True
+        Me.Label71.Location = New System.Drawing.Point(188, 98)
+        Me.Label71.Name = "Label71"
+        Me.Label71.Size = New System.Drawing.Size(90, 13)
+        Me.Label71.TabIndex = 12
+        Me.Label71.Text = "Correct Score 0-0"
+        '
+        'grpSel4
+        '
+        Me.grpSel4.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.grpSel4.Controls.Add(Me.tbxSel4IOver15Orders)
+        Me.grpSel4.Controls.Add(Me.tbxSel4IUnder15Orders)
+        Me.grpSel4.Controls.Add(Me.Label72)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore01Orders)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore10Orders)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore00Orders)
+        Me.grpSel4.Controls.Add(Me.Label73)
+        Me.grpSel4.Controls.Add(Me.tbxSel4Goal2)
+        Me.grpSel4.Controls.Add(Me.Label74)
+        Me.grpSel4.Controls.Add(Me.tbxSel4RefreshLight)
+        Me.grpSel4.Controls.Add(Me.Label75)
+        Me.grpSel4.Controls.Add(Me.tbxSel4EventDateTime)
+        Me.grpSel4.Controls.Add(Me.Label76)
+        Me.grpSel4.Controls.Add(Me.tbxSel4InplayStatus)
+        Me.grpSel4.Controls.Add(Me.Label77)
+        Me.grpSel4.Controls.Add(Me.tbxSel4InplayTime)
+        Me.grpSel4.Controls.Add(Me.tbxSel4UnderOver15MarketStatus)
+        Me.grpSel4.Controls.Add(Me.Label78)
+        Me.grpSel4.Controls.Add(Me.tbxSel4IOver15Status)
+        Me.grpSel4.Controls.Add(Me.tbxSel4IUnder15Status)
+        Me.grpSel4.Controls.Add(Me.Label79)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore01Status)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore10Status)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore00Status)
+        Me.grpSel4.Controls.Add(Me.Label80)
+        Me.grpSel4.Controls.Add(Me.Label81)
+        Me.grpSel4.Controls.Add(Me.Label82)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore01IfWin)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore10IfWin)
+        Me.grpSel4.Controls.Add(Me.tbxSel4Goal1)
+        Me.grpSel4.Controls.Add(Me.tbxSel4Score)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScoreStatus)
+        Me.grpSel4.Controls.Add(Me.Label83)
+        Me.grpSel4.Controls.Add(Me.Label84)
+        Me.grpSel4.Controls.Add(Me.Label85)
+        Me.grpSel4.Controls.Add(Me.tbxSel4IUnder15fWinProfit)
+        Me.grpSel4.Controls.Add(Me.tbxSel4IOver15fWinProfit)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore00IfWin)
+        Me.grpSel4.Controls.Add(Me.Label86)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore01Odds)
+        Me.grpSel4.Controls.Add(Me.Label87)
+        Me.grpSel4.Controls.Add(Me.tbxSel4Under15Odds)
+        Me.grpSel4.Controls.Add(Me.Label88)
+        Me.grpSel4.Controls.Add(Me.tbxSel4Over15Odds)
+        Me.grpSel4.Controls.Add(Me.Label89)
+        Me.grpSel4.Controls.Add(Me.Label90)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore10Odds)
+        Me.grpSel4.Controls.Add(Me.Label91)
+        Me.grpSel4.Controls.Add(Me.tbxSel4CorrectScore00Odds)
+        Me.grpSel4.Controls.Add(Me.Label92)
+        Me.grpSel4.Location = New System.Drawing.Point(764, 555)
+        Me.grpSel4.Name = "grpSel4"
+        Me.grpSel4.Size = New System.Drawing.Size(734, 175)
+        Me.grpSel4.TabIndex = 14
+        Me.grpSel4.TabStop = False
+        Me.grpSel4.Text = "Selection 4"
+        '
+        'tbxSel4IOver15Orders
+        '
+        Me.tbxSel4IOver15Orders.Location = New System.Drawing.Point(650, 133)
+        Me.tbxSel4IOver15Orders.Name = "tbxSel4IOver15Orders"
+        Me.tbxSel4IOver15Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel4IOver15Orders.TabIndex = 78
+        Me.tbxSel4IOver15Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4IUnder15Orders
+        '
+        Me.tbxSel4IUnder15Orders.Location = New System.Drawing.Point(650, 110)
+        Me.tbxSel4IUnder15Orders.Name = "tbxSel4IUnder15Orders"
+        Me.tbxSel4IUnder15Orders.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel4IUnder15Orders.TabIndex = 77
+        Me.tbxSel4IUnder15Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label72
+        '
+        Me.Label72.AutoSize = True
+        Me.Label72.Location = New System.Drawing.Point(646, 94)
+        Me.Label72.Name = "Label72"
+        Me.Label72.Size = New System.Drawing.Size(38, 13)
+        Me.Label72.TabIndex = 76
+        Me.Label72.Text = "Orders"
+        '
+        'tbxSel4CorrectScore01Orders
+        '
+        Me.tbxSel4CorrectScore01Orders.Location = New System.Drawing.Point(379, 146)
+        Me.tbxSel4CorrectScore01Orders.Name = "tbxSel4CorrectScore01Orders"
+        Me.tbxSel4CorrectScore01Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel4CorrectScore01Orders.TabIndex = 75
+        Me.tbxSel4CorrectScore01Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4CorrectScore10Orders
+        '
+        Me.tbxSel4CorrectScore10Orders.Location = New System.Drawing.Point(379, 121)
+        Me.tbxSel4CorrectScore10Orders.Name = "tbxSel4CorrectScore10Orders"
+        Me.tbxSel4CorrectScore10Orders.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel4CorrectScore10Orders.TabIndex = 74
+        Me.tbxSel4CorrectScore10Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4CorrectScore00Orders
+        '
+        Me.tbxSel4CorrectScore00Orders.Location = New System.Drawing.Point(380, 95)
+        Me.tbxSel4CorrectScore00Orders.Name = "tbxSel4CorrectScore00Orders"
+        Me.tbxSel4CorrectScore00Orders.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel4CorrectScore00Orders.TabIndex = 73
+        Me.tbxSel4CorrectScore00Orders.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label73
+        '
+        Me.Label73.AutoSize = True
+        Me.Label73.Location = New System.Drawing.Point(376, 79)
+        Me.Label73.Name = "Label73"
+        Me.Label73.Size = New System.Drawing.Size(38, 13)
+        Me.Label73.TabIndex = 72
+        Me.Label73.Text = "Orders"
+        '
+        'tbxSel4Goal2
+        '
+        Me.tbxSel4Goal2.Location = New System.Drawing.Point(132, 72)
+        Me.tbxSel4Goal2.Name = "tbxSel4Goal2"
+        Me.tbxSel4Goal2.Size = New System.Drawing.Size(40, 20)
+        Me.tbxSel4Goal2.TabIndex = 71
+        Me.tbxSel4Goal2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label74
+        '
+        Me.Label74.AutoSize = True
+        Me.Label74.Location = New System.Drawing.Point(108, 22)
+        Me.Label74.Name = "Label74"
+        Me.Label74.Size = New System.Drawing.Size(89, 13)
+        Me.Label74.TabIndex = 63
+        Me.Label74.Text = "Event Date/Time"
+        '
+        'tbxSel4RefreshLight
+        '
+        Me.tbxSel4RefreshLight.BackColor = System.Drawing.Color.White
+        Me.tbxSel4RefreshLight.Location = New System.Drawing.Point(94, 147)
+        Me.tbxSel4RefreshLight.Name = "tbxSel4RefreshLight"
+        Me.tbxSel4RefreshLight.Size = New System.Drawing.Size(66, 20)
+        Me.tbxSel4RefreshLight.TabIndex = 62
+        Me.tbxSel4RefreshLight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label75
+        '
+        Me.Label75.AutoSize = True
+        Me.Label75.Location = New System.Drawing.Point(9, 150)
+        Me.Label75.Name = "Label75"
+        Me.Label75.Size = New System.Drawing.Size(82, 13)
+        Me.Label75.TabIndex = 61
+        Me.Label75.Text = "Refreshed Data"
+        '
+        'tbxSel4EventDateTime
+        '
+        Me.tbxSel4EventDateTime.Location = New System.Drawing.Point(201, 19)
+        Me.tbxSel4EventDateTime.Name = "tbxSel4EventDateTime"
+        Me.tbxSel4EventDateTime.Size = New System.Drawing.Size(119, 20)
+        Me.tbxSel4EventDateTime.TabIndex = 59
+        '
+        'Label76
+        '
+        Me.Label76.AutoSize = True
+        Me.Label76.Location = New System.Drawing.Point(327, 22)
+        Me.Label76.Name = "Label76"
+        Me.Label76.Size = New System.Drawing.Size(65, 13)
+        Me.Label76.TabIndex = 64
+        Me.Label76.Text = "Inplay (mins)"
+        '
+        'tbxSel4InplayStatus
+        '
+        Me.tbxSel4InplayStatus.Location = New System.Drawing.Point(78, 19)
+        Me.tbxSel4InplayStatus.Name = "tbxSel4InplayStatus"
+        Me.tbxSel4InplayStatus.Size = New System.Drawing.Size(20, 20)
+        Me.tbxSel4InplayStatus.TabIndex = 57
+        '
+        'Label77
+        '
+        Me.Label77.AutoSize = True
+        Me.Label77.Location = New System.Drawing.Point(44, 22)
+        Me.Label77.Name = "Label77"
+        Me.Label77.Size = New System.Drawing.Size(38, 13)
+        Me.Label77.TabIndex = 56
+        Me.Label77.Text = "Inplay "
+        '
+        'tbxSel4InplayTime
+        '
+        Me.tbxSel4InplayTime.Location = New System.Drawing.Point(398, 19)
+        Me.tbxSel4InplayTime.Name = "tbxSel4InplayTime"
+        Me.tbxSel4InplayTime.Size = New System.Drawing.Size(71, 20)
+        Me.tbxSel4InplayTime.TabIndex = 60
+        Me.tbxSel4InplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4UnderOver15MarketStatus
+        '
+        Me.tbxSel4UnderOver15MarketStatus.Location = New System.Drawing.Point(573, 49)
+        Me.tbxSel4UnderOver15MarketStatus.Name = "tbxSel4UnderOver15MarketStatus"
+        Me.tbxSel4UnderOver15MarketStatus.Size = New System.Drawing.Size(119, 20)
+        Me.tbxSel4UnderOver15MarketStatus.TabIndex = 55
+        Me.tbxSel4UnderOver15MarketStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label78
+        '
+        Me.Label78.AutoSize = True
+        Me.Label78.Location = New System.Drawing.Point(452, 52)
+        Me.Label78.Name = "Label78"
+        Me.Label78.Size = New System.Drawing.Size(115, 13)
+        Me.Label78.TabIndex = 54
+        Me.Label78.Text = "Under/Over 1.5 Status"
+        '
+        'tbxSel4IOver15Status
+        '
+        Me.tbxSel4IOver15Status.Location = New System.Drawing.Point(694, 133)
+        Me.tbxSel4IOver15Status.Name = "tbxSel4IOver15Status"
+        Me.tbxSel4IOver15Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel4IOver15Status.TabIndex = 53
+        Me.tbxSel4IOver15Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4IUnder15Status
+        '
+        Me.tbxSel4IUnder15Status.Location = New System.Drawing.Point(694, 110)
+        Me.tbxSel4IUnder15Status.Name = "tbxSel4IUnder15Status"
+        Me.tbxSel4IUnder15Status.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel4IUnder15Status.TabIndex = 52
+        Me.tbxSel4IUnder15Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label79
+        '
+        Me.Label79.AutoSize = True
+        Me.Label79.Location = New System.Drawing.Point(690, 94)
+        Me.Label79.Name = "Label79"
+        Me.Label79.Size = New System.Drawing.Size(37, 13)
+        Me.Label79.TabIndex = 51
+        Me.Label79.Text = "Status"
+        '
+        'tbxSel4CorrectScore01Status
+        '
+        Me.tbxSel4CorrectScore01Status.Location = New System.Drawing.Point(423, 147)
+        Me.tbxSel4CorrectScore01Status.Name = "tbxSel4CorrectScore01Status"
+        Me.tbxSel4CorrectScore01Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel4CorrectScore01Status.TabIndex = 50
+        Me.tbxSel4CorrectScore01Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4CorrectScore10Status
+        '
+        Me.tbxSel4CorrectScore10Status.Location = New System.Drawing.Point(423, 121)
+        Me.tbxSel4CorrectScore10Status.Name = "tbxSel4CorrectScore10Status"
+        Me.tbxSel4CorrectScore10Status.Size = New System.Drawing.Size(26, 20)
+        Me.tbxSel4CorrectScore10Status.TabIndex = 49
+        Me.tbxSel4CorrectScore10Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4CorrectScore00Status
+        '
+        Me.tbxSel4CorrectScore00Status.Location = New System.Drawing.Point(424, 95)
+        Me.tbxSel4CorrectScore00Status.Name = "tbxSel4CorrectScore00Status"
+        Me.tbxSel4CorrectScore00Status.Size = New System.Drawing.Size(25, 20)
+        Me.tbxSel4CorrectScore00Status.TabIndex = 48
+        Me.tbxSel4CorrectScore00Status.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label80
+        '
+        Me.Label80.AutoSize = True
+        Me.Label80.Location = New System.Drawing.Point(420, 79)
+        Me.Label80.Name = "Label80"
+        Me.Label80.Size = New System.Drawing.Size(37, 13)
+        Me.Label80.TabIndex = 47
+        Me.Label80.Text = "Status"
+        '
+        'Label81
+        '
+        Me.Label81.AutoSize = True
+        Me.Label81.Location = New System.Drawing.Point(608, 94)
+        Me.Label81.Name = "Label81"
+        Me.Label81.Size = New System.Drawing.Size(35, 13)
+        Me.Label81.TabIndex = 46
+        Me.Label81.Text = "If Win"
+        '
+        'Label82
+        '
+        Me.Label82.AutoSize = True
+        Me.Label82.Location = New System.Drawing.Point(570, 94)
+        Me.Label82.Name = "Label82"
+        Me.Label82.Size = New System.Drawing.Size(32, 13)
+        Me.Label82.TabIndex = 44
+        Me.Label82.Text = "Back"
+        '
+        'tbxSel4CorrectScore01IfWin
+        '
+        Me.tbxSel4CorrectScore01IfWin.Location = New System.Drawing.Point(332, 145)
+        Me.tbxSel4CorrectScore01IfWin.Name = "tbxSel4CorrectScore01IfWin"
+        Me.tbxSel4CorrectScore01IfWin.Size = New System.Drawing.Size(41, 20)
+        Me.tbxSel4CorrectScore01IfWin.TabIndex = 42
+        Me.tbxSel4CorrectScore01IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4CorrectScore10IfWin
+        '
+        Me.tbxSel4CorrectScore10IfWin.Location = New System.Drawing.Point(332, 120)
+        Me.tbxSel4CorrectScore10IfWin.Name = "tbxSel4CorrectScore10IfWin"
+        Me.tbxSel4CorrectScore10IfWin.Size = New System.Drawing.Size(42, 20)
+        Me.tbxSel4CorrectScore10IfWin.TabIndex = 41
+        Me.tbxSel4CorrectScore10IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4Goal1
+        '
+        Me.tbxSel4Goal1.Location = New System.Drawing.Point(78, 72)
+        Me.tbxSel4Goal1.Name = "tbxSel4Goal1"
+        Me.tbxSel4Goal1.Size = New System.Drawing.Size(37, 20)
+        Me.tbxSel4Goal1.TabIndex = 40
+        Me.tbxSel4Goal1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'tbxSel4Score
+        '
+        Me.tbxSel4Score.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbxSel4Score.Location = New System.Drawing.Point(78, 45)
+        Me.tbxSel4Score.Name = "tbxSel4Score"
+        Me.tbxSel4Score.Size = New System.Drawing.Size(94, 20)
+        Me.tbxSel4Score.TabIndex = 39
+        Me.tbxSel4Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'tbxSel4CorrectScoreStatus
+        '
+        Me.tbxSel4CorrectScoreStatus.Location = New System.Drawing.Point(330, 49)
+        Me.tbxSel4CorrectScoreStatus.Name = "tbxSel4CorrectScoreStatus"
+        Me.tbxSel4CorrectScoreStatus.Size = New System.Drawing.Size(116, 20)
+        Me.tbxSel4CorrectScoreStatus.TabIndex = 36
+        Me.tbxSel4CorrectScoreStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label83
+        '
+        Me.Label83.AutoSize = True
+        Me.Label83.Location = New System.Drawing.Point(14, 75)
+        Me.Label83.Name = "Label83"
+        Me.Label83.Size = New System.Drawing.Size(64, 13)
+        Me.Label83.TabIndex = 37
+        Me.Label83.Text = "Goals (mins)"
+        '
+        'Label84
+        '
+        Me.Label84.AutoSize = True
+        Me.Label84.Location = New System.Drawing.Point(14, 48)
+        Me.Label84.Name = "Label84"
+        Me.Label84.Size = New System.Drawing.Size(35, 13)
+        Me.Label84.TabIndex = 36
+        Me.Label84.Text = "Score"
+        '
+        'Label85
+        '
+        Me.Label85.AutoSize = True
+        Me.Label85.Location = New System.Drawing.Point(225, 54)
+        Me.Label85.Name = "Label85"
+        Me.Label85.Size = New System.Drawing.Size(105, 13)
+        Me.Label85.TabIndex = 35
+        Me.Label85.Text = "Correct Score Status"
+        '
+        'tbxSel4IUnder15fWinProfit
+        '
+        Me.tbxSel4IUnder15fWinProfit.Location = New System.Drawing.Point(606, 110)
+        Me.tbxSel4IUnder15fWinProfit.Name = "tbxSel4IUnder15fWinProfit"
+        Me.tbxSel4IUnder15fWinProfit.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel4IUnder15fWinProfit.TabIndex = 33
+        Me.tbxSel4IUnder15fWinProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4IOver15fWinProfit
+        '
+        Me.tbxSel4IOver15fWinProfit.Location = New System.Drawing.Point(606, 133)
+        Me.tbxSel4IOver15fWinProfit.Name = "tbxSel4IOver15fWinProfit"
+        Me.tbxSel4IOver15fWinProfit.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel4IOver15fWinProfit.TabIndex = 32
+        Me.tbxSel4IOver15fWinProfit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tbxSel4CorrectScore00IfWin
+        '
+        Me.tbxSel4CorrectScore00IfWin.Location = New System.Drawing.Point(333, 94)
+        Me.tbxSel4CorrectScore00IfWin.Name = "tbxSel4CorrectScore00IfWin"
+        Me.tbxSel4CorrectScore00IfWin.Size = New System.Drawing.Size(41, 20)
+        Me.tbxSel4CorrectScore00IfWin.TabIndex = 30
+        Me.tbxSel4CorrectScore00IfWin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label86
+        '
+        Me.Label86.AutoSize = True
+        Me.Label86.Location = New System.Drawing.Point(335, 78)
+        Me.Label86.Name = "Label86"
+        Me.Label86.Size = New System.Drawing.Size(35, 13)
+        Me.Label86.TabIndex = 24
+        Me.Label86.Text = "If Win"
+        '
+        'tbxSel4CorrectScore01Odds
+        '
+        Me.tbxSel4CorrectScore01Odds.Location = New System.Drawing.Point(284, 146)
+        Me.tbxSel4CorrectScore01Odds.Name = "tbxSel4CorrectScore01Odds"
+        Me.tbxSel4CorrectScore01Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel4CorrectScore01Odds.TabIndex = 22
+        Me.tbxSel4CorrectScore01Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label87
+        '
+        Me.Label87.AutoSize = True
+        Me.Label87.Location = New System.Drawing.Point(188, 149)
+        Me.Label87.Name = "Label87"
+        Me.Label87.Size = New System.Drawing.Size(90, 13)
+        Me.Label87.TabIndex = 21
+        Me.Label87.Text = "Correct Score 0-1"
+        '
+        'tbxSel4Under15Odds
+        '
+        Me.tbxSel4Under15Odds.Location = New System.Drawing.Point(566, 110)
+        Me.tbxSel4Under15Odds.Name = "tbxSel4Under15Odds"
+        Me.tbxSel4Under15Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel4Under15Odds.TabIndex = 20
+        Me.tbxSel4Under15Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label88
+        '
+        Me.Label88.AutoSize = True
+        Me.Label88.Location = New System.Drawing.Point(478, 117)
+        Me.Label88.Name = "Label88"
+        Me.Label88.Size = New System.Drawing.Size(82, 13)
+        Me.Label88.TabIndex = 19
+        Me.Label88.Text = "Under 1.5 Odds"
+        '
+        'tbxSel4Over15Odds
+        '
+        Me.tbxSel4Over15Odds.Location = New System.Drawing.Point(566, 133)
+        Me.tbxSel4Over15Odds.Name = "tbxSel4Over15Odds"
+        Me.tbxSel4Over15Odds.Size = New System.Drawing.Size(36, 20)
+        Me.tbxSel4Over15Odds.TabIndex = 18
+        Me.tbxSel4Over15Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label89
+        '
+        Me.Label89.AutoSize = True
+        Me.Label89.Location = New System.Drawing.Point(484, 136)
+        Me.Label89.Name = "Label89"
+        Me.Label89.Size = New System.Drawing.Size(76, 13)
+        Me.Label89.TabIndex = 17
+        Me.Label89.Text = "Over 1.5 Odds"
+        '
+        'Label90
+        '
+        Me.Label90.AutoSize = True
+        Me.Label90.Location = New System.Drawing.Point(288, 79)
+        Me.Label90.Name = "Label90"
+        Me.Label90.Size = New System.Drawing.Size(32, 13)
+        Me.Label90.TabIndex = 16
+        Me.Label90.Text = "Back"
+        '
+        'tbxSel4CorrectScore10Odds
+        '
+        Me.tbxSel4CorrectScore10Odds.Location = New System.Drawing.Point(284, 120)
+        Me.tbxSel4CorrectScore10Odds.Name = "tbxSel4CorrectScore10Odds"
+        Me.tbxSel4CorrectScore10Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel4CorrectScore10Odds.TabIndex = 15
+        Me.tbxSel4CorrectScore10Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label91
+        '
+        Me.Label91.AutoSize = True
+        Me.Label91.Location = New System.Drawing.Point(188, 123)
+        Me.Label91.Name = "Label91"
+        Me.Label91.Size = New System.Drawing.Size(90, 13)
+        Me.Label91.TabIndex = 14
+        Me.Label91.Text = "Correct Score 1-0"
+        '
+        'tbxSel4CorrectScore00Odds
+        '
+        Me.tbxSel4CorrectScore00Odds.Location = New System.Drawing.Point(284, 95)
+        Me.tbxSel4CorrectScore00Odds.Name = "tbxSel4CorrectScore00Odds"
+        Me.tbxSel4CorrectScore00Odds.Size = New System.Drawing.Size(43, 20)
+        Me.tbxSel4CorrectScore00Odds.TabIndex = 13
+        Me.tbxSel4CorrectScore00Odds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label92
+        '
+        Me.Label92.AutoSize = True
+        Me.Label92.Location = New System.Drawing.Point(188, 98)
+        Me.Label92.Name = "Label92"
+        Me.Label92.Size = New System.Drawing.Size(90, 13)
+        Me.Label92.TabIndex = 12
+        Me.Label92.Text = "Correct Score 0-0"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1510, 817)
+        Me.ClientSize = New System.Drawing.Size(1510, 875)
         Me.ControlBox = False
+        Me.Controls.Add(Me.grpSel4)
+        Me.Controls.Add(Me.grpSel3)
+        Me.Controls.Add(Me.grpSel2)
         Me.Controls.Add(Me.dgvEvents)
-        Me.Controls.Add(Me.cbxInplayOnly)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.grpSel1)
         Me.Controls.Add(Me.grpSelections)
@@ -1162,6 +2779,12 @@ Partial Class frmMain
         Me.grpSel1.PerformLayout()
         CType(Me.dgvEvents, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpSel2.ResumeLayout(False)
+        Me.grpSel2.PerformLayout()
+        Me.grpSel3.ResumeLayout(False)
+        Me.grpSel3.PerformLayout()
+        Me.grpSel4.ResumeLayout(False)
+        Me.grpSel4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1206,7 +2829,7 @@ Partial Class frmMain
     Friend WithEvents Label18 As Label
     Friend WithEvents tbxSel1CorrectScore01IfWin As TextBox
     Friend WithEvents tbxSel1CorrectScore10IfWin As TextBox
-    Friend WithEvents tbxSel1LastGoal As TextBox
+    Friend WithEvents tbxSel1Goal1 As TextBox
     Friend WithEvents tbxSel1Score As TextBox
     Friend WithEvents btnExit As Button
     Friend WithEvents tbxSel1IOver15Status As TextBox
@@ -1244,7 +2867,6 @@ Partial Class frmMain
     Friend WithEvents Button8 As Button
     Friend WithEvents Button9 As Button
     Friend WithEvents btnSel2 As Button
-    Friend WithEvents cbxInplayOnly As CheckBox
     Friend WithEvents dgvEvents As DataGridView
     Friend WithEvents BeffairEventClassBindingSource As BindingSource
     Friend WithEvents EventTypeIdDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
@@ -1253,7 +2875,7 @@ Partial Class frmMain
     Friend WithEvents CountryCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents TimezoneDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents OpenDateDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents tbxSel1InplayStatus As TextBox
     Friend WithEvents Label43 As Label
     Friend WithEvents tbxSel1InplayTime As TextBox
     Friend WithEvents tbxSel1EventDateTime As TextBox
@@ -1261,10 +2883,165 @@ Partial Class frmMain
     Friend WithEvents Label24 As Label
     Friend WithEvents tbxSel1RefreshLight As TextBox
     Friend WithEvents Label23 As Label
-    Friend WithEvents tbxSel1UnmatchedCorrectScore As TextBox
-    Friend WithEvents Label27 As Label
-    Friend WithEvents tbxSel1UnmatchedUnderOver15 As TextBox
+    Friend WithEvents tbxSel1Goal2 As TextBox
+    Friend WithEvents tbxSel1IOver15Orders As TextBox
+    Friend WithEvents tbxSel1IUnder15Orders As TextBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents tbxSel1CorrectScore01Orders As TextBox
+    Friend WithEvents tbxSel1CorrectScore10Orders As TextBox
+    Friend WithEvents tbxSel1CorrectScore00Orders As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents grpSel2 As GroupBox
+    Friend WithEvents tbxSel2IOver15Orders As TextBox
+    Friend WithEvents tbxSel2IUnder15Orders As TextBox
     Friend WithEvents Label26 As Label
+    Friend WithEvents tbxSel2CorrectScore01Orders As TextBox
+    Friend WithEvents tbxSel2CorrectScore10Orders As TextBox
+    Friend WithEvents tbxSel2CorrectScore00Orders As TextBox
+    Friend WithEvents Label27 As Label
+    Friend WithEvents tbxSel2Goal2 As TextBox
     Friend WithEvents Label28 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents tbxSel2RefreshLight As TextBox
+    Friend WithEvents Label29 As Label
+    Friend WithEvents tbxSel2EventDateTime As TextBox
+    Friend WithEvents Label30 As Label
+    Friend WithEvents tbxSel2InplayStatus As TextBox
+    Friend WithEvents Label31 As Label
+    Friend WithEvents tbxSel2InplayTime As TextBox
+    Friend WithEvents tbxSel2UnderOver15MarketStatus As TextBox
+    Friend WithEvents Label32 As Label
+    Friend WithEvents tbxSel2IOver15Status As TextBox
+    Friend WithEvents tbxSel2IUnder15Status As TextBox
+    Friend WithEvents Label33 As Label
+    Friend WithEvents tbxSel2CorrectScore01Status As TextBox
+    Friend WithEvents tbxSel2CorrectScore10Status As TextBox
+    Friend WithEvents tbxSel2CorrectScore00Status As TextBox
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label35 As Label
+    Friend WithEvents Label36 As Label
+    Friend WithEvents tbxSel2CorrectScore01IfWin As TextBox
+    Friend WithEvents tbxSel2CorrectScore10IfWin As TextBox
+    Friend WithEvents tbxSel2Goal1 As TextBox
+    Friend WithEvents tbxSel2Score As TextBox
+    Friend WithEvents tbxSel2CorrectScoreStatus As TextBox
+    Friend WithEvents Label37 As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents Label39 As Label
+    Friend WithEvents tbxSel2IUnder15fWinProfit As TextBox
+    Friend WithEvents tbxSel2IOver15fWinProfit As TextBox
+    Friend WithEvents tbxSel2CorrectScore00IfWin As TextBox
+    Friend WithEvents Label44 As Label
+    Friend WithEvents tbxSel2CorrectScore01Odds As TextBox
+    Friend WithEvents Label45 As Label
+    Friend WithEvents tbxSel2Under15Odds As TextBox
+    Friend WithEvents Label46 As Label
+    Friend WithEvents tbxSel2Over15Odds As TextBox
+    Friend WithEvents Label47 As Label
+    Friend WithEvents Label48 As Label
+    Friend WithEvents tbxSel2CorrectScore10Odds As TextBox
+    Friend WithEvents Label49 As Label
+    Friend WithEvents tbxSel2CorrectScore00Odds As TextBox
+    Friend WithEvents Label50 As Label
+    Friend WithEvents grpSel3 As GroupBox
+    Friend WithEvents tbxSel3IOver15Orders As TextBox
+    Friend WithEvents tbxSel3IUnder15Orders As TextBox
+    Friend WithEvents Label51 As Label
+    Friend WithEvents tbxSel3CorrectScore01Orders As TextBox
+    Friend WithEvents tbxSel3CorrectScore10Orders As TextBox
+    Friend WithEvents tbxSel3CorrectScore00Orders As TextBox
+    Friend WithEvents Label52 As Label
+    Friend WithEvents tbxSel3Goal2 As TextBox
+    Friend WithEvents Label53 As Label
+    Friend WithEvents tbxSel3RefreshLight As TextBox
+    Friend WithEvents Label54 As Label
+    Friend WithEvents tbxSel3EventDateTime As TextBox
+    Friend WithEvents Label55 As Label
+    Friend WithEvents tbxSel3InplayStatus As TextBox
+    Friend WithEvents Label56 As Label
+    Friend WithEvents tbxSel3InplayTime As TextBox
+    Friend WithEvents tbxSel3UnderOver15MarketStatus As TextBox
+    Friend WithEvents Label57 As Label
+    Friend WithEvents tbxSel3IOver15Status As TextBox
+    Friend WithEvents tbxSel3IUnder15Status As TextBox
+    Friend WithEvents Label58 As Label
+    Friend WithEvents tbxSel3CorrectScore01Status As TextBox
+    Friend WithEvents tbxSel3CorrectScore10Status As TextBox
+    Friend WithEvents tbxSel3CorrectScore00Status As TextBox
+    Friend WithEvents Label59 As Label
+    Friend WithEvents Label60 As Label
+    Friend WithEvents Label61 As Label
+    Friend WithEvents tbxSel3CorrectScore01IfWin As TextBox
+    Friend WithEvents tbxSel3CorrectScore10IfWin As TextBox
+    Friend WithEvents tbxSel3Goal1 As TextBox
+    Friend WithEvents tbxSel3Score As TextBox
+    Friend WithEvents tbxSel3CorrectScoreStatus As TextBox
+    Friend WithEvents Label62 As Label
+    Friend WithEvents Label63 As Label
+    Friend WithEvents Label64 As Label
+    Friend WithEvents tbxSel3IUnder15fWinProfit As TextBox
+    Friend WithEvents tbxSel3IOver15fWinProfit As TextBox
+    Friend WithEvents tbxSel3CorrectScore00IfWin As TextBox
+    Friend WithEvents Label65 As Label
+    Friend WithEvents tbxSel3CorrectScore01Odds As TextBox
+    Friend WithEvents Label66 As Label
+    Friend WithEvents tbxSel3Under15Odds As TextBox
+    Friend WithEvents Label67 As Label
+    Friend WithEvents tbxSel3Over15Odds As TextBox
+    Friend WithEvents Label68 As Label
+    Friend WithEvents Label69 As Label
+    Friend WithEvents tbxSel3CorrectScore10Odds As TextBox
+    Friend WithEvents Label70 As Label
+    Friend WithEvents tbxSel3CorrectScore00Odds As TextBox
+    Friend WithEvents Label71 As Label
+    Friend WithEvents grpSel4 As GroupBox
+    Friend WithEvents tbxSel4IOver15Orders As TextBox
+    Friend WithEvents tbxSel4IUnder15Orders As TextBox
+    Friend WithEvents Label72 As Label
+    Friend WithEvents tbxSel4CorrectScore01Orders As TextBox
+    Friend WithEvents tbxSel4CorrectScore10Orders As TextBox
+    Friend WithEvents tbxSel4CorrectScore00Orders As TextBox
+    Friend WithEvents Label73 As Label
+    Friend WithEvents tbxSel4Goal2 As TextBox
+    Friend WithEvents Label74 As Label
+    Friend WithEvents tbxSel4RefreshLight As TextBox
+    Friend WithEvents Label75 As Label
+    Friend WithEvents tbxSel4EventDateTime As TextBox
+    Friend WithEvents Label76 As Label
+    Friend WithEvents tbxSel4InplayStatus As TextBox
+    Friend WithEvents Label77 As Label
+    Friend WithEvents tbxSel4InplayTime As TextBox
+    Friend WithEvents tbxSel4UnderOver15MarketStatus As TextBox
+    Friend WithEvents Label78 As Label
+    Friend WithEvents tbxSel4IOver15Status As TextBox
+    Friend WithEvents tbxSel4IUnder15Status As TextBox
+    Friend WithEvents Label79 As Label
+    Friend WithEvents tbxSel4CorrectScore01Status As TextBox
+    Friend WithEvents tbxSel4CorrectScore10Status As TextBox
+    Friend WithEvents tbxSel4CorrectScore00Status As TextBox
+    Friend WithEvents Label80 As Label
+    Friend WithEvents Label81 As Label
+    Friend WithEvents Label82 As Label
+    Friend WithEvents tbxSel4CorrectScore01IfWin As TextBox
+    Friend WithEvents tbxSel4CorrectScore10IfWin As TextBox
+    Friend WithEvents tbxSel4Goal1 As TextBox
+    Friend WithEvents tbxSel4Score As TextBox
+    Friend WithEvents tbxSel4CorrectScoreStatus As TextBox
+    Friend WithEvents Label83 As Label
+    Friend WithEvents Label84 As Label
+    Friend WithEvents Label85 As Label
+    Friend WithEvents tbxSel4IUnder15fWinProfit As TextBox
+    Friend WithEvents tbxSel4IOver15fWinProfit As TextBox
+    Friend WithEvents tbxSel4CorrectScore00IfWin As TextBox
+    Friend WithEvents Label86 As Label
+    Friend WithEvents tbxSel4CorrectScore01Odds As TextBox
+    Friend WithEvents Label87 As Label
+    Friend WithEvents tbxSel4Under15Odds As TextBox
+    Friend WithEvents Label88 As Label
+    Friend WithEvents tbxSel4Over15Odds As TextBox
+    Friend WithEvents Label89 As Label
+    Friend WithEvents Label90 As Label
+    Friend WithEvents tbxSel4CorrectScore10Odds As TextBox
+    Friend WithEvents Label91 As Label
+    Friend WithEvents tbxSel4CorrectScore00Odds As TextBox
+    Friend WithEvents Label92 As Label
 End Class

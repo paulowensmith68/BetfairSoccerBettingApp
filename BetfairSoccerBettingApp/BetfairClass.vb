@@ -29,7 +29,7 @@ Public Class BetfairClass
 
             'ListMarketCatalogue parameters
             Dim time = New TimeRange()
-            time.From = Date.Now()
+            time.From = Date.Now.AddHours(-2)
             time.To = Date.Now.AddDays(globalBetFairDaysAhead)
 
             marketFilter = New MarketFilter()
@@ -40,9 +40,7 @@ Public Class BetfairClass
             marketFilter.MarketCountries = marketCountries
 
             ' Set InPlayOnly : Restrict to markets that are currently in play if True or are not currently in play if false. If not specified, returns both.
-            If inplay = True Then
-                marketFilter.InPlayOnly = True
-            End If
+            'marketFilter.InPlayOnly = True
 
 
             Dim events = client.listEvents(marketFilter)
@@ -76,6 +74,9 @@ Public Class BetfairClass
 
             Next ' End of events
 
+            ' Sort list
+            eventList = eventList.OrderBy(Function(x) x.openDate).ToList()
+
         Catch apiExcepion As APINGException
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
             Exit Sub
@@ -89,7 +90,7 @@ Public Class BetfairClass
 
     End Sub
 
-    Public Sub PollBetFairUnderOver15Market(ByRef selection As Selection, eventTypeId As Integer, eventId As String, maxResults As String)
+    Public Sub PollBetFairInitialMarketDetails(ByRef selection As Selection, eventTypeId As Integer, eventId As String, maxResults As String)
 
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
@@ -154,39 +155,19 @@ Public Class BetfairClass
 
                             If book.Runners(i).RunnerName = "Over 1.5 Goals" Then
                                 selection.betfairUnderOver15MarketId = backBet.MarketId
-                                selection.betfairUnderOver15MarketStatus = convertMarketStatus(backBet.Status)
-                                selection.betfairEventInplay = backBet.IsInplay
-                                selection.betfairOver15BackOdds = backBet.Runners(i).ExchangePrices.AvailableToBack(0).Price
                                 selection.betfairOver15SelectionId = book.Runners(i).SelectionId
-                                selection.betfairOver15SelectionStatus = convertRunnerStatus(backBet.Runners(i).Status)
                             ElseIf book.Runners(i).RunnerName = "Under 1.5 Goals" Then
                                 selection.betfairUnderOver15MarketId = backBet.MarketId
-                                selection.betfairUnderOver15MarketStatus = convertMarketStatus(backBet.Status)
-                                selection.betfairEventInplay = backBet.IsInplay
-                                selection.betfairUnder15BackOdds = backBet.Runners(i).ExchangePrices.AvailableToBack(0).Price
                                 selection.betfairUnder15SelectionId = book.Runners(i).SelectionId
-                                selection.betfairUnder15SelectionStatus = convertRunnerStatus(backBet.Runners(i).Status)
                             ElseIf book.Runners(i).RunnerName = "0 - 0" Then
                                 selection.betfairCorrectScoreMarketId = backBet.MarketId
-                                selection.betfairCorrectScoreMarketStatus = convertMarketStatus(backBet.Status)
-                                selection.betfairEventInplay = backBet.IsInplay
-                                selection.betfairCorrectScore00BackOdds = backBet.Runners(i).ExchangePrices.AvailableToBack(0).Price
                                 selection.betfairCorrectScore00SelectionId = book.Runners(i).SelectionId
-                                selection.betfairCorrectScore00SelectionStatus = convertRunnerStatus(backBet.Runners(i).Status)
                             ElseIf book.Runners(i).RunnerName = "1 - 0" Then
                                 selection.betfairCorrectScoreMarketId = backBet.MarketId
-                                selection.betfairCorrectScoreMarketStatus = convertMarketStatus(backBet.Status)
-                                selection.betfairEventInplay = backBet.IsInplay
-                                selection.betfairCorrectScore10BackOdds = backBet.Runners(i).ExchangePrices.AvailableToBack(0).Price
                                 selection.betfairCorrectScore10SelectionId = book.Runners(i).SelectionId
-                                selection.betfairCorrectScore10SelectionStatus = convertRunnerStatus(backBet.Runners(i).Status)
                             ElseIf book.Runners(i).RunnerName = "0 - 1" Then
                                 selection.betfairCorrectScoreMarketId = backBet.MarketId
-                                selection.betfairCorrectScoreMarketStatus = convertMarketStatus(backBet.Status)
-                                selection.betfairEventInplay = backBet.IsInplay
-                                selection.betfairCorrectScore01BackOdds = backBet.Runners(i).ExchangePrices.AvailableToBack(0).Price
                                 selection.betfairCorrectScore01SelectionId = book.Runners(i).SelectionId
-                                selection.betfairCorrectScore01SelectionStatus = convertRunnerStatus(backBet.Runners(i).Status)
                             End If
 
                         Next ' End of runners
@@ -195,41 +176,65 @@ Public Class BetfairClass
 
                 Next ' End of backBet
 
-
-                Dim marketProfitLoss = client.listMarketProfitAndLoss(marketIdsBook)
-
-                ' Look through the market books, there should only be 1
-                For Each profitLoss In marketProfitLoss
-
-                    If marketProfitLoss.Count = 1 Then
-
-                        For i = 0 To profitLoss.ProfitAndLosses.Count - 1
-
-                            If profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairOver15SelectionId Then
-                                selection.betfairOver15IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
-
-                            ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairUnder15SelectionId Then
-                                selection.betfairUnder15IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
-
-                            ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
-                                selection.betfairCorrectScore00IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
-
-                            ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
-                                selection.betfairCorrectScore10IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
-
-                            ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore01SelectionId Then
-                                selection.betfairCorrectScore01IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
-
-                            End If
-
-
-                        Next ' End of runners
-
-                    End If
-
-                Next ' End of layBet
-
             Next
+
+        Catch apiExcepion As APINGException
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
+            Exit Sub
+        Catch ex As System.Exception
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
+            Exit Sub
+
+        Finally
+
+        End Try
+
+    End Sub
+
+    Public Sub listMarketProfitAndLoss(ByRef selection As Selection, marketId As String)
+
+        Dim client As IClient = Nothing
+        Dim clientType As String = Nothing
+        client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
+        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Getting Profit and Loss report for market Id: " + marketId.ToString, EventLogEntryType.Information)
+
+        Try
+
+            Dim marketIds As IList(Of String) = New List(Of String)()
+            marketIds.Add(marketId)
+
+            Dim marketProfitLoss = client.listMarketProfitAndLoss(marketIds)
+
+            ' Look through the market books, there should only be 1
+            For Each profitLoss In marketProfitLoss
+
+                If marketProfitLoss.Count = 1 Then
+
+                    For i = 0 To profitLoss.ProfitAndLosses.Count - 1
+
+                        If profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairOver15SelectionId Then
+                            selection.betfairOver15IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+
+                        ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairUnder15SelectionId Then
+                            selection.betfairUnder15IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+
+                        ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
+                            selection.betfairCorrectScore00IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+
+                        ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
+                            selection.betfairCorrectScore10IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+
+                        ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore01SelectionId Then
+                            selection.betfairCorrectScore01IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+
+                        End If
+
+
+                    Next ' End of runners
+
+                End If
+
+            Next ' End of layBet
 
         Catch apiExcepion As APINGException
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
@@ -285,58 +290,59 @@ Public Class BetfairClass
 
     End Sub
 
-    Public Sub listCurrentOrder(ByRef selection As Selection)
+    'Public Sub listCurrentOrder(ByRef selection As Selection)
 
-        Dim client As IClient = Nothing
-        Dim clientType As String = Nothing
-        Dim unmatchedCSCount As Integer
-        Dim unmatchedUO15Count As Integer
+    '    Dim client As IClient = Nothing
+    '    Dim clientType As String = Nothing
+    '    Dim unmatchedCSCount As Integer
+    '    Dim unmatchedUO15Count As Integer
 
-        client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : List current Order for Unmatched Bets", EventLogEntryType.Information)
+    '    client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
+    '    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : List current Order for Unmatched Bets", EventLogEntryType.Information)
 
-        Try
+    '    Try
 
-            ' Dim marketIds As ISet(Of String) = New HashSet(Of String)()
-            ' marketIds.Add(marketId)
+    '        ' Dim marketIds As ISet(Of String) = New HashSet(Of String)()
+    '        ' marketIds.Add(marketId)
 
-            Dim CurrentOrderSummaryReport = client.listCurrentOrders()
+    '        Dim CurrentOrderSummaryReport = client.listCurrentOrders()
 
-            Dim x As String
-            x = CurrentOrderSummaryReport.CurrentOrders(0).MarketId
+    '        Dim x As String
+    '        x = CurrentOrderSummaryReport.CurrentOrders(0).MarketId
 
-            For Each orderSummaryItem In CurrentOrderSummaryReport.CurrentOrders
+    '        For Each orderSummaryItem In CurrentOrderSummaryReport.CurrentOrders
 
-                If orderSummaryItem.MarketId = selection.betfairCorrectScoreMarketId Then
-                    If orderSummaryItem.SizeRemaining > 0 Then
-                        unmatchedCSCount = unmatchedCSCount + 1
-                    End If
-                End If
+    '            If orderSummaryItem.MarketId = selection.betfairCorrectScoreMarketId Then
+    '                If orderSummaryItem.SizeRemaining > 0 Then
+    '                    unmatchedCSCount = unmatchedCSCount + 1
+    '                End If
+    '            End If
 
-                If orderSummaryItem.MarketId = selection.betfairUnderOver15MarketId Then
-                    If orderSummaryItem.SizeRemaining > 0 Then
-                        unmatchedUO15Count = unmatchedUO15Count + 1
-                    End If
-                End If
+    '            If orderSummaryItem.MarketId = selection.betfairUnderOver15MarketId Then
+    '                If orderSummaryItem.SizeRemaining > 0 Then
+    '                    unmatchedUO15Count = unmatchedUO15Count + 1
+    '                End If
+    '            End If
 
-            Next
+    '        Next
 
-            ' Populate calling selection object
-            selection.betfairUnderOver15UnmathedBets = unmatchedUO15Count.ToString
-            selection.betfairCorrectScoreUnmathedBets = unmatchedCSCount.ToString
+    '        ' Populate calling selection object
+    '        selection.betfairUnderOver15UnmathedBets = unmatchedUO15Count.ToString
+    '        selection.betfairCorrectScoreUnmathedBets = unmatchedCSCount.ToString
 
-        Catch apiExcepion As APINGException
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
-            Exit Sub
-        Catch ex As System.Exception
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
-            Exit Sub
+    '    Catch apiExcepion As APINGException
+    '        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
+    '        Exit Sub
+    '    Catch ex As System.Exception
+    '        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
+    '        Exit Sub
 
-        Finally
+    '    Finally
 
-        End Try
+    '    End Try
 
-    End Sub
+    'End Sub
+
     Public Sub listMarketBook(ByRef selection As Selection, marketId As String)
 
         Dim client As IClient = Nothing
@@ -349,16 +355,72 @@ Public Class BetfairClass
             Dim marketIds As IList(Of String) = New List(Of String)()
             marketIds.Add(marketId)
 
-            ' Set-up market projection
-            Dim marketProjections As ISet(Of MarketProjection) = New HashSet(Of MarketProjection)()
-            marketProjections.Add(MarketProjection.RUNNER_METADATA)
-            marketProjections.Add(MarketProjection.EVENT)
+            Dim priceData As ISet(Of PriceData) = New HashSet(Of PriceData)()
+            'get all prices from the exchange
+            priceData.Add(Api_ng_sample_code.TO.PriceData.EX_BEST_OFFERS)
+            priceData.Add(Api_ng_sample_code.TO.PriceData.EX_TRADED)
 
+            Dim priceProjection = New PriceProjection()
+            priceProjection.PriceData = priceData
 
-            Dim markets = client.listMarketBook(marketIds, marketProjections)
+            Dim orderProjection = New OrderProjection()
+            orderProjection = OrderProjection.EXECUTABLE
+
+            Dim matchProjection = New MatchProjection()
+            matchProjection = MatchProjection.ROLLED_UP_BY_AVG_PRICE
+
+            Dim markets = client.listMarketBook(marketIds, priceProjection, orderProjection, matchProjection)
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listMarketBook : " + markets.Count.ToString, EventLogEntryType.Information)
 
-            ' Store Market Details
+            For Each market In markets
+
+                ' Store Market Details
+                If market.MarketId = selection.betfairCorrectScoreMarketId Then
+                    selection.betfairCorrectScoreMarketStatus = convertMarketStatus(market.Status)
+                    selection.betfairEventInplay = market.IsInplay
+                End If
+                If market.MarketId = selection.betfairUnderOver15MarketId Then
+                    selection.betfairUnderOver15MarketStatus = convertMarketStatus(market.Status)
+                End If
+
+                For i = 0 To market.Runners.Count - 1
+
+                    If market.Runners(i).SelectionId = selection.betfairOver15SelectionId Then
+                        selection.betfairOver15BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairOver15SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                        If market.Runners(i).Orders IsNot Nothing Then
+                            selection.betfairOver15Orders = market.Runners(i).Orders.Count.ToString
+                        End If
+                    ElseIf market.Runners(i).SelectionId = selection.betfairUnder15SelectionId Then
+                            selection.betfairUnder15BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairUnder15SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                        If market.Runners(i).Orders IsNot Nothing Then
+                            selection.betfairUnder15Orders = market.Runners(i).Orders.Count.ToString
+                        End If
+                    ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
+                            selection.betfairCorrectScore00BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairCorrectScore00SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                        If market.Runners(i).Orders IsNot Nothing Then
+                            selection.betfairCorrectScore00Orders = market.Runners(i).Orders.Count.ToString
+                        End If
+                    ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
+                            selection.betfairCorrectScore10BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairCorrectScore10SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                        If market.Runners(i).Orders IsNot Nothing Then
+                            selection.betfairCorrectScore10Orders = market.Runners(i).Orders.Count.ToString
+                        End If
+                    ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore01SelectionId Then
+                            selection.betfairCorrectScore01BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                        selection.betfairCorrectScore01SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                        If market.Runners(i).Orders IsNot Nothing Then
+                            selection.betfairCorrectScore01Orders = market.Runners(i).Orders.Count.ToString
+                        End If
+
+                    End If
+
+                Next ' End of runners
+
+            Next
 
         Catch apiExcepion As APINGException
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
