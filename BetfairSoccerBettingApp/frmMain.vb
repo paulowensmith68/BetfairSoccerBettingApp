@@ -638,7 +638,7 @@ Public Class frmMain
 
         ' Update Inplay status
         If sel1.betfairEventInplay = "False" Then
-            tbxSel1InplayStatus.BackColor = Color.Yellow
+            tbxSel1InplayStatus.BackColor = Color.OrangeRed
         Else
             tbxSel1InplayStatus.BackColor = Color.Green
         End If
@@ -656,7 +656,7 @@ Public Class frmMain
             ' Same score
         Else
             ' If first time through...ignore
-            If tbxSel1Score.Text <> "" Then
+            If strPreviousScore <> "" Then
                 ' Goal scored since last tick
                 If tbxSel1Goal1.Text = "" Then
                     tbxSel1Goal1.Text = tbxSel1InplayTime.Text.ToString
@@ -788,7 +788,7 @@ Public Class frmMain
 
         ' Update Inplay status
         If sel2.betfairEventInplay = "False" Then
-            tbxSel2InplayStatus.BackColor = Color.Yellow
+            tbxSel2InplayStatus.BackColor = Color.OrangeRed
         Else
             tbxSel2InplayStatus.BackColor = Color.Green
         End If
@@ -806,7 +806,7 @@ Public Class frmMain
             ' Same score
         Else
             ' If first time through...ignore
-            If tbxSel2Score.Text <> "" Then
+            If strPreviousScore <> "" Then
                 ' Goal scored since last tick
                 If tbxSel2Goal1.Text = "" Then
                     tbxSel2Goal1.Text = tbxSel2InplayTime.Text.ToString
@@ -938,7 +938,7 @@ Public Class frmMain
 
         ' Update Inplay status
         If sel3.betfairEventInplay = "False" Then
-            tbxSel3InplayStatus.BackColor = Color.Yellow
+            tbxSel3InplayStatus.BackColor = Color.OrangeRed
         Else
             tbxSel3InplayStatus.BackColor = Color.Green
         End If
@@ -956,7 +956,7 @@ Public Class frmMain
             ' Same score
         Else
             ' If first time through...ignore
-            If tbxSel3Score.Text <> "" Then
+            If strPreviousScore <> "" Then
                 ' Goal scored since last tick
                 If tbxSel3Goal1.Text = "" Then
                     tbxSel3Goal1.Text = tbxSel3InplayTime.Text.ToString
@@ -1086,7 +1086,7 @@ Public Class frmMain
 
         ' Update Inplay status
         If sel4.betfairEventInplay = "False" Then
-            tbxSel4InplayStatus.BackColor = Color.Yellow
+            tbxSel4InplayStatus.BackColor = Color.OrangeRed
         Else
             tbxSel4InplayStatus.BackColor = Color.Green
         End If
@@ -1104,7 +1104,7 @@ Public Class frmMain
             ' Same score
         Else
             ' If first time through...ignore
-            If tbxSel4Score.Text <> "" Then
+            If strPreviousScore <> "" Then
                 ' Goal scored since last tick
                 If tbxSel4Goal1.Text = "" Then
                     tbxSel4Goal1.Text = tbxSel4InplayTime.Text.ToString

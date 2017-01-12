@@ -393,7 +393,7 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.nudSettingsSelectionRefresh)
         Me.GroupBox1.Controls.Add(Me.Label93)
         Me.GroupBox1.Controls.Add(Me.Label22)
-        Me.GroupBox1.Location = New System.Drawing.Point(769, 10)
+        Me.GroupBox1.Location = New System.Drawing.Point(784, 10)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(714, 152)
         Me.GroupBox1.TabIndex = 5
@@ -768,7 +768,7 @@ Partial Class frmMain
         Me.grpSelections.Controls.Add(Me.Label3)
         Me.grpSelections.Controls.Add(Me.Label2)
         Me.grpSelections.Controls.Add(Me.btnSel1)
-        Me.grpSelections.Location = New System.Drawing.Point(769, 168)
+        Me.grpSelections.Location = New System.Drawing.Point(784, 168)
         Me.grpSelections.Name = "grpSelections"
         Me.grpSelections.Size = New System.Drawing.Size(714, 211)
         Me.grpSelections.TabIndex = 6
@@ -780,9 +780,9 @@ Partial Class frmMain
         Me.Button5.BackColor = System.Drawing.Color.White
         Me.Button5.Enabled = False
         Me.Button5.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button5.Location = New System.Drawing.Point(546, 173)
+        Me.Button5.Location = New System.Drawing.Point(553, 173)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(39, 24)
+        Me.Button5.Size = New System.Drawing.Size(45, 24)
         Me.Button5.TabIndex = 55
         Me.Button5.UseVisualStyleBackColor = False
         '
@@ -791,9 +791,9 @@ Partial Class frmMain
         Me.Button10.BackColor = System.Drawing.Color.White
         Me.Button10.Enabled = False
         Me.Button10.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button10.Location = New System.Drawing.Point(546, 134)
+        Me.Button10.Location = New System.Drawing.Point(553, 134)
         Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(39, 24)
+        Me.Button10.Size = New System.Drawing.Size(45, 24)
         Me.Button10.TabIndex = 54
         Me.Button10.UseVisualStyleBackColor = False
         '
@@ -802,9 +802,9 @@ Partial Class frmMain
         Me.Button11.BackColor = System.Drawing.Color.White
         Me.Button11.Enabled = False
         Me.Button11.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button11.Location = New System.Drawing.Point(546, 95)
+        Me.Button11.Location = New System.Drawing.Point(553, 95)
         Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(39, 24)
+        Me.Button11.Size = New System.Drawing.Size(45, 24)
         Me.Button11.TabIndex = 53
         Me.Button11.UseVisualStyleBackColor = False
         '
@@ -813,16 +813,16 @@ Partial Class frmMain
         Me.btnSel1ProfitStatus01.BackColor = System.Drawing.Color.White
         Me.btnSel1ProfitStatus01.Enabled = False
         Me.btnSel1ProfitStatus01.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnSel1ProfitStatus01.Location = New System.Drawing.Point(546, 56)
+        Me.btnSel1ProfitStatus01.Location = New System.Drawing.Point(553, 56)
         Me.btnSel1ProfitStatus01.Name = "btnSel1ProfitStatus01"
-        Me.btnSel1ProfitStatus01.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatus01.Size = New System.Drawing.Size(45, 24)
         Me.btnSel1ProfitStatus01.TabIndex = 52
         Me.btnSel1ProfitStatus01.UseVisualStyleBackColor = False
         '
         'Label108
         '
         Me.Label108.AutoSize = True
-        Me.Label108.Location = New System.Drawing.Point(549, 26)
+        Me.Label108.Location = New System.Drawing.Point(560, 26)
         Me.Label108.Name = "Label108"
         Me.Label108.Size = New System.Drawing.Size(22, 13)
         Me.Label108.TabIndex = 51
@@ -853,9 +853,9 @@ Partial Class frmMain
         Me.Button18.BackColor = System.Drawing.Color.White
         Me.Button18.Enabled = False
         Me.Button18.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button18.Location = New System.Drawing.Point(649, 173)
+        Me.Button18.Location = New System.Drawing.Point(661, 173)
         Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(39, 24)
+        Me.Button18.Size = New System.Drawing.Size(45, 24)
         Me.Button18.TabIndex = 48
         Me.Button18.UseVisualStyleBackColor = False
         '
@@ -864,9 +864,9 @@ Partial Class frmMain
         Me.Button19.BackColor = System.Drawing.Color.White
         Me.Button19.Enabled = False
         Me.Button19.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button19.Location = New System.Drawing.Point(596, 173)
+        Me.Button19.Location = New System.Drawing.Point(604, 173)
         Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(39, 24)
+        Me.Button19.Size = New System.Drawing.Size(45, 24)
         Me.Button19.TabIndex = 47
         Me.Button19.UseVisualStyleBackColor = False
         '
@@ -875,9 +875,9 @@ Partial Class frmMain
         Me.Button20.BackColor = System.Drawing.Color.White
         Me.Button20.Enabled = False
         Me.Button20.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button20.Location = New System.Drawing.Point(498, 173)
+        Me.Button20.Location = New System.Drawing.Point(504, 173)
         Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(39, 24)
+        Me.Button20.Size = New System.Drawing.Size(45, 24)
         Me.Button20.TabIndex = 46
         Me.Button20.UseVisualStyleBackColor = False
         '
@@ -888,7 +888,7 @@ Partial Class frmMain
         Me.btnSel4ProfitStatus00.ForeColor = System.Drawing.SystemColors.Control
         Me.btnSel4ProfitStatus00.Location = New System.Drawing.Point(450, 173)
         Me.btnSel4ProfitStatus00.Name = "btnSel4ProfitStatus00"
-        Me.btnSel4ProfitStatus00.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel4ProfitStatus00.Size = New System.Drawing.Size(45, 24)
         Me.btnSel4ProfitStatus00.TabIndex = 45
         Me.btnSel4ProfitStatus00.UseVisualStyleBackColor = False
         '
@@ -926,9 +926,9 @@ Partial Class frmMain
         Me.Button12.BackColor = System.Drawing.Color.White
         Me.Button12.Enabled = False
         Me.Button12.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button12.Location = New System.Drawing.Point(649, 134)
+        Me.Button12.Location = New System.Drawing.Point(661, 134)
         Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(39, 24)
+        Me.Button12.Size = New System.Drawing.Size(45, 24)
         Me.Button12.TabIndex = 41
         Me.Button12.UseVisualStyleBackColor = False
         '
@@ -937,9 +937,9 @@ Partial Class frmMain
         Me.Button13.BackColor = System.Drawing.Color.White
         Me.Button13.Enabled = False
         Me.Button13.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button13.Location = New System.Drawing.Point(596, 134)
+        Me.Button13.Location = New System.Drawing.Point(604, 134)
         Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(39, 24)
+        Me.Button13.Size = New System.Drawing.Size(45, 24)
         Me.Button13.TabIndex = 40
         Me.Button13.UseVisualStyleBackColor = False
         '
@@ -948,9 +948,9 @@ Partial Class frmMain
         Me.Button14.BackColor = System.Drawing.Color.White
         Me.Button14.Enabled = False
         Me.Button14.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button14.Location = New System.Drawing.Point(498, 134)
+        Me.Button14.Location = New System.Drawing.Point(504, 134)
         Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(39, 24)
+        Me.Button14.Size = New System.Drawing.Size(45, 24)
         Me.Button14.TabIndex = 39
         Me.Button14.UseVisualStyleBackColor = False
         '
@@ -961,7 +961,7 @@ Partial Class frmMain
         Me.btnSel3ProfitStatus00.ForeColor = System.Drawing.SystemColors.Control
         Me.btnSel3ProfitStatus00.Location = New System.Drawing.Point(450, 134)
         Me.btnSel3ProfitStatus00.Name = "btnSel3ProfitStatus00"
-        Me.btnSel3ProfitStatus00.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel3ProfitStatus00.Size = New System.Drawing.Size(45, 24)
         Me.btnSel3ProfitStatus00.TabIndex = 38
         Me.btnSel3ProfitStatus00.UseVisualStyleBackColor = False
         '
@@ -999,9 +999,9 @@ Partial Class frmMain
         Me.Button6.BackColor = System.Drawing.Color.White
         Me.Button6.Enabled = False
         Me.Button6.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button6.Location = New System.Drawing.Point(649, 95)
+        Me.Button6.Location = New System.Drawing.Point(661, 95)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(39, 24)
+        Me.Button6.Size = New System.Drawing.Size(45, 24)
         Me.Button6.TabIndex = 34
         Me.Button6.UseVisualStyleBackColor = False
         '
@@ -1010,9 +1010,9 @@ Partial Class frmMain
         Me.Button7.BackColor = System.Drawing.Color.White
         Me.Button7.Enabled = False
         Me.Button7.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button7.Location = New System.Drawing.Point(596, 95)
+        Me.Button7.Location = New System.Drawing.Point(604, 95)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(39, 24)
+        Me.Button7.Size = New System.Drawing.Size(45, 24)
         Me.Button7.TabIndex = 33
         Me.Button7.UseVisualStyleBackColor = False
         '
@@ -1021,9 +1021,9 @@ Partial Class frmMain
         Me.Button8.BackColor = System.Drawing.Color.White
         Me.Button8.Enabled = False
         Me.Button8.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button8.Location = New System.Drawing.Point(498, 95)
+        Me.Button8.Location = New System.Drawing.Point(504, 95)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(39, 24)
+        Me.Button8.Size = New System.Drawing.Size(45, 24)
         Me.Button8.TabIndex = 32
         Me.Button8.UseVisualStyleBackColor = False
         '
@@ -1034,7 +1034,7 @@ Partial Class frmMain
         Me.btnSel2ProfitStatus00.ForeColor = System.Drawing.SystemColors.Control
         Me.btnSel2ProfitStatus00.Location = New System.Drawing.Point(450, 95)
         Me.btnSel2ProfitStatus00.Name = "btnSel2ProfitStatus00"
-        Me.btnSel2ProfitStatus00.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel2ProfitStatus00.Size = New System.Drawing.Size(45, 24)
         Me.btnSel2ProfitStatus00.TabIndex = 31
         Me.btnSel2ProfitStatus00.UseVisualStyleBackColor = False
         '
@@ -1072,9 +1072,9 @@ Partial Class frmMain
         Me.btnSel1ProfitStatusOver15.BackColor = System.Drawing.Color.White
         Me.btnSel1ProfitStatusOver15.Enabled = False
         Me.btnSel1ProfitStatusOver15.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnSel1ProfitStatusOver15.Location = New System.Drawing.Point(649, 56)
+        Me.btnSel1ProfitStatusOver15.Location = New System.Drawing.Point(661, 56)
         Me.btnSel1ProfitStatusOver15.Name = "btnSel1ProfitStatusOver15"
-        Me.btnSel1ProfitStatusOver15.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatusOver15.Size = New System.Drawing.Size(45, 24)
         Me.btnSel1ProfitStatusOver15.TabIndex = 15
         Me.btnSel1ProfitStatusOver15.UseVisualStyleBackColor = False
         '
@@ -1083,9 +1083,9 @@ Partial Class frmMain
         Me.btnSel1ProfitStatusUnder15.BackColor = System.Drawing.Color.White
         Me.btnSel1ProfitStatusUnder15.Enabled = False
         Me.btnSel1ProfitStatusUnder15.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnSel1ProfitStatusUnder15.Location = New System.Drawing.Point(596, 56)
+        Me.btnSel1ProfitStatusUnder15.Location = New System.Drawing.Point(604, 56)
         Me.btnSel1ProfitStatusUnder15.Name = "btnSel1ProfitStatusUnder15"
-        Me.btnSel1ProfitStatusUnder15.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatusUnder15.Size = New System.Drawing.Size(45, 24)
         Me.btnSel1ProfitStatusUnder15.TabIndex = 14
         Me.btnSel1ProfitStatusUnder15.UseVisualStyleBackColor = False
         '
@@ -1094,9 +1094,9 @@ Partial Class frmMain
         Me.btnSel1ProfitStatus10.BackColor = System.Drawing.Color.White
         Me.btnSel1ProfitStatus10.Enabled = False
         Me.btnSel1ProfitStatus10.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnSel1ProfitStatus10.Location = New System.Drawing.Point(498, 56)
+        Me.btnSel1ProfitStatus10.Location = New System.Drawing.Point(504, 56)
         Me.btnSel1ProfitStatus10.Name = "btnSel1ProfitStatus10"
-        Me.btnSel1ProfitStatus10.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatus10.Size = New System.Drawing.Size(45, 24)
         Me.btnSel1ProfitStatus10.TabIndex = 13
         Me.btnSel1ProfitStatus10.UseVisualStyleBackColor = False
         '
@@ -1107,7 +1107,7 @@ Partial Class frmMain
         Me.btnSel1ProfitStatus00.ForeColor = System.Drawing.SystemColors.Control
         Me.btnSel1ProfitStatus00.Location = New System.Drawing.Point(450, 56)
         Me.btnSel1ProfitStatus00.Name = "btnSel1ProfitStatus00"
-        Me.btnSel1ProfitStatus00.Size = New System.Drawing.Size(39, 24)
+        Me.btnSel1ProfitStatus00.Size = New System.Drawing.Size(45, 24)
         Me.btnSel1ProfitStatus00.TabIndex = 12
         Me.btnSel1ProfitStatus00.UseVisualStyleBackColor = False
         '
@@ -1123,7 +1123,7 @@ Partial Class frmMain
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(646, 26)
+        Me.Label6.Location = New System.Drawing.Point(662, 26)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(42, 13)
         Me.Label6.TabIndex = 10
@@ -1132,7 +1132,7 @@ Partial Class frmMain
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(587, 26)
+        Me.Label5.Location = New System.Drawing.Point(601, 26)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(48, 13)
         Me.Label5.TabIndex = 9
@@ -1141,7 +1141,7 @@ Partial Class frmMain
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(502, 26)
+        Me.Label4.Location = New System.Drawing.Point(508, 26)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(22, 13)
         Me.Label4.TabIndex = 8
@@ -1696,7 +1696,7 @@ Partial Class frmMain
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvEvents.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvEvents.Location = New System.Drawing.Point(31, 29)
+        Me.dgvEvents.Location = New System.Drawing.Point(12, 28)
         Me.dgvEvents.MultiSelect = False
         Me.dgvEvents.Name = "dgvEvents"
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1708,7 +1708,7 @@ Partial Class frmMain
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvEvents.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvEvents.Size = New System.Drawing.Size(715, 326)
+        Me.dgvEvents.Size = New System.Drawing.Size(735, 326)
         Me.dgvEvents.TabIndex = 11
         '
         'grpSel2
