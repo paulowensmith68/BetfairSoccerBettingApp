@@ -349,9 +349,6 @@ Public Class frmMain
             tbxSel1EventDateTime.Text = dgvEvents.SelectedRows(0).Cells(5).Value.ToString()
             sel1.betfairEventId = dgvEvents.SelectedRows(0).Cells(1).Value.ToString()
 
-            ' Get Initial book details, like marketId's and selectionId's
-            sel1.getInitialBookDetails()
-
             ' Refresh 
             Refreshsel1Info()
 
@@ -440,8 +437,6 @@ Public Class frmMain
             tbxSel2EventDateTime.Text = dgvEvents.SelectedRows(0).Cells(5).Value.ToString()
             sel2.betfairEventId = dgvEvents.SelectedRows(0).Cells(1).Value.ToString()
 
-            ' Get Initial book details, like marketId's and selectionId's
-            sel2.getInitialBookDetails()
 
             ' Refresh 
             Refreshsel2Info()
@@ -528,8 +523,6 @@ Public Class frmMain
             tbxSel3EventDateTime.Text = dgvEvents.SelectedRows(0).Cells(5).Value.ToString()
             sel3.betfairEventId = dgvEvents.SelectedRows(0).Cells(1).Value.ToString()
 
-            ' Get Initial book details, like marketId's and selectionId's
-            sel3.getInitialBookDetails()
 
             ' Refresh 
             Refreshsel3Info()
@@ -616,9 +609,6 @@ Public Class frmMain
             tbxSel4EventDateTime.Text = dgvEvents.SelectedRows(0).Cells(5).Value.ToString()
             sel4.betfairEventId = dgvEvents.SelectedRows(0).Cells(1).Value.ToString()
 
-            ' Get Initial book details, like marketId's and selectionId's
-            sel4.getInitialBookDetails()
-
             ' Refresh 
             Refreshsel4Info()
 
@@ -640,6 +630,9 @@ Public Class frmMain
 
     Private Sub Refreshsel1Info()
 
+        ' Get Initial book details, like marketId's and selectionId's
+        sel1.getInitialBookDetails()
+
         ' Get latest data from Betfair
         sel1.getLatestMarketData()
 
@@ -650,8 +643,34 @@ Public Class frmMain
             tbxSel1InplayStatus.BackColor = Color.Green
         End If
 
-        ' Set score
+
+        ' Determine change of goals
+        Dim strPreviousScore As String
+        strPreviousScore = tbxSel1Score.Text
+
+        ' Get latest score
         tbxSel1Score.Text = sel1.betfairGoalsScored
+
+        ' Detect score change
+        If strPreviousScore = tbxSel1Score.Text Then
+            ' Same score
+        Else
+            ' If first time through...ignore
+            If tbxSel1Score.Text <> "" Then
+                ' Goal scored since last tick
+                If tbxSel1Goal1.Text = "" Then
+                    tbxSel1Goal1.Text = tbxSel1InplayTime.Text.ToString
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel1.Text + ", Goal 1 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
+
+                Else
+                    If tbxSel1Goal2.Text = "" Then
+                        tbxSel1Goal2.Text = tbxSel1InplayTime.Text.ToString
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel1.Text + ", Goal 2 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
+                    End If
+                End If
+            End If
+        End If
+
 
         ' Market Status
         tbxSel1CorrectScoreStatus.Text = sel1.betfairCorrectScoreMarketStatus
@@ -761,6 +780,9 @@ Public Class frmMain
 
     Private Sub Refreshsel2Info()
 
+        ' Get Initial book details, like marketId's and selectionId's
+        sel2.getInitialBookDetails()
+
         ' Get latest data from Betfair
         sel2.getLatestMarketData()
 
@@ -771,8 +793,34 @@ Public Class frmMain
             tbxSel2InplayStatus.BackColor = Color.Green
         End If
 
-        ' Set score
-        tbxSel2Score.Text = sel1.betfairGoalsScored
+
+        ' Determine change of goals
+        Dim strPreviousScore As String
+        strPreviousScore = tbxSel2Score.Text
+
+        ' Get latest score
+        tbxSel2Score.Text = sel2.betfairGoalsScored
+
+        ' Detect score change
+        If strPreviousScore = tbxSel2Score.Text Then
+            ' Same score
+        Else
+            ' If first time through...ignore
+            If tbxSel2Score.Text <> "" Then
+                ' Goal scored since last tick
+                If tbxSel2Goal1.Text = "" Then
+                    tbxSel2Goal1.Text = tbxSel2InplayTime.Text.ToString
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 1 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
+                Else
+                    If tbxSel2Goal2.Text = "" Then
+                        tbxSel2Goal2.Text = tbxSel2InplayTime.Text.ToString
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 2 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
+                    End If
+                End If
+            End If
+        End If
+
+
 
         ' Market Status
         tbxSel2CorrectScoreStatus.Text = sel2.betfairCorrectScoreMarketStatus
@@ -882,6 +930,9 @@ Public Class frmMain
 
     Private Sub Refreshsel3Info()
 
+        ' Get Initial book details, like marketId's and selectionId's
+        sel3.getInitialBookDetails()
+
         ' Get latest data from Betfair
         sel3.getLatestMarketData()
 
@@ -892,8 +943,32 @@ Public Class frmMain
             tbxSel3InplayStatus.BackColor = Color.Green
         End If
 
-        ' Set score
-        tbxSel3Score.Text = sel1.betfairGoalsScored
+
+        ' Determine change of goals
+        Dim strPreviousScore As String
+        strPreviousScore = tbxSel3Score.Text
+
+        ' Get latest score
+        tbxSel3Score.Text = sel3.betfairGoalsScored
+
+        ' Detect score change
+        If strPreviousScore = tbxSel3Score.Text Then
+            ' Same score
+        Else
+            ' If first time through...ignore
+            If tbxSel3Score.Text <> "" Then
+                ' Goal scored since last tick
+                If tbxSel3Goal1.Text = "" Then
+                    tbxSel3Goal1.Text = tbxSel3InplayTime.Text.ToString
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel3.Text + ", Goal 1 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
+                Else
+                    If tbxSel3Goal2.Text = "" Then
+                        tbxSel3Goal2.Text = tbxSel3InplayTime.Text.ToString
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel3.Text + ", Goal 2 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
+                    End If
+                End If
+            End If
+        End If
 
         ' Market Status
         tbxSel3CorrectScoreStatus.Text = sel3.betfairCorrectScoreMarketStatus
@@ -1003,6 +1078,9 @@ Public Class frmMain
 
     Private Sub Refreshsel4Info()
 
+        ' Get Initial book details, like marketId's and selectionId's
+        sel4.getInitialBookDetails()
+
         ' Get latest data from Betfair
         sel4.getLatestMarketData()
 
@@ -1013,8 +1091,32 @@ Public Class frmMain
             tbxSel4InplayStatus.BackColor = Color.Green
         End If
 
-        ' Set score
-        tbxSel4Score.Text = sel1.betfairGoalsScored
+
+        ' Determine change of goals
+        Dim strPreviousScore As String
+        strPreviousScore = tbxSel4Score.Text
+
+        ' Get latest score
+        tbxSel4Score.Text = sel4.betfairGoalsScored
+
+        ' Detect score change
+        If strPreviousScore = tbxSel4Score.Text Then
+            ' Same score
+        Else
+            ' If first time through...ignore
+            If tbxSel4Score.Text <> "" Then
+                ' Goal scored since last tick
+                If tbxSel4Goal1.Text = "" Then
+                    tbxSel4Goal1.Text = tbxSel4InplayTime.Text.ToString
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 1 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
+                Else
+                    If tbxSel4Goal2.Text = "" Then
+                        tbxSel4Goal2.Text = tbxSel4InplayTime.Text.ToString
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 2 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
+                    End If
+                End If
+            End If
+        End If
 
         ' Market Status
         tbxSel4CorrectScoreStatus.Text = sel4.betfairCorrectScoreMarketStatus
@@ -1119,31 +1221,6 @@ Public Class frmMain
         Dim timeToStart As TimeSpan = DateTime.Now.Subtract(eventDateTime)
         Dim formatTime As String = "####0.00"
         tbxSel4InplayTime.Text = timeToStart.TotalMinutes.ToString(formatTime)
-
-    End Sub
-
-    Private Sub populateGoalsScoredSel4()
-
-        ' Some matches (low liquidity) dont have any money so just ignore scores
-        If String.IsNullOrEmpty(sel4.betfairCorrectScore00BackOdds) Or String.IsNullOrEmpty(sel4.betfairCorrectScore10BackOdds) Or String.IsNullOrEmpty(sel4.betfairCorrectScore01BackOdds) Then
-            tbxSel4Score.Text = "Unknown"
-        Else
-
-            If Double.Parse(sel4.betfairCorrectScore10BackOdds) = 1000 Then
-                If Double.Parse(sel4.betfairCorrectScore01BackOdds) = 1000 Then
-                    tbxSel4Score.Text = "Score Over 1.5"
-                Else
-                    tbxSel4Score.Text = "0 - 1"
-                End If
-            Else
-                If Double.Parse(sel4.betfairCorrectScore01BackOdds) = 1000 Then
-                    tbxSel4Score.Text = "1 - 0"
-                Else
-                    tbxSel4Score.Text = "0 - 0"
-                End If
-            End If
-
-        End If
 
     End Sub
 

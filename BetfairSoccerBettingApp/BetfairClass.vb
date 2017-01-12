@@ -78,10 +78,10 @@ Public Class BetfairClass
             eventList = eventList.OrderBy(Function(x) x.openDate).ToList()
 
         Catch apiExcepion As APINGException
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : <PollBetFairEvents> Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
             Exit Sub
         Catch ex As System.Exception
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : <PollBetFairEvents> Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
             Exit Sub
 
         Finally
@@ -179,10 +179,10 @@ Public Class BetfairClass
             Next
 
         Catch apiExcepion As APINGException
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : <PollBetFairInitialMarketDetails>Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
             Exit Sub
         Catch ex As System.Exception
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : <PollBetFairInitialMarketDetails> Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
             Exit Sub
 
         Finally
@@ -237,10 +237,10 @@ Public Class BetfairClass
             Next ' End of layBet
 
         Catch apiExcepion As APINGException
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : <listMarketProfitAndLoss> Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
             Exit Sub
         Catch ex As System.Exception
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : <listMarketProfitAndLoss> Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
             Exit Sub
 
         Finally
@@ -425,10 +425,10 @@ Public Class BetfairClass
             Next
 
         Catch apiExcepion As APINGException
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : <listMarketBook> Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
             Exit Sub
         Catch ex As System.Exception
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : <listMarketBook> Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
             Exit Sub
 
         Finally
