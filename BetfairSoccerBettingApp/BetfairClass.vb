@@ -212,23 +212,33 @@ Public Class BetfairClass
 
                     For i = 0 To profitLoss.ProfitAndLosses.Count - 1
 
-                        If profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairOver15SelectionId Then
-                            selection.betfairOver15IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+                        If profitLoss.MarketId = selection.betfairCorrectScoreMarketId Then
 
-                        ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairUnder15SelectionId Then
-                            selection.betfairUnder15IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+                            ' Correct Score Market
+                            If profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
+                                selection.betfairCorrectScore00IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
 
-                        ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
-                            selection.betfairCorrectScore00IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+                            ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
+                                selection.betfairCorrectScore10IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
 
-                        ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
-                            selection.betfairCorrectScore10IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+                            ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore01SelectionId Then
+                                selection.betfairCorrectScore01IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+                            End If
 
-                        ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore01SelectionId Then
-                            selection.betfairCorrectScore01IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+                        Else
 
+                            If profitLoss.MarketId = selection.betfairUnderOver15MarketId Then
+
+                                If profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairOver15SelectionId Then
+                                    selection.betfairOver15IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+
+                                ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairUnder15SelectionId Then
+                                    selection.betfairUnder15IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+
+                                End If
+
+                            End If
                         End If
-
 
                     Next ' End of runners
 
@@ -376,46 +386,58 @@ Public Class BetfairClass
 
                 gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listMarketBook on Market Status. Market Id: " + marketId.ToString + " Status: " + convertMarketStatus(market.Status), EventLogEntryType.Information)
 
+                ' Set inplay status
+                selection.betfairEventInplay = market.IsInplay
+
                 ' Store Market Details
                 If market.MarketId = selection.betfairCorrectScoreMarketId Then
                     selection.betfairCorrectScoreMarketStatus = convertMarketStatus(market.Status)
-                    selection.betfairEventInplay = market.IsInplay
-                End If
-                If market.MarketId = selection.betfairUnderOver15MarketId Then
+                ElseIf market.MarketId = selection.betfairUnderOver15MarketId Then
                     selection.betfairUnderOver15MarketStatus = convertMarketStatus(market.Status)
                 End If
 
                 For i = 0 To market.Runners.Count - 1
 
-                    If market.Runners(i).SelectionId = selection.betfairOver15SelectionId Then
-                        selection.betfairOver15BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
-                        selection.betfairOver15SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
-                        If market.Runners(i).Orders IsNot Nothing Then
-                            selection.betfairOver15Orders = market.Runners(i).Orders.Count.ToString
+                    If market.MarketId = selection.betfairCorrectScoreMarketId Then
+
+                        If market.Runners(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
+                            selection.betfairCorrectScore00BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                            selection.betfairCorrectScore00SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                            If market.Runners(i).Orders IsNot Nothing Then
+                                selection.betfairCorrectScore00Orders = market.Runners(i).Orders.Count.ToString
+                            End If
+                        ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
+                            selection.betfairCorrectScore10BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                            selection.betfairCorrectScore10SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                            If market.Runners(i).Orders IsNot Nothing Then
+                                selection.betfairCorrectScore10Orders = market.Runners(i).Orders.Count.ToString
+                            End If
+                        ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore01SelectionId Then
+                            selection.betfairCorrectScore01BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                            selection.betfairCorrectScore01SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                            If market.Runners(i).Orders IsNot Nothing Then
+                                selection.betfairCorrectScore01Orders = market.Runners(i).Orders.Count.ToString
+                            End If
                         End If
-                    ElseIf market.Runners(i).SelectionId = selection.betfairUnder15SelectionId Then
-                        selection.betfairUnder15BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
-                        selection.betfairUnder15SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
-                        If market.Runners(i).Orders IsNot Nothing Then
-                            selection.betfairUnder15Orders = market.Runners(i).Orders.Count.ToString
-                        End If
-                    ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
-                        selection.betfairCorrectScore00BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
-                        selection.betfairCorrectScore00SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
-                        If market.Runners(i).Orders IsNot Nothing Then
-                            selection.betfairCorrectScore00Orders = market.Runners(i).Orders.Count.ToString
-                        End If
-                    ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
-                        selection.betfairCorrectScore10BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
-                        selection.betfairCorrectScore10SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
-                        If market.Runners(i).Orders IsNot Nothing Then
-                            selection.betfairCorrectScore10Orders = market.Runners(i).Orders.Count.ToString
-                        End If
-                    ElseIf market.Runners(i).SelectionId = selection.betfairCorrectScore01SelectionId Then
-                        selection.betfairCorrectScore01BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
-                        selection.betfairCorrectScore01SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
-                        If market.Runners(i).Orders IsNot Nothing Then
-                            selection.betfairCorrectScore01Orders = market.Runners(i).Orders.Count.ToString
+
+                    Else
+
+                        If market.MarketId = selection.betfairUnderOver15MarketId Then
+
+                            If market.Runners(i).SelectionId = selection.betfairOver15SelectionId Then
+                                selection.betfairOver15BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                                selection.betfairOver15SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                                If market.Runners(i).Orders IsNot Nothing Then
+                                    selection.betfairOver15Orders = market.Runners(i).Orders.Count.ToString
+                                End If
+                            ElseIf market.Runners(i).SelectionId = selection.betfairUnder15SelectionId Then
+                                selection.betfairUnder15BackOdds = market.Runners(i).ExchangePrices.AvailableToBack(0).Price
+                                selection.betfairUnder15SelectionStatus = convertRunnerStatus(market.Runners(i).Status)
+                                If market.Runners(i).Orders IsNot Nothing Then
+                                    selection.betfairUnder15Orders = market.Runners(i).Orders.Count.ToString
+                                End If
+                            End If
+
                         End If
 
                     End If

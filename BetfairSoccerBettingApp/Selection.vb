@@ -6,6 +6,15 @@ Public Class Selection
 
     Public selectionNumber As Integer
 
+    'Autobet flags
+    Public autobetOver15BetMade As Boolean
+    Public autobetUnder15BetMade As Boolean
+    Public autobetCorrectScore00BetMade As Boolean
+    Public autobetCorrectScore10BetMade As Boolean
+    Public autobetCorrectScore01BetMade As Boolean
+    Public autobetOver15TopUpBetMade As Boolean
+
+
     ' Betfair Event details
     Public betfairEventId As String
     Public betfairEventName As String
@@ -87,46 +96,6 @@ Public Class Selection
         ' Get the Correct Score and Under Over 1.5 books using decsriptions
         BetfairClass1.PollBetFairInitialMarketDetails(Me, 1, betfairEventId, My.Settings.NumberOfUkEvents)
 
-        '
-        ' Sometimes All markets are suspended during game whilst things are updated
-        ' 
-        If Me.betfairEventInplay = "True" And Me.betfairCorrectScoreMarketStatus = "SUSPENDED" And Me.betfairUnderOver05MarketStatus = "SUSPENDED" And Me.betfairUnderOver15MarketStatus = "SUSPENDED" And Me.betfairUnderOver25MarketStatus = "SUSPENDED" And Me.betfairUnderOver35MarketStatus = "SUSPENDED" And Me.betfairUnderOver45MarketStatus = "SUSPENDED" Then
-
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : SUSPENDED market situation....going to loop 3 times (10 secs each) ", EventLogEntryType.Error)
-
-            ' Sleep 10secs waiting for market refresh
-            Thread.Sleep(10000)
-
-            BetfairClass1.PollBetFairInitialMarketDetails(Me, 1, betfairEventId, My.Settings.NumberOfUkEvents)
-
-            If Me.betfairEventInplay = "True" And Me.betfairCorrectScoreMarketStatus = "SUSPENDED" And Me.betfairUnderOver05MarketStatus = "SUSPENDED" And Me.betfairUnderOver15MarketStatus = "SUSPENDED" And Me.betfairUnderOver25MarketStatus = "SUSPENDED" And Me.betfairUnderOver35MarketStatus = "SUSPENDED" And Me.betfairUnderOver45MarketStatus = "SUSPENDED" Then
-
-                ' Sleep 10secs waiting for market refresh
-                Thread.Sleep(10000)
-
-                BetfairClass1.PollBetFairInitialMarketDetails(Me, 1, betfairEventId, My.Settings.NumberOfUkEvents)
-
-                If Me.betfairEventInplay = "True" And Me.betfairCorrectScoreMarketStatus = "SUSPENDED" And Me.betfairUnderOver05MarketStatus = "SUSPENDED" And Me.betfairUnderOver15MarketStatus = "SUSPENDED" And Me.betfairUnderOver25MarketStatus = "SUSPENDED" And Me.betfairUnderOver35MarketStatus = "SUSPENDED" And Me.betfairUnderOver45MarketStatus = "SUSPENDED" Then
-
-                    ' Sleep 10secs waiting for market refresh
-                    Thread.Sleep(10000)
-
-                    BetfairClass1.PollBetFairInitialMarketDetails(Me, 1, betfairEventId, My.Settings.NumberOfUkEvents)
-
-                    If Me.betfairEventInplay = "True" And Me.betfairCorrectScoreMarketStatus = "SUSPENDED" And Me.betfairUnderOver05MarketStatus = "SUSPENDED" And Me.betfairUnderOver15MarketStatus = "SUSPENDED" And Me.betfairUnderOver25MarketStatus = "SUSPENDED" And Me.betfairUnderOver35MarketStatus = "SUSPENDED" And Me.betfairUnderOver45MarketStatus = "SUSPENDED" Then
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : SUSPENDED market situation....after 3 waits Markets ARE STILL ALL SUSPENDED, going to exit now, Correct Score Market status now:" + Me.betfairCorrectScoreMarketStatus, EventLogEntryType.Information)
-                    Else
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : SUSPENDED market situation....exited after 2 waits, markets back or closed, Correct Score Market status now:" + Me.betfairCorrectScoreMarketStatus, EventLogEntryType.Information)
-                    End If
-                Else
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : SUSPENDED market situation....exited after 2 waits, markets back or closed, Correct Score Market status now:" + Me.betfairCorrectScoreMarketStatus, EventLogEntryType.Information)
-                End If
-            Else
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : SUSPENDED market situation....exited after 1 wait, markets back or closed, Correct Score Market status now:" + Me.betfairCorrectScoreMarketStatus, EventLogEntryType.Information)
-            End If
-
-        End If
-
         BetfairClass1 = Nothing
 
     End Sub
@@ -140,6 +109,7 @@ Public Class Selection
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Unable to refresh data as Market Id is null or empty for CORRECT_SCORE", EventLogEntryType.Error)
         Else
             If betfairCorrectScoreMarketId = "Not Found" Then
+
                 ' Market has been removed, update data
                 betfairCorrectScoreMarketStatus = "CLOSED"
                 betfairCorrectScoreMarketStatus = ""
@@ -167,6 +137,7 @@ Public Class Selection
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Unable to refresh data as Market Id is null or empty for OVER_UNDER_15", EventLogEntryType.Error)
         Else
             If betfairUnderOver15MarketId = "Not Found" Then
+
                 ' Market has been removed, update data
                 betfairUnderOver15MarketStatus = "CLOSED"
                 betfairOver15SelectionId = ""
@@ -185,11 +156,29 @@ Public Class Selection
             End If
         End If
 
+        '
+        ' Sometimes All markets are suspended during game whilst things are updated e.g. Yellow cards, Red cards, Injury Goals scored
+        ' 
+        ' Calulate Inplay time
+        Dim eventDateTime As DateTime = DateTime.Parse(Me.betfairEventDateTime)
+        Dim timeToStart As TimeSpan = DateTime.Now.Subtract(eventDateTime)
+        Dim timeInplay As Double
+        Dim formatTime As String = "####0.00"
+        timeInplay = timeToStart.TotalMinutes
+
+        If Me.betfairEventInplay = "True" And timeInplay < +105 And Me.betfairCorrectScoreMarketStatus = "SUSPENDED" Then
+
+            ' Don't do anything - 
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : CORRECT_SCORE market SUSPENDED and still within playing time", EventLogEntryType.Error)
+
+        Else
+
+            ' Populate goals scored
+            betfairGoalsScored = calculateGoalsScored()
+
+        End If
+
         BetfairClass1 = Nothing
-
-        ' Populate goals scored
-        betfairGoalsScored = calculateGoalsScored()
-
 
     End Sub
     Private Function calculateGoalsScored() As String
@@ -233,12 +222,41 @@ Public Class Selection
 
     End Function
 
-    Public Sub placeCorrectScore_00_Order()
+    Public Sub placeOver15_Order(price As Double, stake As Double)
 
         Dim BetfairClass1 As New BetfairClass()
-        BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore00SelectionId, CDbl(betfairCorrectScore00BackOdds), CDbl(2))
+        BetfairClass1.PlaceOrder(betfairUnderOver15MarketId, betfairOver15SelectionId, price, stake)
         BetfairClass1 = Nothing
 
     End Sub
 
+    Public Sub placeUnder15_Order(price As Double, stake As Double)
+
+        Dim BetfairClass1 As New BetfairClass()
+        BetfairClass1.PlaceOrder(betfairUnderOver15MarketId, betfairUnder15SelectionId, price, stake)
+        BetfairClass1 = Nothing
+
+    End Sub
+
+    Public Sub placeCorrectScore00_Order(price As Double, stake As Double)
+
+        Dim BetfairClass1 As New BetfairClass()
+        BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore00SelectionId, price, stake)
+        BetfairClass1 = Nothing
+
+    End Sub
+    Public Sub placeCorrectScore10_Order(price As Double, stake As Double)
+
+        Dim BetfairClass1 As New BetfairClass()
+        BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore10SelectionId, price, stake)
+        BetfairClass1 = Nothing
+
+    End Sub
+    Public Sub placeCorrectScore01_Order(price As Double, stake As Double)
+
+        Dim BetfairClass1 As New BetfairClass()
+        BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore01SelectionId, price, stake)
+        BetfairClass1 = Nothing
+
+    End Sub
 End Class
