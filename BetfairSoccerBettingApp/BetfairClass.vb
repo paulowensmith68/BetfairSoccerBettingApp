@@ -259,7 +259,7 @@ Public Class BetfairClass
 
     End Sub
 
-    Public Sub PlaceOrder(marketId As String, selectionId As String, price As Double, stake As Double)
+    Public Function PlaceOrder(marketId As String, selectionId As String, price As Double, stake As Double) As String
 
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
@@ -270,7 +270,6 @@ Public Class BetfairClass
             Dim marketIds As IList(Of String) = New List(Of String)()
             marketIds.Add(marketId)
 
-            ' place a back bet at rediculous odds so it doesn't get matched 
             ' Set-up Limit Order
             Dim LimitOrder = New LimitOrder()
 
@@ -285,32 +284,39 @@ Public Class BetfairClass
             placeInstruction.SelectionId = selectionId
             placeInstructions.Add(placeInstruction)
 
-            Dim customerRef = "smith4pAutobet"
+            Dim customerRef = Nothing
             Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
 
             Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
             Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
 
-            'If executionErrorcode <> ExecutionReportErrorCode.BET_ACTION_ERROR AndAlso instructionErrorCode <> InstructionReportErrorCode.INVALID_BET_SIZE Then
-            '    Environment.[Exit](0)
-            'End If
-
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
 
+            If placeExecutionReport.Status = ExecutionReportStatus.SUCCESS Then
+                Return "SUCCESS"
+
+            ElseIf placeExecutionReport.Status = ExecutionReportStatus.FAILURE Then
+                Return "FAILURE"
+
+            ElseIf placeExecutionReport.Status = ExecutionReportStatus.TIMEOUT Then
+                Return "TIMOUT"
+
+            Else
+
+                Return "UNKNOWN"
+            End If
 
         Catch apiExcepion As APINGException
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
-            Exit Sub
+            Return "API_EXCEPTION"
         Catch ex As System.Exception
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
-            Exit Sub
-
-        Finally
+            Return "EX_EXCEPTION"
 
         End Try
 
 
-    End Sub
+    End Function
 
     'Public Sub listCurrentOrder(ByRef selection As Selection)
 

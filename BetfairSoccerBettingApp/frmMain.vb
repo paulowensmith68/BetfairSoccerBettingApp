@@ -133,6 +133,7 @@ Public Class frmMain
                     sel1.autobetCorrectScore10BetMade = False
                     sel1.autobetCorrectScore01BetMade = False
                     sel1.autobetOver15TopUpBetMade = False
+                    sel1.autobetCashOutNoGoalsAtHalfTime = False
 
                     ' Set the interval
                     timerSel1AutoBet.Interval = nudSettingsAutoBetRefresh.Value
@@ -290,14 +291,17 @@ Public Class frmMain
                                             Dim odds As Double
                                             Dim oddsMarket As Double
                                             Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel1.betfairOver15BackOdds), "OUT")
-                                            oddsMarket = CDbl(sel1.betfairCorrectScore00BackOdds)
+                                            odds = adjustOddsToMatch(CDbl(sel1.betfairOver15BackOdds))
+                                            oddsMarket = CDbl(sel1.betfairOver15BackOdds)
                                             stake = nudSettingsOver15Stake.Value.ToString
+
                                             sendEmailToText("Match: " + sel1.betfairEventName + " Market: Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
                                             sel1.autobetOver15BetMade = True
 
                                             ' Place order on Over 1.5 market
-                                            sel1.placeOver15_Order(odds, stake)
+                                            Dim orderStatus As String
+                                            orderStatus = sel1.placeOver15_Order(odds, stake)
+                                            checkOrderStatus(sel1, orderStatus)
 
                                         End If
                                     Else
@@ -342,28 +346,28 @@ Public Class frmMain
                 If sel1.betfairCorrectScoreMarketStatus = "OPEN" Then
 
                     ' Check in first half
-                    If CDbl(tbxSel1InplayTime.Text) > +25 And CDbl(tbxSel1InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel1InplayTime.Text) > +13 And CDbl(tbxSel1InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00BackOdds) Then
                             If CDbl(sel1.betfairCorrectScore00BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel1.betfairCorrectScore00BackOdds) < nudSettingsCS00UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00Orders) Then
                                     If CDbl(sel1.betfairCorrectScore00Orders) = 0 Then
-                                        If sel1.betfairCorrectScore00BackOdds <= nudSettingsCS00TargetPrice.Value Then
 
-                                            ' calculate stake based on profit
-                                            Dim grossPerMarket As Double = nudSettingsCS00TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel1.betfairCorrectScore00BackOdds), "IN")
-                                            oddsMarket = CDbl(sel1.betfairCorrectScore00BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel1.betfairEventName + " Market: Correct Score place back bet on 0 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel1.autobetCorrectScore00BetMade = True
+                                        ' calculate stake based on profit
+                                        Dim grossPerMarket As Double = nudSettingsCS00TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel1.betfairCorrectScore00BackOdds))
+                                        oddsMarket = CDbl(sel1.betfairCorrectScore00BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel1.betfairEventName + " Market: Correct Score place back bet on 0 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel1.autobetCorrectScore00BetMade = True
 
-                                            ' Place order on Correct Score 0-0 market
-                                            sel1.placeCorrectScore00_Order(odds, stake)
+                                        ' Place order on Correct Score 0-0 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel1.placeCorrectScore00_Order(odds, stake)
+                                        checkOrderStatus(sel1, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 0-0 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -382,7 +386,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 0-0  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 0-0  - Inplay timer not between +13 and 45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -411,23 +415,23 @@ Public Class frmMain
                             If CDbl(sel1.betfairUnder15BackOdds) > nudSettingsUnder15LowerPrice.Value And CDbl(sel1.betfairUnder15BackOdds) < nudSettingsUnder15UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel1.betfairUnder15Orders) Then
                                     If CDbl(sel1.betfairUnder15Orders) = 0 Then
-                                        If sel1.betfairUnder15BackOdds >= nudSettingsUnder15TargetPrice.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsUnder15TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel1.betfairUnder15BackOdds), "IN")
-                                            oddsMarket = CDbl(sel1.betfairUnder15BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel1.betfairEventName + " Market: Over/Under1.5 place back bet on UNDER 1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel1.autobetUnder15BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsUnder15TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel1.betfairUnder15BackOdds))
+                                        oddsMarket = CDbl(sel1.betfairUnder15BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel1.betfairEventName + " Market: Over/Under1.5 place back bet on UNDER 1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel1.autobetUnder15BetMade = True
 
-                                            ' Place order on Over 1.5 market
-                                            sel1.placeUnder15_Order(odds, stake)
+                                        ' Place order on Over 1.5 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel1.placeUnder15_Order(odds, stake)
+                                        checkOrderStatus(sel1, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - UNDER 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -446,7 +450,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - UNDER 1.5 - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - UNDER 1.5 - Inplay timer not between +0 and 45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -458,7 +462,7 @@ Public Class frmMain
 
 
         ' 
-        ' Look to cover 1 - 0, after 40 minutes play
+        ' Look to cover 1 - 0
         '
         If sel1.autobetCorrectScore10BetMade = False Then
 
@@ -469,30 +473,31 @@ Public Class frmMain
 
                 If sel1.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+                    ' Check time is after 13 minutes
 
-                    If CDbl(tbxSel1InplayTime.Text) > +40 And CDbl(tbxSel1InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel1InplayTime.Text) > +13 And CDbl(tbxSel1InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel1.betfairCorrectScore10BackOdds) Then
-                            If CDbl(sel1.betfairCorrectScore10BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel1.betfairCorrectScore10BackOdds) < nudSettingsCS00UpperPrice.Value Then
+                            If CDbl(sel1.betfairCorrectScore10BackOdds) > nudSettingsCS10_CS01LowerPrice.Value And CDbl(sel1.betfairCorrectScore10BackOdds) < nudSettingsCS10_CS01UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel1.betfairCorrectScore10Orders) Then
                                     If CDbl(sel1.betfairCorrectScore10Orders) = 0 Then
-                                        If sel1.betfairCorrectScore10BackOdds <= nudSettingsCS10and01TargetGross.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel1.betfairCorrectScore10BackOdds), "IN")
-                                            oddsMarket = CDbl(sel1.betfairCorrectScore10BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel1.betfairEventName + " Market: Correct Score place back bet on 1 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel1.autobetCorrectScore10BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel1.betfairCorrectScore10BackOdds))
+                                        oddsMarket = CDbl(sel1.betfairCorrectScore10BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel1.betfairEventName + " Market: Correct Score place back bet on 1 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel1.autobetCorrectScore10BetMade = True
 
-                                            ' Place order on Correct Score 1-0 market
-                                            sel1.placeCorrectScore10_Order(odds, stake)
+                                        ' Place order on Correct Score 1-0 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel1.placeCorrectScore10_Order(odds, stake)
+                                        checkOrderStatus(sel1, orderStatus)
 
-                                        End If
+
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 1-0 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -511,7 +516,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 1-0  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 1-0  - Inplay timer not between +13 and +45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -522,7 +527,7 @@ Public Class frmMain
 
 
         ' 
-        ' Look to cover 0 - 1, after 40 minutes play
+        ' Look to cover 0 - 1,
         '
         If sel1.autobetCorrectScore01BetMade = False Then
 
@@ -533,30 +538,30 @@ Public Class frmMain
 
                 If sel1.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+                    ' Check time is after 13 minutes
 
-                    If CDbl(tbxSel1InplayTime.Text) > +40 And CDbl(tbxSel1InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel1InplayTime.Text) > +13 And CDbl(tbxSel1InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel1.betfairCorrectScore01BackOdds) Then
-                            If CDbl(sel1.betfairCorrectScore01BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel1.betfairCorrectScore01BackOdds) < nudSettingsCS00UpperPrice.Value Then
+                            If CDbl(sel1.betfairCorrectScore01BackOdds) > nudSettingsCS10_CS01LowerPrice.Value And CDbl(sel1.betfairCorrectScore01BackOdds) < nudSettingsCS10_CS01LowerPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel1.betfairCorrectScore01Orders) Then
                                     If CDbl(sel1.betfairCorrectScore01Orders) = 0 Then
-                                        If sel1.betfairCorrectScore01BackOdds <= nudSettingsCS10and01TargetGross.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel1.betfairCorrectScore01BackOdds), "IN")
-                                            oddsMarket = CDbl(sel1.betfairCorrectScore01BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel1.betfairEventName + " Market: Correct Score place back bet on 0 - 1 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel1.autobetCorrectScore01BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel1.betfairCorrectScore01BackOdds))
+                                        oddsMarket = CDbl(sel1.betfairCorrectScore01BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel1.betfairEventName + " Market: Correct Score place back bet on 0 - 1 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel1.autobetCorrectScore01BetMade = True
 
-                                            ' Place order on Correct Score 0-1 market
-                                            sel1.placeCorrectScore01_Order(odds, stake)
+                                        ' Place order on Correct Score 0-1 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel1.placeCorrectScore01_Order(odds, stake)
+                                        checkOrderStatus(sel1, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 0-1 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -575,7 +580,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 0-1  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Correct Score 0-1  - Inplay timer not between +13 and +45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -588,62 +593,77 @@ Public Class frmMain
         ' 
         ' Look to boost the Over1.5 if we have taken 0-0 and either 1-0 or 0-1 after 40 minutes play
         '
-        If sel1.autobetOver15TopUpBetMade = False Then
+        'If sel1.autobetOver15TopUpBetMade = False Then
 
-            ' Check the strategy has started, no Under 1.5 bet made and score still 0 - 0
-            If (sel1.autobetOver15BetMade = True And sel1.autobetUnder15BetMade = False And sel1.autobetCorrectScore00BetMade = True And tbxSel1Score.Text = "0 - 0") And (sel1.autobetCorrectScore10BetMade = True Or sel1.autobetCorrectScore01BetMade = True) Then
+        '    ' Check the strategy has started, no Under 1.5 bet made and score still 0 - 0
+        '    If (sel1.autobetOver15BetMade = True And sel1.autobetUnder15BetMade = False And sel1.autobetCorrectScore00BetMade = True And tbxSel1Score.Text = "0 - 0") And (sel1.autobetCorrectScore10BetMade = True Or sel1.autobetCorrectScore01BetMade = True) Then
 
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Looking to boost Over 1.5", EventLogEntryType.Information)
+        '        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Looking to boost Over 1.5", EventLogEntryType.Information)
 
-                If sel1.betfairCorrectScoreMarketStatus = "OPEN" Then
+        '        If sel1.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+        '            ' Check time is after 55 minutes ( inplay timer includes half time as it doesn't stop, so just before second half)
 
-                    If CDbl(tbxSel1InplayTime.Text) > +40 And CDbl(tbxSel1InplayTime.Text) < +60 Then
-                        If Not String.IsNullOrEmpty(sel1.betfairOver15BackOdds) Then
-                            If CDbl(sel1.betfairOver15BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel1.betfairOver15BackOdds) < nudSettingsCS00UpperPrice.Value Then
-                                If Not String.IsNullOrEmpty(sel1.betfairOver15Orders) Then
-                                    If CDbl(sel1.betfairOver15Orders) = 0 Then
+        '            If CDbl(tbxSel1InplayTime.Text) > +55 And CDbl(tbxSel1InplayTime.Text) < +70 Then
+        '                If Not String.IsNullOrEmpty(sel1.betfairOver15BackOdds) Then
+        '                    If CDbl(sel1.betfairOver15BackOdds) > nudSettingsOver15UpperPrice.Value Then
+        '                        If Not String.IsNullOrEmpty(sel1.betfairOver15Orders) Then
+        '                            If CDbl(sel1.betfairOver15Orders) = 0 Then
 
-                                        ' Place 2nd back bet on Over1.5
-                                        Dim odds As Double
-                                        Dim oddsMarket As Double
-                                        Dim stake As Double
-                                        odds = adjustOddsToMatch(CDbl(sel1.betfairOver15BackOdds), "OUT")
-                                        oddsMarket = CDbl(sel1.betfairCorrectScore01BackOdds)
-                                        stake = (nudSettingsOver15Stake.Value / 4)
-                                        sendEmailToText("Match: " + sel1.betfairEventName + " Market: Boost to Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                        sel1.autobetOver15TopUpBetMade = True
+        '                                ' Place 2nd back bet on Over1.5
+        '                                Dim odds As Double
+        '                                Dim oddsMarket As Double
+        '                                Dim stake As Double
+        '                                odds = adjustOddsToMatch(CDbl(sel1.betfairOver15BackOdds))
+        '                                oddsMarket = CDbl(sel1.betfairCorrectScore01BackOdds)
+        '                                stake = (nudSettingsOver15Stake.Value / 6)
+        '                                sendEmailToText("Match: " + sel1.betfairEventName + " Market: Boost to Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+        '                                sel1.autobetOver15TopUpBetMade = True
 
-                                        ' Place order on Over 1.5 market
-                                        sel1.placeOver15_Order(odds, stake)
+        '                                ' Place order on Over 1.5 market
+        '                                Dim orderStatus As String
+        '                                orderStatus = sel1.placeOver15_Order(odds, stake)
+        '                                checkOrderStatus(sel1, orderStatus)
 
-                                    Else
-                                        ' Unmatched orders
-                                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
-                                    End If
-                                Else
-                                    ' Unmatched orders are either NULL or EMPTY
-                                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position  - Unmatched orders are NULL or EMPTY, no further action taken", EventLogEntryType.Information)
-                                End If
-                            Else
-                                ' Odds are either Odds not within limits
-                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position - Odds not within correct Upper/Lower limits, no further action taken", EventLogEntryType.Information)
-                            End If
-                        Else
-                            ' Odds are either NULL or EMPTY
-                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position - Odds NULL or EMPTY, no further action taken", EventLogEntryType.Information)
-                        End If
-                    Else
-                        ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
-                    End If
-                Else
-                    ' Market not open
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position  - Market not OPEN, no further action taken", EventLogEntryType.Information)
+
+        '                            Else
+        '                                ' Unmatched orders
+        '                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
+        '                            End If
+        '                        Else
+        '                            ' Unmatched orders are either NULL or EMPTY
+        '                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position  - Unmatched orders are NULL or EMPTY, no further action taken", EventLogEntryType.Information)
+        '                        End If
+        '                    Else
+        '                        ' Odds are either Odds not within limits
+        '                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position - Odds not within correct Upper/Lower limits, no further action taken", EventLogEntryType.Information)
+        '                    End If
+        '                Else
+        '                    ' Odds are either NULL or EMPTY
+        '                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position - Odds NULL or EMPTY, no further action taken", EventLogEntryType.Information)
+        '                End If
+        '            Else
+        '                ' Not first half of match
+        '                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position - Inplay timer not between +55 and +70 mins, no further action taken", EventLogEntryType.Information)
+        '            End If
+        '        Else
+        '            ' Market not open
+        '            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel1 - Boost Over 1.5 position  - Market not OPEN, no further action taken", EventLogEntryType.Information)
+        '        End If
+        '    End If
+        'End If
+
+
+        ' Check the strategy has got to half time and no Goal
+        If sel1.autobetCashOutNoGoalsAtHalfTime = True Then
+            If sel1.autobetOver15BetMade = True And sel1.autobetUnder15BetMade = False And tbxSel1Score.Text = "0 - 0" Then
+                If CDbl(tbxSel1InplayTime.Text) > +50 And CDbl(tbxSel1InplayTime.Text) < +65 Then
+                    sel1.autobetCashOutNoGoalsAtHalfTime = True
+                    sendEmailToText("Match: " + sel1.betfairEventName + " reached 1/2 time and no goals. Monitor until profit on Correct Score overtakes Over/Under1.5 then CASH OUT")
                 End If
             End If
         End If
+
 
     End Sub
 
@@ -662,6 +682,7 @@ Public Class frmMain
                     sel2.autobetCorrectScore10BetMade = False
                     sel2.autobetCorrectScore01BetMade = False
                     sel2.autobetOver15TopUpBetMade = False
+                    sel2.autobetCashOutNoGoalsAtHalfTime = False
 
                     ' Set the interval
                     timerSel2AutoBet.Interval = nudSettingsAutoBetRefresh.Value
@@ -819,14 +840,17 @@ Public Class frmMain
                                             Dim odds As Double
                                             Dim oddsMarket As Double
                                             Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel2.betfairOver15BackOdds), "OUT")
-                                            oddsMarket = CDbl(sel2.betfairCorrectScore00BackOdds)
+                                            odds = adjustOddsToMatch(CDbl(sel2.betfairOver15BackOdds))
+                                            oddsMarket = CDbl(sel2.betfairOver15BackOdds)
                                             stake = nudSettingsOver15Stake.Value.ToString
+
                                             sendEmailToText("Match: " + sel2.betfairEventName + " Market: Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
                                             sel2.autobetOver15BetMade = True
 
                                             ' Place order on Over 1.5 market
-                                            sel2.placeOver15_Order(odds, stake)
+                                            Dim orderStatus As String
+                                            orderStatus = sel2.placeOver15_Order(odds, stake)
+                                            checkOrderStatus(sel2, orderStatus)
 
                                         End If
                                     Else
@@ -871,28 +895,28 @@ Public Class frmMain
                 If sel2.betfairCorrectScoreMarketStatus = "OPEN" Then
 
                     ' Check in first half
-                    If CDbl(tbxSel2InplayTime.Text) > +25 And CDbl(tbxSel2InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel2InplayTime.Text) > +13 And CDbl(tbxSel2InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel2.betfairCorrectScore00BackOdds) Then
                             If CDbl(sel2.betfairCorrectScore00BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel2.betfairCorrectScore00BackOdds) < nudSettingsCS00UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel2.betfairCorrectScore00Orders) Then
                                     If CDbl(sel2.betfairCorrectScore00Orders) = 0 Then
-                                        If sel2.betfairCorrectScore00BackOdds <= nudSettingsCS00TargetPrice.Value Then
 
-                                            ' calculate stake based on profit
-                                            Dim grossPerMarket As Double = nudSettingsCS00TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel2.betfairCorrectScore00BackOdds), "IN")
-                                            oddsMarket = CDbl(sel2.betfairCorrectScore00BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel2.betfairEventName + " Market: Correct Score place back bet on 0 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel2.autobetCorrectScore00BetMade = True
+                                        ' calculate stake based on profit
+                                        Dim grossPerMarket As Double = nudSettingsCS00TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel2.betfairCorrectScore00BackOdds))
+                                        oddsMarket = CDbl(sel2.betfairCorrectScore00BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel2.betfairEventName + " Market: Correct Score place back bet on 0 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel2.autobetCorrectScore00BetMade = True
 
-                                            ' Place order on Correct Score 0-0 market
-                                            sel2.placeCorrectScore00_Order(odds, stake)
+                                        ' Place order on Correct Score 0-0 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel2.placeCorrectScore00_Order(odds, stake)
+                                        checkOrderStatus(sel2, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 0-0 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -911,7 +935,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 0-0  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 0-0  - Inplay timer not between +13 and 45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -940,23 +964,23 @@ Public Class frmMain
                             If CDbl(sel2.betfairUnder15BackOdds) > nudSettingsUnder15LowerPrice.Value And CDbl(sel2.betfairUnder15BackOdds) < nudSettingsUnder15UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel2.betfairUnder15Orders) Then
                                     If CDbl(sel2.betfairUnder15Orders) = 0 Then
-                                        If sel2.betfairUnder15BackOdds >= nudSettingsUnder15TargetPrice.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsUnder15TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel2.betfairUnder15BackOdds), "IN")
-                                            oddsMarket = CDbl(sel2.betfairUnder15BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel2.betfairEventName + " Market: Over/Under1.5 place back bet on UNDER 1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel2.autobetUnder15BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsUnder15TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel2.betfairUnder15BackOdds))
+                                        oddsMarket = CDbl(sel2.betfairUnder15BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel2.betfairEventName + " Market: Over/Under1.5 place back bet on UNDER 1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel2.autobetUnder15BetMade = True
 
-                                            ' Place order on Over 1.5 market
-                                            sel2.placeUnder15_Order(odds, stake)
+                                        ' Place order on Over 1.5 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel2.placeUnder15_Order(odds, stake)
+                                        checkOrderStatus(sel2, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - UNDER 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -975,7 +999,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - UNDER 1.5 - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - UNDER 1.5 - Inplay timer not between +0 and 45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -987,7 +1011,7 @@ Public Class frmMain
 
 
         ' 
-        ' Look to cover 1 - 0, after 40 minutes play
+        ' Look to cover 1 - 0
         '
         If sel2.autobetCorrectScore10BetMade = False Then
 
@@ -998,30 +1022,31 @@ Public Class frmMain
 
                 If sel2.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+                    ' Check time is after 13 minutes
 
-                    If CDbl(tbxSel2InplayTime.Text) > +40 And CDbl(tbxSel2InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel2InplayTime.Text) > +13 And CDbl(tbxSel2InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel2.betfairCorrectScore10BackOdds) Then
-                            If CDbl(sel2.betfairCorrectScore10BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel2.betfairCorrectScore10BackOdds) < nudSettingsCS00UpperPrice.Value Then
+                            If CDbl(sel2.betfairCorrectScore10BackOdds) > nudSettingsCS10_CS01LowerPrice.Value And CDbl(sel2.betfairCorrectScore10BackOdds) < nudSettingsCS10_CS01UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel2.betfairCorrectScore10Orders) Then
                                     If CDbl(sel2.betfairCorrectScore10Orders) = 0 Then
-                                        If sel2.betfairCorrectScore10BackOdds <= nudSettingsCS10and01TargetGross.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel2.betfairCorrectScore10BackOdds), "IN")
-                                            oddsMarket = CDbl(sel2.betfairCorrectScore10BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel2.betfairEventName + " Market: Correct Score place back bet on 1 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel2.autobetCorrectScore10BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel2.betfairCorrectScore10BackOdds))
+                                        oddsMarket = CDbl(sel2.betfairCorrectScore10BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel2.betfairEventName + " Market: Correct Score place back bet on 1 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel2.autobetCorrectScore10BetMade = True
 
-                                            ' Place order on Correct Score 1-0 market
-                                            sel2.placeCorrectScore10_Order(odds, stake)
+                                        ' Place order on Correct Score 1-0 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel2.placeCorrectScore10_Order(odds, stake)
+                                        checkOrderStatus(sel2, orderStatus)
 
-                                        End If
+
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 1-0 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -1040,7 +1065,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 1-0  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 1-0  - Inplay timer not between +13 and +45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -1051,7 +1076,7 @@ Public Class frmMain
 
 
         ' 
-        ' Look to cover 0 - 1, after 40 minutes play
+        ' Look to cover 0 - 1,
         '
         If sel2.autobetCorrectScore01BetMade = False Then
 
@@ -1062,30 +1087,30 @@ Public Class frmMain
 
                 If sel2.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+                    ' Check time is after 13 minutes
 
-                    If CDbl(tbxSel2InplayTime.Text) > +40 And CDbl(tbxSel2InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel2InplayTime.Text) > +13 And CDbl(tbxSel2InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel2.betfairCorrectScore01BackOdds) Then
-                            If CDbl(sel2.betfairCorrectScore01BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel2.betfairCorrectScore01BackOdds) < nudSettingsCS00UpperPrice.Value Then
+                            If CDbl(sel2.betfairCorrectScore01BackOdds) > nudSettingsCS10_CS01LowerPrice.Value And CDbl(sel2.betfairCorrectScore01BackOdds) < nudSettingsCS10_CS01LowerPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel2.betfairCorrectScore01Orders) Then
                                     If CDbl(sel2.betfairCorrectScore01Orders) = 0 Then
-                                        If sel2.betfairCorrectScore01BackOdds <= nudSettingsCS10and01TargetGross.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel2.betfairCorrectScore01BackOdds), "IN")
-                                            oddsMarket = CDbl(sel2.betfairCorrectScore01BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel2.betfairEventName + " Market: Correct Score place back bet on 0 - 1 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel2.autobetCorrectScore01BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel2.betfairCorrectScore01BackOdds))
+                                        oddsMarket = CDbl(sel2.betfairCorrectScore01BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel2.betfairEventName + " Market: Correct Score place back bet on 0 - 1 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel2.autobetCorrectScore01BetMade = True
 
-                                            ' Place order on Correct Score 0-1 market
-                                            sel2.placeCorrectScore01_Order(odds, stake)
+                                        ' Place order on Correct Score 0-1 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel2.placeCorrectScore01_Order(odds, stake)
+                                        checkOrderStatus(sel2, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 0-1 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -1104,7 +1129,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 0-1  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Correct Score 0-1  - Inplay timer not between +13 and +45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -1117,62 +1142,77 @@ Public Class frmMain
         ' 
         ' Look to boost the Over1.5 if we have taken 0-0 and either 1-0 or 0-1 after 40 minutes play
         '
-        If sel2.autobetOver15TopUpBetMade = False Then
+        'If Sel2.autobetOver15TopUpBetMade = False Then
 
-            ' Check the strategy has started, no Under 1.5 bet made and score still 0 - 0
-            If (sel2.autobetOver15BetMade = True And sel2.autobetUnder15BetMade = False And sel2.autobetCorrectScore00BetMade = True And tbxSel2Score.Text = "0 - 0") And (sel2.autobetCorrectScore10BetMade = True Or sel2.autobetCorrectScore01BetMade = True) Then
+        '    ' Check the strategy has started, no Under 1.5 bet made and score still 0 - 0
+        '    If (Sel2.autobetOver15BetMade = True And Sel2.autobetUnder15BetMade = False And Sel2.autobetCorrectScore00BetMade = True And tbxSel2Score.Text = "0 - 0") And (Sel2.autobetCorrectScore10BetMade = True Or Sel2.autobetCorrectScore01BetMade = True) Then
 
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Looking to boost Over 1.5", EventLogEntryType.Information)
+        '        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Looking to boost Over 1.5", EventLogEntryType.Information)
 
-                If sel2.betfairCorrectScoreMarketStatus = "OPEN" Then
+        '        If Sel2.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+        '            ' Check time is after 55 minutes ( inplay timer includes half time as it doesn't stop, so just before second half)
 
-                    If CDbl(tbxSel2InplayTime.Text) > +40 And CDbl(tbxSel2InplayTime.Text) < +60 Then
-                        If Not String.IsNullOrEmpty(sel2.betfairOver15BackOdds) Then
-                            If CDbl(sel2.betfairOver15BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel2.betfairOver15BackOdds) < nudSettingsCS00UpperPrice.Value Then
-                                If Not String.IsNullOrEmpty(sel2.betfairOver15Orders) Then
-                                    If CDbl(sel2.betfairOver15Orders) = 0 Then
+        '            If CDbl(tbxSel2InplayTime.Text) > +55 And CDbl(tbxSel2InplayTime.Text) < +70 Then
+        '                If Not String.IsNullOrEmpty(Sel2.betfairOver15BackOdds) Then
+        '                    If CDbl(Sel2.betfairOver15BackOdds) > nudSettingsOver15UpperPrice.Value Then
+        '                        If Not String.IsNullOrEmpty(Sel2.betfairOver15Orders) Then
+        '                            If CDbl(Sel2.betfairOver15Orders) = 0 Then
 
-                                        ' Place 2nd back bet on Over1.5
-                                        Dim odds As Double
-                                        Dim oddsMarket As Double
-                                        Dim stake As Double
-                                        odds = adjustOddsToMatch(CDbl(sel2.betfairOver15BackOdds), "OUT")
-                                        oddsMarket = CDbl(sel2.betfairCorrectScore01BackOdds)
-                                        stake = (nudSettingsOver15Stake.Value / 4)
-                                        sendEmailToText("Match: " + sel2.betfairEventName + " Market: Boost to Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                        sel2.autobetOver15TopUpBetMade = True
+        '                                ' Place 2nd back bet on Over1.5
+        '                                Dim odds As Double
+        '                                Dim oddsMarket As Double
+        '                                Dim stake As Double
+        '                                odds = adjustOddsToMatch(CDbl(Sel2.betfairOver15BackOdds))
+        '                                oddsMarket = CDbl(Sel2.betfairCorrectScore01BackOdds)
+        '                                stake = (nudSettingsOver15Stake.Value / 6)
+        '                                sendEmailToText("Match: " + Sel2.betfairEventName + " Market: Boost to Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+        '                                Sel2.autobetOver15TopUpBetMade = True
 
-                                        ' Place order on Over 1.5 market
-                                        sel2.placeOver15_Order(odds, stake)
+        '                                ' Place order on Over 1.5 market
+        '                                Dim orderStatus As String
+        '                                orderStatus = Sel2.placeOver15_Order(odds, stake)
+        '                                checkOrderStatus(Sel2, orderStatus)
 
-                                    Else
-                                        ' Unmatched orders
-                                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
-                                    End If
-                                Else
-                                    ' Unmatched orders are either NULL or EMPTY
-                                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position  - Unmatched orders are NULL or EMPTY, no further action taken", EventLogEntryType.Information)
-                                End If
-                            Else
-                                ' Odds are either Odds not within limits
-                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position - Odds not within correct Upper/Lower limits, no further action taken", EventLogEntryType.Information)
-                            End If
-                        Else
-                            ' Odds are either NULL or EMPTY
-                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position - Odds NULL or EMPTY, no further action taken", EventLogEntryType.Information)
-                        End If
-                    Else
-                        ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
-                    End If
-                Else
-                    ' Market not open
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position  - Market not OPEN, no further action taken", EventLogEntryType.Information)
+
+        '                            Else
+        '                                ' Unmatched orders
+        '                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
+        '                            End If
+        '                        Else
+        '                            ' Unmatched orders are either NULL or EMPTY
+        '                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position  - Unmatched orders are NULL or EMPTY, no further action taken", EventLogEntryType.Information)
+        '                        End If
+        '                    Else
+        '                        ' Odds are either Odds not within limits
+        '                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position - Odds not within correct Upper/Lower limits, no further action taken", EventLogEntryType.Information)
+        '                    End If
+        '                Else
+        '                    ' Odds are either NULL or EMPTY
+        '                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position - Odds NULL or EMPTY, no further action taken", EventLogEntryType.Information)
+        '                End If
+        '            Else
+        '                ' Not first half of match
+        '                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position - Inplay timer not between +55 and +70 mins, no further action taken", EventLogEntryType.Information)
+        '            End If
+        '        Else
+        '            ' Market not open
+        '            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel2 - Boost Over 1.5 position  - Market not OPEN, no further action taken", EventLogEntryType.Information)
+        '        End If
+        '    End If
+        'End If
+
+
+        ' Check the strategy has got to half time and no Goal
+        If sel2.autobetCashOutNoGoalsAtHalfTime = True Then
+            If sel2.autobetOver15BetMade = True And sel2.autobetUnder15BetMade = False And tbxSel2Score.Text = "0 - 0" Then
+                If CDbl(tbxSel2InplayTime.Text) > +50 And CDbl(tbxSel2InplayTime.Text) < +65 Then
+                    sel2.autobetCashOutNoGoalsAtHalfTime = True
+                    sendEmailToText("Match: " + sel2.betfairEventName + " reached 1/2 time and no goals. Monitor until profit on Correct Score overtakes Over/Under1.5 then CASH OUT")
                 End If
             End If
         End If
+
 
     End Sub
 
@@ -1191,6 +1231,7 @@ Public Class frmMain
                     sel3.autobetCorrectScore10BetMade = False
                     sel3.autobetCorrectScore01BetMade = False
                     sel3.autobetOver15TopUpBetMade = False
+                    sel3.autobetCashOutNoGoalsAtHalfTime = False
 
                     ' Set the interval
                     timerSel3AutoBet.Interval = nudSettingsAutoBetRefresh.Value
@@ -1348,14 +1389,17 @@ Public Class frmMain
                                             Dim odds As Double
                                             Dim oddsMarket As Double
                                             Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel3.betfairOver15BackOdds), "OUT")
-                                            oddsMarket = CDbl(sel3.betfairCorrectScore00BackOdds)
+                                            odds = adjustOddsToMatch(CDbl(sel3.betfairOver15BackOdds))
+                                            oddsMarket = CDbl(sel3.betfairOver15BackOdds)
                                             stake = nudSettingsOver15Stake.Value.ToString
+
                                             sendEmailToText("Match: " + sel3.betfairEventName + " Market: Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
                                             sel3.autobetOver15BetMade = True
 
                                             ' Place order on Over 1.5 market
-                                            sel3.placeOver15_Order(odds, stake)
+                                            Dim orderStatus As String
+                                            orderStatus = sel3.placeOver15_Order(odds, stake)
+                                            checkOrderStatus(sel3, orderStatus)
 
                                         End If
                                     Else
@@ -1400,28 +1444,28 @@ Public Class frmMain
                 If sel3.betfairCorrectScoreMarketStatus = "OPEN" Then
 
                     ' Check in first half
-                    If CDbl(tbxSel3InplayTime.Text) > +25 And CDbl(tbxSel3InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel3InplayTime.Text) > +13 And CDbl(tbxSel3InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel3.betfairCorrectScore00BackOdds) Then
                             If CDbl(sel3.betfairCorrectScore00BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel3.betfairCorrectScore00BackOdds) < nudSettingsCS00UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel3.betfairCorrectScore00Orders) Then
                                     If CDbl(sel3.betfairCorrectScore00Orders) = 0 Then
-                                        If sel3.betfairCorrectScore00BackOdds <= nudSettingsCS00TargetPrice.Value Then
 
-                                            ' calculate stake based on profit
-                                            Dim grossPerMarket As Double = nudSettingsCS00TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel3.betfairCorrectScore00BackOdds), "IN")
-                                            oddsMarket = CDbl(sel3.betfairCorrectScore00BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel3.betfairEventName + " Market: Correct Score place back bet on 0 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel3.autobetCorrectScore00BetMade = True
+                                        ' calculate stake based on profit
+                                        Dim grossPerMarket As Double = nudSettingsCS00TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel3.betfairCorrectScore00BackOdds))
+                                        oddsMarket = CDbl(sel3.betfairCorrectScore00BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel3.betfairEventName + " Market: Correct Score place back bet on 0 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel3.autobetCorrectScore00BetMade = True
 
-                                            ' Place order on Correct Score 0-0 market
-                                            sel3.placeCorrectScore00_Order(odds, stake)
+                                        ' Place order on Correct Score 0-0 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel3.placeCorrectScore00_Order(odds, stake)
+                                        checkOrderStatus(sel3, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 0-0 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -1440,7 +1484,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 0-0  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 0-0  - Inplay timer not between +13 and 45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -1469,23 +1513,23 @@ Public Class frmMain
                             If CDbl(sel3.betfairUnder15BackOdds) > nudSettingsUnder15LowerPrice.Value And CDbl(sel3.betfairUnder15BackOdds) < nudSettingsUnder15UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel3.betfairUnder15Orders) Then
                                     If CDbl(sel3.betfairUnder15Orders) = 0 Then
-                                        If sel3.betfairUnder15BackOdds >= nudSettingsUnder15TargetPrice.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsUnder15TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel3.betfairUnder15BackOdds), "IN")
-                                            oddsMarket = CDbl(sel3.betfairUnder15BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel3.betfairEventName + " Market: Over/Under1.5 place back bet on UNDER 1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel3.autobetUnder15BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsUnder15TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel3.betfairUnder15BackOdds))
+                                        oddsMarket = CDbl(sel3.betfairUnder15BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel3.betfairEventName + " Market: Over/Under1.5 place back bet on UNDER 1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel3.autobetUnder15BetMade = True
 
-                                            ' Place order on Over 1.5 market
-                                            sel3.placeUnder15_Order(odds, stake)
+                                        ' Place order on Over 1.5 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel3.placeUnder15_Order(odds, stake)
+                                        checkOrderStatus(sel3, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - UNDER 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -1504,7 +1548,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - UNDER 1.5 - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - UNDER 1.5 - Inplay timer not between +0 and 45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -1516,7 +1560,7 @@ Public Class frmMain
 
 
         ' 
-        ' Look to cover 1 - 0, after 40 minutes play
+        ' Look to cover 1 - 0
         '
         If sel3.autobetCorrectScore10BetMade = False Then
 
@@ -1527,30 +1571,31 @@ Public Class frmMain
 
                 If sel3.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+                    ' Check time is after 13 minutes
 
-                    If CDbl(tbxSel3InplayTime.Text) > +40 And CDbl(tbxSel3InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel3InplayTime.Text) > +13 And CDbl(tbxSel3InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel3.betfairCorrectScore10BackOdds) Then
-                            If CDbl(sel3.betfairCorrectScore10BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel3.betfairCorrectScore10BackOdds) < nudSettingsCS00UpperPrice.Value Then
+                            If CDbl(sel3.betfairCorrectScore10BackOdds) > nudSettingsCS10_CS01LowerPrice.Value And CDbl(sel3.betfairCorrectScore10BackOdds) < nudSettingsCS10_CS01UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel3.betfairCorrectScore10Orders) Then
                                     If CDbl(sel3.betfairCorrectScore10Orders) = 0 Then
-                                        If sel3.betfairCorrectScore10BackOdds <= nudSettingsCS10and01TargetGross.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel3.betfairCorrectScore10BackOdds), "IN")
-                                            oddsMarket = CDbl(sel3.betfairCorrectScore10BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel3.betfairEventName + " Market: Correct Score place back bet on 1 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel3.autobetCorrectScore10BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel3.betfairCorrectScore10BackOdds))
+                                        oddsMarket = CDbl(sel3.betfairCorrectScore10BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel3.betfairEventName + " Market: Correct Score place back bet on 1 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel3.autobetCorrectScore10BetMade = True
 
-                                            ' Place order on Correct Score 1-0 market
-                                            sel3.placeCorrectScore10_Order(odds, stake)
+                                        ' Place order on Correct Score 1-0 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel3.placeCorrectScore10_Order(odds, stake)
+                                        checkOrderStatus(sel3, orderStatus)
 
-                                        End If
+
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 1-0 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -1569,7 +1614,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 1-0  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 1-0  - Inplay timer not between +13 and +45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -1580,7 +1625,7 @@ Public Class frmMain
 
 
         ' 
-        ' Look to cover 0 - 1, after 40 minutes play
+        ' Look to cover 0 - 1,
         '
         If sel3.autobetCorrectScore01BetMade = False Then
 
@@ -1591,30 +1636,30 @@ Public Class frmMain
 
                 If sel3.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+                    ' Check time is after 13 minutes
 
-                    If CDbl(tbxSel3InplayTime.Text) > +40 And CDbl(tbxSel3InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel3InplayTime.Text) > +13 And CDbl(tbxSel3InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel3.betfairCorrectScore01BackOdds) Then
-                            If CDbl(sel3.betfairCorrectScore01BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel3.betfairCorrectScore01BackOdds) < nudSettingsCS00UpperPrice.Value Then
+                            If CDbl(sel3.betfairCorrectScore01BackOdds) > nudSettingsCS10_CS01LowerPrice.Value And CDbl(sel3.betfairCorrectScore01BackOdds) < nudSettingsCS10_CS01LowerPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel3.betfairCorrectScore01Orders) Then
                                     If CDbl(sel3.betfairCorrectScore01Orders) = 0 Then
-                                        If sel3.betfairCorrectScore01BackOdds <= nudSettingsCS10and01TargetGross.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel3.betfairCorrectScore01BackOdds), "IN")
-                                            oddsMarket = CDbl(sel3.betfairCorrectScore01BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel3.betfairEventName + " Market: Correct Score place back bet on 0 - 1 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel3.autobetCorrectScore01BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel3.betfairCorrectScore01BackOdds))
+                                        oddsMarket = CDbl(sel3.betfairCorrectScore01BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel3.betfairEventName + " Market: Correct Score place back bet on 0 - 1 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel3.autobetCorrectScore01BetMade = True
 
-                                            ' Place order on Correct Score 0-1 market
-                                            sel3.placeCorrectScore01_Order(odds, stake)
+                                        ' Place order on Correct Score 0-1 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel3.placeCorrectScore01_Order(odds, stake)
+                                        checkOrderStatus(sel3, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 0-1 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -1633,7 +1678,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 0-1  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Correct Score 0-1  - Inplay timer not between +13 and +45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -1646,62 +1691,77 @@ Public Class frmMain
         ' 
         ' Look to boost the Over1.5 if we have taken 0-0 and either 1-0 or 0-1 after 40 minutes play
         '
-        If sel3.autobetOver15TopUpBetMade = False Then
+        'If Sel3.autobetOver15TopUpBetMade = False Then
 
-            ' Check the strategy has started, no Under 1.5 bet made and score still 0 - 0
-            If (sel3.autobetOver15BetMade = True And sel3.autobetUnder15BetMade = False And sel3.autobetCorrectScore00BetMade = True And tbxSel3Score.Text = "0 - 0") And (sel3.autobetCorrectScore10BetMade = True Or sel3.autobetCorrectScore01BetMade = True) Then
+        '    ' Check the strategy has started, no Under 1.5 bet made and score still 0 - 0
+        '    If (Sel3.autobetOver15BetMade = True And Sel3.autobetUnder15BetMade = False And Sel3.autobetCorrectScore00BetMade = True And tbxSel3Score.Text = "0 - 0") And (Sel3.autobetCorrectScore10BetMade = True Or Sel3.autobetCorrectScore01BetMade = True) Then
 
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Looking to boost Over 1.5", EventLogEntryType.Information)
+        '        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Looking to boost Over 1.5", EventLogEntryType.Information)
 
-                If sel3.betfairCorrectScoreMarketStatus = "OPEN" Then
+        '        If Sel3.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+        '            ' Check time is after 55 minutes ( inplay timer includes half time as it doesn't stop, so just before second half)
 
-                    If CDbl(tbxSel3InplayTime.Text) > +40 And CDbl(tbxSel3InplayTime.Text) < +60 Then
-                        If Not String.IsNullOrEmpty(sel3.betfairOver15BackOdds) Then
-                            If CDbl(sel3.betfairOver15BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel3.betfairOver15BackOdds) < nudSettingsCS00UpperPrice.Value Then
-                                If Not String.IsNullOrEmpty(sel3.betfairOver15Orders) Then
-                                    If CDbl(sel3.betfairOver15Orders) = 0 Then
+        '            If CDbl(tbxSel3InplayTime.Text) > +55 And CDbl(tbxSel3InplayTime.Text) < +70 Then
+        '                If Not String.IsNullOrEmpty(Sel3.betfairOver15BackOdds) Then
+        '                    If CDbl(Sel3.betfairOver15BackOdds) > nudSettingsOver15UpperPrice.Value Then
+        '                        If Not String.IsNullOrEmpty(Sel3.betfairOver15Orders) Then
+        '                            If CDbl(Sel3.betfairOver15Orders) = 0 Then
 
-                                        ' Place 2nd back bet on Over1.5
-                                        Dim odds As Double
-                                        Dim oddsMarket As Double
-                                        Dim stake As Double
-                                        odds = adjustOddsToMatch(CDbl(sel3.betfairOver15BackOdds), "OUT")
-                                        oddsMarket = CDbl(sel3.betfairCorrectScore01BackOdds)
-                                        stake = (nudSettingsOver15Stake.Value / 4)
-                                        sendEmailToText("Match: " + sel3.betfairEventName + " Market: Boost to Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                        sel3.autobetOver15TopUpBetMade = True
+        '                                ' Place 2nd back bet on Over1.5
+        '                                Dim odds As Double
+        '                                Dim oddsMarket As Double
+        '                                Dim stake As Double
+        '                                odds = adjustOddsToMatch(CDbl(Sel3.betfairOver15BackOdds))
+        '                                oddsMarket = CDbl(Sel3.betfairCorrectScore01BackOdds)
+        '                                stake = (nudSettingsOver15Stake.Value / 6)
+        '                                sendEmailToText("Match: " + Sel3.betfairEventName + " Market: Boost to Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+        '                                Sel3.autobetOver15TopUpBetMade = True
 
-                                        ' Place order on Over 1.5 market
-                                        sel3.placeOver15_Order(odds, stake)
+        '                                ' Place order on Over 1.5 market
+        '                                Dim orderStatus As String
+        '                                orderStatus = Sel3.placeOver15_Order(odds, stake)
+        '                                checkOrderStatus(Sel3, orderStatus)
 
-                                    Else
-                                        ' Unmatched orders
-                                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
-                                    End If
-                                Else
-                                    ' Unmatched orders are either NULL or EMPTY
-                                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position  - Unmatched orders are NULL or EMPTY, no further action taken", EventLogEntryType.Information)
-                                End If
-                            Else
-                                ' Odds are either Odds not within limits
-                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position - Odds not within correct Upper/Lower limits, no further action taken", EventLogEntryType.Information)
-                            End If
-                        Else
-                            ' Odds are either NULL or EMPTY
-                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position - Odds NULL or EMPTY, no further action taken", EventLogEntryType.Information)
-                        End If
-                    Else
-                        ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
-                    End If
-                Else
-                    ' Market not open
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position  - Market not OPEN, no further action taken", EventLogEntryType.Information)
+
+        '                            Else
+        '                                ' Unmatched orders
+        '                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
+        '                            End If
+        '                        Else
+        '                            ' Unmatched orders are either NULL or EMPTY
+        '                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position  - Unmatched orders are NULL or EMPTY, no further action taken", EventLogEntryType.Information)
+        '                        End If
+        '                    Else
+        '                        ' Odds are either Odds not within limits
+        '                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position - Odds not within correct Upper/Lower limits, no further action taken", EventLogEntryType.Information)
+        '                    End If
+        '                Else
+        '                    ' Odds are either NULL or EMPTY
+        '                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position - Odds NULL or EMPTY, no further action taken", EventLogEntryType.Information)
+        '                End If
+        '            Else
+        '                ' Not first half of match
+        '                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position - Inplay timer not between +55 and +70 mins, no further action taken", EventLogEntryType.Information)
+        '            End If
+        '        Else
+        '            ' Market not open
+        '            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel3 - Boost Over 1.5 position  - Market not OPEN, no further action taken", EventLogEntryType.Information)
+        '        End If
+        '    End If
+        'End If
+
+
+        ' Check the strategy has got to half time and no Goal
+        If sel3.autobetCashOutNoGoalsAtHalfTime = True Then
+            If sel3.autobetOver15BetMade = True And sel3.autobetUnder15BetMade = False And tbxSel3Score.Text = "0 - 0" Then
+                If CDbl(tbxSel3InplayTime.Text) > +50 And CDbl(tbxSel3InplayTime.Text) < +65 Then
+                    sel3.autobetCashOutNoGoalsAtHalfTime = True
+                    sendEmailToText("Match: " + sel3.betfairEventName + " reached 1/2 time and no goals. Monitor until profit on Correct Score overtakes Over/Under1.5 then CASH OUT")
                 End If
             End If
         End If
+
 
     End Sub
 
@@ -1720,6 +1780,7 @@ Public Class frmMain
                     sel4.autobetCorrectScore10BetMade = False
                     sel4.autobetCorrectScore01BetMade = False
                     sel4.autobetOver15TopUpBetMade = False
+                    sel4.autobetCashOutNoGoalsAtHalfTime = False
 
                     ' Set the interval
                     timerSel4AutoBet.Interval = nudSettingsAutoBetRefresh.Value
@@ -1877,14 +1938,17 @@ Public Class frmMain
                                             Dim odds As Double
                                             Dim oddsMarket As Double
                                             Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel4.betfairOver15BackOdds), "OUT")
-                                            oddsMarket = CDbl(sel4.betfairCorrectScore00BackOdds)
+                                            odds = adjustOddsToMatch(CDbl(sel4.betfairOver15BackOdds))
+                                            oddsMarket = CDbl(sel4.betfairOver15BackOdds)
                                             stake = nudSettingsOver15Stake.Value.ToString
+
                                             sendEmailToText("Match: " + sel4.betfairEventName + " Market: Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
                                             sel4.autobetOver15BetMade = True
 
                                             ' Place order on Over 1.5 market
-                                            sel4.placeOver15_Order(odds, stake)
+                                            Dim orderStatus As String
+                                            orderStatus = sel4.placeOver15_Order(odds, stake)
+                                            checkOrderStatus(sel4, orderStatus)
 
                                         End If
                                     Else
@@ -1929,28 +1993,28 @@ Public Class frmMain
                 If sel4.betfairCorrectScoreMarketStatus = "OPEN" Then
 
                     ' Check in first half
-                    If CDbl(tbxSel4InplayTime.Text) > +25 And CDbl(tbxSel4InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel4InplayTime.Text) > +13 And CDbl(tbxSel4InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel4.betfairCorrectScore00BackOdds) Then
                             If CDbl(sel4.betfairCorrectScore00BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel4.betfairCorrectScore00BackOdds) < nudSettingsCS00UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel4.betfairCorrectScore00Orders) Then
                                     If CDbl(sel4.betfairCorrectScore00Orders) = 0 Then
-                                        If sel4.betfairCorrectScore00BackOdds <= nudSettingsCS00TargetPrice.Value Then
 
-                                            ' calculate stake based on profit
-                                            Dim grossPerMarket As Double = nudSettingsCS00TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel4.betfairCorrectScore00BackOdds), "IN")
-                                            oddsMarket = CDbl(sel4.betfairCorrectScore00BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel4.betfairEventName + " Market: Correct Score place back bet on 0 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel4.autobetCorrectScore00BetMade = True
+                                        ' calculate stake based on profit
+                                        Dim grossPerMarket As Double = nudSettingsCS00TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel4.betfairCorrectScore00BackOdds))
+                                        oddsMarket = CDbl(sel4.betfairCorrectScore00BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel4.betfairEventName + " Market: Correct Score place back bet on 0 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel4.autobetCorrectScore00BetMade = True
 
-                                            ' Place order on Correct Score 0-0 market
-                                            sel4.placeCorrectScore00_Order(odds, stake)
+                                        ' Place order on Correct Score 0-0 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel4.placeCorrectScore00_Order(odds, stake)
+                                        checkOrderStatus(sel4, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 0-0 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -1969,7 +2033,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 0-0  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 0-0  - Inplay timer not between +13 and 45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -1998,23 +2062,23 @@ Public Class frmMain
                             If CDbl(sel4.betfairUnder15BackOdds) > nudSettingsUnder15LowerPrice.Value And CDbl(sel4.betfairUnder15BackOdds) < nudSettingsUnder15UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel4.betfairUnder15Orders) Then
                                     If CDbl(sel4.betfairUnder15Orders) = 0 Then
-                                        If sel4.betfairUnder15BackOdds >= nudSettingsUnder15TargetPrice.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsUnder15TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel4.betfairUnder15BackOdds), "IN")
-                                            oddsMarket = CDbl(sel4.betfairUnder15BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel4.betfairEventName + " Market: Over/Under1.5 place back bet on UNDER 1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel4.autobetUnder15BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsUnder15TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel4.betfairUnder15BackOdds))
+                                        oddsMarket = CDbl(sel4.betfairUnder15BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel4.betfairEventName + " Market: Over/Under1.5 place back bet on UNDER 1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel4.autobetUnder15BetMade = True
 
-                                            ' Place order on Over 1.5 market
-                                            sel4.placeUnder15_Order(odds, stake)
+                                        ' Place order on Over 1.5 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel4.placeUnder15_Order(odds, stake)
+                                        checkOrderStatus(sel4, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - UNDER 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -2033,7 +2097,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - UNDER 1.5 - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - UNDER 1.5 - Inplay timer not between +0 and 45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -2045,7 +2109,7 @@ Public Class frmMain
 
 
         ' 
-        ' Look to cover 1 - 0, after 40 minutes play
+        ' Look to cover 1 - 0
         '
         If sel4.autobetCorrectScore10BetMade = False Then
 
@@ -2056,30 +2120,31 @@ Public Class frmMain
 
                 If sel4.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+                    ' Check time is after 13 minutes
 
-                    If CDbl(tbxSel4InplayTime.Text) > +40 And CDbl(tbxSel4InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel4InplayTime.Text) > +13 And CDbl(tbxSel4InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel4.betfairCorrectScore10BackOdds) Then
-                            If CDbl(sel4.betfairCorrectScore10BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel4.betfairCorrectScore10BackOdds) < nudSettingsCS00UpperPrice.Value Then
+                            If CDbl(sel4.betfairCorrectScore10BackOdds) > nudSettingsCS10_CS01LowerPrice.Value And CDbl(sel4.betfairCorrectScore10BackOdds) < nudSettingsCS10_CS01UpperPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel4.betfairCorrectScore10Orders) Then
                                     If CDbl(sel4.betfairCorrectScore10Orders) = 0 Then
-                                        If sel4.betfairCorrectScore10BackOdds <= nudSettingsCS10and01TargetGross.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel4.betfairCorrectScore10BackOdds), "IN")
-                                            oddsMarket = CDbl(sel4.betfairCorrectScore10BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel4.betfairEventName + " Market: Correct Score place back bet on 1 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel4.autobetCorrectScore10BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel4.betfairCorrectScore10BackOdds))
+                                        oddsMarket = CDbl(sel4.betfairCorrectScore10BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel4.betfairEventName + " Market: Correct Score place back bet on 1 - 0 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel4.autobetCorrectScore10BetMade = True
 
-                                            ' Place order on Correct Score 1-0 market
-                                            sel4.placeCorrectScore10_Order(odds, stake)
+                                        ' Place order on Correct Score 1-0 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel4.placeCorrectScore10_Order(odds, stake)
+                                        checkOrderStatus(sel4, orderStatus)
 
-                                        End If
+
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 1-0 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -2098,7 +2163,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 1-0  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 1-0  - Inplay timer not between +13 and +45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -2109,7 +2174,7 @@ Public Class frmMain
 
 
         ' 
-        ' Look to cover 0 - 1, after 40 minutes play
+        ' Look to cover 0 - 1,
         '
         If sel4.autobetCorrectScore01BetMade = False Then
 
@@ -2120,30 +2185,30 @@ Public Class frmMain
 
                 If sel4.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+                    ' Check time is after 13 minutes
 
-                    If CDbl(tbxSel4InplayTime.Text) > +40 And CDbl(tbxSel4InplayTime.Text) < +60 Then
+                    If CDbl(tbxSel4InplayTime.Text) > +13 And CDbl(tbxSel4InplayTime.Text) < +45 Then
                         If Not String.IsNullOrEmpty(sel4.betfairCorrectScore01BackOdds) Then
-                            If CDbl(sel4.betfairCorrectScore01BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel4.betfairCorrectScore01BackOdds) < nudSettingsCS00UpperPrice.Value Then
+                            If CDbl(sel4.betfairCorrectScore01BackOdds) > nudSettingsCS10_CS01LowerPrice.Value And CDbl(sel4.betfairCorrectScore01BackOdds) < nudSettingsCS10_CS01LowerPrice.Value Then
                                 If Not String.IsNullOrEmpty(sel4.betfairCorrectScore01Orders) Then
                                     If CDbl(sel4.betfairCorrectScore01Orders) = 0 Then
-                                        If sel4.betfairCorrectScore01BackOdds <= nudSettingsCS10and01TargetGross.Value Then
 
-                                            ' calculate profit
-                                            Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
-                                            Dim odds As Double
-                                            Dim oddsMarket As Double
-                                            Dim stake As Double
-                                            odds = adjustOddsToMatch(CDbl(sel4.betfairCorrectScore01BackOdds), "IN")
-                                            oddsMarket = CDbl(sel4.betfairCorrectScore01BackOdds)
-                                            stake = grossPerMarket / (oddsMarket - 1)
-                                            sendEmailToText("Match: " + sel4.betfairEventName + " Market: Correct Score place back bet on 0 - 1 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                            sel4.autobetCorrectScore01BetMade = True
+                                        ' calculate profit
+                                        Dim grossPerMarket As Double = nudSettingsCS10and01TargetGross.Value
+                                        Dim odds As Double
+                                        Dim oddsMarket As Double
+                                        Dim stake As Double
+                                        odds = adjustOddsToMatch(CDbl(sel4.betfairCorrectScore01BackOdds))
+                                        oddsMarket = CDbl(sel4.betfairCorrectScore01BackOdds)
+                                        stake = grossPerMarket / (oddsMarket - 1)
+                                        sendEmailToText("Match: " + sel4.betfairEventName + " Market: Correct Score place back bet on 0 - 1 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+                                        sel4.autobetCorrectScore01BetMade = True
 
-                                            ' Place order on Correct Score 0-1 market
-                                            sel4.placeCorrectScore01_Order(odds, stake)
+                                        ' Place order on Correct Score 0-1 market
+                                        Dim orderStatus As String
+                                        orderStatus = sel4.placeCorrectScore01_Order(odds, stake)
+                                        checkOrderStatus(sel4, orderStatus)
 
-                                        End If
                                     Else
                                         ' Unmatched orders
                                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 0-1 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
@@ -2162,7 +2227,7 @@ Public Class frmMain
                         End If
                     Else
                         ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 0-1  - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Correct Score 0-1  - Inplay timer not between +13 and +45 mins, no further action taken", EventLogEntryType.Information)
                     End If
                 Else
                     ' Market not open
@@ -2175,62 +2240,77 @@ Public Class frmMain
         ' 
         ' Look to boost the Over1.5 if we have taken 0-0 and either 1-0 or 0-1 after 40 minutes play
         '
-        If sel4.autobetOver15TopUpBetMade = False Then
+        'If Sel4.autobetOver15TopUpBetMade = False Then
 
-            ' Check the strategy has started, no Under 1.5 bet made and score still 0 - 0
-            If (sel4.autobetOver15BetMade = True And sel4.autobetUnder15BetMade = False And sel4.autobetCorrectScore00BetMade = True And tbxSel4Score.Text = "0 - 0") And (sel4.autobetCorrectScore10BetMade = True Or sel4.autobetCorrectScore01BetMade = True) Then
+        '    ' Check the strategy has started, no Under 1.5 bet made and score still 0 - 0
+        '    If (Sel4.autobetOver15BetMade = True And Sel4.autobetUnder15BetMade = False And Sel4.autobetCorrectScore00BetMade = True And tbxSel4Score.Text = "0 - 0") And (Sel4.autobetCorrectScore10BetMade = True Or Sel4.autobetCorrectScore01BetMade = True) Then
 
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Looking to boost Over 1.5", EventLogEntryType.Information)
+        '        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Looking to boost Over 1.5", EventLogEntryType.Information)
 
-                If sel4.betfairCorrectScoreMarketStatus = "OPEN" Then
+        '        If Sel4.betfairCorrectScoreMarketStatus = "OPEN" Then
 
-                    ' Check time is after 40 minutes
+        '            ' Check time is after 55 minutes ( inplay timer includes half time as it doesn't stop, so just before second half)
 
-                    If CDbl(tbxSel4InplayTime.Text) > +40 And CDbl(tbxSel4InplayTime.Text) < +60 Then
-                        If Not String.IsNullOrEmpty(sel4.betfairOver15BackOdds) Then
-                            If CDbl(sel4.betfairOver15BackOdds) > nudSettingsCS00LowerPrice.Value And CDbl(sel4.betfairOver15BackOdds) < nudSettingsCS00UpperPrice.Value Then
-                                If Not String.IsNullOrEmpty(sel4.betfairOver15Orders) Then
-                                    If CDbl(sel4.betfairOver15Orders) = 0 Then
+        '            If CDbl(tbxSel4InplayTime.Text) > +55 And CDbl(tbxSel4InplayTime.Text) < +70 Then
+        '                If Not String.IsNullOrEmpty(Sel4.betfairOver15BackOdds) Then
+        '                    If CDbl(Sel4.betfairOver15BackOdds) > nudSettingsOver15UpperPrice.Value Then
+        '                        If Not String.IsNullOrEmpty(Sel4.betfairOver15Orders) Then
+        '                            If CDbl(Sel4.betfairOver15Orders) = 0 Then
 
-                                        ' Place 2nd back bet on Over1.5
-                                        Dim odds As Double
-                                        Dim oddsMarket As Double
-                                        Dim stake As Double
-                                        odds = adjustOddsToMatch(CDbl(sel4.betfairOver15BackOdds), "OUT")
-                                        oddsMarket = CDbl(sel4.betfairCorrectScore01BackOdds)
-                                        stake = (nudSettingsOver15Stake.Value / 4)
-                                        sendEmailToText("Match: " + sel4.betfairEventName + " Market: Boost to Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
-                                        sel4.autobetOver15TopUpBetMade = True
+        '                                ' Place 2nd back bet on Over1.5
+        '                                Dim odds As Double
+        '                                Dim oddsMarket As Double
+        '                                Dim stake As Double
+        '                                odds = adjustOddsToMatch(CDbl(Sel4.betfairOver15BackOdds))
+        '                                oddsMarket = CDbl(Sel4.betfairCorrectScore01BackOdds)
+        '                                stake = (nudSettingsOver15Stake.Value / 6)
+        '                                sendEmailToText("Match: " + Sel4.betfairEventName + " Market: Boost to Over/Under1.5 place back bet on OVER1.5 Price: " + oddsMarket.ToString + " Stake: £" + FormatNumber(CDbl(stake), 2).ToString)
+        '                                Sel4.autobetOver15TopUpBetMade = True
 
-                                        ' Place order on Over 1.5 market
-                                        sel4.placeOver15_Order(odds, stake)
+        '                                ' Place order on Over 1.5 market
+        '                                Dim orderStatus As String
+        '                                orderStatus = Sel4.placeOver15_Order(odds, stake)
+        '                                checkOrderStatus(Sel4, orderStatus)
 
-                                    Else
-                                        ' Unmatched orders
-                                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
-                                    End If
-                                Else
-                                    ' Unmatched orders are either NULL or EMPTY
-                                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position  - Unmatched orders are NULL or EMPTY, no further action taken", EventLogEntryType.Information)
-                                End If
-                            Else
-                                ' Odds are either Odds not within limits
-                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position - Odds not within correct Upper/Lower limits, no further action taken", EventLogEntryType.Information)
-                            End If
-                        Else
-                            ' Odds are either NULL or EMPTY
-                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position - Odds NULL or EMPTY, no further action taken", EventLogEntryType.Information)
-                        End If
-                    Else
-                        ' Not first half of match
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position - Inplay timer >60 mins, no further action taken", EventLogEntryType.Information)
-                    End If
-                Else
-                    ' Market not open
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position  - Market not OPEN, no further action taken", EventLogEntryType.Information)
+
+        '                            Else
+        '                                ' Unmatched orders
+        '                                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position - Unmatched orders, no further action taken", EventLogEntryType.Information)
+        '                            End If
+        '                        Else
+        '                            ' Unmatched orders are either NULL or EMPTY
+        '                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position  - Unmatched orders are NULL or EMPTY, no further action taken", EventLogEntryType.Information)
+        '                        End If
+        '                    Else
+        '                        ' Odds are either Odds not within limits
+        '                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position - Odds not within correct Upper/Lower limits, no further action taken", EventLogEntryType.Information)
+        '                    End If
+        '                Else
+        '                    ' Odds are either NULL or EMPTY
+        '                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position - Odds NULL or EMPTY, no further action taken", EventLogEntryType.Information)
+        '                End If
+        '            Else
+        '                ' Not first half of match
+        '                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position - Inplay timer not between +55 and +70 mins, no further action taken", EventLogEntryType.Information)
+        '            End If
+        '        Else
+        '            ' Market not open
+        '            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Autobet for Sel4 - Boost Over 1.5 position  - Market not OPEN, no further action taken", EventLogEntryType.Information)
+        '        End If
+        '    End If
+        'End If
+
+
+        ' Check the strategy has got to half time and no Goal
+        If sel4.autobetCashOutNoGoalsAtHalfTime = True Then
+            If sel4.autobetOver15BetMade = True And sel4.autobetUnder15BetMade = False And tbxSel4Score.Text = "0 - 0" Then
+                If CDbl(tbxSel4InplayTime.Text) > +50 And CDbl(tbxSel4InplayTime.Text) < +65 Then
+                    sel4.autobetCashOutNoGoalsAtHalfTime = True
+                    sendEmailToText("Match: " + sel4.betfairEventName + " reached 1/2 time and no goals. Monitor until profit on Correct Score overtakes Over/Under1.5 then CASH OUT")
                 End If
             End If
         End If
+
 
     End Sub
 
@@ -3313,70 +3393,61 @@ Public Class frmMain
 
     End Sub
 
-    Private Function adjustOddsToMatch(odds As Double, directionOdds As String) As Double
+    Private Function adjustOddsToMatch(odds As Double) As Double
 
-        ' Adjustable multiplier
-        Dim tickMultiplier As Integer = 1
+        ' Betfair table
+        '1.01 → 2	0.01
+        '2→ 3	    0.02
+        '3 → 4	    0.05
+        '4 → 6	    0.1
+        '6 → 10	    0.2
+        '10 → 20	0.5
+        '20 → 30	  1
+        '30 → 50	  2
+        '50 → 100	  5
+        '100 → 1000	 10
 
-        ' Direction Odds - either OUT or IN (OUT e.g. is going from 10 to 15, IN is going 3 to 2)
-
-        ' Odds between 1-5 increments 0.1
-        ' Odds between 6-9 increments 0.2
-        ' Odds over 10 increments 0.5
-        ' odds over 20 increments 1
-        ' odds over 30 increment 2
-        If odds > 1 And odds < 6 Then
-            If directionOdds = "OUT" Then
-                'Subtract
-                odds = odds - 0.01
-                Return odds
-            Else
-                ' Add
-                odds = odds + 0.01
-                Return odds
-            End If
-
-        ElseIf odds >= 6 And odds < 10 Then
-
-            If directionOdds = "OUT" Then
-                'Subtract
-                odds = odds - 0.02
-                Return odds
-            Else
-                ' Add
-                odds = odds + 0.02
-                Return odds
-            End If
-
-        ElseIf odds >= 10 And odds < 20 Then
-
-            If directionOdds = "OUT" Then
-                'Subtract
-                odds = odds - 0.5
-                Return odds
-            Else
-                ' Add
-                odds = odds + 0.5
-                Return odds
-            End If
-
-
-        ElseIf odds >= 20 And odds < 30 Then
-
-            If directionOdds = "OUT" Then
-                'Subtract
-                odds = odds - 1
-                Return odds
-            Else
-                ' Add
-                odds = odds + 1
-                Return odds
-            End If
+        If odds > 1.01 And odds <= 2 Then
+            odds = odds - 0.01
+            Return odds
+        ElseIf odds > 2 And odds <= 3 Then
+            odds = odds - 0.02
+            Return odds
+        ElseIf odds > 3 And odds <= 4 Then
+            odds = odds - 0.05
+            Return odds
+        ElseIf odds > 4 And odds <= 6 Then
+            odds = odds - 0.1
+            Return odds
+        ElseIf odds > 6 And odds <= 10 Then
+            odds = odds - 0.2
+            Return odds
+        ElseIf odds > 10 And odds <= 20 Then
+            odds = odds - 0.5
+            Return odds
+        ElseIf odds > 20 And odds <= 30 Then
+            odds = odds - 1
+            Return odds
+        ElseIf odds > 30 And odds <= 50 Then
+            odds = odds - 2
+            Return odds
+        ElseIf odds > 50 And odds <= 100 Then
+            odds = odds - 5
+            Return odds
+        ElseIf odds > 100 And odds <= 1000 Then
+            odds = odds - 10
+            Return odds
         Else
-            ' Return odds
             Return odds
         End If
 
     End Function
 
+    Public Sub checkOrderStatus(sel As Selection, status As String)
+        If status = "SUCCESS" Then
+            ' Continue
+        Else
+            sendEmailToText("Match: " + sel.betfairEventName + " placeOrder has failed....please look at logs.")
+        End If
+    End Sub
 End Class

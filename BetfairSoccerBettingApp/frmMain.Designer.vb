@@ -28,6 +28,10 @@ Partial Class frmMain
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.nudSettingsCS10_CS01LowerPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label111 = New System.Windows.Forms.Label()
+        Me.nudSettingsCS10_CS01UpperPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label112 = New System.Windows.Forms.Label()
         Me.nudSettingsUnder15TargetGross = New System.Windows.Forms.NumericUpDown()
         Me.Label109 = New System.Windows.Forms.Label()
         Me.nudSettingsOver15Stake = New System.Windows.Forms.NumericUpDown()
@@ -37,8 +41,6 @@ Partial Class frmMain
         Me.nudSettingsCS00TargetGross = New System.Windows.Forms.NumericUpDown()
         Me.Label105 = New System.Windows.Forms.Label()
         Me.Label104 = New System.Windows.Forms.Label()
-        Me.nudSettingsUnder15TargetPrice = New System.Windows.Forms.NumericUpDown()
-        Me.Label101 = New System.Windows.Forms.Label()
         Me.nudSettingsUnder15LowerPrice = New System.Windows.Forms.NumericUpDown()
         Me.Label102 = New System.Windows.Forms.Label()
         Me.nudSettingsUnder15UpperPrice = New System.Windows.Forms.NumericUpDown()
@@ -50,8 +52,6 @@ Partial Class frmMain
         Me.Label98 = New System.Windows.Forms.Label()
         Me.nudSettingsOver15UpperPrice = New System.Windows.Forms.NumericUpDown()
         Me.Label99 = New System.Windows.Forms.Label()
-        Me.nudSettingsCS00TargetPrice = New System.Windows.Forms.NumericUpDown()
-        Me.Label96 = New System.Windows.Forms.Label()
         Me.nudSettingsCS00LowerPrice = New System.Windows.Forms.NumericUpDown()
         Me.Label95 = New System.Windows.Forms.Label()
         Me.nudSettingsCS00UpperPrice = New System.Windows.Forms.NumericUpDown()
@@ -318,17 +318,17 @@ Partial Class frmMain
         Me.timerSel3AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel4AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1.SuspendLayout()
+        CType(Me.nudSettingsCS10_CS01LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudSettingsCS10_CS01UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsUnder15TargetGross, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsOver15Stake, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsCS10and01TargetGross, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsCS00TargetGross, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudSettingsUnder15TargetPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsUnder15LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsUnder15UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsOver15TargetPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsOver15LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsOver15UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudSettingsCS00TargetPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsCS00LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsCS00UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsAutoBetRefresh, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -355,6 +355,10 @@ Partial Class frmMain
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.Info
+        Me.GroupBox1.Controls.Add(Me.nudSettingsCS10_CS01LowerPrice)
+        Me.GroupBox1.Controls.Add(Me.Label111)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsCS10_CS01UpperPrice)
+        Me.GroupBox1.Controls.Add(Me.Label112)
         Me.GroupBox1.Controls.Add(Me.nudSettingsUnder15TargetGross)
         Me.GroupBox1.Controls.Add(Me.Label109)
         Me.GroupBox1.Controls.Add(Me.nudSettingsOver15Stake)
@@ -364,8 +368,6 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.nudSettingsCS00TargetGross)
         Me.GroupBox1.Controls.Add(Me.Label105)
         Me.GroupBox1.Controls.Add(Me.Label104)
-        Me.GroupBox1.Controls.Add(Me.nudSettingsUnder15TargetPrice)
-        Me.GroupBox1.Controls.Add(Me.Label101)
         Me.GroupBox1.Controls.Add(Me.nudSettingsUnder15LowerPrice)
         Me.GroupBox1.Controls.Add(Me.Label102)
         Me.GroupBox1.Controls.Add(Me.nudSettingsUnder15UpperPrice)
@@ -377,8 +379,6 @@ Partial Class frmMain
         Me.GroupBox1.Controls.Add(Me.Label98)
         Me.GroupBox1.Controls.Add(Me.nudSettingsOver15UpperPrice)
         Me.GroupBox1.Controls.Add(Me.Label99)
-        Me.GroupBox1.Controls.Add(Me.nudSettingsCS00TargetPrice)
-        Me.GroupBox1.Controls.Add(Me.Label96)
         Me.GroupBox1.Controls.Add(Me.nudSettingsCS00LowerPrice)
         Me.GroupBox1.Controls.Add(Me.Label95)
         Me.GroupBox1.Controls.Add(Me.nudSettingsCS00UpperPrice)
@@ -394,18 +394,62 @@ Partial Class frmMain
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Order Controls"
         '
+        'nudSettingsCS10_CS01LowerPrice
+        '
+        Me.nudSettingsCS10_CS01LowerPrice.DecimalPlaces = 2
+        Me.nudSettingsCS10_CS01LowerPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsCS10_CS01LowerPrice.Location = New System.Drawing.Point(357, 53)
+        Me.nudSettingsCS10_CS01LowerPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.nudSettingsCS10_CS01LowerPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsCS10_CS01LowerPrice.Name = "nudSettingsCS10_CS01LowerPrice"
+        Me.nudSettingsCS10_CS01LowerPrice.Size = New System.Drawing.Size(54, 20)
+        Me.nudSettingsCS10_CS01LowerPrice.TabIndex = 74
+        Me.nudSettingsCS10_CS01LowerPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsCS10_CS01LowerPrice.Value = New Decimal(New Integer() {450, 0, 0, 131072})
+        '
+        'Label111
+        '
+        Me.Label111.AutoSize = True
+        Me.Label111.Location = New System.Drawing.Point(282, 55)
+        Me.Label111.Name = "Label111"
+        Me.Label111.Size = New System.Drawing.Size(74, 13)
+        Me.Label111.TabIndex = 73
+        Me.Label111.Text = "1-0/0-1 Lower"
+        '
+        'nudSettingsCS10_CS01UpperPrice
+        '
+        Me.nudSettingsCS10_CS01UpperPrice.DecimalPlaces = 2
+        Me.nudSettingsCS10_CS01UpperPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsCS10_CS01UpperPrice.Location = New System.Drawing.Point(356, 30)
+        Me.nudSettingsCS10_CS01UpperPrice.Maximum = New Decimal(New Integer() {25, 0, 0, 0})
+        Me.nudSettingsCS10_CS01UpperPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudSettingsCS10_CS01UpperPrice.Name = "nudSettingsCS10_CS01UpperPrice"
+        Me.nudSettingsCS10_CS01UpperPrice.Size = New System.Drawing.Size(55, 20)
+        Me.nudSettingsCS10_CS01UpperPrice.TabIndex = 72
+        Me.nudSettingsCS10_CS01UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsCS10_CS01UpperPrice.Value = New Decimal(New Integer() {8, 0, 0, 0})
+        '
+        'Label112
+        '
+        Me.Label112.AutoSize = True
+        Me.Label112.Location = New System.Drawing.Point(281, 32)
+        Me.Label112.Name = "Label112"
+        Me.Label112.Size = New System.Drawing.Size(74, 13)
+        Me.Label112.TabIndex = 71
+        Me.Label112.Text = "1-0/0-1 Upper"
+        '
         'nudSettingsUnder15TargetGross
         '
         Me.nudSettingsUnder15TargetGross.DecimalPlaces = 2
         Me.nudSettingsUnder15TargetGross.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudSettingsUnder15TargetGross.Location = New System.Drawing.Point(385, 125)
+        Me.nudSettingsUnder15TargetGross.Location = New System.Drawing.Point(390, 126)
         Me.nudSettingsUnder15TargetGross.Maximum = New Decimal(New Integer() {150, 0, 0, 0})
         Me.nudSettingsUnder15TargetGross.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
         Me.nudSettingsUnder15TargetGross.Name = "nudSettingsUnder15TargetGross"
         Me.nudSettingsUnder15TargetGross.Size = New System.Drawing.Size(56, 20)
         Me.nudSettingsUnder15TargetGross.TabIndex = 70
         Me.nudSettingsUnder15TargetGross.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsUnder15TargetGross.Value = New Decimal(New Integer() {80, 0, 0, 0})
+        Me.nudSettingsUnder15TargetGross.Value = New Decimal(New Integer() {60, 0, 0, 0})
         '
         'Label109
         '
@@ -420,7 +464,7 @@ Partial Class frmMain
         '
         Me.nudSettingsOver15Stake.DecimalPlaces = 2
         Me.nudSettingsOver15Stake.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudSettingsOver15Stake.Location = New System.Drawing.Point(461, 102)
+        Me.nudSettingsOver15Stake.Location = New System.Drawing.Point(503, 100)
         Me.nudSettingsOver15Stake.Maximum = New Decimal(New Integer() {150, 0, 0, 0})
         Me.nudSettingsOver15Stake.Minimum = New Decimal(New Integer() {20, 0, 0, 0})
         Me.nudSettingsOver15Stake.Name = "nudSettingsOver15Stake"
@@ -432,7 +476,7 @@ Partial Class frmMain
         'Label107
         '
         Me.Label107.AutoSize = True
-        Me.Label107.Location = New System.Drawing.Point(379, 104)
+        Me.Label107.Location = New System.Drawing.Point(421, 102)
         Me.Label107.Name = "Label107"
         Me.Label107.Size = New System.Drawing.Size(76, 13)
         Me.Label107.TabIndex = 67
@@ -492,33 +536,11 @@ Partial Class frmMain
         Me.Label104.TabIndex = 62
         Me.Label104.Text = "Target Return Gross Amounts"
         '
-        'nudSettingsUnder15TargetPrice
-        '
-        Me.nudSettingsUnder15TargetPrice.DecimalPlaces = 2
-        Me.nudSettingsUnder15TargetPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsUnder15TargetPrice.Location = New System.Drawing.Point(619, 78)
-        Me.nudSettingsUnder15TargetPrice.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudSettingsUnder15TargetPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudSettingsUnder15TargetPrice.Name = "nudSettingsUnder15TargetPrice"
-        Me.nudSettingsUnder15TargetPrice.Size = New System.Drawing.Size(55, 20)
-        Me.nudSettingsUnder15TargetPrice.TabIndex = 61
-        Me.nudSettingsUnder15TargetPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsUnder15TargetPrice.Value = New Decimal(New Integer() {7, 0, 0, 0})
-        '
-        'Label101
-        '
-        Me.Label101.AutoSize = True
-        Me.Label101.Location = New System.Drawing.Point(533, 80)
-        Me.Label101.Name = "Label101"
-        Me.Label101.Size = New System.Drawing.Size(88, 13)
-        Me.Label101.TabIndex = 60
-        Me.Label101.Text = "Under 1.5 Target"
-        '
         'nudSettingsUnder15LowerPrice
         '
         Me.nudSettingsUnder15LowerPrice.DecimalPlaces = 2
         Me.nudSettingsUnder15LowerPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsUnder15LowerPrice.Location = New System.Drawing.Point(619, 55)
+        Me.nudSettingsUnder15LowerPrice.Location = New System.Drawing.Point(646, 53)
         Me.nudSettingsUnder15LowerPrice.Maximum = New Decimal(New Integer() {25, 0, 0, 0})
         Me.nudSettingsUnder15LowerPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudSettingsUnder15LowerPrice.Name = "nudSettingsUnder15LowerPrice"
@@ -530,7 +552,7 @@ Partial Class frmMain
         'Label102
         '
         Me.Label102.AutoSize = True
-        Me.Label102.Location = New System.Drawing.Point(533, 57)
+        Me.Label102.Location = New System.Drawing.Point(560, 55)
         Me.Label102.Name = "Label102"
         Me.Label102.Size = New System.Drawing.Size(86, 13)
         Me.Label102.TabIndex = 58
@@ -540,7 +562,7 @@ Partial Class frmMain
         '
         Me.nudSettingsUnder15UpperPrice.DecimalPlaces = 2
         Me.nudSettingsUnder15UpperPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsUnder15UpperPrice.Location = New System.Drawing.Point(619, 32)
+        Me.nudSettingsUnder15UpperPrice.Location = New System.Drawing.Point(646, 30)
         Me.nudSettingsUnder15UpperPrice.Maximum = New Decimal(New Integer() {25, 0, 0, 0})
         Me.nudSettingsUnder15UpperPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudSettingsUnder15UpperPrice.Name = "nudSettingsUnder15UpperPrice"
@@ -552,7 +574,7 @@ Partial Class frmMain
         'Label103
         '
         Me.Label103.AutoSize = True
-        Me.Label103.Location = New System.Drawing.Point(533, 34)
+        Me.Label103.Location = New System.Drawing.Point(560, 32)
         Me.Label103.Name = "Label103"
         Me.Label103.Size = New System.Drawing.Size(86, 13)
         Me.Label103.TabIndex = 56
@@ -562,7 +584,7 @@ Partial Class frmMain
         '
         Me.Label100.AutoSize = True
         Me.Label100.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label100.Location = New System.Drawing.Point(241, 14)
+        Me.Label100.Location = New System.Drawing.Point(160, 16)
         Me.Label100.Name = "Label100"
         Me.Label100.Size = New System.Drawing.Size(42, 13)
         Me.Label100.TabIndex = 55
@@ -572,7 +594,7 @@ Partial Class frmMain
         '
         Me.nudSettingsOver15TargetPrice.DecimalPlaces = 2
         Me.nudSettingsOver15TargetPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsOver15TargetPrice.Location = New System.Drawing.Point(461, 78)
+        Me.nudSettingsOver15TargetPrice.Location = New System.Drawing.Point(503, 76)
         Me.nudSettingsOver15TargetPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
         Me.nudSettingsOver15TargetPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudSettingsOver15TargetPrice.Name = "nudSettingsOver15TargetPrice"
@@ -584,7 +606,7 @@ Partial Class frmMain
         'Label97
         '
         Me.Label97.AutoSize = True
-        Me.Label97.Location = New System.Drawing.Point(375, 80)
+        Me.Label97.Location = New System.Drawing.Point(417, 78)
         Me.Label97.Name = "Label97"
         Me.Label97.Size = New System.Drawing.Size(82, 13)
         Me.Label97.TabIndex = 53
@@ -594,7 +616,7 @@ Partial Class frmMain
         '
         Me.nudSettingsOver15LowerPrice.DecimalPlaces = 2
         Me.nudSettingsOver15LowerPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsOver15LowerPrice.Location = New System.Drawing.Point(461, 55)
+        Me.nudSettingsOver15LowerPrice.Location = New System.Drawing.Point(503, 53)
         Me.nudSettingsOver15LowerPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
         Me.nudSettingsOver15LowerPrice.Minimum = New Decimal(New Integer() {12, 0, 0, 65536})
         Me.nudSettingsOver15LowerPrice.Name = "nudSettingsOver15LowerPrice"
@@ -606,7 +628,7 @@ Partial Class frmMain
         'Label98
         '
         Me.Label98.AutoSize = True
-        Me.Label98.Location = New System.Drawing.Point(375, 57)
+        Me.Label98.Location = New System.Drawing.Point(417, 55)
         Me.Label98.Name = "Label98"
         Me.Label98.Size = New System.Drawing.Size(80, 13)
         Me.Label98.TabIndex = 51
@@ -616,63 +638,41 @@ Partial Class frmMain
         '
         Me.nudSettingsOver15UpperPrice.DecimalPlaces = 2
         Me.nudSettingsOver15UpperPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsOver15UpperPrice.Location = New System.Drawing.Point(461, 32)
-        Me.nudSettingsOver15UpperPrice.Maximum = New Decimal(New Integer() {3, 0, 0, 0})
+        Me.nudSettingsOver15UpperPrice.Location = New System.Drawing.Point(503, 30)
+        Me.nudSettingsOver15UpperPrice.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
         Me.nudSettingsOver15UpperPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudSettingsOver15UpperPrice.Name = "nudSettingsOver15UpperPrice"
         Me.nudSettingsOver15UpperPrice.Size = New System.Drawing.Size(56, 20)
         Me.nudSettingsOver15UpperPrice.TabIndex = 50
         Me.nudSettingsOver15UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsOver15UpperPrice.Value = New Decimal(New Integer() {3, 0, 0, 0})
+        Me.nudSettingsOver15UpperPrice.Value = New Decimal(New Integer() {35, 0, 0, 65536})
         '
         'Label99
         '
         Me.Label99.AutoSize = True
-        Me.Label99.Location = New System.Drawing.Point(375, 34)
+        Me.Label99.Location = New System.Drawing.Point(417, 32)
         Me.Label99.Name = "Label99"
         Me.Label99.Size = New System.Drawing.Size(80, 13)
         Me.Label99.TabIndex = 49
         Me.Label99.Text = "Over 1.5 Upper"
         '
-        'nudSettingsCS00TargetPrice
-        '
-        Me.nudSettingsCS00TargetPrice.DecimalPlaces = 2
-        Me.nudSettingsCS00TargetPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsCS00TargetPrice.Location = New System.Drawing.Point(302, 78)
-        Me.nudSettingsCS00TargetPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
-        Me.nudSettingsCS00TargetPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudSettingsCS00TargetPrice.Name = "nudSettingsCS00TargetPrice"
-        Me.nudSettingsCS00TargetPrice.Size = New System.Drawing.Size(55, 20)
-        Me.nudSettingsCS00TargetPrice.TabIndex = 48
-        Me.nudSettingsCS00TargetPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsCS00TargetPrice.Value = New Decimal(New Integer() {9, 0, 0, 0})
-        '
-        'Label96
-        '
-        Me.Label96.AutoSize = True
-        Me.Label96.Location = New System.Drawing.Point(242, 80)
-        Me.Label96.Name = "Label96"
-        Me.Label96.Size = New System.Drawing.Size(56, 13)
-        Me.Label96.TabIndex = 47
-        Me.Label96.Text = "0-0 Target"
-        '
         'nudSettingsCS00LowerPrice
         '
         Me.nudSettingsCS00LowerPrice.DecimalPlaces = 2
         Me.nudSettingsCS00LowerPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsCS00LowerPrice.Location = New System.Drawing.Point(303, 55)
+        Me.nudSettingsCS00LowerPrice.Location = New System.Drawing.Point(221, 53)
         Me.nudSettingsCS00LowerPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
         Me.nudSettingsCS00LowerPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudSettingsCS00LowerPrice.Name = "nudSettingsCS00LowerPrice"
         Me.nudSettingsCS00LowerPrice.Size = New System.Drawing.Size(54, 20)
         Me.nudSettingsCS00LowerPrice.TabIndex = 46
         Me.nudSettingsCS00LowerPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsCS00LowerPrice.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudSettingsCS00LowerPrice.Value = New Decimal(New Integer() {6, 0, 0, 0})
         '
         'Label95
         '
         Me.Label95.AutoSize = True
-        Me.Label95.Location = New System.Drawing.Point(242, 57)
+        Me.Label95.Location = New System.Drawing.Point(160, 55)
         Me.Label95.Name = "Label95"
         Me.Label95.Size = New System.Drawing.Size(54, 13)
         Me.Label95.TabIndex = 45
@@ -682,19 +682,19 @@ Partial Class frmMain
         '
         Me.nudSettingsCS00UpperPrice.DecimalPlaces = 2
         Me.nudSettingsCS00UpperPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
-        Me.nudSettingsCS00UpperPrice.Location = New System.Drawing.Point(302, 32)
+        Me.nudSettingsCS00UpperPrice.Location = New System.Drawing.Point(220, 30)
         Me.nudSettingsCS00UpperPrice.Maximum = New Decimal(New Integer() {25, 0, 0, 0})
         Me.nudSettingsCS00UpperPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudSettingsCS00UpperPrice.Name = "nudSettingsCS00UpperPrice"
         Me.nudSettingsCS00UpperPrice.Size = New System.Drawing.Size(55, 20)
         Me.nudSettingsCS00UpperPrice.TabIndex = 44
         Me.nudSettingsCS00UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsCS00UpperPrice.Value = New Decimal(New Integer() {25, 0, 0, 0})
+        Me.nudSettingsCS00UpperPrice.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'Label94
         '
         Me.Label94.AutoSize = True
-        Me.Label94.Location = New System.Drawing.Point(242, 34)
+        Me.Label94.Location = New System.Drawing.Point(160, 32)
         Me.Label94.Name = "Label94"
         Me.Label94.Size = New System.Drawing.Size(54, 13)
         Me.Label94.TabIndex = 43
@@ -703,11 +703,11 @@ Partial Class frmMain
         'nudSettingsAutoBetRefresh
         '
         Me.nudSettingsAutoBetRefresh.Increment = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudSettingsAutoBetRefresh.Location = New System.Drawing.Point(108, 53)
+        Me.nudSettingsAutoBetRefresh.Location = New System.Drawing.Point(95, 53)
         Me.nudSettingsAutoBetRefresh.Maximum = New Decimal(New Integer() {120000, 0, 0, 0})
         Me.nudSettingsAutoBetRefresh.Minimum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudSettingsAutoBetRefresh.Name = "nudSettingsAutoBetRefresh"
-        Me.nudSettingsAutoBetRefresh.Size = New System.Drawing.Size(63, 20)
+        Me.nudSettingsAutoBetRefresh.Size = New System.Drawing.Size(59, 20)
         Me.nudSettingsAutoBetRefresh.TabIndex = 42
         Me.nudSettingsAutoBetRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.nudSettingsAutoBetRefresh.Value = New Decimal(New Integer() {60000, 0, 0, 0})
@@ -715,11 +715,11 @@ Partial Class frmMain
         'nudSettingsSelectionRefresh
         '
         Me.nudSettingsSelectionRefresh.Increment = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.nudSettingsSelectionRefresh.Location = New System.Drawing.Point(108, 30)
+        Me.nudSettingsSelectionRefresh.Location = New System.Drawing.Point(95, 30)
         Me.nudSettingsSelectionRefresh.Maximum = New Decimal(New Integer() {600000, 0, 0, 0})
         Me.nudSettingsSelectionRefresh.Minimum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudSettingsSelectionRefresh.Name = "nudSettingsSelectionRefresh"
-        Me.nudSettingsSelectionRefresh.Size = New System.Drawing.Size(63, 20)
+        Me.nudSettingsSelectionRefresh.Size = New System.Drawing.Size(59, 20)
         Me.nudSettingsSelectionRefresh.TabIndex = 41
         Me.nudSettingsSelectionRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.nudSettingsSelectionRefresh.Value = New Decimal(New Integer() {30000, 0, 0, 0})
@@ -738,9 +738,9 @@ Partial Class frmMain
         Me.Label22.AutoSize = True
         Me.Label22.Location = New System.Drawing.Point(6, 32)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(96, 13)
+        Me.Label22.Size = New System.Drawing.Size(67, 13)
         Me.Label22.TabIndex = 37
-        Me.Label22.Text = "Refresh Selections"
+        Me.Label22.Text = "Refresh Sels"
         '
         'grpSelections
         '
@@ -3246,17 +3246,17 @@ Partial Class frmMain
         Me.Text = "Soccer Betting Application"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.nudSettingsCS10_CS01LowerPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudSettingsCS10_CS01UpperPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsUnder15TargetGross, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsOver15Stake, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsCS10and01TargetGross, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsCS00TargetGross, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudSettingsUnder15TargetPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsUnder15LowerPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsUnder15UpperPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsOver15TargetPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsOver15LowerPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsOver15UpperPrice, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudSettingsCS00TargetPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsCS00LowerPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsCS00UpperPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsAutoBetRefresh, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3532,8 +3532,6 @@ Partial Class frmMain
     Friend WithEvents nudSettingsCS00TargetGross As NumericUpDown
     Friend WithEvents Label105 As Label
     Friend WithEvents Label104 As Label
-    Friend WithEvents nudSettingsUnder15TargetPrice As NumericUpDown
-    Friend WithEvents Label101 As Label
     Friend WithEvents nudSettingsUnder15LowerPrice As NumericUpDown
     Friend WithEvents Label102 As Label
     Friend WithEvents nudSettingsUnder15UpperPrice As NumericUpDown
@@ -3545,8 +3543,6 @@ Partial Class frmMain
     Friend WithEvents Label98 As Label
     Friend WithEvents nudSettingsOver15UpperPrice As NumericUpDown
     Friend WithEvents Label99 As Label
-    Friend WithEvents nudSettingsCS00TargetPrice As NumericUpDown
-    Friend WithEvents Label96 As Label
     Friend WithEvents nudSettingsCS00LowerPrice As NumericUpDown
     Friend WithEvents Label95 As Label
     Friend WithEvents nudSettingsCS00UpperPrice As NumericUpDown
@@ -3568,4 +3564,8 @@ Partial Class frmMain
     Friend WithEvents Label106 As Label
     Friend WithEvents nudSettingsUnder15TargetGross As NumericUpDown
     Friend WithEvents Label109 As Label
+    Friend WithEvents nudSettingsCS10_CS01LowerPrice As NumericUpDown
+    Friend WithEvents Label111 As Label
+    Friend WithEvents nudSettingsCS10_CS01UpperPrice As NumericUpDown
+    Friend WithEvents Label112 As Label
 End Class
