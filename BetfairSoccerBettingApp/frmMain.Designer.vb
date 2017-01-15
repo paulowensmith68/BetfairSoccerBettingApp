@@ -154,6 +154,13 @@ Partial Class frmMain
         Me.timerRefreshSelections = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel1AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.dgvEvents = New System.Windows.Forms.DataGridView()
+        Me.EventTypeIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EventIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CountryCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TimezoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OpenDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BeffairEventClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.grpSel2 = New System.Windows.Forms.GroupBox()
         Me.tbxSel2IOver15Orders = New System.Windows.Forms.TextBox()
         Me.tbxSel2IUnder15Orders = New System.Windows.Forms.TextBox()
@@ -310,13 +317,7 @@ Partial Class frmMain
         Me.timerSel2AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel3AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel4AutoBet = New System.Windows.Forms.Timer(Me.components)
-        Me.EventTypeIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EventIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CountryCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TimezoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BeffairEventClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.btnOrder = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.nudSettingsUnder15TargetGross, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsOver15Stake, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -336,10 +337,10 @@ Partial Class frmMain
         Me.grpSelections.SuspendLayout()
         Me.grpSel1.SuspendLayout()
         CType(Me.dgvEvents, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSel2.SuspendLayout()
         Me.grpSel3.SuspendLayout()
         Me.grpSel4.SuspendLayout()
-        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -704,13 +705,13 @@ Partial Class frmMain
         '
         Me.nudSettingsAutoBetRefresh.Increment = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudSettingsAutoBetRefresh.Location = New System.Drawing.Point(108, 53)
-        Me.nudSettingsAutoBetRefresh.Maximum = New Decimal(New Integer() {600000, 0, 0, 0})
+        Me.nudSettingsAutoBetRefresh.Maximum = New Decimal(New Integer() {120000, 0, 0, 0})
         Me.nudSettingsAutoBetRefresh.Minimum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.nudSettingsAutoBetRefresh.Name = "nudSettingsAutoBetRefresh"
         Me.nudSettingsAutoBetRefresh.Size = New System.Drawing.Size(63, 20)
         Me.nudSettingsAutoBetRefresh.TabIndex = 42
         Me.nudSettingsAutoBetRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsAutoBetRefresh.Value = New Decimal(New Integer() {30000, 0, 0, 0})
+        Me.nudSettingsAutoBetRefresh.Value = New Decimal(New Integer() {60000, 0, 0, 0})
         '
         'nudSettingsSelectionRefresh
         '
@@ -1717,6 +1718,61 @@ Partial Class frmMain
         Me.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvEvents.Size = New System.Drawing.Size(735, 326)
         Me.dgvEvents.TabIndex = 11
+        '
+        'EventTypeIdDataGridViewTextBoxColumn
+        '
+        Me.EventTypeIdDataGridViewTextBoxColumn.DataPropertyName = "eventTypeId"
+        Me.EventTypeIdDataGridViewTextBoxColumn.HeaderText = "eventTypeId"
+        Me.EventTypeIdDataGridViewTextBoxColumn.Name = "EventTypeIdDataGridViewTextBoxColumn"
+        Me.EventTypeIdDataGridViewTextBoxColumn.ReadOnly = True
+        Me.EventTypeIdDataGridViewTextBoxColumn.Visible = False
+        '
+        'EventIdDataGridViewTextBoxColumn
+        '
+        Me.EventIdDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EventIdDataGridViewTextBoxColumn.DataPropertyName = "eventId"
+        Me.EventIdDataGridViewTextBoxColumn.HeaderText = "eventId"
+        Me.EventIdDataGridViewTextBoxColumn.Name = "EventIdDataGridViewTextBoxColumn"
+        Me.EventIdDataGridViewTextBoxColumn.Width = 71
+        '
+        'NameDataGridViewTextBoxColumn
+        '
+        Me.NameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
+        Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
+        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
+        Me.NameDataGridViewTextBoxColumn.ReadOnly = True
+        Me.NameDataGridViewTextBoxColumn.Width = 64
+        '
+        'CountryCodeDataGridViewTextBoxColumn
+        '
+        Me.CountryCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.CountryCodeDataGridViewTextBoxColumn.DataPropertyName = "countryCode"
+        Me.CountryCodeDataGridViewTextBoxColumn.HeaderText = "countryCode"
+        Me.CountryCodeDataGridViewTextBoxColumn.Name = "CountryCodeDataGridViewTextBoxColumn"
+        Me.CountryCodeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TimezoneDataGridViewTextBoxColumn
+        '
+        Me.TimezoneDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TimezoneDataGridViewTextBoxColumn.DataPropertyName = "timezone"
+        Me.TimezoneDataGridViewTextBoxColumn.HeaderText = "timezone"
+        Me.TimezoneDataGridViewTextBoxColumn.Name = "TimezoneDataGridViewTextBoxColumn"
+        Me.TimezoneDataGridViewTextBoxColumn.ReadOnly = True
+        Me.TimezoneDataGridViewTextBoxColumn.Width = 83
+        '
+        'OpenDateDataGridViewTextBoxColumn
+        '
+        Me.OpenDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.OpenDateDataGridViewTextBoxColumn.DataPropertyName = "openDate"
+        Me.OpenDateDataGridViewTextBoxColumn.HeaderText = "openDate"
+        Me.OpenDateDataGridViewTextBoxColumn.Name = "OpenDateDataGridViewTextBoxColumn"
+        Me.OpenDateDataGridViewTextBoxColumn.ReadOnly = True
+        Me.OpenDateDataGridViewTextBoxColumn.Width = 86
+        '
+        'BeffairEventClassBindingSource
+        '
+        Me.BeffairEventClassBindingSource.DataSource = GetType(BetfairSoccerBettingApp.BeffairEventClass)
         '
         'grpSel2
         '
@@ -3173,66 +3229,21 @@ Partial Class frmMain
         '
         Me.timerSel4AutoBet.Interval = 30000
         '
-        'EventTypeIdDataGridViewTextBoxColumn
+        'btnOrder
         '
-        Me.EventTypeIdDataGridViewTextBoxColumn.DataPropertyName = "eventTypeId"
-        Me.EventTypeIdDataGridViewTextBoxColumn.HeaderText = "eventTypeId"
-        Me.EventTypeIdDataGridViewTextBoxColumn.Name = "EventTypeIdDataGridViewTextBoxColumn"
-        Me.EventTypeIdDataGridViewTextBoxColumn.ReadOnly = True
-        Me.EventTypeIdDataGridViewTextBoxColumn.Visible = False
-        '
-        'EventIdDataGridViewTextBoxColumn
-        '
-        Me.EventIdDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EventIdDataGridViewTextBoxColumn.DataPropertyName = "eventId"
-        Me.EventIdDataGridViewTextBoxColumn.HeaderText = "eventId"
-        Me.EventIdDataGridViewTextBoxColumn.Name = "EventIdDataGridViewTextBoxColumn"
-        Me.EventIdDataGridViewTextBoxColumn.Width = 71
-        '
-        'NameDataGridViewTextBoxColumn
-        '
-        Me.NameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
-        Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
-        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
-        Me.NameDataGridViewTextBoxColumn.ReadOnly = True
-        Me.NameDataGridViewTextBoxColumn.Width = 64
-        '
-        'CountryCodeDataGridViewTextBoxColumn
-        '
-        Me.CountryCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.CountryCodeDataGridViewTextBoxColumn.DataPropertyName = "countryCode"
-        Me.CountryCodeDataGridViewTextBoxColumn.HeaderText = "countryCode"
-        Me.CountryCodeDataGridViewTextBoxColumn.Name = "CountryCodeDataGridViewTextBoxColumn"
-        Me.CountryCodeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'TimezoneDataGridViewTextBoxColumn
-        '
-        Me.TimezoneDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.TimezoneDataGridViewTextBoxColumn.DataPropertyName = "timezone"
-        Me.TimezoneDataGridViewTextBoxColumn.HeaderText = "timezone"
-        Me.TimezoneDataGridViewTextBoxColumn.Name = "TimezoneDataGridViewTextBoxColumn"
-        Me.TimezoneDataGridViewTextBoxColumn.ReadOnly = True
-        Me.TimezoneDataGridViewTextBoxColumn.Width = 83
-        '
-        'OpenDateDataGridViewTextBoxColumn
-        '
-        Me.OpenDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.OpenDateDataGridViewTextBoxColumn.DataPropertyName = "openDate"
-        Me.OpenDateDataGridViewTextBoxColumn.HeaderText = "openDate"
-        Me.OpenDateDataGridViewTextBoxColumn.Name = "OpenDateDataGridViewTextBoxColumn"
-        Me.OpenDateDataGridViewTextBoxColumn.ReadOnly = True
-        Me.OpenDateDataGridViewTextBoxColumn.Width = 86
-        '
-        'BeffairEventClassBindingSource
-        '
-        Me.BeffairEventClassBindingSource.DataSource = GetType(BetfairSoccerBettingApp.BeffairEventClass)
+        Me.btnOrder.Location = New System.Drawing.Point(673, 2)
+        Me.btnOrder.Name = "btnOrder"
+        Me.btnOrder.Size = New System.Drawing.Size(75, 23)
+        Me.btnOrder.TabIndex = 15
+        Me.btnOrder.Text = "Order"
+        Me.btnOrder.UseVisualStyleBackColor = True
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1510, 777)
+        Me.Controls.Add(Me.btnOrder)
         Me.Controls.Add(Me.grpSel4)
         Me.Controls.Add(Me.grpSel3)
         Me.Controls.Add(Me.grpSel2)
@@ -3266,13 +3277,13 @@ Partial Class frmMain
         Me.grpSel1.ResumeLayout(False)
         Me.grpSel1.PerformLayout()
         CType(Me.dgvEvents, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpSel2.ResumeLayout(False)
         Me.grpSel2.PerformLayout()
         Me.grpSel3.ResumeLayout(False)
         Me.grpSel3.PerformLayout()
         Me.grpSel4.ResumeLayout(False)
         Me.grpSel4.PerformLayout()
-        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3568,4 +3579,5 @@ Partial Class frmMain
     Friend WithEvents Label106 As Label
     Friend WithEvents nudSettingsUnder15TargetGross As NumericUpDown
     Friend WithEvents Label109 As Label
+    Friend WithEvents btnOrder As Button
 End Class

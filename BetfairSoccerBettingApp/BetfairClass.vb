@@ -264,39 +264,51 @@ Public Class BetfairClass
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
         client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order for Market Id: " + marketId.ToString, EventLogEntryType.Information)
+        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order for Market Id: " + marketId.ToString + " Selection Id: " + selectionId + " Price: " + price.ToString + " Stake: " + stake.ToString, EventLogEntryType.Information)
+
+        Try
+            Dim marketIds As IList(Of String) = New List(Of String)()
+            marketIds.Add(marketId)
+
+            ' place a back bet at rediculous odds so it doesn't get matched 
+            ' Set-up Limit Order
+            Dim LimitOrder = New LimitOrder()
+
+            LimitOrder.Price = Math.Round(price, 2)
+            LimitOrder.Size = Math.Round(stake, 2)
+
+            ' placing a bet. set-up market projection
+            Dim placeInstructions As IList(Of PlaceInstruction) = New List(Of PlaceInstruction)()
+            Dim placeInstruction = New PlaceInstruction()
+
+            placeInstruction.LimitOrder = LimitOrder
+            placeInstruction.SelectionId = selectionId
+            placeInstructions.Add(placeInstruction)
+
+            Dim customerRef = "smith4pAutobet"
+            Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
+
+            Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
+            Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
+
+            'If executionErrorcode <> ExecutionReportErrorCode.BET_ACTION_ERROR AndAlso instructionErrorCode <> InstructionReportErrorCode.INVALID_BET_SIZE Then
+            '    Environment.[Exit](0)
+            'End If
+
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
 
 
-        Dim marketIds As IList(Of String) = New List(Of String)()
-        marketIds.Add(marketId)
+        Catch apiExcepion As APINGException
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
+            Exit Sub
+        Catch ex As System.Exception
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
+            Exit Sub
 
-        ' place a back bet at rediculous odds so it doesn't get matched 
-        ' Set-up Limit Order
-        Dim LimitOrder = New LimitOrder()
+        Finally
 
-        LimitOrder.Price = price
-        LimitOrder.Size = stake
+        End Try
 
-        ' placing a bet. set-up market projection
-        Dim placeInstructions As IList(Of PlaceInstruction) = New List(Of PlaceInstruction)()
-        Dim placeInstruction = New PlaceInstruction()
-
-        placeInstruction.LimitOrder = LimitOrder
-        placeInstruction.SelectionId = selectionId
-        placeInstructions.Add(placeInstruction)
-
-        Dim customerRef = "smith4p-autobet"
-        Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
-
-        Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
-        Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
-        Console.WriteLine(vbLf & "PlaceExecutionReport error code is: " + executionErrorcode.ToString + vbLf & "InstructionReport error code is: " + instructionErrorCode.ToString)
-
-        If executionErrorcode <> ExecutionReportErrorCode.BET_ACTION_ERROR AndAlso instructionErrorCode <> InstructionReportErrorCode.INVALID_BET_SIZE Then
-            Environment.[Exit](0)
-        End If
-
-        Console.WriteLine(vbLf & "DONE!")
 
     End Sub
 
