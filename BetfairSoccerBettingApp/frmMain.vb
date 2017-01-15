@@ -2625,38 +2625,32 @@ Public Class frmMain
         If strPreviousScore = tbxSel1Score.Text Then
             ' Same score
         Else
+
             ' If first time through...ignore
             If strPreviousScore <> "" Then
-                ' Goal scored since last tick
-                If tbxSel1Goal1.Text = "" Then
-                    tbxSel1Goal1.Text = tbxSel1InplayTime.Text.ToString
-                    sel1.betfairGoal1DateTime = Now()
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel1.Text + ", Goal 1 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                    ''
-                    '' Play sound
-                    '' 
-                    'My.Computer.Audio.Play("C:\#myPrograms\BetfairSoccerBettingApp\sounds\goal.wav")
-                    '
+                ' If match ended...ignore
+                If tbxSel1Score.Text <> "Match ended!" Then
 
-                    ' Send text
-                    sendEmailToText("Goal 1 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel1InplayTime.Text.ToString)
+                    ' 1st Goal scored since last tick
+                    If tbxSel1Score.Text = "1 Goal scored" Then
+                        tbxSel1Goal1.Text = tbxSel1InplayTime.Text.ToString
+                        sel1.betfairGoal1DateTime = Now()
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel1.Text + ", Goal 1 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
 
-
-                Else
-                    If tbxSel1Goal2.Text = "" Then
-                        tbxSel1Goal2.Text = tbxSel1InplayTime.Text.ToString
-                        sel1.betfairGoal2DateTime = Now()
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel1.Text + ", Goal 2 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
-
-                        '
-                        ' Play sound
-                        ' 
-                        '' My.Computer.Audio.Play("C:\#myPrograms\BetfairSoccerBettingApp\sounds\goal.wav")
-                        '
                         ' Send text
-                        sendEmailToText("Goal 2 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel1InplayTime.Text.ToString)
+                        sendEmailToText("Goal 1 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel1InplayTime.Text.ToString)
 
+                    Else
+                        If tbxSel1Score.Text = "2 Goals scored" Then
+                            tbxSel1Goal2.Text = tbxSel1InplayTime.Text.ToString
+                            sel1.betfairGoal2DateTime = Now()
+                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel1.Text + ", Goal 2 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
+
+                            ' Send text
+                            sendEmailToText("Goal 2 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel1InplayTime.Text.ToString)
+
+                        End If
                     End If
                 End If
             End If
@@ -2800,32 +2794,32 @@ Public Class frmMain
         If strPreviousScore = tbxSel2Score.Text Then
             ' Same score
         Else
+
             ' If first time through...ignore
             If strPreviousScore <> "" Then
-                ' Goal scored since last tick
-                If tbxSel2Goal1.Text = "" Then
-                    tbxSel2Goal1.Text = tbxSel2InplayTime.Text.ToString
-                    sel2.betfairGoal1DateTime = Now()
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 1 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                    '
-                    ' Play sound
-                    ' 
-                    ' My.Computer.Audio.Play("C:\#myPrograms\BetfairSoccerBettingApp\sounds\goal.wav")
-                    '
+                ' If match ended...ignore
+                If tbxSel2Score.Text <> "Match ended!" Then
 
-                Else
-                    If tbxSel2Goal2.Text = "" Then
-                        tbxSel2Goal2.Text = tbxSel2InplayTime.Text.ToString
-                        sel2.betfairGoal2DateTime = Now()
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 2 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
+                    ' 1st Goal scored since last tick
+                    If tbxSel2Score.Text = "1 Goal scored" Then
+                        tbxSel2Goal1.Text = tbxSel2InplayTime.Text.ToString
+                        sel2.betfairGoal1DateTime = Now()
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 1 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                        '
-                        ' Play sound
-                        ' 
-                        ' My.Computer.Audio.Play("C:\#myPrograms\BetfairSoccerBettingApp\sounds\goal.wav")
-                        '
+                        ' Send text
+                        sendEmailToText("Goal 1 scored in match: " + sel2.betfairEventName + " at Inplay timer time: " + tbxSel2InplayTime.Text.ToString)
 
+                    Else
+                        If tbxSel2Score.Text = "2 Goals scored" Then
+                            tbxSel2Goal2.Text = tbxSel2InplayTime.Text.ToString
+                            sel2.betfairGoal2DateTime = Now()
+                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 2 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
+
+                            ' Send text
+                            sendEmailToText("Goal 2 scored in match: " + sel2.betfairEventName + " at Inplay timer time: " + tbxSel2InplayTime.Text.ToString)
+
+                        End If
                     End If
                 End If
             End If
@@ -2968,32 +2962,32 @@ Public Class frmMain
         If strPreviousScore = tbxSel3Score.Text Then
             ' Same score
         Else
+
             ' If first time through...ignore
             If strPreviousScore <> "" Then
-                ' Goal scored since last tick
-                If tbxSel3Goal1.Text = "" Then
-                    tbxSel3Goal1.Text = tbxSel3InplayTime.Text.ToString
-                    sel3.betfairGoal1DateTime = Now()
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel3.Text + ", Goal 1 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                    '
-                    ' Play sound
-                    ' 
-                    ' My.Computer.Audio.Play("C:\#myPrograms\BetfairSoccerBettingApp\sounds\goal.wav")
-                    '
+                ' If match ended...ignore
+                If tbxSel3Score.Text <> "Match ended!" Then
 
-                Else
-                    If tbxSel3Goal2.Text = "" Then
-                        tbxSel3Goal2.Text = tbxSel3InplayTime.Text.ToString
-                        sel3.betfairGoal2DateTime = Now()
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel3.Text + ", Goal 2 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
+                    ' 1st Goal scored since last tick
+                    If tbxSel3Score.Text = "1 Goal scored" Then
+                        tbxSel3Goal1.Text = tbxSel3InplayTime.Text.ToString
+                        sel3.betfairGoal1DateTime = Now()
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel3.Text + ", Goal 1 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                        '
-                        ' Play sound
-                        ' 
-                        ' My.Computer.Audio.Play("C:\#myPrograms\BetfairSoccerBettingApp\sounds\goal.wav")
-                        '
+                        ' Send text
+                        sendEmailToText("Goal 1 scored in match: " + sel3.betfairEventName + " at Inplay timer time: " + tbxSel3InplayTime.Text.ToString)
 
+                    Else
+                        If tbxSel3Score.Text = "2 Goals scored" Then
+                            tbxSel3Goal2.Text = tbxSel3InplayTime.Text.ToString
+                            sel3.betfairGoal2DateTime = Now()
+                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel3.Text + ", Goal 2 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
+
+                            ' Send text
+                            sendEmailToText("Goal 2 scored in match: " + sel3.betfairEventName + " at Inplay timer time: " + tbxSel3InplayTime.Text.ToString)
+
+                        End If
                     End If
                 End If
             End If
@@ -3136,32 +3130,32 @@ Public Class frmMain
         If strPreviousScore = tbxSel4Score.Text Then
             ' Same score
         Else
+
             ' If first time through...ignore
             If strPreviousScore <> "" Then
-                ' Goal scored since last tick
-                If tbxSel4Goal1.Text = "" Then
-                    tbxSel4Goal1.Text = tbxSel4InplayTime.Text.ToString
-                    sel4.betfairGoal1DateTime = Now()
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 1 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                    '
-                    ' Play sound
-                    ' 
-                    ' My.Computer.Audio.Play("C:\#myPrograms\BetfairSoccerBettingApp\sounds\goal.wav")
-                    '
+                ' If match ended...ignore
+                If tbxSel4Score.Text <> "Match ended!" Then
 
-                Else
-                    If tbxSel4Goal2.Text = "" Then
-                        tbxSel4Goal2.Text = tbxSel4InplayTime.Text.ToString
-                        sel4.betfairGoal2DateTime = Now()
-                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 2 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
+                    ' 1st Goal scored since last tick
+                    If tbxSel4Score.Text = "1 Goal scored" Then
+                        tbxSel4Goal1.Text = tbxSel4InplayTime.Text.ToString
+                        sel4.betfairGoal1DateTime = Now()
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel4.Text + ", Goal 1 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                        '
-                        ' Play sound
-                        ' 
-                        ' My.Computer.Audio.Play("C:\#myPrograms\BetfairSoccerBettingApp\sounds\goal.wav")
-                        '
+                        ' Send text
+                        sendEmailToText("Goal 1 scored in match: " + sel4.betfairEventName + " at Inplay timer time: " + tbxSel4InplayTime.Text.ToString)
 
+                    Else
+                        If tbxSel4Score.Text = "2 Goals scored" Then
+                            tbxSel4Goal2.Text = tbxSel4InplayTime.Text.ToString
+                            sel4.betfairGoal2DateTime = Now()
+                            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel4.Text + ", Goal 2 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
+
+                            ' Send text
+                            sendEmailToText("Goal 2 scored in match: " + sel4.betfairEventName + " at Inplay timer time: " + tbxSel4InplayTime.Text.ToString)
+
+                        End If
                     End If
                 End If
             End If
@@ -3385,7 +3379,4 @@ Public Class frmMain
 
     End Function
 
-    Private Sub btnOrder_Click(sender As Object, e As EventArgs) Handles btnOrder.Click
-        sel1.placeCorrectScore00_Order(15.5, 2)
-    End Sub
 End Class

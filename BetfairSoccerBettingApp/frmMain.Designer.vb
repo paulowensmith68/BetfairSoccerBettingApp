@@ -317,7 +317,6 @@ Partial Class frmMain
         Me.timerSel2AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel3AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel4AutoBet = New System.Windows.Forms.Timer(Me.components)
-        Me.btnOrder = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.nudSettingsUnder15TargetGross, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsOver15Stake, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3229,21 +3228,11 @@ Partial Class frmMain
         '
         Me.timerSel4AutoBet.Interval = 30000
         '
-        'btnOrder
-        '
-        Me.btnOrder.Location = New System.Drawing.Point(673, 2)
-        Me.btnOrder.Name = "btnOrder"
-        Me.btnOrder.Size = New System.Drawing.Size(75, 23)
-        Me.btnOrder.TabIndex = 15
-        Me.btnOrder.Text = "Order"
-        Me.btnOrder.UseVisualStyleBackColor = True
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1510, 777)
-        Me.Controls.Add(Me.btnOrder)
         Me.Controls.Add(Me.grpSel4)
         Me.Controls.Add(Me.grpSel3)
         Me.Controls.Add(Me.grpSel2)
@@ -3579,5 +3568,4 @@ Partial Class frmMain
     Friend WithEvents Label106 As Label
     Friend WithEvents nudSettingsUnder15TargetGross As NumericUpDown
     Friend WithEvents Label109 As Label
-    Friend WithEvents btnOrder As Button
 End Class
