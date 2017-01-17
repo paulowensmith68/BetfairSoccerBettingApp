@@ -16,7 +16,10 @@ Public Class BetfairClass
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
         client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Starting to get list of Events for Event Id: " + eventTypeId.ToString + " Market Countries: " + DisplaySet(marketCountries), EventLogEntryType.Information)
+
+        If My.Settings.LogsBetfairResultsOn Then
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Starting to get list of Events for Event Id: " + eventTypeId.ToString + " Market Countries: " + DisplaySet(marketCountries), EventLogEntryType.Information)
+        End If
 
         Try
 
@@ -42,14 +45,19 @@ Public Class BetfairClass
             ' Set InPlayOnly : Restrict to markets that are currently in play if True or are not currently in play if false. If not specified, returns both.
             'marketFilter.InPlayOnly = True
 
-
             Dim events = client.listEvents(marketFilter)
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listEvents : " + events.Count.ToString, EventLogEntryType.Information)
+            If My.Settings.LogsBetfairResultsOn Then
+                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listEvents : " + events.Count.ToString, EventLogEntryType.Information)
+            End If
+
 
             For Each footballEvent In events
 
                 ' Processing event...
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Processing event : " + footballEvent.Event.Name, EventLogEntryType.Information)
+
+                If My.Settings.LogsBetfairResultsOn Then
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Processing event : " + footballEvent.Event.Name, EventLogEntryType.Information)
+                End If
 
                 ' Convert date to localtime
                 Dim gmtOpenDate As DateTime
@@ -95,7 +103,10 @@ Public Class BetfairClass
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
         client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Starting to get Market Ids for Event Id: " + eventTypeId.ToString + " Event Id: " + eventId, EventLogEntryType.Information)
+
+        If My.Settings.LogsBetfairResultsOn Then
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Starting to get Market Ids for Event Id: " + eventTypeId.ToString + " Event Id: " + eventId, EventLogEntryType.Information)
+        End If
 
         Try
 
@@ -128,7 +139,9 @@ Public Class BetfairClass
             marketProjections.Add(MarketProjection.RUNNER_DESCRIPTION)
 
             Dim marketCatalogue = client.listMarketCatalogue(marketFilter, marketProjections, marketSort, maxResults)
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from MarketCatalogue (event objects) : " + marketCatalogue.Count.ToString, EventLogEntryType.Information)
+            If My.Settings.LogsBetfairResultsOn Then
+                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from MarketCatalogue (event objects) : " + marketCatalogue.Count.ToString, EventLogEntryType.Information)
+            End If
 
             ' Initialie the Market Id's to NotFound so we know which ones are still Open
             selection.betfairCorrectScoreMarketId = "Not Found"
@@ -140,7 +153,9 @@ Public Class BetfairClass
 
             For Each book In marketCatalogue
 
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Processing Market : " + book.MarketName + " with Market Id : " + book.MarketId + " Market: " + book.MarketName, EventLogEntryType.Information)
+                If My.Settings.LogsBetfairResultsOn Then
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Processing Market : " + book.MarketName + " with Market Id : " + book.MarketId + " Market: " + book.MarketName, EventLogEntryType.Information)
+                End If
 
                 For i = 0 To book.Runners.Count - 1
 
@@ -196,7 +211,10 @@ Public Class BetfairClass
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
         client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Getting Profit and Loss report for market Id: " + marketId.ToString, EventLogEntryType.Information)
+
+        If My.Settings.LogsBetfairResultsOn Then
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Getting Profit and Loss report for market Id: " + marketId.ToString, EventLogEntryType.Information)
+        End If
 
         Try
 
@@ -217,6 +235,7 @@ Public Class BetfairClass
                             ' Correct Score Market
                             If profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
                                 selection.betfairCorrectScore00IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
+                                selection.betfairCorrectScore00IfloseProfit = profitLoss.ProfitAndLosses(i).IfLose
 
                             ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
                                 selection.betfairCorrectScore10IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
@@ -264,7 +283,10 @@ Public Class BetfairClass
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
         client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order for Market Id: " + marketId.ToString + " Selection Id: " + selectionId + " Side=: " + side + " Price: " + price.ToString + " Stake: " + stake.ToString, EventLogEntryType.Information)
+
+        If My.Settings.LogsBetfairResultsOn Then
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order for Market Id: " + marketId.ToString + " Selection Id: " + selectionId + " Side=: " + side + " Price: " + price.ToString + " Stake: " + stake.ToString, EventLogEntryType.Information)
+        End If
 
         Try
             Dim marketIds As IList(Of String) = New List(Of String)()
@@ -294,30 +316,31 @@ Public Class BetfairClass
             ' Place instruction
             placeInstructions.Add(placeInstruction)
 
-            ' Ammended
-            Return "SUCCESS"
+            Dim customerRef = Nothing
+            Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
 
-            'Dim customerRef = Nothing
-            'Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
+            Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
+            Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
 
-            'Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
-            'Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
 
-            'gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+            If placeExecutionReport.Status = ExecutionReportStatus.SUCCESS Then
+                If My.Settings.LogsBetfairResultsOn Then
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: SUCCESS " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                End If
+                Return "SUCCESS"
 
-            'If placeExecutionReport.Status = ExecutionReportStatus.SUCCESS Then
-            '    Return "SUCCESS"
+                ElseIf placeExecutionReport.Status = ExecutionReportStatus.FAILURE Then
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: FAILURE " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                    Return "FAILURE"
 
-            'ElseIf placeExecutionReport.Status = ExecutionReportStatus.FAILURE Then
-            '    Return "FAILURE"
+                ElseIf placeExecutionReport.Status = ExecutionReportStatus.TIMEOUT Then
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: TIMEOUT " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                    Return "TIMOUT"
 
-            'ElseIf placeExecutionReport.Status = ExecutionReportStatus.TIMEOUT Then
-            '    Return "TIMOUT"
-
-            'Else
-
-            '    Return "UNKNOWN"
-            'End If
+                Else
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: UNKNOWN " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                Return "UNKNOWN"
+            End If
 
         Catch apiExcepion As APINGException
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
@@ -411,11 +434,15 @@ Public Class BetfairClass
             matchProjection = MatchProjection.ROLLED_UP_BY_AVG_PRICE
 
             Dim markets = client.listMarketBook(marketIds, priceProjection, orderProjection, matchProjection)
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listMarketBook : " + markets.Count.ToString, EventLogEntryType.Information)
+            If My.Settings.LogsBetfairResultsOn Then
+                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listMarketBook : " + markets.Count.ToString, EventLogEntryType.Information)
+            End If
 
             For Each market In markets
 
-                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listMarketBook on Market Status. Market Id: " + marketId.ToString + " Status: " + convertMarketStatus(market.Status), EventLogEntryType.Information)
+                If My.Settings.LogsBetfairResultsOn Then
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Response from listMarketBook on Market Status. Market Id: " + marketId.ToString + " Status: " + convertMarketStatus(market.Status), EventLogEntryType.Information)
+                End If
 
                 ' Set inplay status
                 selection.betfairEventInplay = market.IsInplay

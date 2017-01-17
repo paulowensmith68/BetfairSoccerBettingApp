@@ -23,11 +23,13 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label114 = New System.Windows.Forms.Label()
+        Me.nudSettingsCS00BTLStake = New System.Windows.Forms.NumericUpDown()
         Me.nudSettingsCS10_CS01LowerPrice = New System.Windows.Forms.NumericUpDown()
         Me.Label111 = New System.Windows.Forms.Label()
         Me.nudSettingsCS10_CS01UpperPrice = New System.Windows.Forms.NumericUpDown()
@@ -156,13 +158,6 @@ Partial Class frmMain
         Me.timerRefreshSelections = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel1AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.dgvEvents = New System.Windows.Forms.DataGridView()
-        Me.EventTypeIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EventIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CountryCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TimezoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.BeffairEventClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.grpSel2 = New System.Windows.Forms.GroupBox()
         Me.Label101 = New System.Windows.Forms.Label()
         Me.tbxSel2ScheduledInplayTime = New System.Windows.Forms.TextBox()
@@ -325,9 +320,18 @@ Partial Class frmMain
         Me.timerSel2AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel3AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel4AutoBet = New System.Windows.Forms.Timer(Me.components)
-        Me.nudSettingsCS00BTLStake = New System.Windows.Forms.NumericUpDown()
-        Me.Label114 = New System.Windows.Forms.Label()
+        Me.cbxBTL00On = New System.Windows.Forms.CheckBox()
+        Me.cbxBTL10On = New System.Windows.Forms.CheckBox()
+        Me.cbxBTL01On = New System.Windows.Forms.CheckBox()
+        Me.EventTypeIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EventIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CountryCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TimezoneDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OpenDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BeffairEventClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.GroupBox1.SuspendLayout()
+        CType(Me.nudSettingsCS00BTLStake, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsCS10_CS01LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsCS10_CS01UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsUnder15TargetGross, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -346,11 +350,10 @@ Partial Class frmMain
         Me.grpSelections.SuspendLayout()
         Me.grpSel1.SuspendLayout()
         CType(Me.dgvEvents, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpSel2.SuspendLayout()
         Me.grpSel3.SuspendLayout()
         Me.grpSel4.SuspendLayout()
-        CType(Me.nudSettingsCS00BTLStake, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -366,6 +369,9 @@ Partial Class frmMain
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.Info
+        Me.GroupBox1.Controls.Add(Me.cbxBTL01On)
+        Me.GroupBox1.Controls.Add(Me.cbxBTL10On)
+        Me.GroupBox1.Controls.Add(Me.cbxBTL00On)
         Me.GroupBox1.Controls.Add(Me.Label114)
         Me.GroupBox1.Controls.Add(Me.nudSettingsCS00BTLStake)
         Me.GroupBox1.Controls.Add(Me.nudSettingsCS10_CS01LowerPrice)
@@ -406,6 +412,27 @@ Partial Class frmMain
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Order Controls"
+        '
+        'Label114
+        '
+        Me.Label114.AutoSize = True
+        Me.Label114.Location = New System.Drawing.Point(37, 83)
+        Me.Label114.Name = "Label114"
+        Me.Label114.Size = New System.Drawing.Size(56, 13)
+        Me.Label114.TabIndex = 76
+        Me.Label114.Text = "BTL stake"
+        '
+        'nudSettingsCS00BTLStake
+        '
+        Me.nudSettingsCS00BTLStake.DecimalPlaces = 2
+        Me.nudSettingsCS00BTLStake.Location = New System.Drawing.Point(95, 79)
+        Me.nudSettingsCS00BTLStake.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudSettingsCS00BTLStake.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudSettingsCS00BTLStake.Name = "nudSettingsCS00BTLStake"
+        Me.nudSettingsCS00BTLStake.Size = New System.Drawing.Size(59, 20)
+        Me.nudSettingsCS00BTLStake.TabIndex = 75
+        Me.nudSettingsCS00BTLStake.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsCS00BTLStake.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'nudSettingsCS10_CS01LowerPrice
         '
@@ -606,7 +633,7 @@ Partial Class frmMain
         'nudSettingsOver15TargetPrice
         '
         Me.nudSettingsOver15TargetPrice.DecimalPlaces = 2
-        Me.nudSettingsOver15TargetPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
+        Me.nudSettingsOver15TargetPrice.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.nudSettingsOver15TargetPrice.Location = New System.Drawing.Point(503, 76)
         Me.nudSettingsOver15TargetPrice.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
         Me.nudSettingsOver15TargetPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -723,7 +750,7 @@ Partial Class frmMain
         Me.nudSettingsAutoBetRefresh.Size = New System.Drawing.Size(59, 20)
         Me.nudSettingsAutoBetRefresh.TabIndex = 42
         Me.nudSettingsAutoBetRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsAutoBetRefresh.Value = New Decimal(New Integer() {30000, 0, 0, 0})
+        Me.nudSettingsAutoBetRefresh.Value = New Decimal(New Integer() {20000, 0, 0, 0})
         '
         'nudSettingsSelectionRefresh
         '
@@ -1716,94 +1743,39 @@ Partial Class frmMain
         Me.dgvEvents.AllowUserToAddRows = False
         Me.dgvEvents.AllowUserToDeleteRows = False
         Me.dgvEvents.AutoGenerateColumns = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEvents.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Info
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEvents.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgvEvents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvEvents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EventTypeIdDataGridViewTextBoxColumn, Me.EventIdDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.CountryCodeDataGridViewTextBoxColumn, Me.TimezoneDataGridViewTextBoxColumn, Me.OpenDateDataGridViewTextBoxColumn})
         Me.dgvEvents.DataSource = Me.BeffairEventClassBindingSource
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEvents.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEvents.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgvEvents.Location = New System.Drawing.Point(12, 28)
         Me.dgvEvents.MultiSelect = False
         Me.dgvEvents.Name = "dgvEvents"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEvents.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEvents.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgvEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvEvents.Size = New System.Drawing.Size(735, 326)
         Me.dgvEvents.TabIndex = 11
-        '
-        'EventTypeIdDataGridViewTextBoxColumn
-        '
-        Me.EventTypeIdDataGridViewTextBoxColumn.DataPropertyName = "eventTypeId"
-        Me.EventTypeIdDataGridViewTextBoxColumn.HeaderText = "eventTypeId"
-        Me.EventTypeIdDataGridViewTextBoxColumn.Name = "EventTypeIdDataGridViewTextBoxColumn"
-        Me.EventTypeIdDataGridViewTextBoxColumn.ReadOnly = True
-        Me.EventTypeIdDataGridViewTextBoxColumn.Visible = False
-        '
-        'EventIdDataGridViewTextBoxColumn
-        '
-        Me.EventIdDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.EventIdDataGridViewTextBoxColumn.DataPropertyName = "eventId"
-        Me.EventIdDataGridViewTextBoxColumn.HeaderText = "eventId"
-        Me.EventIdDataGridViewTextBoxColumn.Name = "EventIdDataGridViewTextBoxColumn"
-        Me.EventIdDataGridViewTextBoxColumn.Width = 71
-        '
-        'NameDataGridViewTextBoxColumn
-        '
-        Me.NameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
-        Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
-        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
-        Me.NameDataGridViewTextBoxColumn.ReadOnly = True
-        Me.NameDataGridViewTextBoxColumn.Width = 64
-        '
-        'CountryCodeDataGridViewTextBoxColumn
-        '
-        Me.CountryCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.CountryCodeDataGridViewTextBoxColumn.DataPropertyName = "countryCode"
-        Me.CountryCodeDataGridViewTextBoxColumn.HeaderText = "countryCode"
-        Me.CountryCodeDataGridViewTextBoxColumn.Name = "CountryCodeDataGridViewTextBoxColumn"
-        Me.CountryCodeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'TimezoneDataGridViewTextBoxColumn
-        '
-        Me.TimezoneDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.TimezoneDataGridViewTextBoxColumn.DataPropertyName = "timezone"
-        Me.TimezoneDataGridViewTextBoxColumn.HeaderText = "timezone"
-        Me.TimezoneDataGridViewTextBoxColumn.Name = "TimezoneDataGridViewTextBoxColumn"
-        Me.TimezoneDataGridViewTextBoxColumn.ReadOnly = True
-        Me.TimezoneDataGridViewTextBoxColumn.Width = 83
-        '
-        'OpenDateDataGridViewTextBoxColumn
-        '
-        Me.OpenDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.OpenDateDataGridViewTextBoxColumn.DataPropertyName = "openDate"
-        Me.OpenDateDataGridViewTextBoxColumn.HeaderText = "openDate"
-        Me.OpenDateDataGridViewTextBoxColumn.Name = "OpenDateDataGridViewTextBoxColumn"
-        Me.OpenDateDataGridViewTextBoxColumn.ReadOnly = True
-        Me.OpenDateDataGridViewTextBoxColumn.Width = 86
-        '
-        'BeffairEventClassBindingSource
-        '
-        Me.BeffairEventClassBindingSource.DataSource = GetType(BetfairSoccerBettingApp.BeffairEventClass)
         '
         'grpSel2
         '
@@ -3317,26 +3289,92 @@ Partial Class frmMain
         '
         Me.timerSel4AutoBet.Interval = 30000
         '
-        'nudSettingsCS00BTLStake
+        'cbxBTL00On
         '
-        Me.nudSettingsCS00BTLStake.DecimalPlaces = 2
-        Me.nudSettingsCS00BTLStake.Location = New System.Drawing.Point(221, 79)
-        Me.nudSettingsCS00BTLStake.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudSettingsCS00BTLStake.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
-        Me.nudSettingsCS00BTLStake.Name = "nudSettingsCS00BTLStake"
-        Me.nudSettingsCS00BTLStake.Size = New System.Drawing.Size(56, 20)
-        Me.nudSettingsCS00BTLStake.TabIndex = 75
-        Me.nudSettingsCS00BTLStake.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsCS00BTLStake.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.cbxBTL00On.AutoSize = True
+        Me.cbxBTL00On.Checked = True
+        Me.cbxBTL00On.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbxBTL00On.Location = New System.Drawing.Point(188, 82)
+        Me.cbxBTL00On.Name = "cbxBTL00On"
+        Me.cbxBTL00On.Size = New System.Drawing.Size(87, 17)
+        Me.cbxBTL00On.TabIndex = 77
+        Me.cbxBTL00On.Text = "BTL 0-0 On?"
+        Me.cbxBTL00On.UseVisualStyleBackColor = True
         '
-        'Label114
+        'cbxBTL10On
         '
-        Me.Label114.AutoSize = True
-        Me.Label114.Location = New System.Drawing.Point(141, 83)
-        Me.Label114.Name = "Label114"
-        Me.Label114.Size = New System.Drawing.Size(74, 13)
-        Me.Label114.TabIndex = 76
-        Me.Label114.Text = "0-0 BTL stake"
+        Me.cbxBTL10On.AutoSize = True
+        Me.cbxBTL10On.Location = New System.Drawing.Point(324, 78)
+        Me.cbxBTL10On.Name = "cbxBTL10On"
+        Me.cbxBTL10On.Size = New System.Drawing.Size(87, 17)
+        Me.cbxBTL10On.TabIndex = 78
+        Me.cbxBTL10On.Text = "BTL 1-0 On?"
+        Me.cbxBTL10On.UseVisualStyleBackColor = True
+        '
+        'cbxBTL01On
+        '
+        Me.cbxBTL01On.AutoSize = True
+        Me.cbxBTL01On.Location = New System.Drawing.Point(324, 98)
+        Me.cbxBTL01On.Name = "cbxBTL01On"
+        Me.cbxBTL01On.Size = New System.Drawing.Size(87, 17)
+        Me.cbxBTL01On.TabIndex = 79
+        Me.cbxBTL01On.Text = "BTL 0-1 On?"
+        Me.cbxBTL01On.UseVisualStyleBackColor = True
+        '
+        'EventTypeIdDataGridViewTextBoxColumn
+        '
+        Me.EventTypeIdDataGridViewTextBoxColumn.DataPropertyName = "eventTypeId"
+        Me.EventTypeIdDataGridViewTextBoxColumn.HeaderText = "eventTypeId"
+        Me.EventTypeIdDataGridViewTextBoxColumn.Name = "EventTypeIdDataGridViewTextBoxColumn"
+        Me.EventTypeIdDataGridViewTextBoxColumn.ReadOnly = True
+        Me.EventTypeIdDataGridViewTextBoxColumn.Visible = False
+        '
+        'EventIdDataGridViewTextBoxColumn
+        '
+        Me.EventIdDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.EventIdDataGridViewTextBoxColumn.DataPropertyName = "eventId"
+        Me.EventIdDataGridViewTextBoxColumn.HeaderText = "eventId"
+        Me.EventIdDataGridViewTextBoxColumn.Name = "EventIdDataGridViewTextBoxColumn"
+        Me.EventIdDataGridViewTextBoxColumn.Width = 71
+        '
+        'NameDataGridViewTextBoxColumn
+        '
+        Me.NameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
+        Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
+        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
+        Me.NameDataGridViewTextBoxColumn.ReadOnly = True
+        Me.NameDataGridViewTextBoxColumn.Width = 64
+        '
+        'CountryCodeDataGridViewTextBoxColumn
+        '
+        Me.CountryCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.CountryCodeDataGridViewTextBoxColumn.DataPropertyName = "countryCode"
+        Me.CountryCodeDataGridViewTextBoxColumn.HeaderText = "countryCode"
+        Me.CountryCodeDataGridViewTextBoxColumn.Name = "CountryCodeDataGridViewTextBoxColumn"
+        Me.CountryCodeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TimezoneDataGridViewTextBoxColumn
+        '
+        Me.TimezoneDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.TimezoneDataGridViewTextBoxColumn.DataPropertyName = "timezone"
+        Me.TimezoneDataGridViewTextBoxColumn.HeaderText = "timezone"
+        Me.TimezoneDataGridViewTextBoxColumn.Name = "TimezoneDataGridViewTextBoxColumn"
+        Me.TimezoneDataGridViewTextBoxColumn.ReadOnly = True
+        Me.TimezoneDataGridViewTextBoxColumn.Width = 83
+        '
+        'OpenDateDataGridViewTextBoxColumn
+        '
+        Me.OpenDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.OpenDateDataGridViewTextBoxColumn.DataPropertyName = "openDate"
+        Me.OpenDateDataGridViewTextBoxColumn.HeaderText = "openDate"
+        Me.OpenDateDataGridViewTextBoxColumn.Name = "OpenDateDataGridViewTextBoxColumn"
+        Me.OpenDateDataGridViewTextBoxColumn.ReadOnly = True
+        Me.OpenDateDataGridViewTextBoxColumn.Width = 86
+        '
+        'BeffairEventClassBindingSource
+        '
+        Me.BeffairEventClassBindingSource.DataSource = GetType(BetfairSoccerBettingApp.BeffairEventClass)
         '
         'frmMain
         '
@@ -3356,6 +3394,7 @@ Partial Class frmMain
         Me.Text = "Soccer Betting Application"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.nudSettingsCS00BTLStake, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsCS10_CS01LowerPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsCS10_CS01UpperPrice, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudSettingsUnder15TargetGross, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3376,14 +3415,13 @@ Partial Class frmMain
         Me.grpSel1.ResumeLayout(False)
         Me.grpSel1.PerformLayout()
         CType(Me.dgvEvents, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpSel2.ResumeLayout(False)
         Me.grpSel2.PerformLayout()
         Me.grpSel3.ResumeLayout(False)
         Me.grpSel3.PerformLayout()
         Me.grpSel4.ResumeLayout(False)
         Me.grpSel4.PerformLayout()
-        CType(Me.nudSettingsCS00BTLStake, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BeffairEventClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3689,4 +3727,7 @@ Partial Class frmMain
     Friend WithEvents tbxSel4ScheduledInplayTime As TextBox
     Friend WithEvents nudSettingsCS00BTLStake As NumericUpDown
     Friend WithEvents Label114 As Label
+    Friend WithEvents cbxBTL01On As CheckBox
+    Friend WithEvents cbxBTL10On As CheckBox
+    Friend WithEvents cbxBTL00On As CheckBox
 End Class

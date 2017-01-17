@@ -71,6 +71,7 @@ Public Class Selection
     Public betfairCorrectScore00SelectionStatus As String
     Public betfairCorrectScore00BackOdds As String
     Public betfairCorrectScore00IfWinProfit As String
+    Public betfairCorrectScore00IfloseProfit As String
     Public betfairCorrectScore00Orders As String
 
 
@@ -134,8 +135,18 @@ Public Class Selection
                 betfairCorrectScore01IfWinProfit = ""
                 betfairCorrectScore01Orders = ""
             Else
+
+                ' Initialize order counts as when there aren't any nothing returned so not reset
+                betfairCorrectScore00Orders = 0
+                betfairCorrectScore10Orders = 0
+                betfairCorrectScore01Orders = 0
+
+                ' Get Market Book details
                 BetfairClass1.listMarketBook(Me, betfairCorrectScoreMarketId)
+
+                ' Get profit and loss report
                 BetfairClass1.listMarketProfitAndLoss(Me, betfairCorrectScoreMarketId)
+
             End If
         End If
         If String.IsNullOrEmpty(betfairUnderOver15MarketId) Then
@@ -156,8 +167,17 @@ Public Class Selection
                 betfairUnder15IfWinProfit = ""
                 betfairUnder15Orders = ""
             Else
+
+                ' Initialize order counts as when there aren't any nothing returned so not reset
+                betfairOver15Orders = 0
+                betfairUnder15Orders = 0
+
+                ' Get Market Book details
                 BetfairClass1.listMarketBook(Me, betfairUnderOver15MarketId)
+
+                ' Get profit and loss report
                 BetfairClass1.listMarketProfitAndLoss(Me, betfairUnderOver15MarketId)
+
             End If
         End If
 
