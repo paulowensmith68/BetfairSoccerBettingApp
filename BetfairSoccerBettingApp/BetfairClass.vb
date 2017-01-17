@@ -259,12 +259,12 @@ Public Class BetfairClass
 
     End Sub
 
-    Public Function PlaceOrder(marketId As String, selectionId As String, price As Double, stake As Double) As String
+    Public Function PlaceOrder(marketId As String, selectionId As String, price As Double, stake As Double, side As String) As String
 
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
         client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order for Market Id: " + marketId.ToString + " Selection Id: " + selectionId + " Price: " + price.ToString + " Stake: " + stake.ToString, EventLogEntryType.Information)
+        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order for Market Id: " + marketId.ToString + " Selection Id: " + selectionId + " Side=: " + side + " Price: " + price.ToString + " Stake: " + stake.ToString, EventLogEntryType.Information)
 
         Try
             Dim marketIds As IList(Of String) = New List(Of String)()
@@ -282,29 +282,42 @@ Public Class BetfairClass
 
             placeInstruction.LimitOrder = LimitOrder
             placeInstruction.SelectionId = selectionId
+
+            ' Set side
+            If side = "Back" Then
+                placeInstruction.Side = [TO].Side.BACK
+            End If
+            If side = "Lay" Then
+                placeInstruction.Side = [TO].Side.LAY
+            End If
+
+            ' Place instruction
             placeInstructions.Add(placeInstruction)
 
-            Dim customerRef = Nothing
-            Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
+            ' Ammended
+            Return "SUCCESS"
 
-            Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
-            Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
+            'Dim customerRef = Nothing
+            'Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
 
-            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+            'Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
+            'Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
 
-            If placeExecutionReport.Status = ExecutionReportStatus.SUCCESS Then
-                Return "SUCCESS"
+            'gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
 
-            ElseIf placeExecutionReport.Status = ExecutionReportStatus.FAILURE Then
-                Return "FAILURE"
+            'If placeExecutionReport.Status = ExecutionReportStatus.SUCCESS Then
+            '    Return "SUCCESS"
 
-            ElseIf placeExecutionReport.Status = ExecutionReportStatus.TIMEOUT Then
-                Return "TIMOUT"
+            'ElseIf placeExecutionReport.Status = ExecutionReportStatus.FAILURE Then
+            '    Return "FAILURE"
 
-            Else
+            'ElseIf placeExecutionReport.Status = ExecutionReportStatus.TIMEOUT Then
+            '    Return "TIMOUT"
 
-                Return "UNKNOWN"
-            End If
+            'Else
+
+            '    Return "UNKNOWN"
+            'End If
 
         Catch apiExcepion As APINGException
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)

@@ -101,6 +101,8 @@ Partial Class frmMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnSel1 = New System.Windows.Forms.Button()
         Me.grpSel1 = New System.Windows.Forms.GroupBox()
+        Me.Label96 = New System.Windows.Forms.Label()
+        Me.tbxSel1ScheduledInplayTime = New System.Windows.Forms.TextBox()
         Me.tbxSel1IOver15Orders = New System.Windows.Forms.TextBox()
         Me.tbxSel1IUnder15Orders = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -162,6 +164,8 @@ Partial Class frmMain
         Me.OpenDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BeffairEventClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.grpSel2 = New System.Windows.Forms.GroupBox()
+        Me.Label101 = New System.Windows.Forms.Label()
+        Me.tbxSel2ScheduledInplayTime = New System.Windows.Forms.TextBox()
         Me.tbxSel2IOver15Orders = New System.Windows.Forms.TextBox()
         Me.tbxSel2IUnder15Orders = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
@@ -213,6 +217,8 @@ Partial Class frmMain
         Me.tbxSel2CorrectScore00Odds = New System.Windows.Forms.TextBox()
         Me.Label50 = New System.Windows.Forms.Label()
         Me.grpSel3 = New System.Windows.Forms.GroupBox()
+        Me.Label110 = New System.Windows.Forms.Label()
+        Me.tbxSel1Scheduled3nplayTime = New System.Windows.Forms.TextBox()
         Me.tbxSel3IOver15Orders = New System.Windows.Forms.TextBox()
         Me.tbxSel3IUnder15Orders = New System.Windows.Forms.TextBox()
         Me.Label51 = New System.Windows.Forms.Label()
@@ -264,6 +270,8 @@ Partial Class frmMain
         Me.tbxSel3CorrectScore00Odds = New System.Windows.Forms.TextBox()
         Me.Label71 = New System.Windows.Forms.Label()
         Me.grpSel4 = New System.Windows.Forms.GroupBox()
+        Me.Label113 = New System.Windows.Forms.Label()
+        Me.tbxSel4ScheduledInplayTime = New System.Windows.Forms.TextBox()
         Me.tbxSel4IOver15Orders = New System.Windows.Forms.TextBox()
         Me.tbxSel4IUnder15Orders = New System.Windows.Forms.TextBox()
         Me.Label72 = New System.Windows.Forms.Label()
@@ -317,6 +325,8 @@ Partial Class frmMain
         Me.timerSel2AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel3AutoBet = New System.Windows.Forms.Timer(Me.components)
         Me.timerSel4AutoBet = New System.Windows.Forms.Timer(Me.components)
+        Me.nudSettingsCS00BTLStake = New System.Windows.Forms.NumericUpDown()
+        Me.Label114 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.nudSettingsCS10_CS01LowerPrice, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudSettingsCS10_CS01UpperPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -340,6 +350,7 @@ Partial Class frmMain
         Me.grpSel2.SuspendLayout()
         Me.grpSel3.SuspendLayout()
         Me.grpSel4.SuspendLayout()
+        CType(Me.nudSettingsCS00BTLStake, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -355,6 +366,8 @@ Partial Class frmMain
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.SystemColors.Info
+        Me.GroupBox1.Controls.Add(Me.Label114)
+        Me.GroupBox1.Controls.Add(Me.nudSettingsCS00BTLStake)
         Me.GroupBox1.Controls.Add(Me.nudSettingsCS10_CS01LowerPrice)
         Me.GroupBox1.Controls.Add(Me.Label111)
         Me.GroupBox1.Controls.Add(Me.nudSettingsCS10_CS01UpperPrice)
@@ -444,12 +457,12 @@ Partial Class frmMain
         Me.nudSettingsUnder15TargetGross.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudSettingsUnder15TargetGross.Location = New System.Drawing.Point(390, 126)
         Me.nudSettingsUnder15TargetGross.Maximum = New Decimal(New Integer() {150, 0, 0, 0})
-        Me.nudSettingsUnder15TargetGross.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.nudSettingsUnder15TargetGross.Minimum = New Decimal(New Integer() {40, 0, 0, 0})
         Me.nudSettingsUnder15TargetGross.Name = "nudSettingsUnder15TargetGross"
         Me.nudSettingsUnder15TargetGross.Size = New System.Drawing.Size(56, 20)
         Me.nudSettingsUnder15TargetGross.TabIndex = 70
         Me.nudSettingsUnder15TargetGross.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsUnder15TargetGross.Value = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.nudSettingsUnder15TargetGross.Value = New Decimal(New Integer() {50, 0, 0, 0})
         '
         'Label109
         '
@@ -488,12 +501,12 @@ Partial Class frmMain
         Me.nudSettingsCS10and01TargetGross.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudSettingsCS10and01TargetGross.Location = New System.Drawing.Point(95, 125)
         Me.nudSettingsCS10and01TargetGross.Maximum = New Decimal(New Integer() {150, 0, 0, 0})
-        Me.nudSettingsCS10and01TargetGross.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.nudSettingsCS10and01TargetGross.Minimum = New Decimal(New Integer() {40, 0, 0, 0})
         Me.nudSettingsCS10and01TargetGross.Name = "nudSettingsCS10and01TargetGross"
         Me.nudSettingsCS10and01TargetGross.Size = New System.Drawing.Size(56, 20)
         Me.nudSettingsCS10and01TargetGross.TabIndex = 66
         Me.nudSettingsCS10and01TargetGross.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsCS10and01TargetGross.Value = New Decimal(New Integer() {80, 0, 0, 0})
+        Me.nudSettingsCS10and01TargetGross.Value = New Decimal(New Integer() {50, 0, 0, 0})
         '
         'Label106
         '
@@ -510,12 +523,12 @@ Partial Class frmMain
         Me.nudSettingsCS00TargetGross.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.nudSettingsCS00TargetGross.Location = New System.Drawing.Point(231, 125)
         Me.nudSettingsCS00TargetGross.Maximum = New Decimal(New Integer() {150, 0, 0, 0})
-        Me.nudSettingsCS00TargetGross.Minimum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.nudSettingsCS00TargetGross.Minimum = New Decimal(New Integer() {40, 0, 0, 0})
         Me.nudSettingsCS00TargetGross.Name = "nudSettingsCS00TargetGross"
         Me.nudSettingsCS00TargetGross.Size = New System.Drawing.Size(55, 20)
         Me.nudSettingsCS00TargetGross.TabIndex = 64
         Me.nudSettingsCS00TargetGross.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsCS00TargetGross.Value = New Decimal(New Integer() {80, 0, 0, 0})
+        Me.nudSettingsCS00TargetGross.Value = New Decimal(New Integer() {50, 0, 0, 0})
         '
         'Label105
         '
@@ -547,7 +560,7 @@ Partial Class frmMain
         Me.nudSettingsUnder15LowerPrice.Size = New System.Drawing.Size(55, 20)
         Me.nudSettingsUnder15LowerPrice.TabIndex = 59
         Me.nudSettingsUnder15LowerPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsUnder15LowerPrice.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudSettingsUnder15LowerPrice.Value = New Decimal(New Integer() {45, 0, 0, 65536})
         '
         'Label102
         '
@@ -569,7 +582,7 @@ Partial Class frmMain
         Me.nudSettingsUnder15UpperPrice.Size = New System.Drawing.Size(55, 20)
         Me.nudSettingsUnder15UpperPrice.TabIndex = 57
         Me.nudSettingsUnder15UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsUnder15UpperPrice.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudSettingsUnder15UpperPrice.Value = New Decimal(New Integer() {12, 0, 0, 0})
         '
         'Label103
         '
@@ -623,7 +636,7 @@ Partial Class frmMain
         Me.nudSettingsOver15LowerPrice.Size = New System.Drawing.Size(56, 20)
         Me.nudSettingsOver15LowerPrice.TabIndex = 52
         Me.nudSettingsOver15LowerPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsOver15LowerPrice.Value = New Decimal(New Integer() {12, 0, 0, 65536})
+        Me.nudSettingsOver15LowerPrice.Value = New Decimal(New Integer() {13, 0, 0, 65536})
         '
         'Label98
         '
@@ -639,13 +652,13 @@ Partial Class frmMain
         Me.nudSettingsOver15UpperPrice.DecimalPlaces = 2
         Me.nudSettingsOver15UpperPrice.Increment = New Decimal(New Integer() {2, 0, 0, 65536})
         Me.nudSettingsOver15UpperPrice.Location = New System.Drawing.Point(503, 30)
-        Me.nudSettingsOver15UpperPrice.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudSettingsOver15UpperPrice.Maximum = New Decimal(New Integer() {8, 0, 0, 0})
         Me.nudSettingsOver15UpperPrice.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nudSettingsOver15UpperPrice.Name = "nudSettingsOver15UpperPrice"
         Me.nudSettingsOver15UpperPrice.Size = New System.Drawing.Size(56, 20)
         Me.nudSettingsOver15UpperPrice.TabIndex = 50
         Me.nudSettingsOver15UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsOver15UpperPrice.Value = New Decimal(New Integer() {35, 0, 0, 65536})
+        Me.nudSettingsOver15UpperPrice.Value = New Decimal(New Integer() {5, 0, 0, 0})
         '
         'Label99
         '
@@ -667,7 +680,7 @@ Partial Class frmMain
         Me.nudSettingsCS00LowerPrice.Size = New System.Drawing.Size(54, 20)
         Me.nudSettingsCS00LowerPrice.TabIndex = 46
         Me.nudSettingsCS00LowerPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsCS00LowerPrice.Value = New Decimal(New Integer() {6, 0, 0, 0})
+        Me.nudSettingsCS00LowerPrice.Value = New Decimal(New Integer() {35, 0, 0, 65536})
         '
         'Label95
         '
@@ -689,7 +702,7 @@ Partial Class frmMain
         Me.nudSettingsCS00UpperPrice.Size = New System.Drawing.Size(55, 20)
         Me.nudSettingsCS00UpperPrice.TabIndex = 44
         Me.nudSettingsCS00UpperPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsCS00UpperPrice.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudSettingsCS00UpperPrice.Value = New Decimal(New Integer() {6, 0, 0, 0})
         '
         'Label94
         '
@@ -710,7 +723,7 @@ Partial Class frmMain
         Me.nudSettingsAutoBetRefresh.Size = New System.Drawing.Size(59, 20)
         Me.nudSettingsAutoBetRefresh.TabIndex = 42
         Me.nudSettingsAutoBetRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsAutoBetRefresh.Value = New Decimal(New Integer() {60000, 0, 0, 0})
+        Me.nudSettingsAutoBetRefresh.Value = New Decimal(New Integer() {30000, 0, 0, 0})
         '
         'nudSettingsSelectionRefresh
         '
@@ -722,7 +735,7 @@ Partial Class frmMain
         Me.nudSettingsSelectionRefresh.Size = New System.Drawing.Size(59, 20)
         Me.nudSettingsSelectionRefresh.TabIndex = 41
         Me.nudSettingsSelectionRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudSettingsSelectionRefresh.Value = New Decimal(New Integer() {30000, 0, 0, 0})
+        Me.nudSettingsSelectionRefresh.Value = New Decimal(New Integer() {10000, 0, 0, 0})
         '
         'Label93
         '
@@ -1193,6 +1206,8 @@ Partial Class frmMain
         'grpSel1
         '
         Me.grpSel1.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.grpSel1.Controls.Add(Me.Label96)
+        Me.grpSel1.Controls.Add(Me.tbxSel1ScheduledInplayTime)
         Me.grpSel1.Controls.Add(Me.tbxSel1IOver15Orders)
         Me.grpSel1.Controls.Add(Me.tbxSel1IUnder15Orders)
         Me.grpSel1.Controls.Add(Me.Label17)
@@ -1249,6 +1264,23 @@ Partial Class frmMain
         Me.grpSel1.TabIndex = 7
         Me.grpSel1.TabStop = False
         Me.grpSel1.Text = "Selection 1"
+        '
+        'Label96
+        '
+        Me.Label96.AutoSize = True
+        Me.Label96.Location = New System.Drawing.Point(494, 22)
+        Me.Label96.Name = "Label96"
+        Me.Label96.Size = New System.Drawing.Size(122, 13)
+        Me.Label96.TabIndex = 80
+        Me.Label96.Text = "Scheduled mins to Start:"
+        '
+        'tbxSel1ScheduledInplayTime
+        '
+        Me.tbxSel1ScheduledInplayTime.Location = New System.Drawing.Point(622, 19)
+        Me.tbxSel1ScheduledInplayTime.Name = "tbxSel1ScheduledInplayTime"
+        Me.tbxSel1ScheduledInplayTime.Size = New System.Drawing.Size(71, 20)
+        Me.tbxSel1ScheduledInplayTime.TabIndex = 79
+        Me.tbxSel1ScheduledInplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbxSel1IOver15Orders
         '
@@ -1776,6 +1808,8 @@ Partial Class frmMain
         'grpSel2
         '
         Me.grpSel2.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.grpSel2.Controls.Add(Me.Label101)
+        Me.grpSel2.Controls.Add(Me.tbxSel2ScheduledInplayTime)
         Me.grpSel2.Controls.Add(Me.tbxSel2IOver15Orders)
         Me.grpSel2.Controls.Add(Me.tbxSel2IUnder15Orders)
         Me.grpSel2.Controls.Add(Me.Label26)
@@ -1832,6 +1866,23 @@ Partial Class frmMain
         Me.grpSel2.TabIndex = 12
         Me.grpSel2.TabStop = False
         Me.grpSel2.Text = "Selection 2"
+        '
+        'Label101
+        '
+        Me.Label101.AutoSize = True
+        Me.Label101.Location = New System.Drawing.Point(496, 22)
+        Me.Label101.Name = "Label101"
+        Me.Label101.Size = New System.Drawing.Size(122, 13)
+        Me.Label101.TabIndex = 82
+        Me.Label101.Text = "Scheduled mins to Start:"
+        '
+        'tbxSel2ScheduledInplayTime
+        '
+        Me.tbxSel2ScheduledInplayTime.Location = New System.Drawing.Point(624, 19)
+        Me.tbxSel2ScheduledInplayTime.Name = "tbxSel2ScheduledInplayTime"
+        Me.tbxSel2ScheduledInplayTime.Size = New System.Drawing.Size(71, 20)
+        Me.tbxSel2ScheduledInplayTime.TabIndex = 81
+        Me.tbxSel2ScheduledInplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbxSel2IOver15Orders
         '
@@ -2257,6 +2308,8 @@ Partial Class frmMain
         'grpSel3
         '
         Me.grpSel3.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.grpSel3.Controls.Add(Me.Label110)
+        Me.grpSel3.Controls.Add(Me.tbxSel1Scheduled3nplayTime)
         Me.grpSel3.Controls.Add(Me.tbxSel3IOver15Orders)
         Me.grpSel3.Controls.Add(Me.tbxSel3IUnder15Orders)
         Me.grpSel3.Controls.Add(Me.Label51)
@@ -2313,6 +2366,23 @@ Partial Class frmMain
         Me.grpSel3.TabIndex = 13
         Me.grpSel3.TabStop = False
         Me.grpSel3.Text = "Selection 3"
+        '
+        'Label110
+        '
+        Me.Label110.AutoSize = True
+        Me.Label110.Location = New System.Drawing.Point(494, 22)
+        Me.Label110.Name = "Label110"
+        Me.Label110.Size = New System.Drawing.Size(122, 13)
+        Me.Label110.TabIndex = 82
+        Me.Label110.Text = "Scheduled mins to Start:"
+        '
+        'tbxSel1Scheduled3nplayTime
+        '
+        Me.tbxSel1Scheduled3nplayTime.Location = New System.Drawing.Point(622, 19)
+        Me.tbxSel1Scheduled3nplayTime.Name = "tbxSel1Scheduled3nplayTime"
+        Me.tbxSel1Scheduled3nplayTime.Size = New System.Drawing.Size(71, 20)
+        Me.tbxSel1Scheduled3nplayTime.TabIndex = 81
+        Me.tbxSel1Scheduled3nplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbxSel3IOver15Orders
         '
@@ -2738,6 +2808,8 @@ Partial Class frmMain
         'grpSel4
         '
         Me.grpSel4.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.grpSel4.Controls.Add(Me.Label113)
+        Me.grpSel4.Controls.Add(Me.tbxSel4ScheduledInplayTime)
         Me.grpSel4.Controls.Add(Me.tbxSel4IOver15Orders)
         Me.grpSel4.Controls.Add(Me.tbxSel4IUnder15Orders)
         Me.grpSel4.Controls.Add(Me.Label72)
@@ -2794,6 +2866,23 @@ Partial Class frmMain
         Me.grpSel4.TabIndex = 14
         Me.grpSel4.TabStop = False
         Me.grpSel4.Text = "Selection 4"
+        '
+        'Label113
+        '
+        Me.Label113.AutoSize = True
+        Me.Label113.Location = New System.Drawing.Point(496, 22)
+        Me.Label113.Name = "Label113"
+        Me.Label113.Size = New System.Drawing.Size(122, 13)
+        Me.Label113.TabIndex = 82
+        Me.Label113.Text = "Scheduled mins to Start:"
+        '
+        'tbxSel4ScheduledInplayTime
+        '
+        Me.tbxSel4ScheduledInplayTime.Location = New System.Drawing.Point(624, 19)
+        Me.tbxSel4ScheduledInplayTime.Name = "tbxSel4ScheduledInplayTime"
+        Me.tbxSel4ScheduledInplayTime.Size = New System.Drawing.Size(71, 20)
+        Me.tbxSel4ScheduledInplayTime.TabIndex = 81
+        Me.tbxSel4ScheduledInplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbxSel4IOver15Orders
         '
@@ -3228,6 +3317,27 @@ Partial Class frmMain
         '
         Me.timerSel4AutoBet.Interval = 30000
         '
+        'nudSettingsCS00BTLStake
+        '
+        Me.nudSettingsCS00BTLStake.DecimalPlaces = 2
+        Me.nudSettingsCS00BTLStake.Location = New System.Drawing.Point(221, 79)
+        Me.nudSettingsCS00BTLStake.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudSettingsCS00BTLStake.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.nudSettingsCS00BTLStake.Name = "nudSettingsCS00BTLStake"
+        Me.nudSettingsCS00BTLStake.Size = New System.Drawing.Size(56, 20)
+        Me.nudSettingsCS00BTLStake.TabIndex = 75
+        Me.nudSettingsCS00BTLStake.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.nudSettingsCS00BTLStake.Value = New Decimal(New Integer() {2, 0, 0, 0})
+        '
+        'Label114
+        '
+        Me.Label114.AutoSize = True
+        Me.Label114.Location = New System.Drawing.Point(141, 83)
+        Me.Label114.Name = "Label114"
+        Me.Label114.Size = New System.Drawing.Size(74, 13)
+        Me.Label114.TabIndex = 76
+        Me.Label114.Text = "0-0 BTL stake"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3273,6 +3383,7 @@ Partial Class frmMain
         Me.grpSel3.PerformLayout()
         Me.grpSel4.ResumeLayout(False)
         Me.grpSel4.PerformLayout()
+        CType(Me.nudSettingsCS00BTLStake, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3568,4 +3679,14 @@ Partial Class frmMain
     Friend WithEvents Label111 As Label
     Friend WithEvents nudSettingsCS10_CS01UpperPrice As NumericUpDown
     Friend WithEvents Label112 As Label
+    Friend WithEvents Label96 As Label
+    Friend WithEvents tbxSel1ScheduledInplayTime As TextBox
+    Friend WithEvents Label101 As Label
+    Friend WithEvents tbxSel2ScheduledInplayTime As TextBox
+    Friend WithEvents Label110 As Label
+    Friend WithEvents tbxSel1Scheduled3nplayTime As TextBox
+    Friend WithEvents Label113 As Label
+    Friend WithEvents tbxSel4ScheduledInplayTime As TextBox
+    Friend WithEvents nudSettingsCS00BTLStake As NumericUpDown
+    Friend WithEvents Label114 As Label
 End Class

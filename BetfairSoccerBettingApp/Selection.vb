@@ -4,10 +4,14 @@ Public Class Selection
 
     Public status As String
 
-    Public selectionNumber As Integer
 
     'Autobet flags
-    Public autobetOver15BetMade As Boolean
+    Public autobetOver15StartegyStarted As Boolean
+    Public autobetOver15Back1 As Boolean
+    Public autobetOver15Back2 As Boolean
+    Public autobetOver15Back3 As Boolean
+    Public autobetOver15Back4 As Boolean
+
     Public autobetUnder15BetMade As Boolean
     Public autobetCorrectScore00BetMade As Boolean
     Public autobetCorrectScore10BetMade As Boolean
@@ -223,49 +227,49 @@ Public Class Selection
 
     End Function
 
-    Public Function placeOver15_Order(price As Double, stake As Double) As String
+    Public Function placeOver15_Order(price As Double, stake As Double, side As String) As String
         Dim status As String
 
         Dim BetfairClass1 As New BetfairClass()
-        status = BetfairClass1.PlaceOrder(betfairUnderOver15MarketId, betfairOver15SelectionId, price, stake)
+        status = BetfairClass1.PlaceOrder(betfairUnderOver15MarketId, betfairOver15SelectionId, price, stake, side)
         BetfairClass1 = Nothing
         Return status
 
     End Function
 
-    Public Function placeUnder15_Order(price As Double, stake As Double) As String
+    Public Function placeUnder15_Order(price As Double, stake As Double, side As String) As String
         Dim status As String
 
         Dim BetfairClass1 As New BetfairClass()
-        status = BetfairClass1.PlaceOrder(betfairUnderOver15MarketId, betfairUnder15SelectionId, price, stake)
+        status = BetfairClass1.PlaceOrder(betfairUnderOver15MarketId, betfairUnder15SelectionId, price, stake, side)
         BetfairClass1 = Nothing
         Return status
 
     End Function
 
-    Public Function placeCorrectScore00_Order(price As Double, stake As Double) As String
+    Public Function placeCorrectScore00_Order(price As Double, stake As Double, side As String) As String
         Dim status As String
 
         Dim BetfairClass1 As New BetfairClass()
-        status = BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore00SelectionId, price, stake)
+        status = BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore00SelectionId, price, stake, side)
         BetfairClass1 = Nothing
         Return status
 
     End Function
-    Public Function placeCorrectScore10_Order(price As Double, stake As Double) As String
+    Public Function placeCorrectScore10_Order(price As Double, stake As Double, side As String) As String
         Dim status As String
 
         Dim BetfairClass1 As New BetfairClass()
-        status = BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore10SelectionId, price, stake)
+        status = BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore10SelectionId, price, stake, side)
         BetfairClass1 = Nothing
         Return status
 
     End Function
-    Public Function placeCorrectScore01_Order(price As Double, stake As Double) As String
+    Public Function placeCorrectScore01_Order(price As Double, stake As Double, side As String) As String
         Dim status As String
 
         Dim BetfairClass1 As New BetfairClass()
-        status = BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore01SelectionId, price, stake)
+        status = BetfairClass1.PlaceOrder(betfairCorrectScoreMarketId, betfairCorrectScore01SelectionId, price, stake, side)
         BetfairClass1 = Nothing
         Return status
 
