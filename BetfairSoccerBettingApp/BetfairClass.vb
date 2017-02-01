@@ -235,7 +235,11 @@ Public Class BetfairClass
                             ' Correct Score Market
                             If profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore00SelectionId Then
                                 selection.betfairCorrectScore00IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
-                                selection.betfairCorrectScore00IfloseProfit = profitLoss.ProfitAndLosses(i).IfLose
+                                If profitLoss.ProfitAndLosses(i).IfLose IsNot Nothing Then
+                                    selection.betfairCorrectScore00IfloseProfit = profitLoss.ProfitAndLosses(i).IfLose
+                                Else
+                                    selection.betfairCorrectScore00IfloseProfit = 0
+                                End If
 
                             ElseIf profitLoss.ProfitAndLosses(i).SelectionId = selection.betfairCorrectScore10SelectionId Then
                                 selection.betfairCorrectScore10IfWinProfit = profitLoss.ProfitAndLosses(i).IfWin
@@ -316,18 +320,22 @@ Public Class BetfairClass
             ' Place instruction
             placeInstructions.Add(placeInstruction)
 
-            Dim customerRef = Nothing
-            Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
-
-            Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
-            Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
-
-
-            If placeExecutionReport.Status = ExecutionReportStatus.SUCCESS Then
-                If My.Settings.LogsBetfairResultsOn Then
-                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: SUCCESS " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
-                End If
+            If My.Settings.SimulationModeOn = True Then
+                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order !!!! SIMULATION MODE !!!! : PlaceExecutionReport : Status: SUCCESS ", EventLogEntryType.Information)
                 Return "SUCCESS"
+            Else
+                Dim customerRef = Nothing
+                Dim placeExecutionReport = client.placeOrders(marketId, customerRef, placeInstructions)
+
+                Dim executionErrorcode As ExecutionReportErrorCode = placeExecutionReport.ErrorCode
+                Dim instructionErrorCode As InstructionReportErrorCode = placeExecutionReport.InstructionReports(0).ErrorCode
+
+
+                If placeExecutionReport.Status = ExecutionReportStatus.SUCCESS Then
+                    If My.Settings.LogsBetfairResultsOn Then
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: SUCCESS " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                    End If
+                    Return "SUCCESS"
 
                 ElseIf placeExecutionReport.Status = ExecutionReportStatus.FAILURE Then
                     gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: FAILURE " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
@@ -339,8 +347,78 @@ Public Class BetfairClass
 
                 Else
                     gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order results: PlaceExecutionReport : Status: UNKNOWN " + placeExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
-                Return "UNKNOWN"
+                    Return "UNKNOWN"
+                End If
+
             End If
+
+
+        Catch apiExcepion As APINGException
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
+            Return "API_EXCEPTION"
+        Catch ex As System.Exception
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, system exception: " + ex.Message, EventLogEntryType.Error)
+            Return "EX_EXCEPTION"
+
+        End Try
+
+
+    End Function
+
+    Public Function CancelAllOrdersOnMarket(marketId As String) As String
+
+        Dim client As IClient = Nothing
+        Dim clientType As String = Nothing
+        client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
+
+        If My.Settings.LogsBetfairResultsOn Then
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Cancel all Orders for Market Id: " + marketId.ToString, EventLogEntryType.Information)
+        End If
+
+        Try
+
+            ' Set-up Limit Order
+            Dim LimitOrder = New LimitOrder()
+
+            ' placing a bet. set-up market projection
+            Dim cancelInstructions As IList(Of CancelInstruction) = New List(Of CancelInstruction)()
+            cancelInstructions = Nothing
+
+            ' Place empty instruction to cancel all
+            'cancelInstructions.Add(cancelInstruction)
+
+            If My.Settings.SimulationModeOn = True Then
+                gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order !!!! SIMULATION MODE !!!! : PlaceExecutionReport : Status: SUCCESS ", EventLogEntryType.Information)
+                Return "SUCCESS"
+            Else
+                Dim customerRef = Nothing
+                Dim cancelExecutionReport = client.cancelOrders(marketId, cancelInstructions, customerRef)
+
+                Dim executionErrorcode As ExecutionReportErrorCode = cancelExecutionReport.ErrorCode
+                Dim instructionErrorCode As InstructionReportErrorCode = cancelExecutionReport.InstructionReports(0).ErrorCode
+
+
+                If cancelExecutionReport.Status = ExecutionReportStatus.SUCCESS Then
+                    If My.Settings.LogsBetfairResultsOn Then
+                        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Cancel Orders results: CancelExecutionReport : Status: SUCCESS " + cancelExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                    End If
+                    Return "SUCCESS"
+
+                ElseIf cancelExecutionReport.Status = ExecutionReportStatus.FAILURE Then
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Cancel Orders results: CancelExecutionReport : Status: FAILURE " + cancelExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                    Return "FAILURE"
+
+                ElseIf cancelExecutionReport.Status = ExecutionReportStatus.TIMEOUT Then
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Cancel Order results: CancelExecutionReport : Status: TIMEOUT " + cancelExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                    Return "TIMOUT"
+
+                Else
+                    gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Cancel Order results: CancelExecutionReport : Status: UNKNOWN " + cancelExecutionReport.Status.ToString + " Error code is: " + executionErrorcode.ToString + " InstructionReport error code is: " + instructionErrorCode.ToString, EventLogEntryType.Information)
+                    Return "UNKNOWN"
+                End If
+
+            End If
+
 
         Catch apiExcepion As APINGException
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Place Order - Error getting Api data, APINGExcepion msg : " + apiExcepion.Message, EventLogEntryType.Error)
@@ -412,7 +490,9 @@ Public Class BetfairClass
         Dim client As IClient = Nothing
         Dim clientType As String = Nothing
         client = New JsonRpcClient(globalBetFairUrl, globalBetFairAppKey, globalBetFairToken)
-        gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Starting to get market book for Market Id: " + marketId.ToString, EventLogEntryType.Information)
+        If My.Settings.LogsBetfairResultsOn Then
+            gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Starting to get market book for Market Id: " + marketId.ToString, EventLogEntryType.Information)
+        End If
 
         Try
 

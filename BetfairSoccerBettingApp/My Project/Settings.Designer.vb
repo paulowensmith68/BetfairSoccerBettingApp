@@ -197,6 +197,18 @@ Namespace My
                 Me("LogsBetfairResultsOn") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property SimulationModeOn() As Boolean
+            Get
+                Return CType(Me("SimulationModeOn"),Boolean)
+            End Get
+            Set
+                Me("SimulationModeOn") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

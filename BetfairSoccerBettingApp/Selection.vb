@@ -14,8 +14,9 @@ Public Class Selection
 
     Public autobetUnder15BetMade As Boolean
     Public autobetCorrectScore00BetMade As Boolean
-    Public autobetCorrectScore10BetMade As Boolean
-    Public autobetCorrectScore01BetMade As Boolean
+    Public autobetCorrectScore00BTLBetMade As Boolean
+    Public autobetCorrectScore10BTLBetMade As Boolean
+    Public autobetCorrectScore01BTLBetMade As Boolean
     Public autobetOver15TopUpBetMade As Boolean
     Public autobetCashOutNoGoalsAtHalfTime As Boolean
 
@@ -25,6 +26,7 @@ Public Class Selection
     Public betfairEventName As String
     Public betfairEventDateTime As String
     Public betfairEventInplay As Boolean
+    Public betfairEventInPlayLastCycle As Boolean = True
     Public betfairGoalsScored As String
     Public betfairGoal1DateTime As Date
     Public betfairGoal2DateTime As Date
@@ -88,6 +90,13 @@ Public Class Selection
     Public betfairCorrectScore01IfWinProfit As String
     Public betfairCorrectScore01Orders As String
 
+    Public autobetCorrectScore00BTLTimeLastBet As String
+    Public autobetCorrectScore10BTLTimeLastBet As String
+    Public autobetCorrectScore01BTLTimeLastBet As String
+
+
+    Public textGoal1Sent As Boolean = False
+    Public textGoal2Sent As Boolean = False
 
     Public Sub New(selectionNumber)
 
@@ -191,7 +200,7 @@ Public Class Selection
         Dim formatTime As String = "####0.00"
         timeInplay = timeToStart.TotalMinutes
 
-        If Me.betfairEventInplay = "True" And timeInplay < +105 And Me.betfairCorrectScoreMarketStatus = "SUSPENDED" Then
+        If Me.betfairEventInplay = "True" And timeInplay < +108 And Me.betfairCorrectScoreMarketStatus = "SUSPENDED" Then
 
             ' Don't do anything - 
             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : CORRECT_SCORE market SUSPENDED and still within playing time", EventLogEntryType.Error)
@@ -294,6 +303,22 @@ Public Class Selection
         Return status
 
     End Function
+    Public Function cancelAllOrdersOverUnder15_Order() As String
+        Dim status As String
 
+        Dim BetfairClass1 As New BetfairClass()
+        status = BetfairClass1.CancelAllOrdersOnMarket(betfairUnderOver15MarketId)
+        BetfairClass1 = Nothing
+        Return status
 
+    End Function
+    Public Function cancelAllOrdersCorrectScore_Order() As String
+        Dim status As String
+
+        Dim BetfairClass1 As New BetfairClass()
+        status = BetfairClass1.CancelAllOrdersOnMarket(betfairCorrectScoreMarketId)
+        BetfairClass1 = Nothing
+        Return status
+
+    End Function
 End Class
