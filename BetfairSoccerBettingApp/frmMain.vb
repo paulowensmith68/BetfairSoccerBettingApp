@@ -4,10 +4,10 @@ Imports System.Net.Mail
 
 Public Class frmMain
 
-    Public sel1 As New Selection(1)
-    Public sel2 As New Selection(2)
-    Public sel3 As New Selection(3)
-    Public sel4 As New Selection(4)
+    Public Sel1 As New Selection(1)
+    Public Sel2 As New Selection(2)
+    Public Sel3 As New Selection(3)
+    Public Sel4 As New Selection(4)
 
 
     Private intFileNumber As Integer = FreeFile()
@@ -3856,123 +3856,123 @@ Public Class frmMain
     Private Sub RefreshSel1Info()
 
         ' Get Initial book details, like marketId's and selectionId's
-        sel1.getInitialBookDetails()
+        Sel1.getInitialBookDetails()
 
         ' Get latest data from Betfair
-        sel1.getLatestMarketData()
+        Sel1.getLatestMarketData()
 
         ' Update Inplay status
-        If sel1.betfairEventInplay = False Then
+        If Sel1.betfairEventInplay = False Then
             tbxSel1InplayStatus.BackColor = Color.Red
-            sel1.betfairEventInPlayLastCycle = False
+            Sel1.betfairEventInPlayLastCycle = False
         Else
 
             tbxSel1InplayStatus.BackColor = Color.GreenYellow
 
-            If sel1.betfairEventInPlayLastCycle = False Then
+            If Sel1.betfairEventInPlayLastCycle = False Then
 
                 ' Ensure we don't keep resetting Event Date/Time
-                sel1.betfairEventInPlayLastCycle = True
+                Sel1.betfairEventInPlayLastCycle = True
 
                 Dim dateTime As DateTime = DateTime.Now
-                Dim formatEventDateTime As String = "d/M/yyyy h:mm tt"
+                Dim formatEventDateTime As String = "M/d/yyyy h:mm tt"
                 tbxSel1EventDateTime.Text = dateTime.ToString(formatEventDateTime)
-                sel1.betfairEventDateTime = dateTime.ToString(formatEventDateTime)
+                Sel1.betfairEventDateTime = dateTime.ToString(formatEventDateTime)
 
             End If
 
         End If
 
         ' Market Status
-        tbxSel1CorrectScoreStatus.Text = sel1.betfairCorrectScoreMarketStatus
-        tbxSel1UnderOver15MarketStatus.Text = sel1.betfairUnderOver15MarketStatus
+        tbxSel1CorrectScoreStatus.Text = Sel1.betfairCorrectScoreMarketStatus
+        tbxSel1UnderOver15MarketStatus.Text = Sel1.betfairUnderOver15MarketStatus
 
-        tbxSel1Over15Odds.Text = sel1.betfairOver15BackOdds
-        tbxSel1Under15Odds.Text = sel1.betfairUnder15BackOdds
-        tbxSel1CorrectScore00Odds.Text = sel1.betfairCorrectScore00BackOdds
-        tbxSel1CorrectScore10Odds.Text = sel1.betfairCorrectScore10BackOdds
-        tbxSel1CorrectScore01Odds.Text = sel1.betfairCorrectScore01BackOdds
+        tbxSel1Over15Odds.Text = Sel1.betfairOver15BackOdds
+        tbxSel1Under15Odds.Text = Sel1.betfairUnder15BackOdds
+        tbxSel1CorrectScore00Odds.Text = Sel1.betfairCorrectScore00BackOdds
+        tbxSel1CorrectScore10Odds.Text = Sel1.betfairCorrectScore10BackOdds
+        tbxSel1CorrectScore01Odds.Text = Sel1.betfairCorrectScore01BackOdds
 
-        If Not String.IsNullOrEmpty(sel1.betfairOver15IfWinProfit) Then
-            If Double.Parse(sel1.betfairOver15IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel1.betfairOver15IfWinProfit) Then
+            If Double.Parse(Sel1.betfairOver15IfWinProfit) >= 0 Then
                 tbxSel1IOver15fWinProfit.ForeColor = Color.DarkGreen
             Else
                 tbxSel1IOver15fWinProfit.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairUnder15IfWinProfit) Then
-            If Double.Parse(sel1.betfairUnder15IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel1.betfairUnder15IfWinProfit) Then
+            If Double.Parse(Sel1.betfairUnder15IfWinProfit) >= 0 Then
                 tbxSel1IUnder15fWinProfit.ForeColor = Color.DarkGreen
             Else
                 tbxSel1IUnder15fWinProfit.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore00IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel1.betfairCorrectScore00IfWinProfit) Then
+            If Double.Parse(Sel1.betfairCorrectScore00IfWinProfit) >= 0 Then
                 tbxSel1CorrectScore00IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel1CorrectScore00IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore10IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore10IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel1.betfairCorrectScore10IfWinProfit) Then
+            If Double.Parse(Sel1.betfairCorrectScore10IfWinProfit) >= 0 Then
                 tbxSel1CorrectScore10IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel1CorrectScore10IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore01IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore01IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel1.betfairCorrectScore01IfWinProfit) Then
+            If Double.Parse(Sel1.betfairCorrectScore01IfWinProfit) >= 0 Then
                 tbxSel1CorrectScore01IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel1CorrectScore01IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        tbxSel1IOver15fWinProfit.Text = sel1.betfairOver15IfWinProfit
-        tbxSel1IUnder15fWinProfit.Text = sel1.betfairUnder15IfWinProfit
-        tbxSel1CorrectScore00IfWin.Text = sel1.betfairCorrectScore00IfWinProfit
-        tbxSel1CorrectScore10IfWin.Text = sel1.betfairCorrectScore10IfWinProfit
-        tbxSel1CorrectScore01IfWin.Text = sel1.betfairCorrectScore01IfWinProfit
+        tbxSel1IOver15fWinProfit.Text = Sel1.betfairOver15IfWinProfit
+        tbxSel1IUnder15fWinProfit.Text = Sel1.betfairUnder15IfWinProfit
+        tbxSel1CorrectScore00IfWin.Text = Sel1.betfairCorrectScore00IfWinProfit
+        tbxSel1CorrectScore10IfWin.Text = Sel1.betfairCorrectScore10IfWinProfit
+        tbxSel1CorrectScore01IfWin.Text = Sel1.betfairCorrectScore01IfWinProfit
 
-        If sel1.betfairUnder15SelectionStatus = "ACTIVE" Then
+        If Sel1.betfairUnder15SelectionStatus = "ACTIVE" Then
             tbxSel1IUnder15Status.BackColor = Color.LawnGreen
         Else
             tbxSel1IUnder15Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairOver15SelectionStatus = "ACTIVE" Then
+        If Sel1.betfairOver15SelectionStatus = "ACTIVE" Then
             tbxSel1IOver15Status.BackColor = Color.LawnGreen
         Else
             tbxSel1IOver15Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore00SelectionStatus = "ACTIVE" Then
+        If Sel1.betfairCorrectScore00SelectionStatus = "ACTIVE" Then
             tbxSel1CorrectScore00Status.BackColor = Color.LawnGreen
         Else
             tbxSel1CorrectScore00Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore10SelectionStatus = "ACTIVE" Then
+        If Sel1.betfairCorrectScore10SelectionStatus = "ACTIVE" Then
             tbxSel1CorrectScore10Status.BackColor = Color.LawnGreen
         Else
             tbxSel1CorrectScore10Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore01SelectionStatus = "ACTIVE" Then
+        If Sel1.betfairCorrectScore01SelectionStatus = "ACTIVE" Then
             tbxSel1CorrectScore01Status.BackColor = Color.LawnGreen
         Else
             tbxSel1CorrectScore01Status.BackColor = Color.OrangeRed
         End If
 
-        tbxSel1IUnder15Status.Text = sel1.betfairUnder15SelectionStatus
-        tbxSel1IOver15Status.Text = sel1.betfairOver15SelectionStatus
-        tbxSel1CorrectScore00Status.Text = sel1.betfairCorrectScore00SelectionStatus
-        tbxSel1CorrectScore10Status.Text = sel1.betfairCorrectScore10SelectionStatus
-        tbxSel1CorrectScore01Status.Text = sel1.betfairCorrectScore01SelectionStatus
+        tbxSel1IUnder15Status.Text = Sel1.betfairUnder15SelectionStatus
+        tbxSel1IOver15Status.Text = Sel1.betfairOver15SelectionStatus
+        tbxSel1CorrectScore00Status.Text = Sel1.betfairCorrectScore00SelectionStatus
+        tbxSel1CorrectScore10Status.Text = Sel1.betfairCorrectScore10SelectionStatus
+        tbxSel1CorrectScore01Status.Text = Sel1.betfairCorrectScore01SelectionStatus
 
         ' Populate unmatched bets
-        tbxSel1IOver15Orders.Text = sel1.betfairOver15Orders
-        tbxSel1IUnder15Orders.Text = sel1.betfairUnder15Orders
+        tbxSel1IOver15Orders.Text = Sel1.betfairOver15Orders
+        tbxSel1IUnder15Orders.Text = Sel1.betfairUnder15Orders
 
-        tbxSel1CorrectScore00Orders.Text = sel1.betfairCorrectScore00Orders
-        tbxSel1CorrectScore10Orders.Text = sel1.betfairCorrectScore10Orders
-        tbxSel1CorrectScore01Orders.Text = sel1.betfairCorrectScore01Orders
+        tbxSel1CorrectScore00Orders.Text = Sel1.betfairCorrectScore00Orders
+        tbxSel1CorrectScore10Orders.Text = Sel1.betfairCorrectScore10Orders
+        tbxSel1CorrectScore01Orders.Text = Sel1.betfairCorrectScore01Orders
 
         ' Update refresh date/time
         tbxSel1RefreshLight.BackColor = Color.DarkGreen
@@ -3996,7 +3996,7 @@ Public Class frmMain
         strPreviousScore = tbxSel1Score.Text
 
         ' Get latest score
-        tbxSel1Score.Text = sel1.betfairGoalsScored
+        tbxSel1Score.Text = Sel1.betfairGoalsScored
 
         ' Detect score change
         If strPreviousScore = tbxSel1Score.Text Then
@@ -4012,22 +4012,22 @@ Public Class frmMain
                     ' 1st Goal scored since last tick
                     If tbxSel1Score.Text = "1 Goal scored" Then
                         tbxSel1Goal1.Text = tbxSel1InplayTime.Text.ToString
-                        sel1.betfairGoal1DateTime = Now()
+                        Sel1.betfairGoal1DateTime = Now()
                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel1.Text + ", Goal 1 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                        If sel1.textGoal1Sent = False Then
-                            sendEmailToText("Goal 1 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel1InplayTime.Text.ToString)
-                            sel1.textGoal1Sent = True
+                        If Sel1.textGoal1Sent = False Then
+                            sendEmailToText("Goal 1 scored in match: " + Sel1.betfairEventName + " at Inplay timer time: " + tbxSel1InplayTime.Text.ToString)
+                            Sel1.textGoal1Sent = True
                         End If
                     Else
                         If tbxSel1Score.Text = "2 Goals scored" Then
                             tbxSel1Goal2.Text = tbxSel1InplayTime.Text.ToString
-                            sel1.betfairGoal2DateTime = Now()
+                            Sel1.betfairGoal2DateTime = Now()
                             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel1.Text + ", Goal 2 scored at: " + tbxSel1InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                            If sel1.textGoal1Sent = False Then
-                                sendEmailToText("Goal 2 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel1InplayTime.Text.ToString)
-                                sel1.textGoal2Sent = True
+                            If Sel1.textGoal1Sent = False Then
+                                sendEmailToText("Goal 2 scored in match: " + Sel1.betfairEventName + " at Inplay timer time: " + tbxSel1InplayTime.Text.ToString)
+                                Sel1.textGoal2Sent = True
                             End If
                         End If
                     End If
@@ -4040,123 +4040,123 @@ Public Class frmMain
     Private Sub RefreshSel2Info()
 
         ' Get Initial book details, like marketId's and selectionId's
-        sel1.getInitialBookDetails()
+        Sel2.getInitialBookDetails()
 
         ' Get latest data from Betfair
-        sel1.getLatestMarketData()
+        Sel2.getLatestMarketData()
 
         ' Update Inplay status
-        If sel1.betfairEventInplay = False Then
+        If Sel2.betfairEventInplay = False Then
             tbxSel2InplayStatus.BackColor = Color.Red
-            sel1.betfairEventInPlayLastCycle = False
+            Sel2.betfairEventInPlayLastCycle = False
         Else
 
             tbxSel2InplayStatus.BackColor = Color.GreenYellow
 
-            If sel1.betfairEventInPlayLastCycle = False Then
+            If Sel2.betfairEventInPlayLastCycle = False Then
 
                 ' Ensure we don't keep resetting Event Date/Time
-                sel1.betfairEventInPlayLastCycle = True
+                Sel2.betfairEventInPlayLastCycle = True
 
                 Dim dateTime As DateTime = DateTime.Now
-                Dim formatEventDateTime As String = "d/M/yyyy h:mm tt"
+                Dim formatEventDateTime As String = "M/d/yyyy h:mm tt"
                 tbxSel2EventDateTime.Text = dateTime.ToString(formatEventDateTime)
-                sel1.betfairEventDateTime = dateTime.ToString(formatEventDateTime)
+                Sel2.betfairEventDateTime = dateTime.ToString(formatEventDateTime)
 
             End If
 
         End If
 
         ' Market Status
-        tbxSel2CorrectScoreStatus.Text = sel1.betfairCorrectScoreMarketStatus
-        tbxSel2UnderOver15MarketStatus.Text = sel1.betfairUnderOver15MarketStatus
+        tbxSel2CorrectScoreStatus.Text = Sel2.betfairCorrectScoreMarketStatus
+        tbxSel2UnderOver15MarketStatus.Text = Sel2.betfairUnderOver15MarketStatus
 
-        tbxSel2Over15Odds.Text = sel1.betfairOver15BackOdds
-        tbxSel2Under15Odds.Text = sel1.betfairUnder15BackOdds
-        tbxSel2CorrectScore00Odds.Text = sel1.betfairCorrectScore00BackOdds
-        tbxSel2CorrectScore10Odds.Text = sel1.betfairCorrectScore10BackOdds
-        tbxSel2CorrectScore01Odds.Text = sel1.betfairCorrectScore01BackOdds
+        tbxSel2Over15Odds.Text = Sel2.betfairOver15BackOdds
+        tbxSel2Under15Odds.Text = Sel2.betfairUnder15BackOdds
+        tbxSel2CorrectScore00Odds.Text = Sel2.betfairCorrectScore00BackOdds
+        tbxSel2CorrectScore10Odds.Text = Sel2.betfairCorrectScore10BackOdds
+        tbxSel2CorrectScore01Odds.Text = Sel2.betfairCorrectScore01BackOdds
 
-        If Not String.IsNullOrEmpty(sel1.betfairOver15IfWinProfit) Then
-            If Double.Parse(sel1.betfairOver15IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel2.betfairOver15IfWinProfit) Then
+            If Double.Parse(Sel2.betfairOver15IfWinProfit) >= 0 Then
                 tbxSel2IOver15fWinProfit.ForeColor = Color.DarkGreen
             Else
                 tbxSel2IOver15fWinProfit.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairUnder15IfWinProfit) Then
-            If Double.Parse(sel1.betfairUnder15IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel2.betfairUnder15IfWinProfit) Then
+            If Double.Parse(Sel2.betfairUnder15IfWinProfit) >= 0 Then
                 tbxSel2IUnder15fWinProfit.ForeColor = Color.DarkGreen
             Else
                 tbxSel2IUnder15fWinProfit.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore00IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel2.betfairCorrectScore00IfWinProfit) Then
+            If Double.Parse(Sel2.betfairCorrectScore00IfWinProfit) >= 0 Then
                 tbxSel2CorrectScore00IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel2CorrectScore00IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore10IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore10IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel2.betfairCorrectScore10IfWinProfit) Then
+            If Double.Parse(Sel2.betfairCorrectScore10IfWinProfit) >= 0 Then
                 tbxSel2CorrectScore10IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel2CorrectScore10IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore01IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore01IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel2.betfairCorrectScore01IfWinProfit) Then
+            If Double.Parse(Sel2.betfairCorrectScore01IfWinProfit) >= 0 Then
                 tbxSel2CorrectScore01IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel2CorrectScore01IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        tbxSel2IOver15fWinProfit.Text = sel1.betfairOver15IfWinProfit
-        tbxSel2IUnder15fWinProfit.Text = sel1.betfairUnder15IfWinProfit
-        tbxSel2CorrectScore00IfWin.Text = sel1.betfairCorrectScore00IfWinProfit
-        tbxSel2CorrectScore10IfWin.Text = sel1.betfairCorrectScore10IfWinProfit
-        tbxSel2CorrectScore01IfWin.Text = sel1.betfairCorrectScore01IfWinProfit
+        tbxSel2IOver15fWinProfit.Text = Sel2.betfairOver15IfWinProfit
+        tbxSel2IUnder15fWinProfit.Text = Sel2.betfairUnder15IfWinProfit
+        tbxSel2CorrectScore00IfWin.Text = Sel2.betfairCorrectScore00IfWinProfit
+        tbxSel2CorrectScore10IfWin.Text = Sel2.betfairCorrectScore10IfWinProfit
+        tbxSel2CorrectScore01IfWin.Text = Sel2.betfairCorrectScore01IfWinProfit
 
-        If sel1.betfairUnder15SelectionStatus = "ACTIVE" Then
+        If Sel2.betfairUnder15SelectionStatus = "ACTIVE" Then
             tbxSel2IUnder15Status.BackColor = Color.LawnGreen
         Else
             tbxSel2IUnder15Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairOver15SelectionStatus = "ACTIVE" Then
+        If Sel2.betfairOver15SelectionStatus = "ACTIVE" Then
             tbxSel2IOver15Status.BackColor = Color.LawnGreen
         Else
             tbxSel2IOver15Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore00SelectionStatus = "ACTIVE" Then
+        If Sel2.betfairCorrectScore00SelectionStatus = "ACTIVE" Then
             tbxSel2CorrectScore00Status.BackColor = Color.LawnGreen
         Else
             tbxSel2CorrectScore00Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore10SelectionStatus = "ACTIVE" Then
+        If Sel2.betfairCorrectScore10SelectionStatus = "ACTIVE" Then
             tbxSel2CorrectScore10Status.BackColor = Color.LawnGreen
         Else
             tbxSel2CorrectScore10Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore01SelectionStatus = "ACTIVE" Then
+        If Sel2.betfairCorrectScore01SelectionStatus = "ACTIVE" Then
             tbxSel2CorrectScore01Status.BackColor = Color.LawnGreen
         Else
             tbxSel2CorrectScore01Status.BackColor = Color.OrangeRed
         End If
 
-        tbxSel2IUnder15Status.Text = sel1.betfairUnder15SelectionStatus
-        tbxSel2IOver15Status.Text = sel1.betfairOver15SelectionStatus
-        tbxSel2CorrectScore00Status.Text = sel1.betfairCorrectScore00SelectionStatus
-        tbxSel2CorrectScore10Status.Text = sel1.betfairCorrectScore10SelectionStatus
-        tbxSel2CorrectScore01Status.Text = sel1.betfairCorrectScore01SelectionStatus
+        tbxSel2IUnder15Status.Text = Sel2.betfairUnder15SelectionStatus
+        tbxSel2IOver15Status.Text = Sel2.betfairOver15SelectionStatus
+        tbxSel2CorrectScore00Status.Text = Sel2.betfairCorrectScore00SelectionStatus
+        tbxSel2CorrectScore10Status.Text = Sel2.betfairCorrectScore10SelectionStatus
+        tbxSel2CorrectScore01Status.Text = Sel2.betfairCorrectScore01SelectionStatus
 
         ' Populate unmatched bets
-        tbxSel2IOver15Orders.Text = sel1.betfairOver15Orders
-        tbxSel2IUnder15Orders.Text = sel1.betfairUnder15Orders
+        tbxSel2IOver15Orders.Text = Sel2.betfairOver15Orders
+        tbxSel2IUnder15Orders.Text = Sel2.betfairUnder15Orders
 
-        tbxSel2CorrectScore00Orders.Text = sel1.betfairCorrectScore00Orders
-        tbxSel2CorrectScore10Orders.Text = sel1.betfairCorrectScore10Orders
-        tbxSel2CorrectScore01Orders.Text = sel1.betfairCorrectScore01Orders
+        tbxSel2CorrectScore00Orders.Text = Sel2.betfairCorrectScore00Orders
+        tbxSel2CorrectScore10Orders.Text = Sel2.betfairCorrectScore10Orders
+        tbxSel2CorrectScore01Orders.Text = Sel2.betfairCorrectScore01Orders
 
         ' Update refresh date/time
         tbxSel2RefreshLight.BackColor = Color.DarkGreen
@@ -4180,7 +4180,7 @@ Public Class frmMain
         strPreviousScore = tbxSel2Score.Text
 
         ' Get latest score
-        tbxSel2Score.Text = sel1.betfairGoalsScored
+        tbxSel2Score.Text = Sel2.betfairGoalsScored
 
         ' Detect score change
         If strPreviousScore = tbxSel2Score.Text Then
@@ -4196,22 +4196,22 @@ Public Class frmMain
                     ' 1st Goal scored since last tick
                     If tbxSel2Score.Text = "1 Goal scored" Then
                         tbxSel2Goal1.Text = tbxSel2InplayTime.Text.ToString
-                        sel1.betfairGoal1DateTime = Now()
+                        Sel2.betfairGoal1DateTime = Now()
                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 1 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                        If sel1.textGoal1Sent = False Then
-                            sendEmailToText("Goal 1 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel2InplayTime.Text.ToString)
-                            sel1.textGoal1Sent = True
+                        If Sel2.textGoal1Sent = False Then
+                            sendEmailToText("Goal 1 scored in match: " + Sel2.betfairEventName + " at Inplay timer time: " + tbxSel2InplayTime.Text.ToString)
+                            Sel2.textGoal1Sent = True
                         End If
                     Else
                         If tbxSel2Score.Text = "2 Goals scored" Then
                             tbxSel2Goal2.Text = tbxSel2InplayTime.Text.ToString
-                            sel1.betfairGoal2DateTime = Now()
+                            Sel2.betfairGoal2DateTime = Now()
                             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel2.Text + ", Goal 2 scored at: " + tbxSel2InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                            If sel1.textGoal1Sent = False Then
-                                sendEmailToText("Goal 2 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel2InplayTime.Text.ToString)
-                                sel1.textGoal2Sent = True
+                            If Sel2.textGoal1Sent = False Then
+                                sendEmailToText("Goal 2 scored in match: " + Sel2.betfairEventName + " at Inplay timer time: " + tbxSel2InplayTime.Text.ToString)
+                                Sel2.textGoal2Sent = True
                             End If
                         End If
                     End If
@@ -4224,123 +4224,123 @@ Public Class frmMain
     Private Sub RefreshSel3Info()
 
         ' Get Initial book details, like marketId's and selectionId's
-        sel1.getInitialBookDetails()
+        Sel3.getInitialBookDetails()
 
         ' Get latest data from Betfair
-        sel1.getLatestMarketData()
+        Sel3.getLatestMarketData()
 
         ' Update Inplay status
-        If sel1.betfairEventInplay = False Then
+        If Sel3.betfairEventInplay = False Then
             tbxSel3InplayStatus.BackColor = Color.Red
-            sel1.betfairEventInPlayLastCycle = False
+            Sel3.betfairEventInPlayLastCycle = False
         Else
 
             tbxSel3InplayStatus.BackColor = Color.GreenYellow
 
-            If sel1.betfairEventInPlayLastCycle = False Then
+            If Sel3.betfairEventInPlayLastCycle = False Then
 
                 ' Ensure we don't keep resetting Event Date/Time
-                sel1.betfairEventInPlayLastCycle = True
+                Sel3.betfairEventInPlayLastCycle = True
 
                 Dim dateTime As DateTime = DateTime.Now
-                Dim formatEventDateTime As String = "d/M/yyyy h:mm tt"
+                Dim formatEventDateTime As String = "M/d/yyyy h:mm tt"
                 tbxSel3EventDateTime.Text = dateTime.ToString(formatEventDateTime)
-                sel1.betfairEventDateTime = dateTime.ToString(formatEventDateTime)
+                Sel3.betfairEventDateTime = dateTime.ToString(formatEventDateTime)
 
             End If
 
         End If
 
         ' Market Status
-        tbxSel3CorrectScoreStatus.Text = sel1.betfairCorrectScoreMarketStatus
-        tbxSel3UnderOver15MarketStatus.Text = sel1.betfairUnderOver15MarketStatus
+        tbxSel3CorrectScoreStatus.Text = Sel3.betfairCorrectScoreMarketStatus
+        tbxSel3UnderOver15MarketStatus.Text = Sel3.betfairUnderOver15MarketStatus
 
-        tbxSel3Over15Odds.Text = sel1.betfairOver15BackOdds
-        tbxSel3Under15Odds.Text = sel1.betfairUnder15BackOdds
-        tbxSel3CorrectScore00Odds.Text = sel1.betfairCorrectScore00BackOdds
-        tbxSel3CorrectScore10Odds.Text = sel1.betfairCorrectScore10BackOdds
-        tbxSel3CorrectScore01Odds.Text = sel1.betfairCorrectScore01BackOdds
+        tbxSel3Over15Odds.Text = Sel3.betfairOver15BackOdds
+        tbxSel3Under15Odds.Text = Sel3.betfairUnder15BackOdds
+        tbxSel3CorrectScore00Odds.Text = Sel3.betfairCorrectScore00BackOdds
+        tbxSel3CorrectScore10Odds.Text = Sel3.betfairCorrectScore10BackOdds
+        tbxSel3CorrectScore01Odds.Text = Sel3.betfairCorrectScore01BackOdds
 
-        If Not String.IsNullOrEmpty(sel1.betfairOver15IfWinProfit) Then
-            If Double.Parse(sel1.betfairOver15IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel3.betfairOver15IfWinProfit) Then
+            If Double.Parse(Sel3.betfairOver15IfWinProfit) >= 0 Then
                 tbxSel3IOver15fWinProfit.ForeColor = Color.DarkGreen
             Else
                 tbxSel3IOver15fWinProfit.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairUnder15IfWinProfit) Then
-            If Double.Parse(sel1.betfairUnder15IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel3.betfairUnder15IfWinProfit) Then
+            If Double.Parse(Sel3.betfairUnder15IfWinProfit) >= 0 Then
                 tbxSel3IUnder15fWinProfit.ForeColor = Color.DarkGreen
             Else
                 tbxSel3IUnder15fWinProfit.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore00IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel3.betfairCorrectScore00IfWinProfit) Then
+            If Double.Parse(Sel3.betfairCorrectScore00IfWinProfit) >= 0 Then
                 tbxSel3CorrectScore00IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel3CorrectScore00IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore10IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore10IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel3.betfairCorrectScore10IfWinProfit) Then
+            If Double.Parse(Sel3.betfairCorrectScore10IfWinProfit) >= 0 Then
                 tbxSel3CorrectScore10IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel3CorrectScore10IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore01IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore01IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel3.betfairCorrectScore01IfWinProfit) Then
+            If Double.Parse(Sel3.betfairCorrectScore01IfWinProfit) >= 0 Then
                 tbxSel3CorrectScore01IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel3CorrectScore01IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        tbxSel3IOver15fWinProfit.Text = sel1.betfairOver15IfWinProfit
-        tbxSel3IUnder15fWinProfit.Text = sel1.betfairUnder15IfWinProfit
-        tbxSel3CorrectScore00IfWin.Text = sel1.betfairCorrectScore00IfWinProfit
-        tbxSel3CorrectScore10IfWin.Text = sel1.betfairCorrectScore10IfWinProfit
-        tbxSel3CorrectScore01IfWin.Text = sel1.betfairCorrectScore01IfWinProfit
+        tbxSel3IOver15fWinProfit.Text = Sel3.betfairOver15IfWinProfit
+        tbxSel3IUnder15fWinProfit.Text = Sel3.betfairUnder15IfWinProfit
+        tbxSel3CorrectScore00IfWin.Text = Sel3.betfairCorrectScore00IfWinProfit
+        tbxSel3CorrectScore10IfWin.Text = Sel3.betfairCorrectScore10IfWinProfit
+        tbxSel3CorrectScore01IfWin.Text = Sel3.betfairCorrectScore01IfWinProfit
 
-        If sel1.betfairUnder15SelectionStatus = "ACTIVE" Then
+        If Sel3.betfairUnder15SelectionStatus = "ACTIVE" Then
             tbxSel3IUnder15Status.BackColor = Color.LawnGreen
         Else
             tbxSel3IUnder15Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairOver15SelectionStatus = "ACTIVE" Then
+        If Sel3.betfairOver15SelectionStatus = "ACTIVE" Then
             tbxSel3IOver15Status.BackColor = Color.LawnGreen
         Else
             tbxSel3IOver15Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore00SelectionStatus = "ACTIVE" Then
+        If Sel3.betfairCorrectScore00SelectionStatus = "ACTIVE" Then
             tbxSel3CorrectScore00Status.BackColor = Color.LawnGreen
         Else
             tbxSel3CorrectScore00Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore10SelectionStatus = "ACTIVE" Then
+        If Sel3.betfairCorrectScore10SelectionStatus = "ACTIVE" Then
             tbxSel3CorrectScore10Status.BackColor = Color.LawnGreen
         Else
             tbxSel3CorrectScore10Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore01SelectionStatus = "ACTIVE" Then
+        If Sel3.betfairCorrectScore01SelectionStatus = "ACTIVE" Then
             tbxSel3CorrectScore01Status.BackColor = Color.LawnGreen
         Else
             tbxSel3CorrectScore01Status.BackColor = Color.OrangeRed
         End If
 
-        tbxSel3IUnder15Status.Text = sel1.betfairUnder15SelectionStatus
-        tbxSel3IOver15Status.Text = sel1.betfairOver15SelectionStatus
-        tbxSel3CorrectScore00Status.Text = sel1.betfairCorrectScore00SelectionStatus
-        tbxSel3CorrectScore10Status.Text = sel1.betfairCorrectScore10SelectionStatus
-        tbxSel3CorrectScore01Status.Text = sel1.betfairCorrectScore01SelectionStatus
+        tbxSel3IUnder15Status.Text = Sel3.betfairUnder15SelectionStatus
+        tbxSel3IOver15Status.Text = Sel3.betfairOver15SelectionStatus
+        tbxSel3CorrectScore00Status.Text = Sel3.betfairCorrectScore00SelectionStatus
+        tbxSel3CorrectScore10Status.Text = Sel3.betfairCorrectScore10SelectionStatus
+        tbxSel3CorrectScore01Status.Text = Sel3.betfairCorrectScore01SelectionStatus
 
         ' Populate unmatched bets
-        tbxSel3IOver15Orders.Text = sel1.betfairOver15Orders
-        tbxSel3IUnder15Orders.Text = sel1.betfairUnder15Orders
+        tbxSel3IOver15Orders.Text = Sel3.betfairOver15Orders
+        tbxSel3IUnder15Orders.Text = Sel3.betfairUnder15Orders
 
-        tbxSel3CorrectScore00Orders.Text = sel1.betfairCorrectScore00Orders
-        tbxSel3CorrectScore10Orders.Text = sel1.betfairCorrectScore10Orders
-        tbxSel3CorrectScore01Orders.Text = sel1.betfairCorrectScore01Orders
+        tbxSel3CorrectScore00Orders.Text = Sel3.betfairCorrectScore00Orders
+        tbxSel3CorrectScore10Orders.Text = Sel3.betfairCorrectScore10Orders
+        tbxSel3CorrectScore01Orders.Text = Sel3.betfairCorrectScore01Orders
 
         ' Update refresh date/time
         tbxSel3RefreshLight.BackColor = Color.DarkGreen
@@ -4364,7 +4364,7 @@ Public Class frmMain
         strPreviousScore = tbxSel3Score.Text
 
         ' Get latest score
-        tbxSel3Score.Text = sel1.betfairGoalsScored
+        tbxSel3Score.Text = Sel3.betfairGoalsScored
 
         ' Detect score change
         If strPreviousScore = tbxSel3Score.Text Then
@@ -4380,22 +4380,22 @@ Public Class frmMain
                     ' 1st Goal scored since last tick
                     If tbxSel3Score.Text = "1 Goal scored" Then
                         tbxSel3Goal1.Text = tbxSel3InplayTime.Text.ToString
-                        sel1.betfairGoal1DateTime = Now()
+                        Sel3.betfairGoal1DateTime = Now()
                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel3.Text + ", Goal 1 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                        If sel1.textGoal1Sent = False Then
-                            sendEmailToText("Goal 1 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel3InplayTime.Text.ToString)
-                            sel1.textGoal1Sent = True
+                        If Sel3.textGoal1Sent = False Then
+                            sendEmailToText("Goal 1 scored in match: " + Sel3.betfairEventName + " at Inplay timer time: " + tbxSel3InplayTime.Text.ToString)
+                            Sel3.textGoal1Sent = True
                         End If
                     Else
                         If tbxSel3Score.Text = "2 Goals scored" Then
                             tbxSel3Goal2.Text = tbxSel3InplayTime.Text.ToString
-                            sel1.betfairGoal2DateTime = Now()
+                            Sel3.betfairGoal2DateTime = Now()
                             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel3.Text + ", Goal 2 scored at: " + tbxSel3InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                            If sel1.textGoal1Sent = False Then
-                                sendEmailToText("Goal 2 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel3InplayTime.Text.ToString)
-                                sel1.textGoal2Sent = True
+                            If Sel3.textGoal1Sent = False Then
+                                sendEmailToText("Goal 2 scored in match: " + Sel3.betfairEventName + " at Inplay timer time: " + tbxSel3InplayTime.Text.ToString)
+                                Sel3.textGoal2Sent = True
                             End If
                         End If
                     End If
@@ -4408,123 +4408,123 @@ Public Class frmMain
     Private Sub RefreshSel4Info()
 
         ' Get Initial book details, like marketId's and selectionId's
-        sel1.getInitialBookDetails()
+        Sel4.getInitialBookDetails()
 
         ' Get latest data from Betfair
-        sel1.getLatestMarketData()
+        Sel4.getLatestMarketData()
 
         ' Update Inplay status
-        If sel1.betfairEventInplay = False Then
+        If Sel4.betfairEventInplay = False Then
             tbxSel4InplayStatus.BackColor = Color.Red
-            sel1.betfairEventInPlayLastCycle = False
+            Sel4.betfairEventInPlayLastCycle = False
         Else
 
             tbxSel4InplayStatus.BackColor = Color.GreenYellow
 
-            If sel1.betfairEventInPlayLastCycle = False Then
+            If Sel4.betfairEventInPlayLastCycle = False Then
 
                 ' Ensure we don't keep resetting Event Date/Time
-                sel1.betfairEventInPlayLastCycle = True
+                Sel4.betfairEventInPlayLastCycle = True
 
                 Dim dateTime As DateTime = DateTime.Now
-                Dim formatEventDateTime As String = "d/M/yyyy h:mm tt"
+                Dim formatEventDateTime As String = "M/d/yyyy h:mm tt"
                 tbxSel4EventDateTime.Text = dateTime.ToString(formatEventDateTime)
-                sel1.betfairEventDateTime = dateTime.ToString(formatEventDateTime)
+                Sel4.betfairEventDateTime = dateTime.ToString(formatEventDateTime)
 
             End If
 
         End If
 
         ' Market Status
-        tbxSel4CorrectScoreStatus.Text = sel1.betfairCorrectScoreMarketStatus
-        tbxSel4UnderOver15MarketStatus.Text = sel1.betfairUnderOver15MarketStatus
+        tbxSel4CorrectScoreStatus.Text = Sel4.betfairCorrectScoreMarketStatus
+        tbxSel4UnderOver15MarketStatus.Text = Sel4.betfairUnderOver15MarketStatus
 
-        tbxSel4Over15Odds.Text = sel1.betfairOver15BackOdds
-        tbxSel4Under15Odds.Text = sel1.betfairUnder15BackOdds
-        tbxSel4CorrectScore00Odds.Text = sel1.betfairCorrectScore00BackOdds
-        tbxSel4CorrectScore10Odds.Text = sel1.betfairCorrectScore10BackOdds
-        tbxSel4CorrectScore01Odds.Text = sel1.betfairCorrectScore01BackOdds
+        tbxSel4Over15Odds.Text = Sel4.betfairOver15BackOdds
+        tbxSel4Under15Odds.Text = Sel4.betfairUnder15BackOdds
+        tbxSel4CorrectScore00Odds.Text = Sel4.betfairCorrectScore00BackOdds
+        tbxSel4CorrectScore10Odds.Text = Sel4.betfairCorrectScore10BackOdds
+        tbxSel4CorrectScore01Odds.Text = Sel4.betfairCorrectScore01BackOdds
 
-        If Not String.IsNullOrEmpty(sel1.betfairOver15IfWinProfit) Then
-            If Double.Parse(sel1.betfairOver15IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel4.betfairOver15IfWinProfit) Then
+            If Double.Parse(Sel4.betfairOver15IfWinProfit) >= 0 Then
                 tbxSel4IOver15fWinProfit.ForeColor = Color.DarkGreen
             Else
                 tbxSel4IOver15fWinProfit.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairUnder15IfWinProfit) Then
-            If Double.Parse(sel1.betfairUnder15IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel4.betfairUnder15IfWinProfit) Then
+            If Double.Parse(Sel4.betfairUnder15IfWinProfit) >= 0 Then
                 tbxSel4IUnder15fWinProfit.ForeColor = Color.DarkGreen
             Else
                 tbxSel4IUnder15fWinProfit.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore00IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore00IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel4.betfairCorrectScore00IfWinProfit) Then
+            If Double.Parse(Sel4.betfairCorrectScore00IfWinProfit) >= 0 Then
                 tbxSel4CorrectScore00IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel4CorrectScore00IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore10IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore10IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel4.betfairCorrectScore10IfWinProfit) Then
+            If Double.Parse(Sel4.betfairCorrectScore10IfWinProfit) >= 0 Then
                 tbxSel4CorrectScore10IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel4CorrectScore10IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        If Not String.IsNullOrEmpty(sel1.betfairCorrectScore01IfWinProfit) Then
-            If Double.Parse(sel1.betfairCorrectScore01IfWinProfit) >= 0 Then
+        If Not String.IsNullOrEmpty(Sel4.betfairCorrectScore01IfWinProfit) Then
+            If Double.Parse(Sel4.betfairCorrectScore01IfWinProfit) >= 0 Then
                 tbxSel4CorrectScore01IfWin.ForeColor = Color.DarkGreen
             Else
                 tbxSel4CorrectScore01IfWin.ForeColor = Color.OrangeRed
             End If
         End If
-        tbxSel4IOver15fWinProfit.Text = sel1.betfairOver15IfWinProfit
-        tbxSel4IUnder15fWinProfit.Text = sel1.betfairUnder15IfWinProfit
-        tbxSel4CorrectScore00IfWin.Text = sel1.betfairCorrectScore00IfWinProfit
-        tbxSel4CorrectScore10IfWin.Text = sel1.betfairCorrectScore10IfWinProfit
-        tbxSel4CorrectScore01IfWin.Text = sel1.betfairCorrectScore01IfWinProfit
+        tbxSel4IOver15fWinProfit.Text = Sel4.betfairOver15IfWinProfit
+        tbxSel4IUnder15fWinProfit.Text = Sel4.betfairUnder15IfWinProfit
+        tbxSel4CorrectScore00IfWin.Text = Sel4.betfairCorrectScore00IfWinProfit
+        tbxSel4CorrectScore10IfWin.Text = Sel4.betfairCorrectScore10IfWinProfit
+        tbxSel4CorrectScore01IfWin.Text = Sel4.betfairCorrectScore01IfWinProfit
 
-        If sel1.betfairUnder15SelectionStatus = "ACTIVE" Then
+        If Sel4.betfairUnder15SelectionStatus = "ACTIVE" Then
             tbxSel4IUnder15Status.BackColor = Color.LawnGreen
         Else
             tbxSel4IUnder15Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairOver15SelectionStatus = "ACTIVE" Then
+        If Sel4.betfairOver15SelectionStatus = "ACTIVE" Then
             tbxSel4IOver15Status.BackColor = Color.LawnGreen
         Else
             tbxSel4IOver15Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore00SelectionStatus = "ACTIVE" Then
+        If Sel4.betfairCorrectScore00SelectionStatus = "ACTIVE" Then
             tbxSel4CorrectScore00Status.BackColor = Color.LawnGreen
         Else
             tbxSel4CorrectScore00Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore10SelectionStatus = "ACTIVE" Then
+        If Sel4.betfairCorrectScore10SelectionStatus = "ACTIVE" Then
             tbxSel4CorrectScore10Status.BackColor = Color.LawnGreen
         Else
             tbxSel4CorrectScore10Status.BackColor = Color.OrangeRed
         End If
-        If sel1.betfairCorrectScore01SelectionStatus = "ACTIVE" Then
+        If Sel4.betfairCorrectScore01SelectionStatus = "ACTIVE" Then
             tbxSel4CorrectScore01Status.BackColor = Color.LawnGreen
         Else
             tbxSel4CorrectScore01Status.BackColor = Color.OrangeRed
         End If
 
-        tbxSel4IUnder15Status.Text = sel1.betfairUnder15SelectionStatus
-        tbxSel4IOver15Status.Text = sel1.betfairOver15SelectionStatus
-        tbxSel4CorrectScore00Status.Text = sel1.betfairCorrectScore00SelectionStatus
-        tbxSel4CorrectScore10Status.Text = sel1.betfairCorrectScore10SelectionStatus
-        tbxSel4CorrectScore01Status.Text = sel1.betfairCorrectScore01SelectionStatus
+        tbxSel4IUnder15Status.Text = Sel4.betfairUnder15SelectionStatus
+        tbxSel4IOver15Status.Text = Sel4.betfairOver15SelectionStatus
+        tbxSel4CorrectScore00Status.Text = Sel4.betfairCorrectScore00SelectionStatus
+        tbxSel4CorrectScore10Status.Text = Sel4.betfairCorrectScore10SelectionStatus
+        tbxSel4CorrectScore01Status.Text = Sel4.betfairCorrectScore01SelectionStatus
 
         ' Populate unmatched bets
-        tbxSel4IOver15Orders.Text = sel1.betfairOver15Orders
-        tbxSel4IUnder15Orders.Text = sel1.betfairUnder15Orders
+        tbxSel4IOver15Orders.Text = Sel4.betfairOver15Orders
+        tbxSel4IUnder15Orders.Text = Sel4.betfairUnder15Orders
 
-        tbxSel4CorrectScore00Orders.Text = sel1.betfairCorrectScore00Orders
-        tbxSel4CorrectScore10Orders.Text = sel1.betfairCorrectScore10Orders
-        tbxSel4CorrectScore01Orders.Text = sel1.betfairCorrectScore01Orders
+        tbxSel4CorrectScore00Orders.Text = Sel4.betfairCorrectScore00Orders
+        tbxSel4CorrectScore10Orders.Text = Sel4.betfairCorrectScore10Orders
+        tbxSel4CorrectScore01Orders.Text = Sel4.betfairCorrectScore01Orders
 
         ' Update refresh date/time
         tbxSel4RefreshLight.BackColor = Color.DarkGreen
@@ -4548,7 +4548,7 @@ Public Class frmMain
         strPreviousScore = tbxSel4Score.Text
 
         ' Get latest score
-        tbxSel4Score.Text = sel1.betfairGoalsScored
+        tbxSel4Score.Text = Sel4.betfairGoalsScored
 
         ' Detect score change
         If strPreviousScore = tbxSel4Score.Text Then
@@ -4564,22 +4564,22 @@ Public Class frmMain
                     ' 1st Goal scored since last tick
                     If tbxSel4Score.Text = "1 Goal scored" Then
                         tbxSel4Goal1.Text = tbxSel4InplayTime.Text.ToString
-                        sel1.betfairGoal1DateTime = Now()
+                        Sel4.betfairGoal1DateTime = Now()
                         gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel4.Text + ", Goal 1 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                        If sel1.textGoal1Sent = False Then
-                            sendEmailToText("Goal 1 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel4InplayTime.Text.ToString)
-                            sel1.textGoal1Sent = True
+                        If Sel4.textGoal1Sent = False Then
+                            sendEmailToText("Goal 1 scored in match: " + Sel4.betfairEventName + " at Inplay timer time: " + tbxSel4InplayTime.Text.ToString)
+                            Sel4.textGoal1Sent = True
                         End If
                     Else
                         If tbxSel4Score.Text = "2 Goals scored" Then
                             tbxSel4Goal2.Text = tbxSel4InplayTime.Text.ToString
-                            sel1.betfairGoal2DateTime = Now()
+                            Sel4.betfairGoal2DateTime = Now()
                             gobjEvent.WriteToEventLog("BetfairSoccerBettingApp : Selection: " + grpSel4.Text + ", Goal 2 scored at: " + tbxSel4InplayTime.Text.ToString, EventLogEntryType.Information)
 
-                            If sel1.textGoal1Sent = False Then
-                                sendEmailToText("Goal 2 scored in match: " + sel1.betfairEventName + " at Inplay timer time: " + tbxSel4InplayTime.Text.ToString)
-                                sel1.textGoal2Sent = True
+                            If Sel4.textGoal1Sent = False Then
+                                sendEmailToText("Goal 2 scored in match: " + Sel4.betfairEventName + " at Inplay timer time: " + tbxSel4InplayTime.Text.ToString)
+                                Sel4.textGoal2Sent = True
                             End If
                         End If
                     End If
